@@ -22,6 +22,7 @@
 @property (strong ,nonatomic)UIButton *classButton;
 @property (strong ,nonatomic)UIButton *downButton;
 @property (strong ,nonatomic)UIButton *newsClassButton;
+@property (strong, nonatomic) UIButton *comboButton;
 
 @property (assign ,nonatomic)CGFloat  buttonW;
 @property (strong ,nonatomic)UIButton *HDButton;
@@ -111,7 +112,7 @@
     WZView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:WZView];
     //添加按钮
-    _titleArray = @[@"直播",@"点播",@"线下课",@"班级课"];
+    _titleArray = @[@"直播",@"点播",@"线下课",@"班级课",@"套餐"];
     
     CGFloat ButtonH = 20;
     CGFloat ButtonW = MainScreenWidth / _titleArray.count;
@@ -139,6 +140,8 @@
             _downButton = button;
         } else if (i == 3) {
             _newsClassButton = button;
+        } else if (i == 4) {
+            _comboButton = button;
         }
         
         //添加分割线
@@ -201,6 +204,12 @@
     [_controllerSrcollView addSubview:newClassVc.view];
     [self addChildViewController:newClassVc];
     
+    KCViewController * comboClassVc = [[KCViewController alloc]init];
+    comboClassVc.typeString = @"combo";
+    comboClassVc.view.frame = CGRectMake(MainScreenWidth * 4, 0, MainScreenWidth, MainScreenHeight - MACRO_UI_UPHEIGHT - 34);
+    [_controllerSrcollView addSubview:comboClassVc.view];
+    [self addChildViewController:comboClassVc];
+    
 }
 
 
@@ -227,7 +236,8 @@
             [_liveButton setTitleColor:BasidColor forState:UIControlStateNormal];
             [_classButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [_downButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            
+            [_newsClassButton setTitleColor:[UIColor blackColor] forState:0];
+            [_comboButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             
         } else if(point.x == MainScreenWidth) {
             
@@ -239,7 +249,8 @@
             [_liveButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [_classButton setTitleColor:BasidColor forState:UIControlStateNormal];
             [_downButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            
+            [_newsClassButton setTitleColor:[UIColor blackColor] forState:0];
+            [_comboButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             
         }else if (point.x == MainScreenWidth * 2) {
             
@@ -252,6 +263,8 @@
             [_liveButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [_classButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [_downButton setTitleColor:BasidColor forState:UIControlStateNormal];
+            [_newsClassButton setTitleColor:[UIColor blackColor] forState:0];
+            [_comboButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             
         } else if (point.x == MainScreenWidth * 3) {
             
@@ -265,6 +278,21 @@
             [_classButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [_downButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [_newsClassButton setTitleColor:BasidColor forState:0];
+            [_comboButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            
+        } else if (point.x == MainScreenWidth * 4) {
+            
+            _controllerSrcollView.contentOffset = CGPointMake(MainScreenWidth * 4, 0);
+            
+            [UIView animateWithDuration:0.25 animations:^{
+                _HDButton.frame = CGRectMake(_buttonW * 3, 27 + 3, _buttonW, 1);
+            }];
+            
+            [_liveButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [_classButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [_downButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [_newsClassButton setTitleColor:[UIColor blackColor] forState:0];
+            [_comboButton setTitleColor:BasidColor forState:0];
             
         }
     }

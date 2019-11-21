@@ -31,6 +31,7 @@
 #import "ClassRevampCell.h"
 #import "Good_ClassMainViewController.h"
 #import "DLViewController.h"
+#import "ClassDetailViewController.h"
 
 
 @interface KCViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
@@ -188,8 +189,12 @@
     
     NSDictionary *dict = _dataArray[indexPath.row];
 //    [cell dataWithDict:dict withType:@"1"];
-    [cell dataWithDict:dict withType:@"1" withOrderSwitch:_order_switch];
-    cell.kinsOf.text = [NSString stringWithFormat:@"%@",[dict stringValueForKey:@"time_limit"]];
+    if ([_typeString isEqualToString:@"combo"]) {
+        [cell comboDataWithDict:dict withType:@"1" withOrderSwitch:_order_switch];
+    } else {
+        [cell dataWithDict:dict withType:@"1" withOrderSwitch:_order_switch];
+        cell.kinsOf.text = [NSString stringWithFormat:@"%@",[dict stringValueForKey:@"time_limit"]];
+    }
     return cell;
 
 }
@@ -204,21 +209,27 @@
         }
     }
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    NSString *ID = _dataArray[indexPath.row][@"id"];
-    NSString *price = _dataArray[indexPath.row][@"price"];
-    NSString *title = _dataArray[indexPath.row][@"video_title"];
-    NSString *videoUrl = _dataArray[indexPath.row][@"video_address"];
-    NSString *imageUrl = _dataArray[indexPath.row][@"imageurl"];
-    
-    Good_ClassMainViewController *vc = [[Good_ClassMainViewController alloc] init];
-    vc.ID = ID;
-    vc.price = price;
-    vc.title = title;
-    vc.videoUrl = videoUrl;
-    vc.imageUrl = imageUrl;
-    vc.orderSwitch = _order_switch;
-    vc.isClassNew = [_typeString isEqualToString:@"newClass"] ? YES : NO;
-    [self.navigationController pushViewController:vc animated:YES];
+    if ([_typeString isEqualToString:@"combo"]) {
+        ClassDetailViewController *vc = [[ClassDetailViewController alloc] init];
+        vc.combo_id = _dataArray[indexPath.row][@"id"];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        NSString *ID = _dataArray[indexPath.row][@"id"];
+        NSString *price = _dataArray[indexPath.row][@"price"];
+        NSString *title = _dataArray[indexPath.row][@"video_title"];
+        NSString *videoUrl = _dataArray[indexPath.row][@"video_address"];
+        NSString *imageUrl = _dataArray[indexPath.row][@"imageurl"];
+        
+        Good_ClassMainViewController *vc = [[Good_ClassMainViewController alloc] init];
+        vc.ID = ID;
+        vc.price = price;
+        vc.title = title;
+        vc.videoUrl = videoUrl;
+        vc.imageUrl = imageUrl;
+        vc.orderSwitch = _order_switch;
+        vc.isClassNew = [_typeString isEqualToString:@"newClass"] ? YES : NO;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 #pragma mark --- 网络请求
@@ -227,6 +238,8 @@
     NSString *endUrlStr = YunKeTang_User_video_getMyList;
     if ([_typeString isEqualToString:@"newClass"]) {
         endUrlStr = classes_getMyList;
+    } else if ([_typeString isEqualToString:@"combo"]) {
+        endUrlStr = album_getMyList;
     }
     NSString *allUrlStr = [YunKeTang_Api_Tool YunKeTang_GetFullUrl:endUrlStr];
     

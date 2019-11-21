@@ -289,13 +289,6 @@
         } else if ([eventType integerValue] == 6) {
             eventTitle = @"拼团";
             eventIcon = @"seckill";
-//            if ([priceStr floatValue] == 0) {
-//                _kinsOf.text = [NSString stringWithFormat:@"免费"];
-//                _kinsOf.textColor = [UIColor colorWithHexString:@"#47b37d"];
-//            } else {
-//                _kinsOf.text = [NSString stringWithFormat:@"育币%@",priceStr];
-//                _kinsOf.textColor = PriceColor;
-//            }
         } else {
             _activityType.hidden = YES;
         }

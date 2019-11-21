@@ -394,6 +394,7 @@
 #define album_getCanUseCouponList @"album.getCanUseCouponList"
 #define album_addReview @"album.addReview"
 #define album_getCommentList @"album.getCommentList"
+#define album_getMyList @"album.getMyList"
 
 // 新增获取课时信息接口
 #define course_getSectionHour @"course.getSectionHour"
