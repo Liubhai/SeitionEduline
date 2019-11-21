@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="ekD-9S-XdC" customClass="TKCTUserListFooterView">
+            <rect key="frame" x="0.0" y="0.0" width="436" height="71"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Cy-JQ-efY">
+                    <rect key="frame" x="223" y="10" width="46" height="51"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="46" id="jsE-aH-wzu"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Crz-RJ-jn1">
+                    <rect key="frame" x="213" y="10" width="10" height="51"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="10" id="UOJ-En-es6"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rTo-bt-xYh">
+                    <rect key="frame" x="162" y="24.5" width="46" height="22"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RY7-k4-zOn">
+                            <rect key="frame" x="0.0" y="0.0" width="46" height="22"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAU-eF-BIK">
+                            <rect key="frame" x="0.0" y="0.0" width="46" height="22"/>
+                            <connections>
+                                <action selector="showTool:" destination="ekD-9S-XdC" eventType="touchUpInside" id="5xl-N1-wQ3"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="RY7-k4-zOn" firstAttribute="height" secondItem="rTo-bt-xYh" secondAttribute="height" id="0cw-EE-OcR"/>
+                        <constraint firstAttribute="height" constant="22" id="2O2-bP-caG"/>
+                        <constraint firstItem="gAU-eF-BIK" firstAttribute="width" secondItem="rTo-bt-xYh" secondAttribute="width" id="2QN-hC-8il"/>
+                        <constraint firstAttribute="width" constant="46" id="9F9-Y5-Sww"/>
+                        <constraint firstItem="RY7-k4-zOn" firstAttribute="centerX" secondItem="rTo-bt-xYh" secondAttribute="centerX" id="M0z-hD-7I1"/>
+                        <constraint firstItem="RY7-k4-zOn" firstAttribute="width" secondItem="rTo-bt-xYh" secondAttribute="width" id="PcT-Mp-dpY"/>
+                        <constraint firstItem="RY7-k4-zOn" firstAttribute="centerY" secondItem="rTo-bt-xYh" secondAttribute="centerY" id="RTd-TC-LXO"/>
+                        <constraint firstItem="gAU-eF-BIK" firstAttribute="centerY" secondItem="rTo-bt-xYh" secondAttribute="centerY" id="cHz-cY-SKy"/>
+                        <constraint firstItem="gAU-eF-BIK" firstAttribute="height" secondItem="rTo-bt-xYh" secondAttribute="height" id="jBq-Lo-h3q"/>
+                        <constraint firstItem="gAU-eF-BIK" firstAttribute="centerX" secondItem="rTo-bt-xYh" secondAttribute="centerX" id="tB5-U6-Tdc"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HfU-Bc-EXj">
+                    <rect key="frame" x="102" y="10" width="50" height="51"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="KE2-NH-Fer"/>
+                    </constraints>
+                    <connections>
+                        <action selector="prePage:" destination="ekD-9S-XdC" eventType="touchUpInside" id="PG8-Yk-QKy"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zZ1-KP-5Pd">
+                    <rect key="frame" x="279" y="10" width="50" height="51"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="hJd-Hc-zaf"/>
+                    </constraints>
+                    <connections>
+                        <action selector="nextPage:" destination="ekD-9S-XdC" eventType="touchUpInside" id="ACV-DH-ETk"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Crz-RJ-jn1" firstAttribute="top" secondItem="ekD-9S-XdC" secondAttribute="top" constant="10" id="4h8-pV-gb5"/>
+                <constraint firstAttribute="bottom" secondItem="5Cy-JQ-efY" secondAttribute="bottom" constant="10" id="9cg-4G-RIQ"/>
+                <constraint firstItem="zZ1-KP-5Pd" firstAttribute="top" secondItem="ekD-9S-XdC" secondAttribute="top" constant="10" id="N1o-wf-T37"/>
+                <constraint firstItem="Crz-RJ-jn1" firstAttribute="centerX" secondItem="ekD-9S-XdC" secondAttribute="centerX" id="OBp-7z-rlh"/>
+                <constraint firstItem="Crz-RJ-jn1" firstAttribute="leading" secondItem="rTo-bt-xYh" secondAttribute="trailing" constant="5" id="S4v-uq-yEn"/>
+                <constraint firstAttribute="bottom" secondItem="HfU-Bc-EXj" secondAttribute="bottom" constant="10" id="aaP-b9-DXy"/>
+                <constraint firstItem="rTo-bt-xYh" firstAttribute="centerY" secondItem="ekD-9S-XdC" secondAttribute="centerY" id="epG-7y-L15"/>
+                <constraint firstItem="HfU-Bc-EXj" firstAttribute="top" secondItem="ekD-9S-XdC" secondAttribute="top" constant="10" id="hTK-Ni-pGM"/>
+                <constraint firstAttribute="bottom" secondItem="Crz-RJ-jn1" secondAttribute="bottom" constant="10" id="kwP-kg-pHv"/>
+                <constraint firstItem="5Cy-JQ-efY" firstAttribute="top" secondItem="ekD-9S-XdC" secondAttribute="top" constant="10" id="lOJ-hu-0Hx"/>
+                <constraint firstItem="rTo-bt-xYh" firstAttribute="leading" secondItem="HfU-Bc-EXj" secondAttribute="trailing" constant="10" id="nrY-s4-T6y"/>
+                <constraint firstItem="zZ1-KP-5Pd" firstAttribute="leading" secondItem="5Cy-JQ-efY" secondAttribute="trailing" constant="10" id="rrk-dm-Nz1"/>
+                <constraint firstAttribute="bottom" secondItem="zZ1-KP-5Pd" secondAttribute="bottom" constant="10" id="wkF-o8-9QO"/>
+                <constraint firstItem="5Cy-JQ-efY" firstAttribute="leading" secondItem="Crz-RJ-jn1" secondAttribute="trailing" id="xhV-pq-Vjp"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="currentPage" destination="RY7-k4-zOn" id="6Zs-mi-DTp"/>
+                <outlet property="currentpageView" destination="rTo-bt-xYh" id="MD5-Ke-Dpf"/>
+                <outlet property="lineLabel" destination="Crz-RJ-jn1" id="ZLP-kw-t2q"/>
+                <outlet property="nextBtn" destination="zZ1-KP-5Pd" id="Zuf-TR-xrE"/>
+                <outlet property="preBtn" destination="HfU-Bc-EXj" id="V8y-26-2Wd"/>
+                <outlet property="totalPage" destination="5Cy-JQ-efY" id="Vdi-E2-2dR"/>
+            </connections>
+            <point key="canvasLocation" x="64" y="-244.5"/>
+        </view>
+    </objects>
+</document>

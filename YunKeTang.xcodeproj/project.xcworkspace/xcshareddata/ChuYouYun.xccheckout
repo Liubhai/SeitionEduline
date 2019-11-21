@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>1D5110C1-B830-430F-8BBA-9625B5EE992B</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ChuYouYun</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>0f44ccb0-861d-48bd-9499-0a11aca309bc++1776</key>
+		<string>svn://demo.seition.com/app/eduline/ios/Eduline%25E5%2589%25AF%25E6%259C%25AC%252093</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ChuYouYun.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>0f44ccb0-861d-48bd-9499-0a11aca309bc++1776</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectRepositoryRootDictionary</key>
+	<dict>
+		<key>0f44ccb0-861d-48bd-9499-0a11aca309bc++1776</key>
+		<string>svn://demo.seition.com/app/eduline</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>svn://demo.seition.com/app/eduline/ios/Eduline%25E5%2589%25AF%25E6%259C%25AC%252093/ChuYouYun.xcodeproj</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>0f44ccb0-861d-48bd-9499-0a11aca309bc++1776</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>0f44ccb0-861d-48bd-9499-0a11aca309bc++1776</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Eduline%E5%89%AF%E6%9C%AC%2093</string>
+		</dict>
+	</array>
+</dict>
+</plist>

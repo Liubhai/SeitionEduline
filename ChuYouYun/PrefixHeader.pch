@@ -1,0 +1,15 @@
+//
+//  PrefixHeader.pch
+//  YunKeTang
+//
+//  Created by 刘邦海 on 2019/6/10.
+//  Copyright © 2019 ZhiYiForMac. All rights reserved.
+//
+
+#import <Availability.h>
+
+#ifdef __OBJC__
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import "SYG.h"
+#endif

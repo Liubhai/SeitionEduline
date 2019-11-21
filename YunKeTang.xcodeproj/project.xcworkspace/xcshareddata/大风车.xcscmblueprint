@@ -1,0 +1,25 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "a81a9446-8460-4858-8958-7bf79993d6e1++7865",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "a81a9446-8460-4858-8958-7bf79993d6e1++7865" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "a81a9446-8460-4858-8958-7bf79993d6e1++7865" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "18A531FB-706E-4B6A-9AE0-C5E25AB5D191",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "a81a9446-8460-4858-8958-7bf79993d6e1++7865" : "Eduline%203\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "大风车",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "大风车.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/demo.seition.com\/app\/dafengche",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "a81a9446-8460-4858-8958-7bf79993d6e1++7865"
+    }
+  ]
+}

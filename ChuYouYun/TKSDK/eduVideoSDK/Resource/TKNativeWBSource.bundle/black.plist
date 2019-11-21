@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>remark</key>
+	<string>黑色皮肤</string>
+	<key>wb</key>
+	<dict>
+		<key>remark</key>
+		<string>白板</string>
+        
+        <key>rm_bg_color</key>
+        <string>#000000</string>
+        <key>rm_bg_alpha</key>
+        <string>0.6</string>
+        
+	</dict>
+	<key>swb</key>
+	<dict>
+		<key>remark</key>
+		<string>小白板</string>
+		<key>bg_color</key>
+		<string>#2C2C30</string>
+        
+        <key>tip_text_sel_color</key>
+        <string>#2C2C30</string>
+        <key>tip_text_nor_color</key>
+        <string>#FFFFFF</string>
+        <key>tip_bg_sel_color</key>
+        <string>#FFFFFF</string>
+        <key>tip_bg_nor_color</key>
+        <string>#4C4C4D</string>
+	</dict>
+	<key>toolbar</key>
+	<dict>
+		<key>remark</key>
+		<string>画笔工具栏</string>
+        <key>bg_color</key>
+        <string>#000000</string>
+        <key>bg_alpha</key>
+        <string>0.5</string>
+        <key>bg_top_color</key>
+        <string>#000000</string>
+        <key>bg_top_alpha</key>
+        <string>0.3</string>
+	</dict>
+	<key>ctrlbar</key>
+	<dict>
+		<key>remark</key>
+		<string>翻页控制栏</string>
+        <key>bg_color</key>
+        <string>#000000</string>
+        <key>bg_alpha</key>
+        <string>0.3</string>
+	</dict>
+    <key>optview</key>
+    <dict>
+        <key>remark</key>
+        <string>颜色选择页</string>
+        <key>bg_color</key>
+        <string>#000000</string>
+        <key>bg_alpha</key>
+        <string>0.7</string>
+    </dict>
+</dict>
+</plist>

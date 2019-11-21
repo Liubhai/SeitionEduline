@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--City Picker View Controller-->
+        <scene sceneID="kmJ-4x-9pc">
+            <objects>
+                <viewController storyboardIdentifier="CityPickerViewController" id="X8i-Yd-TkH" customClass="CityPickerViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="GOA-7O-d6E"/>
+                        <viewControllerLayoutGuide type="bottom" id="RTS-zR-vPq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XLw-cw-0Y2">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vek-1s-wh3">
+                                <rect key="frame" x="0.0" y="352" width="320" height="216"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="216" id="bek-Bm-va7"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="X8i-Yd-TkH" id="Atb-VR-kuN"/>
+                                    <outlet property="delegate" destination="X8i-Yd-TkH" id="PG6-aJ-mt3"/>
+                                </connections>
+                            </pickerView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RFe-kf-p4V">
+                                <rect key="frame" x="0.0" y="308" width="320" height="44"/>
+                                <items>
+                                    <barButtonItem title="取消" id="6Rp-hu-nJ5">
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <action selector="btnCancel:" destination="X8i-Yd-TkH" id="Oyo-N7-R2b"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="A6g-Qz-Ew4"/>
+                                    <barButtonItem title="选择城市" id="XG2-4f-BZG">
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="B7S-zy-0WK"/>
+                                    <barButtonItem title="确定" id="kJR-i7-ErO">
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <action selector="btnSure:" destination="X8i-Yd-TkH" id="Itx-oB-D4s"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" red="0.97638851404190063" green="0.97652500867843628" blue="0.9763454794883728" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="vek-1s-wh3" firstAttribute="top" secondItem="RFe-kf-p4V" secondAttribute="bottom" id="HdO-Gp-EGi"/>
+                            <constraint firstItem="RFe-kf-p4V" firstAttribute="leading" secondItem="XLw-cw-0Y2" secondAttribute="leading" id="JYp-jy-lkq"/>
+                            <constraint firstAttribute="trailing" secondItem="vek-1s-wh3" secondAttribute="trailing" id="RKg-lt-WXV"/>
+                            <constraint firstItem="vek-1s-wh3" firstAttribute="leading" secondItem="XLw-cw-0Y2" secondAttribute="leading" id="eYH-4Q-hSw"/>
+                            <constraint firstItem="RTS-zR-vPq" firstAttribute="top" secondItem="vek-1s-wh3" secondAttribute="bottom" id="iDk-Mx-KP9"/>
+                            <constraint firstAttribute="trailing" secondItem="RFe-kf-p4V" secondAttribute="trailing" id="yR3-fv-wQF"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnSelectShow" destination="XG2-4f-BZG" id="iAg-WP-IeX"/>
+                        <outlet property="cityPicker" destination="vek-1s-wh3" id="s8I-JJ-hDP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xmA-64-UT5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="102" y="107"/>
+        </scene>
+    </scenes>
+</document>

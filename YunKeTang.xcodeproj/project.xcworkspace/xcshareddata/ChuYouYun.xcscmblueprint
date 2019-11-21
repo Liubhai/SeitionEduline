@@ -1,0 +1,75 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "a81a9446-8460-4858-8958-7bf79993d6e1++7865",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "0f44ccb0-861d-48bd-9499-0a11aca309bc++2654" : {
+
+    },
+    "0f44ccb0-861d-48bd-9499-0a11aca309bc++6680" : {
+
+    },
+    "a81a9446-8460-4858-8958-7bf79993d6e1++7865" : {
+
+    },
+    "0f44ccb0-861d-48bd-9499-0a11aca309bc++1776" : {
+
+    },
+    "0f44ccb0-861d-48bd-9499-0a11aca309bc++1666" : {
+
+    },
+    "0f44ccb0-861d-48bd-9499-0a11aca309bc++4933" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "0f44ccb0-861d-48bd-9499-0a11aca309bc++2654" : 0,
+    "0f44ccb0-861d-48bd-9499-0a11aca309bc++6680" : 0,
+    "a81a9446-8460-4858-8958-7bf79993d6e1++7865" : 0,
+    "0f44ccb0-861d-48bd-9499-0a11aca309bc++1776" : 0,
+    "0f44ccb0-861d-48bd-9499-0a11aca309bc++1666" : 0,
+    "0f44ccb0-861d-48bd-9499-0a11aca309bc++4933" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "1D5110C1-B830-430F-8BBA-9625B5EE992B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "0f44ccb0-861d-48bd-9499-0a11aca309bc++2654" : "Eduline2\/",
+    "0f44ccb0-861d-48bd-9499-0a11aca309bc++6680" : "Eduline\/",
+    "a81a9446-8460-4858-8958-7bf79993d6e1++7865" : "Eduline%203\/",
+    "0f44ccb0-861d-48bd-9499-0a11aca309bc++1776" : "Eduline%E5%89%AF%E6%9C%AC%2093\/",
+    "0f44ccb0-861d-48bd-9499-0a11aca309bc++1666" : "Eduline%20%202\/",
+    "0f44ccb0-861d-48bd-9499-0a11aca309bc++4933" : "Eduline%20\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "ChuYouYun",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ChuYouYun.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/demo.seition.com\/app\/eduline",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0f44ccb0-861d-48bd-9499-0a11aca309bc++1666"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/demo.seition.com\/app\/eduline",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0f44ccb0-861d-48bd-9499-0a11aca309bc++1776"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/demo.seition.com\/app\/eduline",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0f44ccb0-861d-48bd-9499-0a11aca309bc++2654"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/demo.seition.com\/app\/eduline",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0f44ccb0-861d-48bd-9499-0a11aca309bc++4933"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/demo.seition.com\/app\/eduline",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0f44ccb0-861d-48bd-9499-0a11aca309bc++6680"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/demo.seition.com\/app\/dafengche",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "a81a9446-8460-4858-8958-7bf79993d6e1++7865"
+    }
+  ]
+}

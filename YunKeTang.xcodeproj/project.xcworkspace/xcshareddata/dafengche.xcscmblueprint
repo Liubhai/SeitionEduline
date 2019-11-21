@@ -1,0 +1,35 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "a81a9446-8460-4858-8958-7bf79993d6e1++5550",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "a81a9446-8460-4858-8958-7bf79993d6e1++5550" : {
+
+    },
+    "a81a9446-8460-4858-8958-7bf79993d6e1++7865" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "a81a9446-8460-4858-8958-7bf79993d6e1++5550" : 0,
+    "a81a9446-8460-4858-8958-7bf79993d6e1++7865" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "8E2194F4-B94C-4D18-93B8-24818A79036C",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "a81a9446-8460-4858-8958-7bf79993d6e1++5550" : "Eduline%208\/",
+    "a81a9446-8460-4858-8958-7bf79993d6e1++7865" : "Eduline%203\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "dafengche",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "dafengche.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/demo.seition.com\/app\/dafengche",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "a81a9446-8460-4858-8958-7bf79993d6e1++5550"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/demo.seition.com\/app\/dafengche",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "a81a9446-8460-4858-8958-7bf79993d6e1++7865"
+    }
+  ]
+}

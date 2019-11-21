@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="BRCourseDownInfoTableViewCell" rowHeight="110" id="KGk-i7-Jjw" customClass="BRCourseDownInfoTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="286" height="109.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gOn-xg-J5N">
+                        <rect key="frame" x="10" y="14.5" width="106" height="80.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="gOn-xg-J5N" secondAttribute="height" multiplier="105:80" id="Ibz-ql-Gy0"/>
+                            <constraint firstAttribute="width" constant="106" id="Wi4-KC-tRa"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="课程名字啊升级到卡里的世界" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Z2-Dk-plm">
+                        <rect key="frame" x="124" y="10" width="154" height="36"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共18节" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dfh-77-fFP">
+                        <rect key="frame" x="124" y="47" width="154" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="puK-sB-jZ6"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已下载5个任务" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LeG-3F-sv8">
+                        <rect key="frame" x="124" y="82.5" width="94.5" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="dfh-77-fFP" firstAttribute="leading" secondItem="gOn-xg-J5N" secondAttribute="trailing" constant="8" id="36y-Fm-DKH"/>
+                    <constraint firstItem="6Z2-Dk-plm" firstAttribute="leading" secondItem="dfh-77-fFP" secondAttribute="leading" id="O6K-LD-Ikl"/>
+                    <constraint firstAttribute="bottom" secondItem="LeG-3F-sv8" secondAttribute="bottom" constant="10" id="UOQ-lg-ckx"/>
+                    <constraint firstItem="LeG-3F-sv8" firstAttribute="leading" secondItem="dfh-77-fFP" secondAttribute="leading" id="Yd1-pk-m2Q"/>
+                    <constraint firstItem="6Z2-Dk-plm" firstAttribute="trailing" secondItem="dfh-77-fFP" secondAttribute="trailing" id="Zv4-0q-FU1"/>
+                    <constraint firstAttribute="trailing" secondItem="dfh-77-fFP" secondAttribute="trailing" constant="8" id="fn4-kx-hkI"/>
+                    <constraint firstItem="gOn-xg-J5N" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="gMW-yI-ONu"/>
+                    <constraint firstItem="6Z2-Dk-plm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="iNE-E6-MXJ"/>
+                    <constraint firstItem="gOn-xg-J5N" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="iR9-eI-rNY"/>
+                    <constraint firstItem="dfh-77-fFP" firstAttribute="centerY" secondItem="gOn-xg-J5N" secondAttribute="centerY" id="oN5-6s-00p"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="hadDownLabel" destination="LeG-3F-sv8" id="ylP-VT-HkT"/>
+                <outlet property="mImageView" destination="gOn-xg-J5N" id="eQV-ky-hyI"/>
+                <outlet property="mNameLabel" destination="6Z2-Dk-plm" id="h3p-On-D6y"/>
+                <outlet property="totalCourseLabel" destination="dfh-77-fFP" id="CYZ-pJ-cKp"/>
+            </connections>
+            <point key="canvasLocation" x="-99.200000000000003" y="52.173913043478265"/>
+        </tableViewCell>
+    </objects>
+</document>
