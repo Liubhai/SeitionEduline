@@ -2453,6 +2453,9 @@
 		78DAEBF5238665B30000311F /* MyQuestionMainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DAEBF4238665B30000311F /* MyQuestionMainVC.m */; };
 		78DAEBF8238666C80000311F /* MyQuestionListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DAEBF7238666C80000311F /* MyQuestionListCell.m */; };
 		78DAEBFB23866F2C0000311F /* MyQuestionListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DAEBFA23866F2C0000311F /* MyQuestionListVC.m */; };
+		78DAEBFE23868EF40000311F /* EvaluateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DAEBFD23868EF40000311F /* EvaluateCell.m */; };
+		78DAEC0123869AAD0000311F /* MyCommentListMainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DAEC0023869AAD0000311F /* MyCommentListMainVC.m */; };
+		78DAEC0423869B790000311F /* MyCommentListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DAEC0323869B790000311F /* MyCommentListVC.m */; };
 		78DF190622AF5AB500DF10FB /* ShopOrderDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DF190522AF5AB500DF10FB /* ShopOrderDetailVC.m */; };
 		78F108F322B7471A00288DEB /* LanchAnimationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F108F022B7471900288DEB /* LanchAnimationVC.m */; };
 		78F108F422B7471A00288DEB /* LanchAnimationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78F108F222B7471A00288DEB /* LanchAnimationVC.xib */; };
@@ -6816,6 +6819,12 @@
 		78DAEBF7238666C80000311F /* MyQuestionListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyQuestionListCell.m; sourceTree = "<group>"; };
 		78DAEBF923866F2C0000311F /* MyQuestionListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyQuestionListVC.h; sourceTree = "<group>"; };
 		78DAEBFA23866F2C0000311F /* MyQuestionListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyQuestionListVC.m; sourceTree = "<group>"; };
+		78DAEBFC23868EF40000311F /* EvaluateCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EvaluateCell.h; sourceTree = "<group>"; };
+		78DAEBFD23868EF40000311F /* EvaluateCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EvaluateCell.m; sourceTree = "<group>"; };
+		78DAEBFF23869AAD0000311F /* MyCommentListMainVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCommentListMainVC.h; sourceTree = "<group>"; };
+		78DAEC0023869AAD0000311F /* MyCommentListMainVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyCommentListMainVC.m; sourceTree = "<group>"; };
+		78DAEC0223869B790000311F /* MyCommentListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCommentListVC.h; sourceTree = "<group>"; };
+		78DAEC0323869B790000311F /* MyCommentListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyCommentListVC.m; sourceTree = "<group>"; };
 		78DF190422AF5AB500DF10FB /* ShopOrderDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopOrderDetailVC.h; sourceTree = "<group>"; };
 		78DF190522AF5AB500DF10FB /* ShopOrderDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopOrderDetailVC.m; sourceTree = "<group>"; };
 		78F108F022B7471900288DEB /* LanchAnimationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanchAnimationVC.m; sourceTree = "<group>"; };
@@ -22702,6 +22711,12 @@
 				78DAEBFA23866F2C0000311F /* MyQuestionListVC.m */,
 				78DAEBF6238666C80000311F /* MyQuestionListCell.h */,
 				78DAEBF7238666C80000311F /* MyQuestionListCell.m */,
+				78DAEBFF23869AAD0000311F /* MyCommentListMainVC.h */,
+				78DAEC0023869AAD0000311F /* MyCommentListMainVC.m */,
+				78DAEC0223869B790000311F /* MyCommentListVC.h */,
+				78DAEC0323869B790000311F /* MyCommentListVC.m */,
+				78DAEBFC23868EF40000311F /* EvaluateCell.h */,
+				78DAEBFD23868EF40000311F /* EvaluateCell.m */,
 			);
 			path = Me_Main;
 			sourceTree = "<group>";
@@ -26943,6 +26958,7 @@
 				8126EE5521D63A42008C8547 /* QuestionView.m in Sources */,
 				815EFDA621AE89350026D35F /* CanceledVC.m in Sources */,
 				780F8A59230F85F500B67CEF /* TXSakuraNavigationBar.m in Sources */,
+				78DAEC0123869AAD0000311F /* MyCommentListMainVC.m in Sources */,
 				097DC25F21D632850060C974 /* AliyunPlayerViewTopView.m in Sources */,
 				8126EE3E21D63A42008C8547 /* CCPrivateChatView.m in Sources */,
 				815EFE2F21AE96DD0026D35F /* AttentionCell.m in Sources */,
@@ -27199,6 +27215,7 @@
 				8145DC5621B11628005B838D /* Good_QuestionAndAnsCateViewController.m in Sources */,
 				7803141822ADE4480007EBBC /* ZLCameraImageView.m in Sources */,
 				780F89C4230F85F400B67CEF /* TKNativeWBRemarkView.m in Sources */,
+				78DAEC0423869B790000311F /* MyCommentListVC.m in Sources */,
 				815EFDF621AE8DB30026D35F /* Good_AddBankCityViewController.m in Sources */,
 				F1EB363C1C4CE44600D2EA73 /* WHFWendaTool.m in Sources */,
 				8145DD7321B11D98005B838D /* OfflineMoreViewController.m in Sources */,
@@ -27394,6 +27411,7 @@
 				781F45C922D4671F006CF3C5 /* ClassInfoDetailVC.m in Sources */,
 				81FD2FC11CFBCA2600FD2B4E /* UIColor+HTMLColors.m in Sources */,
 				9412E4D51A8E0480005145CD /* CBaseClass.m in Sources */,
+				78DAEBFE23868EF40000311F /* EvaluateCell.m in Sources */,
 				815EFB8E21AE3B8C0026D35F /* TestAnswerSheetViewController.m in Sources */,
 				8145DC9021B1192C005B838D /* MyUIButton.m in Sources */,
 				815EFC7F21AE81A00026D35F /* Good_ZhiBoDetailViewController.m in Sources */,

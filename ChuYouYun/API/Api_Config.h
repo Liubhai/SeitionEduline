@@ -414,4 +414,6 @@
 
 // 我的提问 type 1 提问 2 回复
 #define user_getQuestionList @"user.getQuestionList"
+// 我的点评
+#define user_getCommentList @"user.getCommentList"
 #endif /* Header_h */
