@@ -2456,6 +2456,7 @@
 		78DAEBFE23868EF40000311F /* EvaluateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DAEBFD23868EF40000311F /* EvaluateCell.m */; };
 		78DAEC0123869AAD0000311F /* MyCommentListMainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DAEC0023869AAD0000311F /* MyCommentListMainVC.m */; };
 		78DAEC0423869B790000311F /* MyCommentListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DAEC0323869B790000311F /* MyCommentListVC.m */; };
+		78DAEC072386C1160000311F /* TeacherApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DAEC062386C1160000311F /* TeacherApplyViewController.m */; };
 		78DF190622AF5AB500DF10FB /* ShopOrderDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DF190522AF5AB500DF10FB /* ShopOrderDetailVC.m */; };
 		78F108F322B7471A00288DEB /* LanchAnimationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F108F022B7471900288DEB /* LanchAnimationVC.m */; };
 		78F108F422B7471A00288DEB /* LanchAnimationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78F108F222B7471A00288DEB /* LanchAnimationVC.xib */; };
@@ -6825,6 +6826,8 @@
 		78DAEC0023869AAD0000311F /* MyCommentListMainVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyCommentListMainVC.m; sourceTree = "<group>"; };
 		78DAEC0223869B790000311F /* MyCommentListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCommentListVC.h; sourceTree = "<group>"; };
 		78DAEC0323869B790000311F /* MyCommentListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyCommentListVC.m; sourceTree = "<group>"; };
+		78DAEC052386C1160000311F /* TeacherApplyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeacherApplyViewController.h; sourceTree = "<group>"; };
+		78DAEC062386C1160000311F /* TeacherApplyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeacherApplyViewController.m; sourceTree = "<group>"; };
 		78DF190422AF5AB500DF10FB /* ShopOrderDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopOrderDetailVC.h; sourceTree = "<group>"; };
 		78DF190522AF5AB500DF10FB /* ShopOrderDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopOrderDetailVC.m; sourceTree = "<group>"; };
 		78F108F022B7471900288DEB /* LanchAnimationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanchAnimationVC.m; sourceTree = "<group>"; };
@@ -22717,6 +22720,8 @@
 				78DAEC0323869B790000311F /* MyCommentListVC.m */,
 				78DAEBFC23868EF40000311F /* EvaluateCell.h */,
 				78DAEBFD23868EF40000311F /* EvaluateCell.m */,
+				78DAEC052386C1160000311F /* TeacherApplyViewController.h */,
+				78DAEC062386C1160000311F /* TeacherApplyViewController.m */,
 			);
 			path = Me_Main;
 			sourceTree = "<group>";
@@ -27209,6 +27214,7 @@
 				815EFD8221AE89340026D35F /* MyQuesitionViewController.m in Sources */,
 				780313F922ADE4480007EBBC /* UIFont+YYAdd.m in Sources */,
 				780F8A0B230F85F500B67CEF /* TKPlaySpeedView.m in Sources */,
+				78DAEC072386C1160000311F /* TeacherApplyViewController.m in Sources */,
 				8145DC5221B11628005B838D /* Good_HonorListTableViewCell.m in Sources */,
 				F1EB36301C4C83EB00D2EA73 /* PLClassTool.m in Sources */,
 				780F89DC230F85F400B67CEF /* TKCTUserListHeaderView.m in Sources */,
