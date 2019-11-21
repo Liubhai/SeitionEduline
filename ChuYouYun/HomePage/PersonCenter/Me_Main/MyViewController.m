@@ -820,6 +820,8 @@
         //添加透明的按钮
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(width * (i % 4), 130 * (i / 4), width, 130)];
         button.backgroundColor = [UIColor clearColor];
+        [button setTitle:SYGArray[i] forState:0];
+        [button setTitleColor:[UIColor clearColor] forState:0];
         button.tag = i;
         [button addTarget:self action:@selector(SYGButtton:) forControlEvents:UIControlEventTouchUpInside];
         [SYGView addSubview:button];
@@ -966,6 +968,66 @@
 }
 
 - (void)manyButtonSet:(UIButton *)button {
+    
+    // 改版效果
+    if ([button.titleLabel.text isEqualToString:@"我的课程"]) {
+        MyClassMainViewController *myClassVc = [[MyClassMainViewController alloc] init];
+        [self.navigationController pushViewController:myClassVc animated:YES];
+    } else if ([button.titleLabel.text isEqualToString:@"我的笔记"]) {
+        SYGBJViewController *SYGBJVC = [[SYGBJViewController alloc] init];
+        [self.navigationController pushViewController:SYGBJVC animated:YES];
+    } else if ([button.titleLabel.text isEqualToString:@"我的收藏"]) {
+        CollectMainViewController *collectMainVc = [[CollectMainViewController alloc] init];
+        [self.navigationController pushViewController:collectMainVc animated:YES];
+    } else if ([button.titleLabel.text isEqualToString:@"我的问答"]) {
+        MyAnswerMainViewController *answerMainVc = [[MyAnswerMainViewController alloc] init];
+        [self.navigationController pushViewController:answerMainVc animated:YES];
+    } else if ([button.titleLabel.text isEqualToString:@"我的考试"]) {
+        MyExamMainViewController *myEaxmVc = [[MyExamMainViewController alloc] init];
+        [self.navigationController pushViewController:myEaxmVc animated:YES];
+    } else if ([button.titleLabel.text isEqualToString:@"我的文库"]) {
+        MyLibraryViewController *myLibVc = [[MyLibraryViewController alloc] init];
+        [self.navigationController pushViewController:myLibVc animated:YES];
+    } else if ([button.titleLabel.text isEqualToString:@"我的下载"]) {
+        Good_MyDownLoadMainViewController *vc = [[Good_MyDownLoadMainViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if ([button.titleLabel.text isEqualToString:@"我的卡券"]) {
+        Good_MyCardStockMainViewController *vc = [[Good_MyCardStockMainViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if ([button.titleLabel.text isEqualToString:@"学习记录"]) {
+        StudyRecodeViewController *lookVc = [[StudyRecodeViewController alloc] init];
+        [self.navigationController pushViewController:lookVc animated:YES];
+    } else if ([button.titleLabel.text isEqualToString:@"兑换记录"]) {
+        ExchangeViewController *JYJLVC =  [[ExchangeViewController alloc] init];
+        [self.navigationController pushViewController:JYJLVC animated:YES];
+    } else if ([button.titleLabel.text isEqualToString:@"我的机构"]) {
+        MyInstationViewController *myInsnVc = [[MyInstationViewController alloc] init];
+        [self.navigationController pushViewController:myInsnVc animated:YES];
+    } else if ([button.titleLabel.text isEqualToString:@"我的推荐"]) {
+        MyDownLineViewController *vc = [[MyDownLineViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if ([button.titleLabel.text isEqualToString:@"我的分享"]) {
+        MyShareViewController *vc = [[MyShareViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if ([button.titleLabel.text isEqualToString:@"我的线下课"]) {
+        MyLineDownClassMainViewController *vc = [[MyLineDownClassMainViewController alloc] init];
+        vc.allMyDict = _allInformation;
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if ([button.titleLabel.text isEqualToString:@"我的授课"]) {
+        MeTeacherMainViewController *vc = [[MeTeacherMainViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if ([button.titleLabel.text isEqualToString:@"线下课管理"]) {
+        MyTeacherMangerDownClassViewController *vc = [[MyTeacherMangerDownClassViewController alloc] init];
+        vc.allMyDict = _allInformation;
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if ([button.titleLabel.text isEqualToString:@"我的提问"]) {
+        
+    } else if ([button.titleLabel.text isEqualToString:@"我的点评"]) {
+        
+    } else if ([button.titleLabel.text isEqualToString:@"讲师认证"]) {
+        
+    }
+    return;
     if ([MoreOrSingle integerValue] == 1) {
         if ([HASALIPAY isEqualToString:@"0"]) {
             if (button.tag == 0) {//说明是课程
