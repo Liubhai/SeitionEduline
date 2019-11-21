@@ -2450,6 +2450,9 @@
 		789B834C2329F7F90073D426 /* StudyRecodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 789B834B2329F7F90073D426 /* StudyRecodeViewController.m */; };
 		78A658F52338A91F002FA19F /* GroupListPopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A658F42338A91F002FA19F /* GroupListPopViewController.m */; };
 		78A658F82338B0B3002FA19F /* GrouListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A658F72338B0B3002FA19F /* GrouListCell.m */; };
+		78DAEBF5238665B30000311F /* MyQuestionMainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DAEBF4238665B30000311F /* MyQuestionMainVC.m */; };
+		78DAEBF8238666C80000311F /* MyQuestionListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DAEBF7238666C80000311F /* MyQuestionListCell.m */; };
+		78DAEBFB23866F2C0000311F /* MyQuestionListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DAEBFA23866F2C0000311F /* MyQuestionListVC.m */; };
 		78DF190622AF5AB500DF10FB /* ShopOrderDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DF190522AF5AB500DF10FB /* ShopOrderDetailVC.m */; };
 		78F108F322B7471A00288DEB /* LanchAnimationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F108F022B7471900288DEB /* LanchAnimationVC.m */; };
 		78F108F422B7471A00288DEB /* LanchAnimationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78F108F222B7471A00288DEB /* LanchAnimationVC.xib */; };
@@ -6807,6 +6810,12 @@
 		78A658F42338A91F002FA19F /* GroupListPopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GroupListPopViewController.m; sourceTree = "<group>"; };
 		78A658F62338B0B3002FA19F /* GrouListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GrouListCell.h; sourceTree = "<group>"; };
 		78A658F72338B0B3002FA19F /* GrouListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GrouListCell.m; sourceTree = "<group>"; };
+		78DAEBF3238665B30000311F /* MyQuestionMainVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyQuestionMainVC.h; sourceTree = "<group>"; };
+		78DAEBF4238665B30000311F /* MyQuestionMainVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyQuestionMainVC.m; sourceTree = "<group>"; };
+		78DAEBF6238666C80000311F /* MyQuestionListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyQuestionListCell.h; sourceTree = "<group>"; };
+		78DAEBF7238666C80000311F /* MyQuestionListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyQuestionListCell.m; sourceTree = "<group>"; };
+		78DAEBF923866F2C0000311F /* MyQuestionListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyQuestionListVC.h; sourceTree = "<group>"; };
+		78DAEBFA23866F2C0000311F /* MyQuestionListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyQuestionListVC.m; sourceTree = "<group>"; };
 		78DF190422AF5AB500DF10FB /* ShopOrderDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopOrderDetailVC.h; sourceTree = "<group>"; };
 		78DF190522AF5AB500DF10FB /* ShopOrderDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopOrderDetailVC.m; sourceTree = "<group>"; };
 		78F108F022B7471900288DEB /* LanchAnimationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanchAnimationVC.m; sourceTree = "<group>"; };
@@ -22687,6 +22696,12 @@
 			children = (
 				815EFE2521AE906E0026D35F /* MyViewController.h */,
 				815EFE2421AE906E0026D35F /* MyViewController.m */,
+				78DAEBF3238665B30000311F /* MyQuestionMainVC.h */,
+				78DAEBF4238665B30000311F /* MyQuestionMainVC.m */,
+				78DAEBF923866F2C0000311F /* MyQuestionListVC.h */,
+				78DAEBFA23866F2C0000311F /* MyQuestionListVC.m */,
+				78DAEBF6238666C80000311F /* MyQuestionListCell.h */,
+				78DAEBF7238666C80000311F /* MyQuestionListCell.m */,
 			);
 			path = Me_Main;
 			sourceTree = "<group>";
@@ -26907,6 +26922,7 @@
 				8145DD9A21B11D99005B838D /* InstationClassViewController.m in Sources */,
 				944651291A77A335001F0DA7 /* ASIDownloadCache.m in Sources */,
 				815EFD7B21AE89340026D35F /* Good_ClassCardViewController.m in Sources */,
+				78DAEBFB23866F2C0000311F /* MyQuestionListVC.m in Sources */,
 				78F1099922B770AA00288DEB /* ZBLM3u8FileManager.m in Sources */,
 				8145DCE821B11CE1005B838D /* ZFDownloadManager.m in Sources */,
 				780313EE22ADE4470007EBBC /* UIBezierPath+YYAdd.m in Sources */,
@@ -27397,6 +27413,7 @@
 				7803141422ADE4480007EBBC /* UIResponder+Router.m in Sources */,
 				8126EE6721D63A43008C8547 /* QRCodeReaderViewController.m in Sources */,
 				81AEB7F42281614300F97858 /* MyTeacherMangerDownClassViewController.m in Sources */,
+				78DAEBF8238666C80000311F /* MyQuestionListCell.m in Sources */,
 				81C4DE0E21B1240B00A7CAD6 /* BuyAgreementViewController.m in Sources */,
 				09F0B43C21D5B41B006C7D53 /* Good_ClassServiceViewController.m in Sources */,
 				8126EE2E21D63A42008C8547 /* UIImage+Extension.m in Sources */,
@@ -27502,6 +27519,7 @@
 				8145DCE921B11CE1005B838D /* ZFPlyerResolution.m in Sources */,
 				780F89BB230F85F400B67CEF /* TKModelToJson.m in Sources */,
 				9412E5081A8E05C7005145CD /* PhoneMd.m in Sources */,
+				78DAEBF5238665B30000311F /* MyQuestionMainVC.m in Sources */,
 				8145DD9421B11D99005B838D /* HomeSearchViewController.m in Sources */,
 				09E0AF4E206B454A009788C8 /* MASConstraintMaker.m in Sources */,
 				8145DDC021B11E56005B838D /* GLTeaTableViewCell.m in Sources */,

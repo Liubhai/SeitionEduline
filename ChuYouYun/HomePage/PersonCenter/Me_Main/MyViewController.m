@@ -73,6 +73,9 @@
 #import "MyTeacherMangerDownClassViewController.h"
 #import "MeTeacherLineClassViewController.h"
 
+// 我的提问
+#import "MyQuestionMainVC.h"
+
 @interface MyViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 {
     NSInteger _number;
@@ -759,8 +762,8 @@
     CGFloat Bwidth = 45;
     CGFloat width = MainScreenWidth / 4 ;
     CGFloat spare = (MainScreenWidth / 4 - Bwidth) / 4;
-    NSArray *SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"我的卡券",@"学习记录",@"兑换记录",@"我的机构",@"我的推荐"];
-    NSArray *TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"conpons@3x",@"study@3x",@"record@3x",@"org@3x",@"downLine"];
+    NSArray *SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"我的卡券",@"学习记录",@"兑换记录",@"我的机构",@"我的推荐",@"我的提问",@"我的点评",@"讲师认证"];
+    NSArray *TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"conpons@3x",@"study@3x",@"record@3x",@"org@3x",@"downLine",@"question",@"comment",@"teacher"];
     
 
     
@@ -768,19 +771,19 @@
 
         if ([HASALIPAY isEqualToString:@"0"]) {
             if ([_isTeacher integerValue] == 1) {
-                SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"学习记录",@"兑换记录",@"我的推荐",@"我的授课"];
-                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"study@3x",@"record@3x",@"downLine",@"me_is_teacher"];
+                SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"学习记录",@"兑换记录",@"我的推荐",@"我的授课",@"我的提问",@"我的点评",@"讲师认证"];
+                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"study@3x",@"record@3x",@"downLine",@"me_is_teacher",@"question",@"comment",@"teacher"];
             } else {
-                SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"学习记录",@"兑换记录",@"我的推荐"];
-                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"study@3x",@"record@3x",@"downLine"];
+                SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"学习记录",@"兑换记录",@"我的推荐",@"我的提问",@"我的点评",@"讲师认证"];
+                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"study@3x",@"record@3x",@"downLine",@"question",@"comment",@"teacher"];
             }
         } else {
             if ([_isTeacher integerValue] == 1) {
-                SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"我的卡券",@"学习记录",@"兑换记录",@"我的推荐",@"我的授课"];
-                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"conpons@3x",@"study@3x",@"record@3x",@"downLine",@"me_is_teacher"];
+                SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"我的卡券",@"学习记录",@"兑换记录",@"我的推荐",@"我的授课",@"我的提问",@"我的点评",@"讲师认证"];
+                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"conpons@3x",@"study@3x",@"record@3x",@"downLine",@"me_is_teacher",@"question",@"comment",@"teacher"];
             } else {
-                SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"我的卡券",@"学习记录",@"兑换记录",@"我的推荐"];
-                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"conpons@3x",@"study@3x",@"record@3x",@"downLine"];
+                SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"我的卡券",@"学习记录",@"兑换记录",@"我的推荐",@"我的提问",@"我的点评",@"讲师认证"];
+                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"conpons@3x",@"study@3x",@"record@3x",@"downLine",@"question",@"comment",@"teacher"];
             }
         }
         
@@ -788,19 +791,19 @@
 
         if ([HASALIPAY isEqualToString:@"0"]) {
             if ([_isTeacher integerValue] == 1) {
-                SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"学习记录",@"兑换记录",@"我的机构",@"我的推荐",@"我的授课",@"我的分享",@"我的线下课",@"线下课管理"];
-                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"study@3x",@"record@3x",@"org@3x",@"downLine",@"me_is_teacher",@"icon-share",@"me_is_teacher",@"me_is_teacher"];
+                SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"学习记录",@"兑换记录",@"我的机构",@"我的推荐",@"我的授课",@"我的分享",@"我的线下课",@"线下课管理",@"我的提问",@"我的点评",@"讲师认证"];
+                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"study@3x",@"record@3x",@"org@3x",@"downLine",@"me_is_teacher",@"icon-share",@"me_is_teacher",@"me_is_teacher",@"question",@"comment",@"teacher"];
             } else {
-                SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"学习记录",@"兑换记录",@"我的机构",@"我的推荐",@"我的分享",@"我的线下课"];
-                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"study@3x",@"record@3x",@"org@3x",@"downLine",@"icon-share",@"me_is_teacher"];
+                SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"学习记录",@"兑换记录",@"我的机构",@"我的推荐",@"我的分享",@"我的线下课",@"我的提问",@"我的点评",@"讲师认证"];
+                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"study@3x",@"record@3x",@"org@3x",@"downLine",@"icon-share",@"me_is_teacher",@"question",@"comment",@"teacher"];
             }
         } else {
             if ([_isTeacher integerValue] == 1) {
-                SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"我的卡券",@"学习记录",@"兑换记录",@"我的机构",@"我的推荐",@"我的授课",@"我的分享",@"我的线下课",@"线下课管理"];
-                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"conpons@3x",@"study@3x",@"record@3x",@"org@3x",@"downLine",@"me_is_teacher",@"icon-share",@"me_is_teacher",@"me_is_teacher"];
+                SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"我的卡券",@"学习记录",@"兑换记录",@"我的机构",@"我的推荐",@"我的授课",@"我的分享",@"我的线下课",@"线下课管理",@"我的提问",@"我的点评",@"讲师认证"];
+                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"conpons@3x",@"study@3x",@"record@3x",@"org@3x",@"downLine",@"me_is_teacher",@"icon-share",@"me_is_teacher",@"me_is_teacher",@"question",@"comment",@"teacher"];
             } else {
-                SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"我的卡券",@"学习记录",@"兑换记录",@"我的机构",@"我的推荐",@"我的分享",@"我的线下课"];
-                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"conpons@3x",@"study@3x",@"record@3x",@"org@3x",@"downLine",@"icon-share",@"me_is_teacher"];
+                SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"我的卡券",@"学习记录",@"兑换记录",@"我的机构",@"我的推荐",@"我的分享",@"我的线下课",@"我的提问",@"我的点评",@"讲师认证"];
+                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"conpons@3x",@"study@3x",@"record@3x",@"org@3x",@"downLine",@"icon-share",@"me_is_teacher",@"question",@"comment",@"teacher"];
             }
         }
     }
@@ -848,6 +851,7 @@
     
     
     //添加线
+    /**
     for (int i = 1 ; i < 4 ; i ++) {
         UIButton *Sline = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth / 4 * i, 0, 1, 390)];
         Sline.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -872,6 +876,7 @@
         Hline.backgroundColor = [UIColor groupTableViewBackgroundColor];
         [SYGView addSubview:Hline];
     }
+    */
 }
 
 
@@ -1021,7 +1026,8 @@
         vc.allMyDict = _allInformation;
         [self.navigationController pushViewController:vc animated:YES];
     } else if ([button.titleLabel.text isEqualToString:@"我的提问"]) {
-        
+        MyQuestionMainVC *vc = [[MyQuestionMainVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
     } else if ([button.titleLabel.text isEqualToString:@"我的点评"]) {
         
     } else if ([button.titleLabel.text isEqualToString:@"讲师认证"]) {

@@ -410,4 +410,7 @@
 // 机构app是否开启
 #define config_indexConfig @"config.indexConfig"
 #define home_searchSchool @"home.searchSchool"
+
+// 我的提问 type 1 提问 2 回复
+#define user_getQuestionList @"user.getQuestionList"
 #endif /* Header_h */
