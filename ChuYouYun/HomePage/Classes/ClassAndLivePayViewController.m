@@ -111,9 +111,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSMutableDictionary *pass = [NSMutableDictionary dictionaryWithDictionary:_dict];
-    [pass setObject:[[pass objectForKey:@"mz_price"] objectForKey:@"selPrice"] forKey:@"price"];
-    _dict = [NSDictionary dictionaryWithDictionary:pass];
+    if (SWNOTEmptyDictionary(_activityInfo)) {
+        NSString *eventType = [NSString stringWithFormat:@"%@",[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"]];
+        if ([eventType integerValue] == 6 || [eventType integerValue] == 7) {
+            if (!_isBuyAlone) {
+                NSMutableDictionary *pass = [NSMutableDictionary dictionaryWithDictionary:_dict];
+                [pass setObject:[[pass objectForKey:@"mz_price"] objectForKey:@"selPrice"] forKey:@"price"];
+                _dict = [NSDictionary dictionaryWithDictionary:pass];
+            }
+        }
+    }
     _counpArray = [NSMutableArray new];
     _titleImage.backgroundColor = BasidColor;
     _titleLabel.text = [_typeStr isEqualToString:@"4"] ? @"解锁套餐" : @"解锁课程";

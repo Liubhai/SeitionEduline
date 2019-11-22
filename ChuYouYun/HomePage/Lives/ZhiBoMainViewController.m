@@ -1354,7 +1354,7 @@
 - (void)changeEventPriceUI {
     if (SWNOTEmptyDictionary(_zhiBoDic) && SWNOTEmptyDictionary(_activityInfo)) {
         NSString *eventType = [NSString stringWithFormat:@"%@",[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"]];
-        if ([eventType integerValue] == 6) {
+        if ([eventType integerValue] == 6 || [eventType integerValue] == 7) {
             NSString *activityType = @"";
             NSString *priceCount = @"";
             NSString *discount = @"";
@@ -1451,6 +1451,12 @@
                     _otherRightTimeLabel.text = [NSString stringWithFormat:@"距开售%@",[YunKeTang_Api_Tool timeChangeWithSeconds:eventTime]];
                 }
             }
+        } else if ([eventType integerValue] == 7) {
+            if ([[_activityInfo objectForKey:@"is_start"] integerValue] == 1) {
+                _otherRightTimeLabel.text = [NSString stringWithFormat:@"距结束%@",[YunKeTang_Api_Tool timeChangeWithSeconds:eventTime]];
+            } else {
+                _otherRightTimeLabel.text = [NSString stringWithFormat:@"距开售%@",[YunKeTang_Api_Tool timeChangeWithSeconds:eventTime]];
+            }
         } else {
             if ([[_activityInfo objectForKey:@"is_start"] integerValue] == 1) {
                 _rightTimeLabel.text = [NSString stringWithFormat:@"距结束%@",[YunKeTang_Api_Tool timeChangeWithSeconds:eventTime]];
@@ -1528,14 +1534,14 @@
         [_otherJoinIcon addTarget:self action:@selector(joinGroupActivity) forControlEvents:UIControlEventTouchUpInside];
         [_otherActivityBackView addSubview:_otherJoinIcon];
         
-        _otherGroupBuyBtn = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth - 20 - 100, (_otherActivityBackView.height - 30) / 2.0, 100, 30)];
-        [_otherGroupBuyBtn setTitle:@"好友助力" forState:0];
+        _otherGroupBuyBtn = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth - 20 - 80, (_otherActivityBackView.height - 30) / 2.0, 80, 30)];
+        [_otherGroupBuyBtn setTitle:@"我要砍价" forState:0];
         [_otherGroupBuyBtn setTitleColor:RGBHex(0xF12026) forState:0];
         _otherGroupBuyBtn.backgroundColor = RGBHex(0xFBF259);
         _otherGroupBuyBtn.titleLabel.font = SYSTEMFONT(13);
         _otherGroupBuyBtn.layer.masksToBounds = YES;
         _otherGroupBuyBtn.layer.cornerRadius = 3;
-        [_otherGroupBuyBtn addTarget:self action:@selector(bargainOrFriendHelpClick) forControlEvents:UIControlEventTouchUpInside];
+        [_otherGroupBuyBtn addTarget:self action:@selector(makeBargainOrFriendHelpUI) forControlEvents:UIControlEventTouchUpInside];
         [_otherActivityBackView addSubview:_otherGroupBuyBtn];
         _otherGroupBuyBtn.hidden = YES;
     }
@@ -1611,6 +1617,9 @@
             _otherRightTimeLabel.text = [NSString stringWithFormat:@"距开售%@",[YunKeTang_Api_Tool timeChangeWithSeconds:[spanTime integerValue]]];
         }
         eventTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(eventTimerDown) userInfo:nil repeats:YES];
+        NSString *eventType = [NSString stringWithFormat:@"%@",[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"]];
+
+        if ([eventType integerValue] == 6) {
         NSDictionary *myActivityInfo;
         if ([[_activityInfo objectForKey:@"user_asb"] isKindOfClass:[NSDictionary class]]) {
             myActivityInfo = [NSDictionary dictionaryWithDictionary:[_activityInfo objectForKey:@"user_asb"]];
@@ -1628,6 +1637,7 @@
                 eventTimer = nil;
                 return;
             }
+            
             NSString *myActivityLimitTime = [NSString stringWithFormat:@"%@",[myActivityInfo objectForKey:@"timespan"]];
             eventTime = [myActivityLimitTime integerValue];
             _otherRightTimeLabel.text = [NSString stringWithFormat:@"距结束%@",[YunKeTang_Api_Tool timeChangeWithSeconds:[myActivityLimitTime integerValue]]];
@@ -1695,11 +1705,41 @@
                 _otherRightTimeIcon.centerY = _otherRightTimeLabel.centerY;
             }
         }
-        
         CGFloat widthRight = [_otherRightTimeLabel.text sizeWithFont:_otherRightTimeLabel.font].width + 4;
         [_otherRightTimeLabel setWidth:widthRight];
         [_otherRightTimeLabel setRight:_otherStarBtn.right];
         [_otherRightTimeIcon setRight:_otherRightTimeLabel.left];
+        } else if ([eventType integerValue] == 7) {
+            [_otherRightTimeLabel setTop:0];
+            _otherRightTimeIcon.centerY = _otherRightTimeLabel.centerY;
+            _otherProgressView.hidden = YES;
+            _otherBuyProgressLabel.hidden = YES;
+            _otherJoinIcon.hidden = YES;
+            _otherStarBtn.hidden = YES;
+            _otherGroupBuyBtn.hidden = NO;
+            
+            [_otherGroupBuyBtn setHeight:20];
+            [_otherGroupBuyBtn setTop:_otherRightTimeLabel.bottom + 5.5];
+            if ([[_activityInfo objectForKey:@"is_start"] integerValue] == 0) {
+                _otherRightTimeLabel.centerY = _otherLeftPriceLabel.centerY;
+                _otherRightTimeIcon.centerY = _otherLeftPriceLabel.centerY;
+                _otherGroupBuyBtn.hidden = YES;
+            } else {
+                _otherGroupBuyBtn.hidden = NO;
+                NSDictionary *bargain_info = [[_activityInfo objectForKey:@"bargain_info"] objectForKey:@"mine"];
+                NSString *bargain_info_status = [NSString stringWithFormat:@"%@",[bargain_info objectForKey:@"status"]];
+                // 0未砍价 1砍价中 2砍价成功 9已帮别人砍过价
+                if ([bargain_info_status integerValue] == 0) {
+                    [_otherGroupBuyBtn setTitle:@"我要砍价" forState:0];
+                } else {
+                    [_otherGroupBuyBtn setTitle:@"砍价详情" forState:0];
+                }
+            }
+            CGFloat widthRight = [_otherRightTimeLabel.text sizeWithFont:_otherRightTimeLabel.font].width + 10;
+            [_otherRightTimeLabel setWidth:widthRight];
+            [_otherRightTimeLabel setRight:_otherGroupBuyBtn.right];
+            [_otherRightTimeIcon setRight:_otherRightTimeLabel.left];
+        }
         
     }
     if ([[_zhiBoDic objectForKey:@"is_buy"] integerValue] == 1) {
@@ -1802,7 +1842,12 @@
     [_popBackView addSubview:whiteView];
     // 头像
     UIImageView *headerImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-    headerImage.backgroundColor = [UIColor redColor];
+    if ([[[_activityInfo objectForKey:@"bargain_info"] objectForKey:@"mine"] objectForKey:@"my_avt"]) {
+        [headerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[[_activityInfo objectForKey:@"bargain_info"] objectForKey:@"mine"] objectForKey:@"my_avt"]]] placeholderImage:Image(@"站位图")];
+    } else {
+        headerImage.image = Image(@"站位图");
+    }
+    
     headerImage.layer.masksToBounds = YES;
     headerImage.layer.cornerRadius = 50;
     headerImage.center = CGPointMake(_popBackView.width / 2.0, whiteView.top);
@@ -1811,7 +1856,6 @@
     UILabel *detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 60 - 3, whiteView.width - 30, 36)];
     detailLabel.textColor = RGBHex(0x5D5D5D);//E02620
     detailLabel.font = SYSTEMFONT(13);
-    detailLabel.text = @"好友助力或者是砍价情况,多少人砍价多少了,好友助力多少了";
     detailLabel.textAlignment = NSTextAlignmentCenter;
     detailLabel.numberOfLines = 0;
     [whiteView addSubview:detailLabel];
@@ -1822,6 +1866,7 @@
     inviteButton.titleLabel.font = SYSTEMFONT(16);
     inviteButton.layer.masksToBounds = YES;
     inviteButton.layer.cornerRadius = 6;
+    [inviteButton addTarget:self action:@selector(inviteButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [inviteButton setTitle:@"邀请好友砍价" forState:0];
     inviteButton.centerX = whiteView.width / 2.0;
     [whiteView addSubview:inviteButton];
@@ -1840,7 +1885,30 @@
     // 参与人的详情
     UIScrollView *menberScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, fengeView.bottom, whiteView.width, whiteView.height - fengeView.bottom)];
     [whiteView addSubview:menberScrollView];
-    [self makeMenBerUI:menberScrollView];
+    
+    NSArray *pass = [NSArray arrayWithArray:[[[_activityInfo objectForKey:@"bargain_info"] objectForKey:@"mine"] objectForKey:@"list"]];
+    if (SWNOTEmptyArr(pass)) {
+        NSDictionary *pass_1 = [NSDictionary dictionaryWithDictionary:pass[0]];
+        NSString *bargain_info_all = [NSString stringWithFormat:@"%@",[pass_1 objectForKey:@"bargained_total_price"]];
+        NSString *bargain_info_remain = [NSString stringWithFormat:@"%@",[pass_1 objectForKey:@"remain_price"]];
+        detailLabel.text = [NSString stringWithFormat:@"已有%@位好友为你砍价%@元~还剩%@元",@(pass.count),bargain_info_all,bargain_info_remain];
+        NSRange bargain_info_all_range = [detailLabel.text rangeOfString:bargain_info_all];
+        NSRange bargain_info_ramain_range = [detailLabel.text rangeOfString:bargain_info_remain];
+        NSRange countRange = NSMakeRange(2, [[NSString stringWithFormat:@"%@",@(pass.count)] length]);
+        NSMutableAttributedString *detailLabel_mut = [[NSMutableAttributedString alloc] initWithString:detailLabel.text];
+        [detailLabel_mut addAttributes:@{NSForegroundColorAttributeName: [UIColor redColor]} range:countRange];
+        [detailLabel_mut addAttributes:@{NSForegroundColorAttributeName: [UIColor redColor]} range:bargain_info_all_range];
+        [detailLabel_mut addAttributes:@{NSForegroundColorAttributeName: [UIColor redColor]} range:bargain_info_ramain_range];
+        detailLabel.attributedText = [[NSAttributedString alloc] initWithAttributedString:detailLabel_mut];
+    } else {
+        detailLabel.text = @"还没有人为你砍价,去邀请好友砍价吧";
+    }
+    NSString *bargain_info_status = [NSString stringWithFormat:@"%@",[[[_activityInfo objectForKey:@"bargain_info"] objectForKey:@"mine"] objectForKey:@"status"]];
+    if ([bargain_info_status integerValue] == 2) {
+        [inviteButton setTitle:@"立即购买" forState:0];
+        detailLabel.text = @"砍价成功,快去购买吧";
+    }
+    [self makeMenBerUI:menberScrollView menberArr:pass];
     // 关闭按钮
     UIButton *closeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, whiteView.bottom + 25, 36, 36)];
     closeButton.centerX = _popBackView.width / 2.0;
@@ -1855,22 +1923,52 @@
     _popBackView = nil;
 }
 
-- (void)makeMenBerUI:(UIScrollView *)scroll {
+- (void)makeMenBerUI:(UIScrollView *)scroll menberArr:(NSArray *)menberArr {
     CGFloat width1 = 36.0;
     CGFloat leftRightSpace = 15.0;
     CGFloat menberSpace = (scroll.width - leftRightSpace * 2 - width1 * 5) / 4.0;
     CGFloat topSpace = 10.0;
     CGFloat menberTop = 30.0;
     CGFloat moneyWidth = scroll.width / 5.0;
-    for (int i = 0; i<10; i++) {
+    for (int i = 0; i<menberArr.count; i++) {
         UIImageView *face = [[UIImageView alloc] initWithFrame:CGRectMake(leftRightSpace + (i % 5) * (width1 + menberSpace), topSpace + (i/5) * (menberTop + width1), width1, width1)];
-        face.backgroundColor = [UIColor blueColor];
+        [face sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[menberArr[i] objectForKey:@"avatar"]]] placeholderImage:Image(@"站位图")];
+        face.layer.masksToBounds = YES;
+        face.layer.cornerRadius = width1 / 2.0;
         [scroll addSubview:face];
         UILabel *moneyLabel = [[UILabel alloc] initWithFrame:CGRectMake((i % 5) * moneyWidth, face.bottom, moneyWidth, 26)];
         moneyLabel.textAlignment = NSTextAlignmentCenter;
-        moneyLabel.text = @"23元";
+        moneyLabel.text = [NSString stringWithFormat:@"%@元",[menberArr[i] objectForKey:@"bargain_price"]];
+        NSMutableAttributedString *detailLabel_mut = [[NSMutableAttributedString alloc] initWithString:moneyLabel.text];
+        [detailLabel_mut addAttributes:@{NSForegroundColorAttributeName: [UIColor redColor]} range:NSMakeRange(0, moneyLabel.text.length - 1)];
+        moneyLabel.attributedText = [[NSAttributedString alloc] initWithAttributedString:detailLabel_mut];
         moneyLabel.font = SYSTEMFONT(10);
         [scroll addSubview:moneyLabel];
+    }
+}
+
+- (void)inviteButtonClick:(UIButton *)sender {
+    NSString *bargain_info_status = [NSString stringWithFormat:@"%@",[[[_activityInfo objectForKey:@"bargain_info"] objectForKey:@"mine"] objectForKey:@"status"]];
+    if ([bargain_info_status integerValue] == 2) {
+        // 砍价成功
+        ClassAndLivePayViewController *vc = [[ClassAndLivePayViewController alloc] init];
+        vc.dict = _zhiBoDic;
+        vc.typeStr = @"1";
+        vc.isBuyAlone = YES;
+        vc.cid = [_zhiBoDic stringValueForKey:@"id"];
+        vc.activityInfo = [NSDictionary dictionaryWithDictionary:_activityInfo];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        // 继续邀请
+        NSString *bargain_info_share_url = [NSString stringWithFormat:@"%@",[[[_activityInfo objectForKey:@"bargain_info"] objectForKey:@"mine"] objectForKey:@"share_url"]];
+        [UMSocialWechatHandler setWXAppId:WXAppId appSecret:WXAppSecret url:bargain_info_share_url];
+        [UMSocialQQHandler setQQWithAppId:QQAppId appKey:QQAppSecret url:bargain_info_share_url];
+        [UMSocialSnsService presentSnsIconSheetView:self
+                                             appKey:@"574e8829e0f55a12f8001790"
+                                          shareText:[NSString stringWithFormat:@"%@",_zhiBoTitle]
+                                         shareImage:shareImageView.image
+                                    shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQQ,nil]
+                                           delegate:self];
     }
 }
 
@@ -1904,7 +2002,7 @@
                 _activityInfo = (NSDictionary *)[YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStrFromData:responseObject];
                 if (SWNOTEmptyDictionary(_activityInfo) && SWNOTEmptyDictionary([_activityInfo objectForKey:@"event_type_info"])) {
                     NSString *eventType = [NSString stringWithFormat:@"%@",[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"]];
-                    if ([eventType integerValue] == 6) {
+                    if ([eventType integerValue] == 6 || [eventType integerValue] == 7) {
                         [self makeGroupBuyUI];
                         [self setJoinGroupActivityInfoData];
                         return;
