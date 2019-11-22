@@ -2457,6 +2457,19 @@
 		78DAEC0123869AAD0000311F /* MyCommentListMainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DAEC0023869AAD0000311F /* MyCommentListMainVC.m */; };
 		78DAEC0423869B790000311F /* MyCommentListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DAEC0323869B790000311F /* MyCommentListVC.m */; };
 		78DAEC072386C1160000311F /* TeacherApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DAEC062386C1160000311F /* TeacherApplyViewController.m */; };
+		78DAEC1E2387CF8C0000311F /* TZAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DAEC0C2387CF8B0000311F /* TZAssetCell.m */; };
+		78DAEC1F2387CF8C0000311F /* TZVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DAEC0D2387CF8B0000311F /* TZVideoPlayerController.m */; };
+		78DAEC202387CF8C0000311F /* TZAssetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DAEC0E2387CF8B0000311F /* TZAssetModel.m */; };
+		78DAEC212387CF8C0000311F /* UIView+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DAEC102387CF8B0000311F /* UIView+Layout.m */; };
+		78DAEC222387CF8C0000311F /* TZPhotoPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DAEC112387CF8B0000311F /* TZPhotoPreviewController.m */; };
+		78DAEC232387CF8C0000311F /* TZImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DAEC132387CF8B0000311F /* TZImageManager.m */; };
+		78DAEC242387CF8C0000311F /* TZPhotoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DAEC142387CF8B0000311F /* TZPhotoPickerController.m */; };
+		78DAEC252387CF8C0000311F /* TZPhotoPreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DAEC152387CF8B0000311F /* TZPhotoPreviewCell.m */; };
+		78DAEC262387CF8C0000311F /* TZImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DAEC1A2387CF8B0000311F /* TZImagePickerController.m */; };
+		78DAEC272387CF8C0000311F /* TZAlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78DAEC1C2387CF8B0000311F /* TZAlbumCell.xib */; };
+		78DAEC282387CF8C0000311F /* TZAssetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78DAEC1D2387CF8B0000311F /* TZAssetCell.xib */; };
+		78DAEC2D2387CFA00000311F /* UIActionSheet+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DAEC292387CF9C0000311F /* UIActionSheet+Blocks.m */; };
+		78DAEC2E2387CFA00000311F /* ScanPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DAEC2C2387CF9F0000311F /* ScanPhotoViewController.m */; };
 		78DF190622AF5AB500DF10FB /* ShopOrderDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DF190522AF5AB500DF10FB /* ShopOrderDetailVC.m */; };
 		78F108F322B7471A00288DEB /* LanchAnimationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F108F022B7471900288DEB /* LanchAnimationVC.m */; };
 		78F108F422B7471A00288DEB /* LanchAnimationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78F108F222B7471A00288DEB /* LanchAnimationVC.xib */; };
@@ -6828,6 +6841,30 @@
 		78DAEC0323869B790000311F /* MyCommentListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyCommentListVC.m; sourceTree = "<group>"; };
 		78DAEC052386C1160000311F /* TeacherApplyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeacherApplyViewController.h; sourceTree = "<group>"; };
 		78DAEC062386C1160000311F /* TeacherApplyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeacherApplyViewController.m; sourceTree = "<group>"; };
+		78DAEC092387CF8B0000311F /* TZPhotoPreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZPhotoPreviewCell.h; sourceTree = "<group>"; };
+		78DAEC0A2387CF8B0000311F /* TZPhotoPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZPhotoPickerController.h; sourceTree = "<group>"; };
+		78DAEC0B2387CF8B0000311F /* TZImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZImageManager.h; sourceTree = "<group>"; };
+		78DAEC0C2387CF8B0000311F /* TZAssetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZAssetCell.m; sourceTree = "<group>"; };
+		78DAEC0D2387CF8B0000311F /* TZVideoPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZVideoPlayerController.m; sourceTree = "<group>"; };
+		78DAEC0E2387CF8B0000311F /* TZAssetModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZAssetModel.m; sourceTree = "<group>"; };
+		78DAEC0F2387CF8B0000311F /* TZImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZImagePickerController.h; sourceTree = "<group>"; };
+		78DAEC102387CF8B0000311F /* UIView+Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Layout.m"; sourceTree = "<group>"; };
+		78DAEC112387CF8B0000311F /* TZPhotoPreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZPhotoPreviewController.m; sourceTree = "<group>"; };
+		78DAEC122387CF8B0000311F /* TZAssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZAssetCell.h; sourceTree = "<group>"; };
+		78DAEC132387CF8B0000311F /* TZImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZImageManager.m; sourceTree = "<group>"; };
+		78DAEC142387CF8B0000311F /* TZPhotoPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZPhotoPickerController.m; sourceTree = "<group>"; };
+		78DAEC152387CF8B0000311F /* TZPhotoPreviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZPhotoPreviewCell.m; sourceTree = "<group>"; };
+		78DAEC162387CF8B0000311F /* TZAssetModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZAssetModel.h; sourceTree = "<group>"; };
+		78DAEC172387CF8B0000311F /* TZVideoPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZVideoPlayerController.h; sourceTree = "<group>"; };
+		78DAEC182387CF8B0000311F /* TZPhotoPreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZPhotoPreviewController.h; sourceTree = "<group>"; };
+		78DAEC192387CF8B0000311F /* UIView+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Layout.h"; sourceTree = "<group>"; };
+		78DAEC1A2387CF8B0000311F /* TZImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZImagePickerController.m; sourceTree = "<group>"; };
+		78DAEC1C2387CF8B0000311F /* TZAlbumCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TZAlbumCell.xib; sourceTree = "<group>"; };
+		78DAEC1D2387CF8B0000311F /* TZAssetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TZAssetCell.xib; sourceTree = "<group>"; };
+		78DAEC292387CF9C0000311F /* UIActionSheet+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+Blocks.m"; sourceTree = "<group>"; };
+		78DAEC2A2387CF9D0000311F /* UIActionSheet+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+Blocks.h"; sourceTree = "<group>"; };
+		78DAEC2B2387CF9E0000311F /* ScanPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanPhotoViewController.h; sourceTree = "<group>"; };
+		78DAEC2C2387CF9F0000311F /* ScanPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanPhotoViewController.m; sourceTree = "<group>"; };
 		78DF190422AF5AB500DF10FB /* ShopOrderDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopOrderDetailVC.h; sourceTree = "<group>"; };
 		78DF190522AF5AB500DF10FB /* ShopOrderDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopOrderDetailVC.m; sourceTree = "<group>"; };
 		78F108F022B7471900288DEB /* LanchAnimationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanchAnimationVC.m; sourceTree = "<group>"; };
@@ -10286,6 +10323,11 @@
 		50BACA3B1A709E7200E2B8A4 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				78DAEC2B2387CF9E0000311F /* ScanPhotoViewController.h */,
+				78DAEC2C2387CF9F0000311F /* ScanPhotoViewController.m */,
+				78DAEC2A2387CF9D0000311F /* UIActionSheet+Blocks.h */,
+				78DAEC292387CF9C0000311F /* UIActionSheet+Blocks.m */,
+				78DAEC082387CF8B0000311F /* TZImagePickerController */,
 				78355FCE230E7BA100A979D0 /* MBHUD+ADD */,
 				81B301DF227EDE68005B1D34 /* Baidu-DocReader-SDK-iOS-2-2 */,
 				09EEBB2A20C543B80014D5CF /* 进度条（Progress） */,
@@ -19462,6 +19504,41 @@
 			path = json;
 			sourceTree = "<group>";
 		};
+		78DAEC082387CF8B0000311F /* TZImagePickerController */ = {
+			isa = PBXGroup;
+			children = (
+				78DAEC092387CF8B0000311F /* TZPhotoPreviewCell.h */,
+				78DAEC0A2387CF8B0000311F /* TZPhotoPickerController.h */,
+				78DAEC0B2387CF8B0000311F /* TZImageManager.h */,
+				78DAEC0C2387CF8B0000311F /* TZAssetCell.m */,
+				78DAEC0D2387CF8B0000311F /* TZVideoPlayerController.m */,
+				78DAEC0E2387CF8B0000311F /* TZAssetModel.m */,
+				78DAEC0F2387CF8B0000311F /* TZImagePickerController.h */,
+				78DAEC102387CF8B0000311F /* UIView+Layout.m */,
+				78DAEC112387CF8B0000311F /* TZPhotoPreviewController.m */,
+				78DAEC122387CF8B0000311F /* TZAssetCell.h */,
+				78DAEC132387CF8B0000311F /* TZImageManager.m */,
+				78DAEC142387CF8B0000311F /* TZPhotoPickerController.m */,
+				78DAEC152387CF8B0000311F /* TZPhotoPreviewCell.m */,
+				78DAEC162387CF8B0000311F /* TZAssetModel.h */,
+				78DAEC172387CF8B0000311F /* TZVideoPlayerController.h */,
+				78DAEC182387CF8B0000311F /* TZPhotoPreviewController.h */,
+				78DAEC192387CF8B0000311F /* UIView+Layout.h */,
+				78DAEC1A2387CF8B0000311F /* TZImagePickerController.m */,
+				78DAEC1B2387CF8B0000311F /* Resource */,
+			);
+			path = TZImagePickerController;
+			sourceTree = "<group>";
+		};
+		78DAEC1B2387CF8B0000311F /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				78DAEC1C2387CF8B0000311F /* TZAlbumCell.xib */,
+				78DAEC1D2387CF8B0000311F /* TZAssetCell.xib */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		78F1091022B770A900288DEB /* DownVideoFileManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -24417,6 +24494,7 @@
 				F19CF9DD1DEEB47700920080 /* 机构信息@2x.png in Resources */,
 				780F855A230F85EF00B67CEF /* tk_base_btn_close_cartoon.png in Resources */,
 				780F885D230F85F200B67CEF /* tk_open_eyes_black.png in Resources */,
+				78DAEC282387CF8C0000311F /* TZAssetCell.xib in Resources */,
 				780F8755230F85F100B67CEF /* tk_icon_control_camera_02_black@3x.png in Resources */,
 				8126ED7621D63A42008C8547 /* 010@3x.png in Resources */,
 				780F88DE230F85F300B67CEF /* tk_button_jingyin_black@3x.png in Resources */,
@@ -25187,6 +25265,7 @@
 				780F892F230F85F300B67CEF /* tk_right_default_black@3x.png in Resources */,
 				81C4DE9021B1246500A7CAD6 /* biaoqing_13.png in Resources */,
 				780F837A230F85ED00B67CEF /* answer_C_0_cartoon@2x.png in Resources */,
+				78DAEC272387CF8C0000311F /* TZAlbumCell.xib in Resources */,
 				780F896E230F85F400B67CEF /* tk_yingguangbi_default_black@3x.png in Resources */,
 				815EFC2421AE71A70026D35F /* gl删除.png in Resources */,
 				F19EC1181C8D14270094C2A4 /* shengli.png in Resources */,
@@ -26750,6 +26829,7 @@
 				781A653022BBA77A0012F9EF /* ZFPlayerControlView.m in Sources */,
 				815EFD6721AE89340026D35F /* MyTestViewController.m in Sources */,
 				786DB5D822C717780094B7F4 /* LBHProgressView.m in Sources */,
+				78DAEC212387CF8C0000311F /* UIView+Layout.m in Sources */,
 				815EFDAB21AE89350026D35F /* OrderCell.m in Sources */,
 				780F89AD230F85F400B67CEF /* NSAttributedString+TKEmoji.m in Sources */,
 				815EFDD121AE8CBE0026D35F /* OpenMemberViewController.m in Sources */,
@@ -26776,6 +26856,7 @@
 				50BACB531A709E7300E2B8A4 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				8145DC8D21B1192C005B838D /* UIView+Utils.m in Sources */,
 				097DC2D521D632850060C974 /* NSString+AlivcHelper.m in Sources */,
+				78DAEC222387CF8C0000311F /* TZPhotoPreviewController.m in Sources */,
 				09F319BE1F18759D0014044A /* LLSegmentBarConfig.m in Sources */,
 				815EFDB521AE89350026D35F /* FSViewController.m in Sources */,
 				815EFB6D21AE3B620026D35F /* Good_LibraryRankViewController.m in Sources */,
@@ -26804,6 +26885,7 @@
 				8126EE4B21D63A42008C8547 /* ModelView.m in Sources */,
 				8159885F2293E05000140E59 /* JVSRSAHandler.m in Sources */,
 				780F8996230F85F400B67CEF /* crypt.c in Sources */,
+				78DAEC2E2387CFA00000311F /* ScanPhotoViewController.m in Sources */,
 				780F89A2230F85F400B67CEF /* aes_ni.c in Sources */,
 				780F89B6230F85F400B67CEF /* TKMP3ToPCM.m in Sources */,
 				097DC26221D632850060C974 /* AliyunPlayerViewGestureView.m in Sources */,
@@ -26936,6 +27018,7 @@
 				81AEB7F72281617900F97858 /* MyTeacherManageReservationViewController.m in Sources */,
 				8145DD8E21B11D98005B838D /* Good_InstRankViewController.m in Sources */,
 				815EFBE621AE65510026D35F /* PublishTopicViewController.m in Sources */,
+				78DAEC1F2387CF8C0000311F /* TZVideoPlayerController.m in Sources */,
 				F1E8F85E1C48ED3800EAFED6 /* SYGClassTool.m in Sources */,
 				780F8A10230F85F500B67CEF /* TKCountdown.m in Sources */,
 				781F45C622D4671F006CF3C5 /* ClassCommentListVC.m in Sources */,
@@ -27122,6 +27205,7 @@
 				815EFDF121AE8DB30026D35F /* Good_ManagementCardViewController.m in Sources */,
 				815EFD9521AE89350026D35F /* Good_integParticularsTableViewCell.m in Sources */,
 				50BACB551A709E7300E2B8A4 /* UIButton+AFNetworking.m in Sources */,
+				78DAEC202387CF8C0000311F /* TZAssetModel.m in Sources */,
 				50180BAF1A8F69A3005F441C /* CMBaseClass.m in Sources */,
 				780F89B3230F85F400B67CEF /* TKSortByNameCore.m in Sources */,
 				09E7D8051EA73F5C00701395 /* SearchCataLog.m in Sources */,
@@ -27135,6 +27219,7 @@
 				787DFB5822DDBC0200335A13 /* SBJsonBase.m in Sources */,
 				780F89B7230F85F400B67CEF /* TKImageLoadBit.m in Sources */,
 				780F89D0230F85F400B67CEF /* TKCTFileListTableViewCell.m in Sources */,
+				78DAEC232387CF8C0000311F /* TZImageManager.m in Sources */,
 				81FB7E032224DC7F00E43B01 /* MyShareTableViewCell.m in Sources */,
 				81DF85B5224A0871004CA3B2 /* ClassTestPracticeViewController.m in Sources */,
 				097DC25E21D632850060C974 /* AliyunPlayerViewErrorView.m in Sources */,
@@ -27144,6 +27229,7 @@
 				780F8A44230F85F500B67CEF /* TKHUD.m in Sources */,
 				815EFC7E21AE81A00026D35F /* ZhiBoMainViewController.m in Sources */,
 				8145DCD021B11B66005B838D /* DetectionViewController.m in Sources */,
+				78DAEC2D2387CFA00000311F /* UIActionSheet+Blocks.m in Sources */,
 				780F8A40230F85F500B67CEF /* TKAFURLResponseSerialization.m in Sources */,
 				815EFD8321AE89340026D35F /* MyAnswerViewController.m in Sources */,
 				78F109C522B770AA00288DEB /* BRAFURLResponseSerialization.m in Sources */,
@@ -27202,6 +27288,7 @@
 				780F8A22230F85F500B67CEF /* TKColorTipView.m in Sources */,
 				815EFDAE21AE89350026D35F /* BJXQViewController.m in Sources */,
 				944651341A77A335001F0DA7 /* UIScrollView+MJExtension.m in Sources */,
+				78DAEC252387CF8C0000311F /* TZPhotoPreviewCell.m in Sources */,
 				F18387861DE565D000FBF310 /* MJPhotoView.m in Sources */,
 				F188B53A1CBB87FE00BA7F3F /* ZiXunFL.m in Sources */,
 				8126EE5C21D63A42008C8547 /* QRCodeReaderAanimationLineView.m in Sources */,
@@ -27217,6 +27304,7 @@
 				78DAEC072386C1160000311F /* TeacherApplyViewController.m in Sources */,
 				8145DC5221B11628005B838D /* Good_HonorListTableViewCell.m in Sources */,
 				F1EB36301C4C83EB00D2EA73 /* PLClassTool.m in Sources */,
+				78DAEC242387CF8C0000311F /* TZPhotoPickerController.m in Sources */,
 				780F89DC230F85F400B67CEF /* TKCTUserListHeaderView.m in Sources */,
 				8145DC5621B11628005B838D /* Good_QuestionAndAnsCateViewController.m in Sources */,
 				7803141822ADE4480007EBBC /* ZLCameraImageView.m in Sources */,
@@ -27368,9 +27456,11 @@
 				815988602293E05000140E59 /* NSString+Base64.m in Sources */,
 				78F109B922B770AA00288DEB /* PUTResponse.m in Sources */,
 				8145DD9E21B11D99005B838D /* VideoViewController.m in Sources */,
+				78DAEC1E2387CF8C0000311F /* TZAssetCell.m in Sources */,
 				8145DD7921B11D98005B838D /* SearchTeacherCell.m in Sources */,
 				097DC2D321D632850060C974 /* UIView+AlivcHelper.m in Sources */,
 				815EFDBD21AE89350026D35F /* CollectLineClassViewController.m in Sources */,
+				78DAEC262387CF8C0000311F /* TZImagePickerController.m in Sources */,
 				944651261A77A335001F0DA7 /* ASIAuthenticationDialog.m in Sources */,
 				09F319BF1F18759D0014044A /* LLSegmentBarVC.m in Sources */,
 				8145DC6721B11705005B838D /* emotionViewController.m in Sources */,

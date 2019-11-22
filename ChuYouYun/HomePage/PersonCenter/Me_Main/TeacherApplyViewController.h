@@ -8,80 +8,91 @@
 
 #import "BaseViewController.h"
 
+#import "SYG.h"
+#import "YunKeTang_Api.h"
+#import "TKProgressHUD+Add.h"
+#import "Passport.h"
+#import "AppDelegate.h"
+
+#import "TZImagePickerController.h"
+#import "ScanPhotoViewController.h"
+
+
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TeacherApplyViewController : BaseViewController
+@interface TeacherApplyViewController : BaseViewController<UIPickerViewDelegate, UIPickerViewDataSource, UIActionSheetDelegate, TZImagePickerControllerDelegate, sendPhotoArrDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIScrollViewDelegate, UITextViewDelegate, UITextFieldDelegate>
 
-@property(retain, nonatomic) NSDictionary *teacherApplyInfo;
+@property(strong, nonatomic) NSDictionary *teacherApplyInfo;
 
-@property(retain, nonatomic) NSMutableArray *imageArray;
+@property(strong, nonatomic) NSMutableArray *imageArray;
 
-@property(retain, nonatomic) NSMutableArray *schoolArray;
+@property(strong, nonatomic) NSMutableArray *schoolArray;
 
-@property(retain, nonatomic) NSMutableArray *secondDataSource;
-@property(retain, nonatomic) NSMutableArray *firstDataSource;
-@property(retain, nonatomic) NSMutableArray *dataSource;
+@property(strong, nonatomic) NSMutableArray *secondDataSource;
+@property(strong, nonatomic) NSMutableArray *firstDataSource;
+@property(strong, nonatomic) NSMutableArray *dataSource;
 
-@property(retain, nonatomic) UIView *pickerLineView;
-@property(retain, nonatomic) UIButton *sureButton;
-@property(retain, nonatomic) UIButton *cancelButton;
-@property(retain, nonatomic) UIView *whiteBackView;
-@property(retain, nonatomic) UIView *pickBackView;
-@property(retain, nonatomic) UIPickerView *choosePickerView;
+@property(strong, nonatomic) UIView *pickerLineView;
+@property(strong, nonatomic) UIButton *sureButton;
+@property(strong, nonatomic) UIButton *cancelButton;
+@property(strong, nonatomic) UIView *whiteBackView;
+@property(strong, nonatomic) UIView *pickBackView;
+@property(strong, nonatomic) UIPickerView *choosePickerView;
 
-@property(retain, nonatomic) UIButton *submitButton;
+@property(strong, nonatomic) UIButton *submitButton;
 
-@property(retain, nonatomic) UIButton *agreeButton;
-@property(retain, nonatomic) UILabel *agreementLabel;
-@property(retain, nonatomic) UIButton *selectIcon;
-@property(retain, nonatomic) UIView *agreeBg;
+@property(strong, nonatomic) UIButton *agreeDetailVCButton;
+@property(strong, nonatomic) UIButton *agreeButton;
+@property(strong, nonatomic) UILabel *agreeTitle;
+@property(strong, nonatomic) UIButton *agreeBackButton;
+@property(strong, nonatomic) UIView *agreementBackView;
 
-@property(retain, nonatomic) UIView *picsContainView;
-@property(retain, nonatomic) UIButton *picButton;
-@property(retain, nonatomic) UIImageView *picIcon;
-@property(retain, nonatomic) UILabel *picLabel;
-@property(retain, nonatomic) UILabel *picTitle;
-@property(retain, nonatomic) UIImageView *picleftIcon;
-@property(retain, nonatomic) UIView *picBg;
+@property(strong, nonatomic) UIView *picsContainView;
+@property(strong, nonatomic) UIButton *picButton;
+@property(strong, nonatomic) UIImageView *picIcon;
+@property(strong, nonatomic) UILabel *picLabel;
+@property(strong, nonatomic) UILabel *picTitle;
+@property(strong, nonatomic) UIImageView *picleftIcon;
+@property(strong, nonatomic) UIView *picBg;
 
-@property(retain, nonatomic) UILabel *placeholderLabel;
-@property(retain, nonatomic) UITextView *reasonTextView;
-@property(retain, nonatomic) UILabel *reasonTitle;
-@property(retain, nonatomic) UIImageView *reasonleftIcon;
-@property(retain, nonatomic) UIView *reasonBg;
+@property(strong, nonatomic) UILabel *placeholderLabel;
+@property(strong, nonatomic) UITextView *reasonTextView;
+@property(strong, nonatomic) UILabel *reasonTitle;
+@property(strong, nonatomic) UIImageView *reasonleftIcon;
+@property(strong, nonatomic) UIView *reasonBg;
 
-@property(retain, nonatomic) UIButton *nameButton;
-@property(retain, nonatomic) UILabel *nameLabel;
-@property(retain, nonatomic) UILabel *nameTitle;
-@property(retain, nonatomic) UIImageView *nameleftIcon;
-@property(retain, nonatomic) UITextField *nameTextField;
-@property(retain, nonatomic) UIView *nameBg;
+@property(strong, nonatomic) UIButton *nameButton;
+@property(strong, nonatomic) UILabel *nameLabel;
+@property(strong, nonatomic) UILabel *nameTitle;
+@property(strong, nonatomic) UIImageView *nameleftIcon;
+@property(strong, nonatomic) UITextField *nameTextField;
+@property(strong, nonatomic) UIView *nameBg;
 
-@property(retain, nonatomic) UIButton *classButton;
-@property(retain, nonatomic) UIImageView *classIcon;
-@property(retain, nonatomic) UILabel *classLabel;
-@property(retain, nonatomic) UILabel *classTitle;
-@property(retain, nonatomic) UIImageView *classleftIcon;
-@property(retain, nonatomic) UIView *classBg;
+@property(strong, nonatomic) UIButton *classButton;
+@property(strong, nonatomic) UIImageView *classIcon;
+@property(strong, nonatomic) UILabel *classLabel;
+@property(strong, nonatomic) UILabel *classTitle;
+@property(strong, nonatomic) UIImageView *classleftIcon;
+@property(strong, nonatomic) UIView *classBg;
 
-@property(retain, nonatomic) UIButton *organizationButton;
-@property(retain, nonatomic) UIImageView *organizationIcon;
-@property(retain, nonatomic) UILabel *organizationLabel;
-@property(retain, nonatomic) UILabel *organizationTitle;
-@property(retain, nonatomic) UIView *organizationBg;
+@property(strong, nonatomic) UIButton *organizationButton;
+@property(strong, nonatomic) UIImageView *organizationIcon;
+@property(strong, nonatomic) UILabel *organizationLabel;
+@property(strong, nonatomic) UILabel *organizationTitle;
+@property(strong, nonatomic) UIView *organizationBg;
 
-@property(retain, nonatomic) UIView *line5;
-@property(retain, nonatomic) UIView *line4;
-@property(retain, nonatomic) UIView *line3;
-@property(retain, nonatomic) UIView *line2;
-@property(retain, nonatomic) UIView *line1;
+@property(strong, nonatomic) UIView *line5;
+@property(strong, nonatomic) UIView *line4;
+@property(strong, nonatomic) UIView *line3;
+@property(strong, nonatomic) UIView *line2;
+@property(strong, nonatomic) UIView *line1;
 
-@property(retain, nonatomic) UIButton *statusButton;
-@property(retain, nonatomic) UILabel *statusResult;
-@property(retain, nonatomic) UILabel *statusTitle;
-@property(retain, nonatomic) UIView *statusBg;
+@property(strong, nonatomic) UIButton *statusButton;
+@property(strong, nonatomic) UILabel *statusResult;
+@property(strong, nonatomic) UILabel *statusTitle;
+@property(strong, nonatomic) UIView *statusBg;
 
-@property(retain, nonatomic) UIScrollView *mainScrollView;
+@property(strong, nonatomic) UIScrollView *mainScrollView;
 
 @end
 

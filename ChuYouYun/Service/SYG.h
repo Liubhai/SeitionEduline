@@ -247,4 +247,10 @@ alpha:1.0]
 #define ScreenFitWidth [UIScreen mainScreen].bounds.size.width / 375
 #define ScreenFitHeight [UIScreen mainScreen].bounds.size.height / 667
 
+// View 坐标(x,y)和宽高(width,height)
+#define X(v)                    (v).frame.origin.x
+#define Y(v)                    (v).frame.origin.y
+#define WIDTH(v)                (v).frame.size.width
+#define HEIGHT(v)               (v).frame.size.height
+
 #endif

@@ -77,6 +77,8 @@
 #import "MyQuestionMainVC.h"
 // 我的点评
 #import "MyCommentListMainVC.h"
+// 讲师认证
+#import "TeacherApplyViewController.h"
 
 @interface MyViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 {
@@ -1034,7 +1036,8 @@
         MyCommentListMainVC *vc = [[MyCommentListMainVC alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     } else if ([button.titleLabel.text isEqualToString:@"讲师认证"]) {
-        
+        TeacherApplyViewController *vc = [[TeacherApplyViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
     }
     return;
     if ([MoreOrSingle integerValue] == 1) {

@@ -416,4 +416,12 @@
 #define user_getQuestionList @"user.getQuestionList"
 // 我的点评
 #define user_getCommentList @"user.getCommentList"
+
+// 讲师认证信息
+#define teacher_authInfo @"teacher.authInfo"
+// 通过机构获取讲师分类
+#define teacher_getCate @"teacher.getCate"
+// 讲师认证
+#define teacher_doAuth @"teacher.doAuth"
+
 #endif /* Header_h */
