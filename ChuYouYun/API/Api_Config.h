@@ -423,5 +423,8 @@
 #define teacher_getCate @"teacher.getCate"
 // 讲师认证
 #define teacher_doAuth @"teacher.doAuth"
-
+// 取消认证
+#define teacher_cancelAuth @"teacher.cancelAuth"
+// 讲师认证多张图片一起上传
+#define attach_multipleUploads @"attach.multipleUploads"
 #endif /* Header_h */

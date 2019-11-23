@@ -284,7 +284,7 @@
     [_submitButton setTitleColor:[UIColor whiteColor] forState:0];
     _submitButton.layer.masksToBounds = YES;
     _submitButton.layer.cornerRadius = 5;
-    [_submitButton addTarget:self action:@selector(submitButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    [_submitButton addTarget:self action:@selector(uploadImageToNet) forControlEvents:UIControlEventTouchUpInside];
     [_mainScrollView addSubview:_submitButton];
     
     _mainScrollView.contentSize = CGSizeMake(0, (_submitButton.bottom + 40) > MainScreenHeight ? (_submitButton.bottom + 40) : MainScreenHeight);
@@ -299,11 +299,165 @@
     [_reasonTextView becomeFirstResponder];
 }
 
-- (void)submitButtonClick {
+- (void)uploadImageToNet {
+    
+    if ([verified_status isEqualToString:@"1"]) {
+        //取消认证
+        [self unApplyMethod];
+        return;
+    }
+    
+    if (!SWNOTEmptyArr(_imageArray)) {
+        [TKProgressHUD showError:@"至少上传一张认证附件" toView:self.view];
+        return;
+    }
+    NSString *endUrlStr = attach_multipleUploads;
+    NSString *allUrlStr = [YunKeTang_Api_Tool YunKeTang_GetFullUrl:endUrlStr];
+    
+    NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
+    [mutabDict setObject:@"20" forKey:@"count"];
+    NSString *oath_token_Str = nil;
+    if (UserOathToken) {
+        oath_token_Str = [NSString stringWithFormat:@"%@:%@",UserOathToken,UserOathTokenSecret];
+    }
+    AFHTTPSessionManager *manger = [AFHTTPSessionManager manager];
+    AFHTTPRequestSerializer *requestSerializer =  [AFJSONRequestSerializer serializer];
+    NSString *encryptStr1 = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetEncryptStr:mutabDict];
+    [requestSerializer setValue:encryptStr1 forHTTPHeaderField:HeaderKey];
+    [requestSerializer setValue:oath_token_Str forHTTPHeaderField:OAUTH_TOKEN];
+    
+    manger.requestSerializer = requestSerializer;
+    
+    [manger POST:allUrlStr parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        //上传图片
+        for (int i = 0; i<_imageArray.count; i++) {
+            NSData *dataImg=UIImageJPEGRepresentation(_imageArray[i], 0.5);
+            [formData appendPartWithFileData:dataImg name:[NSString stringWithFormat:@"teacherapply%d",i] fileName:[NSString stringWithFormat:@"image%d.jpg",i] mimeType:@"image/jpeg"];
+        }
+        
+    } success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSDictionary *dict = (NSDictionary *)responseObject;
+        if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
+            attach_ids = @"";
+            dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_WithJson:[dict stringValueForKey:@"data"]];
+            if (SWNOTEmptyArr(dict)) {
+                NSArray *attach_ids_array = [NSArray arrayWithArray:(NSArray *)dict];
+                for (int i = 0; i<attach_ids_array.count; i++) {
+                    if (i==0) {
+                        attach_ids = [NSString stringWithFormat:@",%@,",[attach_ids_array[i] objectForKey:@"attach_id"]];
+                    } else {
+                        attach_ids = [NSString stringWithFormat:@"%@%@,",attach_ids,[attach_ids_array[i] objectForKey:@"attach_id"]];
+                    }
+                }
+                [self submitButtonClick:attach_ids];
+            }
+            
+        } else {
+            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [TKProgressHUD showError:@"上传图片超时,请重试" toView:self.view];
+    }];
+}
+
+- (void)submitButtonClick:(NSString *)imageId_string {
+    
+    if (!SWNOTEmptyStr(schoolID)) {
+        [TKProgressHUD showError:@"请选择认证机构" toView:self.view];
+        return;
+    }
+    if (!SWNOTEmptyStr(classID)) {
+        [TKProgressHUD showError:@"请选择认证分类" toView:self.view];
+        return;
+    }
+    if (!SWNOTEmptyStr(_nameTextField.text)) {
+        [TKProgressHUD showError:@"请填写姓名" toView:self.view];
+        return;
+    }
+    if (!SWNOTEmptyStr(_reasonTextView.text)) {
+        [TKProgressHUD showError:@"请输入您的认证理由" toView:self.view];
+        return;
+    }
+    
+    NSString *endUrlStr = teacher_doAuth;
+    NSString *allUrlStr = [YunKeTang_Api_Tool YunKeTang_GetFullUrl:endUrlStr];
+    
+    NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
+    [mutabDict setObject:schoolID forKey:@"school"];
+    [mutabDict setObject:classID forKey:@"cate"];
+    [mutabDict setObject:_nameTextField.text forKey:@"name"];
+    [mutabDict setObject:_reasonTextView.text forKey:@"reason"];
+    [mutabDict setObject:attach_ids forKey:@"attach_ids"];
+    
+    NSString *oath_token_Str = nil;
+    if (UserOathToken) {
+        oath_token_Str = [NSString stringWithFormat:@"%@:%@",UserOathToken,UserOathTokenSecret];
+    }
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:allUrlStr]];
+    [request setHTTPMethod:NetWay];
+    NSString *encryptStr = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetEncryptStr:mutabDict];
+    [request setValue:encryptStr forHTTPHeaderField:HeaderKey];
+    [request setValue:oath_token_Str forHTTPHeaderField:OAUTH_TOKEN];
+    
+    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        NSDictionary *statusDict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
+        [TKProgressHUD showError:[statusDict stringValueForKey:@"msg"] toView:self.view];
+        if ([[statusDict stringValueForKey:@"code"] integerValue] == 1) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            });
+        } else {
+            [TKProgressHUD showError:[statusDict stringValueForKey:@"msg"] toView:self.view];
+        }
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        [TKProgressHUD showError:@"认证超时,请重试" toView:self.view];
+    }];
+    [op start];
     
 }
 
+- (void)unApplyMethod {
+    
+    NSString *endUrlStr = teacher_cancelAuth;
+    NSString *allUrlStr = [YunKeTang_Api_Tool YunKeTang_GetFullUrl:endUrlStr];
+    
+    NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
+    
+    NSString *oath_token_Str = nil;
+    if (UserOathToken) {
+        oath_token_Str = [NSString stringWithFormat:@"%@:%@",UserOathToken,UserOathTokenSecret];
+    }
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:allUrlStr]];
+    [request setHTTPMethod:NetWay];
+    NSString *encryptStr = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetEncryptStr:mutabDict];
+    [request setValue:encryptStr forHTTPHeaderField:HeaderKey];
+    [request setValue:oath_token_Str forHTTPHeaderField:OAUTH_TOKEN];
+    
+    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        NSDictionary *statusDict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
+        [TKProgressHUD showError:[statusDict stringValueForKey:@"msg"] toView:self.view];
+        if ([[statusDict stringValueForKey:@"code"] integerValue] == 1) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            });
+        } else {
+            [TKProgressHUD showError:[statusDict stringValueForKey:@"msg"] toView:self.view];
+        }
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        [TKProgressHUD showError:@"请求超时,请重试" toView:self.view];
+    }];
+    [op start];
+       
+}
+
 - (void)agreeButtonClick {
+    if ([verified_status isEqualToString:@"0"] || [verified_status isEqualToString:@"1"]) {
+        return;
+    }
     _agreeButton.selected = !_agreeButton.selected;
     if (_agreeButton.selected) {
         _submitButton.enabled = YES;
@@ -315,6 +469,9 @@
 }
 
 - (void)coverButtonClick:(UIButton *)sender {
+    if ([verified_status isEqualToString:@"0"] || [verified_status isEqualToString:@"1"]) {
+        return;
+    }
     [_nameTextField resignFirstResponder];
     [_reasonTextView resignFirstResponder];
     if (sender == _picButton) {
@@ -429,6 +586,9 @@
 }
 
 -(void)tapImage:(UITapGestureRecognizer *)tgr{
+    if ([verified_status isEqualToString:@"1"] || [verified_status isEqualToString:@"0"]) {
+        return;
+    }
     [self.view endEditing:YES];
     ScanPhotoViewController *scanVC = [[ScanPhotoViewController alloc]init];
     scanVC.imgArr = _imageArray;
@@ -458,6 +618,20 @@
 
 - (void)textFieldDidChanged:(NSNotification *)notice {
     
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    if ([verified_status isEqualToString:@"0"] || [verified_status isEqualToString:@"1"]) {
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+    if ([verified_status isEqualToString:@"0"] || [verified_status isEqualToString:@"1"]) {
+        return NO;
+    }
+    return YES;
 }
 
 - (void)textViewDidChanged:(NSNotification *)notice {
@@ -667,8 +841,29 @@
                 [_schoolArray removeAllObjects];
                 [_schoolArray addObjectsFromArray:[_teacherApplyInfo objectForKey:@"school"]];
                 if (SWNOTEmptyDictionary([_teacherApplyInfo objectForKey:@"verifyInfo"])) {
-                    [self setValueForTeacherInfo:[_teacherApplyInfo objectForKey:@"verifyInfo"]];
                     verified_status = [NSString stringWithFormat:@"%@",[[_teacherApplyInfo objectForKey:@"verifyInfo"] objectForKey:@"verified_status"]];
+                    [self setValueForTeacherInfo:[_teacherApplyInfo objectForKey:@"verifyInfo"]];
+                    if ([verified_status isEqualToString:@"1"]) {
+                        [_submitButton setTitle:@"取消认证" forState:0];
+                        _statusResult.text = @"认证成功";
+                        _statusResult.textColor = BasidColor;
+                        _submitButton.enabled = YES;
+                        _submitButton.backgroundColor = BasidColor;
+                    } else if ([verified_status isEqualToString:@"0"]) {
+                        [_submitButton setTitle:@"认证中" forState:0];
+                        _statusResult.text = @"认证中";
+                        _submitButton.backgroundColor = [UIColor colorWithHexString:@"#a5c3eb"];
+                        _submitButton.enabled = NO;
+                    } else {
+                        [_submitButton setTitle:@"提交申请" forState:0];
+                        _statusResult.text = @"认证失败";
+                        _statusResult.textColor = [UIColor redColor];
+                        _submitButton.enabled = YES;
+                        _submitButton.backgroundColor = BasidColor;
+                    }
+                } else {
+                    _statusResult.text = @"未认证";
+                    _statusResult.textColor = RGBHex(0xB5B5B5);
                 }
             }
         }
@@ -737,7 +932,16 @@
 }
 
 - (void)setValueForTeacherInfo:(NSDictionary *)info {
-    
+    if ([verified_status isEqualToString:@"1"] || [verified_status isEqualToString:@"0"]) {
+        _organizationLabel.text = [NSString stringWithFormat:@"%@",[info objectForKey:@"school"]];
+        _classLabel.text = [NSString stringWithFormat:@"%@",[info objectForKey:@"cate"]];
+        _nameTextField.text = [NSString stringWithFormat:@"%@",[info objectForKey:@"name"]];
+        _reasonTextView.text = [NSString stringWithFormat:@"%@",[info objectForKey:@"reason"]];
+        _placeholderLabel.hidden = YES;
+        [_imageArray removeAllObjects];
+        [_imageArray addObjectsFromArray:[info objectForKey:@"img_url"]];
+        [self dealPictures];
+    }
 }
 
 @end
