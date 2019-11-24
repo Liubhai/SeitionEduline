@@ -8,7 +8,7 @@
 
 #import "ClassNeedTestViewController.h"
 #import "SYG.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "BigWindCar.h"
 #import "MJRefresh.h"
 
@@ -235,7 +235,7 @@
 
 - (void)resultsButtonCilck {
     if (_answerArray.count == 0) {
-        [TKProgressHUD showError:@"请选择答案再提交" toView:[UIApplication sharedApplication].keyWindow];
+        [MBProgressHUD showError:@"请选择答案再提交" toView:[UIApplication sharedApplication].keyWindow];
         return;
     }
     NSString *userAnswerStr = nil;

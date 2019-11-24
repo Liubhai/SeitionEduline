@@ -404,7 +404,7 @@
     NSDictionary *dict = _dataArray[button.tag];
     _ID = [dict stringValueForKey:@"course_id"];
     if ([[dict stringValueForKey:@"is_buy"] integerValue] == 1) {
-        [TKProgressHUD showError:@"已经解锁" toView:self.view];
+        [MBProgressHUD showError:@"已经解锁" toView:self.view];
         return;
     } else {
         [self whichPay];
@@ -531,7 +531,7 @@
                 }
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         if (_dataArray.count == 0) {
             self.imageView.hidden = NO;
@@ -584,14 +584,14 @@
     NSURL *url = nil;
     if (_typeNum == 1) {
         if (_alipayStr == nil) {
-            [TKProgressHUD showError:@"支付失败" toView:self.view];
+            [MBProgressHUD showError:@"支付失败" toView:self.view];
         } else {
             url = [NSURL URLWithString:_alipayStr];
         }
         
     } else if (_typeNum == 2) {
         if (_wxpayStr == nil) {
-            [TKProgressHUD showError:@"支付失败" toView:self.view];
+            [MBProgressHUD showError:@"支付失败" toView:self.view];
         } else {
             url = [NSURL URLWithString:_wxpayStr];
         }

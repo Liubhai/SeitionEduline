@@ -16,7 +16,7 @@
 #import "YXZHViewController.h"
 #import "ZHCGViewController.h"
 #import "AppDelegate.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "UIView+Utils.h"
 #import "SYG.h"
 
@@ -171,7 +171,7 @@
 
 - (void)TJNetWorkPassportGetRegphoneCode {
     if (_phoneField.text.length == 0) {
-        [TKProgressHUD showError:@"请输入手机号" toView:self.view];
+        [MBProgressHUD showError:@"请输入手机号" toView:self.view];
         return;
     }
     NSString *endUrlStr = YunKeTang_sms_phoneGetPwd;
@@ -206,10 +206,10 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 0) {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             return ;
         } else if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-             [TKProgressHUD showSuccess:[dict stringValueForKey:@"msg"] toView:self.view];
+             [MBProgressHUD showSuccess:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -224,13 +224,13 @@
 
 - (void)TJButton {
     if (_phoneField.text.length == 0 || _phoneField.text.length != 11) {
-        [TKProgressHUD showError:@"请输入手机号或正确的手机号" toView:self.view];
+        [MBProgressHUD showError:@"请输入手机号或正确的手机号" toView:self.view];
         return;
     }else if (_YZMField.text.length == 0){
-        [TKProgressHUD showError:@"请输入验证码" toView:self.view];
+        [MBProgressHUD showError:@"请输入验证码" toView:self.view];
         return;
     }else if (_XMMField.text.length == 0){
-        [TKProgressHUD showError:@"请输入新密码" toView:self.view];
+        [MBProgressHUD showError:@"请输入新密码" toView:self.view];
         return;
     }
     else {
@@ -271,7 +271,7 @@
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
             if (dict.allKeys.count > 0) {
-                [TKProgressHUD showError:@"重置成功" toView:self.view];
+                [MBProgressHUD showError:@"重置成功" toView:self.view];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     if ([_typeStr integerValue] == 123) {//说明是从设置界面退出登陆的
                         [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
@@ -281,7 +281,7 @@
                 });
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];
@@ -310,7 +310,7 @@
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             [self netWorkPassportPhoneGetPwd];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             return ;
         }
         
@@ -365,7 +365,7 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             if ([_typeStr integerValue] == 123) {//说明是从设置界面退出登陆的
                 [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
             } else {
@@ -373,7 +373,7 @@
             }
             
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];

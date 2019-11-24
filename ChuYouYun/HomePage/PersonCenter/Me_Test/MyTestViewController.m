@@ -255,7 +255,7 @@
         if (deleDict.allKeys.count > 0 ) {
             [self netWorkExamsGetExamsLog:_Number];
         } else {
-            [TKProgressHUD showError:@"删除记录失败" toView:self.view];
+            [MBProgressHUD showError:@"删除记录失败" toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {

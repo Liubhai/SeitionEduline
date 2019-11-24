@@ -485,7 +485,7 @@ typedef enum : NSUInteger {
         
         NSString *url = dict[@"video_address"];
         if ([[ZBLM3u8Manager shareInstance] exitLocalVideoWithUrlString:url]) {
-            [TKProgressHUD showError:@"已下载" toView:self.view];
+            [MBProgressHUD showError:@"已下载" toView:self.view];
             
             NSString * localPlayUrlString = [[ZBLM3u8Manager shareInstance] localPlayUrlWithOriUrlString:url];
             
@@ -515,7 +515,7 @@ typedef enum : NSUInteger {
         
         NSString *url = dict[@"video_address"];
         if ([[ZBLM3u8Manager shareInstance] exitLocalVideoWithUrlString:url]) {
-            [TKProgressHUD showError:@"已下载" toView:self.view];
+            [MBProgressHUD showError:@"已下载" toView:self.view];
             
             NSString * localPlayUrlString = [[ZBLM3u8Manager shareInstance] localPlayUrlWithOriUrlString:url];
             
@@ -806,7 +806,7 @@ typedef enum : NSUInteger {
             _dataSource = (NSDictionary *)_dataArray;
             
             if ([[ZBLM3u8Manager shareInstance] exitLocalVideoWithUrlString:url]) {
-                [TKProgressHUD showError:@"已下载" toView:self.view];
+                [MBProgressHUD showError:@"已下载" toView:self.view];
                 
                 NSString * localPlayUrlString = [[ZBLM3u8Manager shareInstance] localPlayUrlWithOriUrlString:url];
                 
@@ -836,7 +836,7 @@ typedef enum : NSUInteger {
 }
 -(void)videoDown:(NSString *)url{
     if ([[ZBLM3u8Manager shareInstance] exitLocalVideoWithUrlString:url]) {
-        [TKProgressHUD showError:@"已下载" toView:self.view];
+        [MBProgressHUD showError:@"已下载" toView:self.view];
         
         NSString * localPlayUrlString = [[ZBLM3u8Manager shareInstance] localPlayUrlWithOriUrlString:url];
 
@@ -863,7 +863,7 @@ typedef enum : NSUInteger {
 -(void)downLoadVideo:(NSString *)url{
     
     if (_downUrl.length == 0) {
-        [TKProgressHUD showError:@"下载地址为空" toView:self.view];
+        [MBProgressHUD showError:@"下载地址为空" toView:self.view];
         return;
     }
 //    NSURL *imagegurl = [NSURL URLWithString:_downUrl];
@@ -1145,7 +1145,7 @@ typedef enum : NSUInteger {
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
 //        [error lo];
-        [TKProgressHUD showError:[error localizedDescription] toView:[UIApplication sharedApplication].keyWindow];
+        [MBProgressHUD showError:[error localizedDescription] toView:[UIApplication sharedApplication].keyWindow];
 
     }];
     [op start];

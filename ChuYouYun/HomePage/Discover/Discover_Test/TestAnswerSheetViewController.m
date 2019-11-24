@@ -741,14 +741,14 @@
     [request setValue:encryptStr forHTTPHeaderField:HeaderKey];
     [request setValue:oath_token_Str forHTTPHeaderField:OAUTH_TOKEN];
     
-    [TKProgressHUD showMessag:@"交卷中..." toView:self.view];
+    [MBProgressHUD showMessag:@"交卷中..." toView:self.view];
     
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
-        [TKProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             [_timer invalidate];//移除时间
             self.timer = nil;
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -775,10 +775,10 @@
                 }
             });
         } else {
-             [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+             [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-         [TKProgressHUD hideAllHUDsForView:self.view animated:YES];
+         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
     [op start];
 }

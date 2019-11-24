@@ -227,7 +227,7 @@
 }
 
 - (void)orderButtonCilck:(UIButton *)button {
-    [TKProgressHUD showMessag:@"已经解锁" toView:self.view];
+    [MBProgressHUD showMessag:@"已经解锁" toView:self.view];
 }
 
 #pragma mark --- 网络请求

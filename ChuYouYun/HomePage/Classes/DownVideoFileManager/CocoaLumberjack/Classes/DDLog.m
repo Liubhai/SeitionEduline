@@ -69,7 +69,7 @@
 
 static void *const GlobalLoggingQueueIdentityKey = (void *)&GlobalLoggingQueueIdentityKey;
 
-@interface DDLoggerNode : NSObject
+@interface DDLoggerNode1 : NSObject
 {
     // Direct accessors to be used only for performance
     @public
@@ -82,7 +82,7 @@ static void *const GlobalLoggingQueueIdentityKey = (void *)&GlobalLoggingQueueId
 @property (nonatomic, readonly) DDLogLevel level;
 @property (nonatomic, readonly) dispatch_queue_t loggerQueue;
 
-+ (DDLoggerNode *)nodeWithLogger:(id <DDLogger>)logger
++ (DDLoggerNode1 *)nodeWithLogger:(id <DDLogger>)logger
                      loggerQueue:(dispatch_queue_t)loggerQueue
                            level:(DDLogLevel)level;
 
@@ -575,7 +575,7 @@ static NSUInteger _numProcessors;
         loggerQueue = dispatch_queue_create(loggerQueueName, NULL);
     }
 
-    DDLoggerNode *loggerNode = [DDLoggerNode nodeWithLogger:logger loggerQueue:loggerQueue level:level];
+    DDLoggerNode1 *loggerNode = [DDLoggerNode1 nodeWithLogger:logger loggerQueue:loggerQueue level:level];
     [_loggers addObject:loggerNode];
 
     if ([logger respondsToSelector:@selector(didAddLogger)]) {
@@ -591,9 +591,9 @@ static NSUInteger _numProcessors;
     NSAssert(dispatch_get_specific(GlobalLoggingQueueIdentityKey),
              @"This method should only be run on the logging thread/queue");
 
-    DDLoggerNode *loggerNode = nil;
+    DDLoggerNode1 *loggerNode = nil;
 
-    for (DDLoggerNode *node in _loggers) {
+    for (DDLoggerNode1 *node in _loggers) {
         if (node->_logger == logger) {
             loggerNode = node;
             break;
@@ -621,7 +621,7 @@ static NSUInteger _numProcessors;
              @"This method should only be run on the logging thread/queue");
     
     // Notify all loggers
-    for (DDLoggerNode *loggerNode in _loggers) {
+    for (DDLoggerNode1 *loggerNode in _loggers) {
         if ([loggerNode->_logger respondsToSelector:@selector(willRemoveLogger)]) {
             dispatch_async(loggerNode->_loggerQueue, ^{ @autoreleasepool {
                 [loggerNode->_logger willRemoveLogger];
@@ -640,7 +640,7 @@ static NSUInteger _numProcessors;
 
     NSMutableArray *theLoggers = [NSMutableArray new];
 
-    for (DDLoggerNode *loggerNode in _loggers) {
+    for (DDLoggerNode1 *loggerNode in _loggers) {
         [theLoggers addObject:loggerNode->_logger];
     }
 
@@ -661,7 +661,7 @@ static NSUInteger _numProcessors;
         // The waiting ensures that a slow logger doesn't end up with a large queue of pending log messages.
         // This would defeat the purpose of the efforts we made earlier to restrict the max queue size.
 
-        for (DDLoggerNode *loggerNode in _loggers) {
+        for (DDLoggerNode1 *loggerNode in _loggers) {
             // skip the loggers that shouldn't write this message based on the log level
 
             if (!(logMessage->_flag & loggerNode->_level)) {
@@ -677,7 +677,7 @@ static NSUInteger _numProcessors;
     } else {
         // Execute each logger serialy, each within its own queue.
         
-        for (DDLoggerNode *loggerNode in _loggers) {
+        for (DDLoggerNode1 *loggerNode in _loggers) {
             // skip the loggers that shouldn't write this message based on the log level
 
             if (!(logMessage->_flag & loggerNode->_level)) {
@@ -716,7 +716,7 @@ static NSUInteger _numProcessors;
     NSAssert(dispatch_get_specific(GlobalLoggingQueueIdentityKey),
              @"This method should only be run on the logging thread/queue");
     
-    for (DDLoggerNode *loggerNode in _loggers) {
+    for (DDLoggerNode1 *loggerNode in _loggers) {
         if ([loggerNode->_logger respondsToSelector:@selector(flush)]) {
             dispatch_group_async(_loggingGroup, loggerNode->_loggerQueue, ^{ @autoreleasepool {
                 [loggerNode->_logger flush];
@@ -731,7 +731,7 @@ static NSUInteger _numProcessors;
 #pragma mark Utilities
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-NSString * DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy) {
+NSString * DDExtractFileNameWithoutExtension1(const char *filePath, BOOL copy) {
     if (filePath == NULL) {
         return nil;
     }
@@ -798,7 +798,7 @@ NSString * DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy) {
 #pragma mark -
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@implementation DDLoggerNode
+@implementation DDLoggerNode1
 
 - (instancetype)initWithLogger:(id <DDLogger>)logger loggerQueue:(dispatch_queue_t)loggerQueue level:(DDLogLevel)level {
     if ((self = [super init])) {
@@ -816,8 +816,8 @@ NSString * DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy) {
     return self;
 }
 
-+ (DDLoggerNode *)nodeWithLogger:(id <DDLogger>)logger loggerQueue:(dispatch_queue_t)loggerQueue level:(DDLogLevel)level {
-    return [[DDLoggerNode alloc] initWithLogger:logger loggerQueue:loggerQueue level:level];
++ (DDLoggerNode1 *)nodeWithLogger:(id <DDLogger>)logger loggerQueue:(dispatch_queue_t)loggerQueue level:(DDLogLevel)level {
+    return [[DDLoggerNode1 alloc] initWithLogger:logger loggerQueue:loggerQueue level:level];
 }
 
 - (void)dealloc {

@@ -8,7 +8,7 @@
 
 #import "MJPhotoToolbar.h"
 #import "MJPhoto.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 
 @interface MJPhotoToolbar()
 {
@@ -66,12 +66,12 @@
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
     if (error) {
-        [TKProgressHUD showSuccess:@"保存失败" toView:nil];
+        [MBProgressHUD showSuccess:@"保存失败" toView:nil];
     } else {
         MJPhoto *photo = _photos[_currentPhotoIndex];
         photo.save = YES;
         _saveImageBtn.enabled = NO;
-        [TKProgressHUD showSuccess:@"成功保存到相册" toView:nil];
+        [MBProgressHUD showSuccess:@"成功保存到相册" toView:nil];
     }
 }
 

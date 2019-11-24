@@ -407,7 +407,7 @@
             vc.testDict = _testDict;
             [self.navigationController pushViewController:vc animated:YES];
         } else {
-            [TKProgressHUD showError:[_dataSource stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[_dataSource stringValueForKey:@"msg"] toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -440,7 +440,7 @@
             NSString *urlStr = [_userTestDict stringValueForKey:@"userface"];
             [_userImageButton sd_setImageWithURL:[NSURL URLWithString:urlStr] forState:UIControlStateNormal placeholderImage:Image(@"站位图")];
         } else {
-            [TKProgressHUD showError:msg toView:self.view];
+            [MBProgressHUD showError:msg toView:self.view];
         }
 
         [_tableView reloadData];
@@ -482,7 +482,7 @@
             NSString *urlStr = [_userTestDict stringValueForKey:@"userface"];
             [_userImageButton sd_setImageWithURL:[NSURL URLWithString:urlStr] forState:UIControlStateNormal placeholderImage:Image(@"站位图")];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         [_tableView reloadData];
         
@@ -519,11 +519,11 @@
         if ([[_dataSource stringValueForKey:@"code"] integerValue] == 1) {
             _dataSource = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
             if ([_dataSource dictionaryValueForKey:@"paper_options"].allKeys.count == 0) {
-                [TKProgressHUD showError:@"考试数据为空" toView:self.view];
+                [MBProgressHUD showError:@"考试数据为空" toView:self.view];
                 return ;
             }
             if ([[_dataSource dictionaryValueForKey:@"paper_options"] dictionaryValueForKey:@"options_questions"].allKeys.count == 0) {
-                [TKProgressHUD showError:@"考试数据为空" toView:self.view];
+                [MBProgressHUD showError:@"考试数据为空" toView:self.view];
                 return ;
             }
             TestCurrentViewController *vc = [[TestCurrentViewController alloc] init];
@@ -533,7 +533,7 @@
             vc.continueStr = @"again";//再次挑战
             [self.navigationController pushViewController:vc animated:YES];
         } else {
-            [TKProgressHUD showError:[_dataSource stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[_dataSource stringValueForKey:@"msg"] toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -561,10 +561,10 @@
     NSString *encryptStr = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetEncryptStr:mutabDict];
     [request setValue:encryptStr forHTTPHeaderField:HeaderKey];
     [request setValue:oath_token_Str forHTTPHeaderField:OAUTH_TOKEN];
-    [TKProgressHUD showMessag:@"加载中..." toView:[UIApplication sharedApplication].keyWindow];
+    [MBProgressHUD showMessag:@"加载中..." toView:[UIApplication sharedApplication].keyWindow];
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        [TKProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
+        [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
         _dataSource = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[_dataSource stringValueForKey:@"code"] integerValue] == 1) {
             _dataSource = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
@@ -576,11 +576,11 @@
             vc.testDict = _testDict;
             [self.navigationController pushViewController:vc animated:YES];
         } else {
-            [TKProgressHUD showError:[_dataSource stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:[_dataSource stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        [TKProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
+        [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
     }];
     [op start];
 }
@@ -614,7 +614,7 @@
         if ([[_dataSource stringValueForKey:@"code"] integerValue] == 1) {
             _dataSource = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
             if ([[_dataSource dictionaryValueForKey:@"paper_options"] dictionaryValueForKey:@"options_questions_data"].allKeys.count == 0) {
-                [TKProgressHUD showError:@"数据为空" toView:self.view];
+                [MBProgressHUD showError:@"数据为空" toView:self.view];
                 return;
             }
             TestCurrentViewController *vc = [[TestCurrentViewController alloc] init];
@@ -624,7 +624,7 @@
             vc.testDict = _testDict;
             [self.navigationController pushViewController:vc animated:YES];
         } else {
-            [TKProgressHUD showError:[_dataSource stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[_dataSource stringValueForKey:@"msg"] toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {

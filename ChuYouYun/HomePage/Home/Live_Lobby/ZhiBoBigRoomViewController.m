@@ -467,7 +467,7 @@ static NSString *cellID = @"cell";
                 [_dataArray addObjectsFromArray:array];
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         if (_dataArray.count == 0) {
             self.imageView.hidden = NO;

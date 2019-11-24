@@ -9,9 +9,9 @@
 #import "GenSeeLiveViewController.h"
 #import <PlayerSDK/PlayerSDK.h>
 #import "UIColor+HTMLColors.h"
-#import "TKProgressHUD.h"
+#import "MBProgressHUD.h"
 #import "BigWindCar.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "rootViewController.h"
 #import "AppDelegate.h"
 #import "SYG.h"
@@ -50,7 +50,7 @@
 @property (nonatomic, strong) GSPInvestigationView *investigationView;
 
 @property (nonatomic, strong) GSPQaView *qaView;
-@property (nonatomic, strong) TKProgressHUD *progressHUD;
+@property (nonatomic, strong) MBProgressHUD *progressHUD;
 @property (nonatomic, strong) UIAlertView *alert;
 
 
@@ -522,7 +522,7 @@
 #pragma mark --- 代理
 
 - (void)playerManagerWillReconnect:(GSPPlayerManager *)playerManager {
-    _progressHUD = [[TKProgressHUD alloc] initWithView:_qaView];
+    _progressHUD = [[MBProgressHUD alloc] initWithView:_qaView];
     _progressHUD.labelText = NSLocalizedString(@"断线重连", @"");
     [self.view addSubview:_progressHUD];
     [_progressHUD show:YES];
@@ -669,9 +669,9 @@
 //        NSLog(@"======  %@",responseObject);
 //        NSString *msg = responseObject[@"msg"];
 //        //        if ([responseObject[@"code"] integerValue] != 1) {
-//        //            [TKProgressHUD showError:msg toView:self.view];
+//        //            [MBProgressHUD showError:msg toView:self.view];
 //        //        } else {
-//        //            [TKProgressHUD showSuccess:@"申请成功" toView:self.view];
+//        //            [MBProgressHUD showSuccess:@"申请成功" toView:self.view];
 //        //            [self.navigationController popToRootViewControllerAnimated:YES];
 //        //        }
 //        if ([responseObject[@"code"] integerValue] == 1) {
@@ -694,7 +694,7 @@
 //
 //            [self.view addSubview:_videoView];
 //        } else {
-//            [TKProgressHUD showError:msg toView:self.view];
+//            [MBProgressHUD showError:msg toView:self.view];
 //        }
 //
 //

@@ -13,7 +13,7 @@
 #import "ZhiyiHTTPRequest.h"
 #import "BigWindCar.h"
 #import "MyHttpRequest.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "MJRefresh.h"
 #import "DLViewController.h"
 
@@ -573,7 +573,7 @@
             }
 
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         if (_dataArray.count == 0) {
             self.imageView.hidden = NO;
@@ -610,10 +610,10 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            [TKProgressHUD showError:@"兑换成功" toView:self.view];
+            [MBProgressHUD showError:@"兑换成功" toView:self.view];
             [self netWorkDocGetList:_num];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         [_tableView reloadData];
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -666,7 +666,7 @@
     NSString *libriyName = [NSString stringWithFormat:@"%@.%@",_downName,_downExtension];
     
     if (!_downUrl.length) {
-        [TKProgressHUD showError:@"下载地址为空" toView:self.view];
+        [MBProgressHUD showError:@"下载地址为空" toView:self.view];
         return ;
     }
     

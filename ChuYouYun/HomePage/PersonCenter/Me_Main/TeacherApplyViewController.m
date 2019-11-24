@@ -8,7 +8,7 @@
 
 #import "TeacherApplyViewController.h"
 #import "BuyAgreementViewController.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 
 #define ApplyHeight 52
 #define ApplySpace 20
@@ -308,7 +308,7 @@
     }
     
     if (!SWNOTEmptyArr(_imageArray)) {
-        [TKProgressHUD showError:@"至少上传一张认证附件" toView:self.view];
+        [MBProgressHUD showError:@"至少上传一张认证附件" toView:self.view];
         return;
     }
     NSString *endUrlStr = attach_multipleUploads;
@@ -353,29 +353,29 @@
             }
             
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        [TKProgressHUD showError:@"上传图片超时,请重试" toView:self.view];
+        [MBProgressHUD showError:@"上传图片超时,请重试" toView:self.view];
     }];
 }
 
 - (void)submitButtonClick:(NSString *)imageId_string {
     
     if (!SWNOTEmptyStr(schoolID)) {
-        [TKProgressHUD showError:@"请选择认证机构" toView:self.view];
+        [MBProgressHUD showError:@"请选择认证机构" toView:self.view];
         return;
     }
     if (!SWNOTEmptyStr(classID)) {
-        [TKProgressHUD showError:@"请选择认证分类" toView:self.view];
+        [MBProgressHUD showError:@"请选择认证分类" toView:self.view];
         return;
     }
     if (!SWNOTEmptyStr(_nameTextField.text)) {
-        [TKProgressHUD showError:@"请填写姓名" toView:self.view];
+        [MBProgressHUD showError:@"请填写姓名" toView:self.view];
         return;
     }
     if (!SWNOTEmptyStr(_reasonTextView.text)) {
-        [TKProgressHUD showError:@"请输入您的认证理由" toView:self.view];
+        [MBProgressHUD showError:@"请输入您的认证理由" toView:self.view];
         return;
     }
     
@@ -403,16 +403,16 @@
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *statusDict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
-        [TKProgressHUD showError:[statusDict stringValueForKey:@"msg"] toView:self.view];
+        [MBProgressHUD showError:[statusDict stringValueForKey:@"msg"] toView:self.view];
         if ([[statusDict stringValueForKey:@"code"] integerValue] == 1) {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popToRootViewControllerAnimated:YES];
             });
         } else {
-            [TKProgressHUD showError:[statusDict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[statusDict stringValueForKey:@"msg"] toView:self.view];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        [TKProgressHUD showError:@"认证超时,请重试" toView:self.view];
+        [MBProgressHUD showError:@"认证超时,请重试" toView:self.view];
     }];
     [op start];
     
@@ -439,16 +439,16 @@
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *statusDict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
-        [TKProgressHUD showError:[statusDict stringValueForKey:@"msg"] toView:self.view];
+        [MBProgressHUD showError:[statusDict stringValueForKey:@"msg"] toView:self.view];
         if ([[statusDict stringValueForKey:@"code"] integerValue] == 1) {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popToRootViewControllerAnimated:YES];
             });
         } else {
-            [TKProgressHUD showError:[statusDict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[statusDict stringValueForKey:@"msg"] toView:self.view];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        [TKProgressHUD showError:@"请求超时,请重试" toView:self.view];
+        [MBProgressHUD showError:@"请求超时,请重试" toView:self.view];
     }];
     [op start];
        
@@ -501,7 +501,7 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0){//进入相册
         if (_imageArray.count >= MAX_IMAGE_COUNT) {
-            [TKProgressHUD showError:[NSString stringWithFormat:@"最多选%d张图片",MAX_IMAGE_COUNT] toView:self.view];
+            [MBProgressHUD showError:[NSString stringWithFormat:@"最多选%d张图片",MAX_IMAGE_COUNT] toView:self.view];
             return;
         }
         TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:MAX_IMAGE_COUNT -_imageArray.count delegate:self singleChoose:NO];
@@ -510,7 +510,7 @@
     }else if (buttonIndex == 1){//相机拍照
         
         if (_imageArray.count>=MAX_IMAGE_COUNT) {
-            [TKProgressHUD showError:[NSString stringWithFormat:@"最多选%d张图片",MAX_IMAGE_COUNT] toView:self.view];
+            [MBProgressHUD showError:[NSString stringWithFormat:@"最多选%d张图片",MAX_IMAGE_COUNT] toView:self.view];
             return;
         }
         else
@@ -529,7 +529,7 @@
             }
             else
             {
-                [TKProgressHUD showError:@"设备不支持" toView:self.view];
+                [MBProgressHUD showError:@"设备不支持" toView:self.view];
             }
         }
     }
@@ -875,7 +875,7 @@
 
 - (void)getClassTypeInfo {
     if (!SWNOTEmptyStr(schoolID)) {
-        [TKProgressHUD showError:@"请先选择一个机构" toView:self.view];
+        [MBProgressHUD showError:@"请先选择一个机构" toView:self.view];
         return;
     }
     NSString *endUrlStr = teacher_getCate;

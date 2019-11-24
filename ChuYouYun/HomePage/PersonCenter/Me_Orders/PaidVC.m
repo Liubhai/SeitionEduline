@@ -12,7 +12,7 @@
 #import "rootViewController.h"
 #import "BigWindCar.h"
 #import "MJRefresh.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 
 #import "InstitutionListCell.h"
 #import "OrderCell.h"
@@ -571,7 +571,7 @@
         NSDictionary *cancelDict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
         
         if ([[cancelDict stringValueForKey:@"staust"] integerValue] == 1) {
-            [TKProgressHUD showSuccess:@"取消成功" toView:self.view];
+            [MBProgressHUD showSuccess:@"取消成功" toView:self.view];
             [self netWorkOrderGetList:_number];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -606,7 +606,7 @@
         NSDictionary *cancelDict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
         
         if ([[cancelDict stringValueForKey:@"staust"] integerValue] == 1) {
-            [TKProgressHUD showSuccess:@"取消成功" toView:self.view];
+            [MBProgressHUD showSuccess:@"取消成功" toView:self.view];
             [self netWorkOrderGetList:_number];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {

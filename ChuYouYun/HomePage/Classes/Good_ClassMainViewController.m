@@ -12,7 +12,7 @@
 #import "SYG.h"
 #import "BigWindCar.h"
 #import "UIImageView+WebCache.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "MyHttpRequest.h"
 #import "ZhiyiHTTPRequest.h"
 #import "ZFDownloadManager.h"
@@ -956,7 +956,7 @@
             [self.navigationController pushViewController:vc animated:YES];
         } else {
             [_allWindowView removeFromSuperview];
-            [TKProgressHUD showError:@"解锁之后才能下载课程" toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:@"解锁之后才能下载课程" toView:[UIApplication sharedApplication].keyWindow];
             return;
         }
     }
@@ -1208,7 +1208,7 @@
     }
     
     if ([_notifitonDic stringValueForKey:@"type"] == nil) {
-        [TKProgressHUD showError:@"暂时不支持" toView:[UIApplication sharedApplication].keyWindow];
+        [MBProgressHUD showError:@"暂时不支持" toView:[UIApplication sharedApplication].keyWindow];
         return;
     }
     
@@ -1226,7 +1226,7 @@
                     self.timer = nil;
                 } else {//试看。受限制
                     if (_timeNum == 0) {
-                        [TKProgressHUD showError:@"需先解锁此课程" toView:[UIApplication sharedApplication].keyWindow];
+                        [MBProgressHUD showError:@"需先解锁此课程" toView:[UIApplication sharedApplication].keyWindow];
                         return;
                     } else {
                         self.timer = nil;
@@ -1240,7 +1240,7 @@
     } else if ([[_notifitonDic stringValueForKey:@"type"] integerValue] == 2) {//音频
         if ([[_notifitonDic stringValueForKey:@"is_free"] integerValue] == 1 || [[_videoDataSource stringValueForKey:@"is_play_all"] integerValue] != 0 || [[_notifitonDic stringValueForKey:@"is_buy"] integerValue] == 1) {//解锁了的
         }else {//没有解锁
-            [TKProgressHUD showError:@"解锁才能听此音频" toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:@"解锁才能听此音频" toView:[UIApplication sharedApplication].keyWindow];
             return;
         }
         
@@ -1248,14 +1248,14 @@
     } else if ([[_notifitonDic stringValueForKey:@"type"] integerValue] == 3) {//文本
         if ([[_notifitonDic stringValueForKey:@"is_free"] integerValue] == 1 || [[_videoDataSource stringValueForKey:@"is_play_all"] integerValue] != 0 || [[_notifitonDic stringValueForKey:@"is_buy"] integerValue] == 1) {//解锁了的
         }else {//没有解锁
-            [TKProgressHUD showError:@"解锁才能看此文本" toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:@"解锁才能看此文本" toView:[UIApplication sharedApplication].keyWindow];
             return;
         }
         [self addTextView];
     } else if ([[_notifitonDic stringValueForKey:@"type"] integerValue] == 4) {//文档
         if ([[_notifitonDic stringValueForKey:@"is_free"] integerValue] == 1 || [[_videoDataSource stringValueForKey:@"is_play_all"] integerValue] != 0 || [[_notifitonDic stringValueForKey:@"is_buy"] integerValue] == 1) {//解锁了的
         }else {//没有解锁
-            [TKProgressHUD showError:@"解锁才能看此文档" toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:@"解锁才能看此文档" toView:[UIApplication sharedApplication].keyWindow];
             return;
         }
         [self addWebView];
@@ -1329,7 +1329,7 @@
     }
     
     if ([_notifitonDic stringValueForKey:@"type"] == nil) {
-        [TKProgressHUD showError:@"暂时不支持" toView:[UIApplication sharedApplication].keyWindow];
+        [MBProgressHUD showError:@"暂时不支持" toView:[UIApplication sharedApplication].keyWindow];
         return;
     }
     
@@ -1347,7 +1347,7 @@
                     self.timer = nil;
                 } else {//试看。受限制
                     if (_timeNum == 0) {
-                        [TKProgressHUD showError:@"需先解锁此课程" toView:[UIApplication sharedApplication].keyWindow];
+                        [MBProgressHUD showError:@"需先解锁此课程" toView:[UIApplication sharedApplication].keyWindow];
                         return;
                     } else {
                         self.timer = nil;
@@ -1361,7 +1361,7 @@
     } else if ([[_notifitonDic stringValueForKey:@"type"] integerValue] == 2) {//音频
         if ([[_notifitonDic stringValueForKey:@"is_free"] integerValue] == 1 || [[_videoDataSource stringValueForKey:@"is_play_all"] integerValue] != 0 || [[_notifitonDic stringValueForKey:@"is_buy"] integerValue] == 1) {//解锁了的
         }else {//没有解锁
-            [TKProgressHUD showError:@"解锁才能听此音频" toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:@"解锁才能听此音频" toView:[UIApplication sharedApplication].keyWindow];
             return;
         }
         
@@ -1369,14 +1369,14 @@
     } else if ([[_notifitonDic stringValueForKey:@"type"] integerValue] == 3) {//文本
         if ([[_notifitonDic stringValueForKey:@"is_free"] integerValue] == 1 || [[_videoDataSource stringValueForKey:@"is_play_all"] integerValue] != 0 || [[_notifitonDic stringValueForKey:@"is_buy"] integerValue] == 1) {//解锁了的
         }else {//没有解锁
-            [TKProgressHUD showError:@"解锁才能看此文本" toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:@"解锁才能看此文本" toView:[UIApplication sharedApplication].keyWindow];
             return;
         }
         [self addTextView];
     } else if ([[_notifitonDic stringValueForKey:@"type"] integerValue] == 4) {//文档
         if ([[_notifitonDic stringValueForKey:@"is_free"] integerValue] == 1 || [[_videoDataSource stringValueForKey:@"is_play_all"] integerValue] != 0 || [[_notifitonDic stringValueForKey:@"is_buy"] integerValue] == 1) {//解锁了的
         }else {//没有解锁
-            [TKProgressHUD showError:@"解锁才能看此文档" toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:@"解锁才能看此文档" toView:[UIApplication sharedApplication].keyWindow];
             return;
         }
         [self addWebView];
@@ -1656,7 +1656,7 @@
         if ([[_seleCurrentDict stringValueForKey:@"lock"] integerValue] == 1) {//可以播放
             
         } else {//不可以播放
-            [TKProgressHUD showError:@"该课时暂时无法观看" toView:self.view];
+            [MBProgressHUD showError:@"该课时暂时无法观看" toView:self.view];
             return;
         }
     }
@@ -1732,7 +1732,7 @@
                     self.timer = nil;
                 } else {//试看。受限制
                     if (_timeNum == 0) {
-                        [TKProgressHUD showError:@"需先解锁此课程" toView:[UIApplication sharedApplication].keyWindow];
+                        [MBProgressHUD showError:@"需先解锁此课程" toView:[UIApplication sharedApplication].keyWindow];
                         return;
                     } else {
                         self.timer = nil;
@@ -1744,21 +1744,21 @@
     } else if ([[_notifitonDic stringValueForKey:@"type"] integerValue] == 2) {//音频
         if ([[_notifitonDic stringValueForKey:@"is_free"] integerValue] == 1 || [[_videoDataSource stringValueForKey:@"is_play_all"] integerValue] != 0 || [[_notifitonDic stringValueForKey:@"is_buy"] integerValue] == 1) {//解锁了的
         }else {//没有解锁
-            [TKProgressHUD showError:@"解锁才能听此音频" toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:@"解锁才能听此音频" toView:[UIApplication sharedApplication].keyWindow];
             return;
         }
         
     } else if ([[_notifitonDic stringValueForKey:@"type"] integerValue] == 3) {//文本
         if ([[_notifitonDic stringValueForKey:@"is_free"] integerValue] == 1 || [[_videoDataSource stringValueForKey:@"is_play_all"] integerValue] != 0 || [[_notifitonDic stringValueForKey:@"is_buy"] integerValue] == 1) {//解锁了的
         }else {//没有解锁
-            [TKProgressHUD showError:@"解锁才能看此文本" toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:@"解锁才能看此文本" toView:[UIApplication sharedApplication].keyWindow];
             return;
         }
         [self addTextView];
     } else if ([[_notifitonDic stringValueForKey:@"type"] integerValue] == 4) {//文档
         if ([[_notifitonDic stringValueForKey:@"is_free"] integerValue] == 1 || [[_videoDataSource stringValueForKey:@"is_play_all"] integerValue] != 0 || [[_notifitonDic stringValueForKey:@"is_buy"] integerValue] == 1) {//解锁了的
         }else {//没有解锁
-            [TKProgressHUD showError:@"解锁才能看此文档" toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:@"解锁才能看此文档" toView:[UIApplication sharedApplication].keyWindow];
             return;
         }
         [self addWebView];
@@ -2165,13 +2165,13 @@
 #pragma mark --- UIWebViewDelegate
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
-    //    [TKProgressHUD hideAllHUDsForView:self.view animated:YES];
-    //    [TKProgressHUD showError:@"加载成功" toView:self.view];
+    //    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    //    [MBProgressHUD showError:@"加载成功" toView:self.view];
 }
 
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    //    [TKProgressHUD hideAllHUDsForView:self.view animated:YES];
-    //    [TKProgressHUD showError:@"加载失败" toView:self.view];
+    //    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    //    [MBProgressHUD showError:@"加载失败" toView:self.view];
 }
 
 #pragma mark ---Marquee
@@ -2450,7 +2450,7 @@
             dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
             _timeNum = [[dict stringValueForKey:@"video_free_time"] integerValue];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -2494,7 +2494,7 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             [_allWindowView removeFromSuperview];
             if ([_collectStr integerValue] == 1) {
                 _collectStr = @"0";
@@ -2502,7 +2502,7 @@
                 _collectStr = @"1";
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -2543,7 +2543,7 @@
             _shareVideoUrl = [dict stringValueForKey:@"share_url"];
             [self VideoShare];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -2577,7 +2577,7 @@
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -2714,7 +2714,7 @@
     NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
     
     if ([_seleCurrentDict stringValueForKey:@"eid"] == nil) {
-        [TKProgressHUD showError:@"考试为空" toView:self.view];
+        [MBProgressHUD showError:@"考试为空" toView:self.view];
         return;
     } else {
         [mutabDict setObject:[_seleCurrentDict stringValueForKey:@"eid"] forKey:@"paper_id"];
@@ -2737,17 +2737,17 @@
     [request setValue:encryptStr forHTTPHeaderField:HeaderKey];
     [request setValue:oath_token_Str forHTTPHeaderField:OAUTH_TOKEN];
     __weak Good_ClassMainViewController *wekself = self;
-    [TKProgressHUD showMessag:@"加载中...." toView:[UIApplication sharedApplication].keyWindow];
+    [MBProgressHUD showMessag:@"加载中...." toView:[UIApplication sharedApplication].keyWindow];
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        [TKProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
+        [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
         if ([dict dictionaryValueForKey:@"paper_options"].allKeys.count == 0) {
-            [TKProgressHUD showError:@"考试数据为空" toView:self.view];
+            [MBProgressHUD showError:@"考试数据为空" toView:self.view];
             return ;
         }
         if ([[dict dictionaryValueForKey:@"paper_options"] dictionaryValueForKey:@"options_questions"].allKeys.count == 0) {
-            [TKProgressHUD showError:@"考试数据为空" toView:self.view];
+            [MBProgressHUD showError:@"考试数据为空" toView:self.view];
             return ;
         }
         //        if ([_examsType integerValue] == 1) {//练习模式
@@ -2767,8 +2767,8 @@
         [wekself.navigationController pushViewController:vc animated:YES];
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        [TKProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
-        [TKProgressHUD showError:@"加载失败" toView:self.view];
+        [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
+        [MBProgressHUD showError:@"加载失败" toView:self.view];
     }];
     [op start];
 }
@@ -2801,7 +2801,7 @@
     
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        [TKProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
+        [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
         
         NSLog(@"---%@",dict);
@@ -2809,8 +2809,8 @@
         [self addBaiDuDoc];
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        [TKProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
-        [TKProgressHUD showError:@"加载失败" toView:self.view];
+        [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
+        [MBProgressHUD showError:@"加载失败" toView:self.view];
     }];
     [op start];
 }
@@ -3908,7 +3908,7 @@
     if ([[_activityInfo objectForKey:@"is_start"] integerValue] == 1) {
         
     } else {
-        [TKProgressHUD showError:@"活动还未开始" toView:self.view];
+        [MBProgressHUD showError:@"活动还未开始" toView:self.view];
         return;
     }
     GroupListPopViewController *vc = [[GroupListPopViewController alloc] init];
@@ -3918,11 +3918,11 @@
         if (SWNOTEmptyArr([_activityInfo objectForKey:@"asb"])) {
             vc.dataSource = [NSMutableArray arrayWithArray:[_activityInfo objectForKey:@"asb"]];
         } else {
-            [TKProgressHUD showError:@"还没有相关团购活动" toView:self.view];
+            [MBProgressHUD showError:@"还没有相关团购活动" toView:self.view];
             return;
         }
     } else {
-        [TKProgressHUD showError:@"还没有相关团购活动" toView:self.view];
+        [MBProgressHUD showError:@"还没有相关团购活动" toView:self.view];
         return;
     }
     [self.view addSubview:vc.view];
@@ -3936,7 +3936,7 @@
 //            [self.view addSubview:vc.view];
 //            [self addChildViewController:vc];
 //        } else {
-//            [TKProgressHUD showError:@"没有团可参与,可以去开团" toView:self.view];
+//            [MBProgressHUD showError:@"没有团可参与,可以去开团" toView:self.view];
 //        }
 //    }
 }
@@ -3952,7 +3952,7 @@
     if ([[_activityInfo objectForKey:@"is_start"] integerValue] == 1) {
         
     } else {
-        [TKProgressHUD showError:@"活动还未开始" toView:self.view];
+        [MBProgressHUD showError:@"活动还未开始" toView:self.view];
         return;
     }
     ClassAndLivePayViewController *vc = [[ClassAndLivePayViewController alloc] init];

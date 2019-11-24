@@ -445,10 +445,10 @@
                     }
                 } else {
                     if (indexPathSection == 0 && indexPathRow == 0) {
-                        [TKProgressHUD showError:@"请先解锁整个课程" toView:[UIApplication sharedApplication].keyWindow];
+                        [MBProgressHUD showError:@"请先解锁整个课程" toView:[UIApplication sharedApplication].keyWindow];
                         return;
                     } else {
-                        [TKProgressHUD showError:@"暂时不能观看,请先解锁上一个课时" toView:[UIApplication sharedApplication].keyWindow];
+                        [MBProgressHUD showError:@"暂时不能观看,请先解锁上一个课时" toView:[UIApplication sharedApplication].keyWindow];
                         return;
                     }
                 }
@@ -467,7 +467,7 @@
                 if ([[_cellDict stringValueForKey:@"course_hour_price"] floatValue] != 0) {
                     [self isPromptBuy];
                 } else {
-                    [TKProgressHUD showError:@"请先解锁整个课程" toView:[UIApplication sharedApplication].keyWindow];
+                    [MBProgressHUD showError:@"请先解锁整个课程" toView:[UIApplication sharedApplication].keyWindow];
                     return;
                 }
             } else {
@@ -485,7 +485,7 @@
                                 [self.timer fire];
                             }
                         } else {
-                            [TKProgressHUD showError:@"暂时不能观看" toView:[UIApplication sharedApplication].keyWindow];
+                            [MBProgressHUD showError:@"暂时不能观看" toView:[UIApplication sharedApplication].keyWindow];
                             return;
                         }
                     } else {
@@ -582,10 +582,10 @@
                             }
                         } else {
                             if (indexPathSection == 0 && indexPathRow == 0) {
-                                [TKProgressHUD showError:@"请先解锁整个课程" toView:[UIApplication sharedApplication].keyWindow];
+                                [MBProgressHUD showError:@"请先解锁整个课程" toView:[UIApplication sharedApplication].keyWindow];
                                 return;
                             } else {
-                                [TKProgressHUD showError:@"暂时不能观看,请先解锁上一个课时" toView:[UIApplication sharedApplication].keyWindow];
+                                [MBProgressHUD showError:@"暂时不能观看,请先解锁上一个课时" toView:[UIApplication sharedApplication].keyWindow];
                                 return;
                             }
                         }
@@ -604,7 +604,7 @@
                         if ([[_cellDict stringValueForKey:@"course_hour_price"] floatValue] != 0) {
                             [self isPromptBuy];
                         } else {
-                            [TKProgressHUD showError:@"请先解锁整个课程" toView:[UIApplication sharedApplication].keyWindow];
+                            [MBProgressHUD showError:@"请先解锁整个课程" toView:[UIApplication sharedApplication].keyWindow];
                             return;
                         }
                     } else {
@@ -622,7 +622,7 @@
                                         [self.timer fire];
                                     }
                                 } else {
-                                    [TKProgressHUD showError:@"暂时不能观看" toView:[UIApplication sharedApplication].keyWindow];
+                                    [MBProgressHUD showError:@"暂时不能观看" toView:[UIApplication sharedApplication].keyWindow];
                                     return;
                                 }
                             } else {
@@ -700,10 +700,10 @@
                     }
                 } else {
                     if (indexPathSection == 0 && indexPathRow == 0 && classCellRow == 0) {
-                        [TKProgressHUD showError:@"请先解锁整个课程" toView:[UIApplication sharedApplication].keyWindow];
+                        [MBProgressHUD showError:@"请先解锁整个课程" toView:[UIApplication sharedApplication].keyWindow];
                         return;
                     } else {
-                        [TKProgressHUD showError:@"暂时不能观看,请先解锁上一个课时" toView:[UIApplication sharedApplication].keyWindow];
+                        [MBProgressHUD showError:@"暂时不能观看,请先解锁上一个课时" toView:[UIApplication sharedApplication].keyWindow];
                         return;
                     }
                 }
@@ -722,7 +722,7 @@
                 if ([[_cellDict stringValueForKey:@"course_hour_price"] floatValue] != 0) {
                     [self isPromptBuy];
                 } else {
-                    [TKProgressHUD showError:@"请先解锁整个课程" toView:[UIApplication sharedApplication].keyWindow];
+                    [MBProgressHUD showError:@"请先解锁整个课程" toView:[UIApplication sharedApplication].keyWindow];
                     return;
                 }
             } else {
@@ -740,7 +740,7 @@
                                 [self.timer fire];
                             }
                         } else {
-                            [TKProgressHUD showError:@"暂时不能观看" toView:[UIApplication sharedApplication].keyWindow];
+                            [MBProgressHUD showError:@"暂时不能观看" toView:[UIApplication sharedApplication].keyWindow];
                             return;
                         }
                     } else {
@@ -815,10 +815,10 @@
                             }
                         } else {
                             if (indexPathSection == 0 && indexPathRow == 0 && classCellRow == 0) {
-                                [TKProgressHUD showError:@"请先解锁整个课程" toView:[UIApplication sharedApplication].keyWindow];
+                                [MBProgressHUD showError:@"请先解锁整个课程" toView:[UIApplication sharedApplication].keyWindow];
                                 return;
                             } else {
-                                [TKProgressHUD showError:@"暂时不能观看,请先解锁上一个课时" toView:[UIApplication sharedApplication].keyWindow];
+                                [MBProgressHUD showError:@"暂时不能观看,请先解锁上一个课时" toView:[UIApplication sharedApplication].keyWindow];
                                 return;
                             }
                         }
@@ -837,7 +837,7 @@
                         if ([[_cellDict stringValueForKey:@"course_hour_price"] floatValue] != 0) {
                             [self isPromptBuy];
                         } else {
-                            [TKProgressHUD showError:@"请先解锁整个课程" toView:[UIApplication sharedApplication].keyWindow];
+                            [MBProgressHUD showError:@"请先解锁整个课程" toView:[UIApplication sharedApplication].keyWindow];
                             return;
                         }
                     } else {
@@ -855,7 +855,7 @@
                                         [self.timer fire];
                                     }
                                 } else {
-                                    [TKProgressHUD showError:@"暂时不能观看" toView:[UIApplication sharedApplication].keyWindow];
+                                    [MBProgressHUD showError:@"暂时不能观看" toView:[UIApplication sharedApplication].keyWindow];
                                     return;
                                 }
                             } else {
@@ -985,7 +985,7 @@
     if ([[_cellDict stringValueForKey:@"video_type"] integerValue] == 6) {//考试
         
         if ([[_cellDict stringValueForKey:@"is_order"] integerValue] && [[_cellDict stringValueForKey:@"lock"] integerValue] != 1) {
-            [TKProgressHUD showError:@"暂时无法考试" toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:@"暂时无法考试" toView:[UIApplication sharedApplication].keyWindow];
             return;
         }
         
@@ -1144,7 +1144,7 @@
             }
             
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
@@ -1303,7 +1303,7 @@
         [_tableView reloadData];
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        [TKProgressHUD showError:@"请求错误" toView:self.view];
+        [MBProgressHUD showError:@"请求错误" toView:self.view];
     }];
     [op start];
 }
@@ -1453,10 +1453,10 @@
                 [self NSNotificationVideoDataSource];
                 [self netWorkUserAddRecord];
             } else {//不是同一个人
-                [TKProgressHUD showError:[errorDict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:[errorDict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -1493,11 +1493,11 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            [TKProgressHUD showError:@"创建成功" toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:@"创建成功" toView:[UIApplication sharedApplication].keyWindow];
             [self NSNotificationVideoDataSource];
             [self netWorkUserAddRecord];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];
@@ -1539,7 +1539,7 @@
         [self netWorkVideoGetCatalog];
         [_tableView reloadData];
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        [TKProgressHUD showError:@"请求错误" toView:self.view];
+        [MBProgressHUD showError:@"请求错误" toView:self.view];
     }];
     [op start];
 }
@@ -1570,17 +1570,17 @@
     [request setValue:encryptStr forHTTPHeaderField:HeaderKey];
     [request setValue:oath_token_Str forHTTPHeaderField:OAUTH_TOKEN];
     
-    [TKProgressHUD showMessag:@"加载中...." toView:[UIApplication sharedApplication].keyWindow];
+    [MBProgressHUD showMessag:@"加载中...." toView:[UIApplication sharedApplication].keyWindow];
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        [TKProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
+        [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
         _testDataSource = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
         if ([_testDataSource dictionaryValueForKey:@"paper_options"].allKeys.count == 0) {
-            [TKProgressHUD showError:@"考试数据为空" toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:@"考试数据为空" toView:[UIApplication sharedApplication].keyWindow];
             return ;
         }
         if ([[_testDataSource dictionaryValueForKey:@"paper_options"] dictionaryValueForKey:@"options_questions"].allKeys.count == 0) {
-            [TKProgressHUD showError:@"考试数据为空" toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:@"考试数据为空" toView:[UIApplication sharedApplication].keyWindow];
             return ;
         }
         TestCurrentViewController *vc = [[TestCurrentViewController alloc] init];
@@ -1595,8 +1595,8 @@
         [self.navigationController pushViewController:vc animated:YES];
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        [TKProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
-        [TKProgressHUD showError:@"加载失败" toView:[UIApplication sharedApplication].keyWindow];
+        [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
+        [MBProgressHUD showError:@"加载失败" toView:[UIApplication sharedApplication].keyWindow];
     }];
     [op start];
 }
@@ -1752,7 +1752,7 @@
                     [self.timer fire];
                 }
             } else {
-                [TKProgressHUD showError:@"暂时不能观看" toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:@"暂时不能观看" toView:[UIApplication sharedApplication].keyWindow];
                 return;
             }
         } else {
@@ -1783,7 +1783,7 @@
                             [self.timer fire];
                         }
                     } else {
-                        [TKProgressHUD showError:@"暂时不能观看" toView:[UIApplication sharedApplication].keyWindow];
+                        [MBProgressHUD showError:@"暂时不能观看" toView:[UIApplication sharedApplication].keyWindow];
                         return;
                     }
                 } else {

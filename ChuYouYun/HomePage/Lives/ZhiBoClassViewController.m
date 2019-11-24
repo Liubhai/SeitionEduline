@@ -9,7 +9,7 @@
 #import "ZhiBoClassViewController.h"
 #import "SYG.h"
 #import "MyHttpRequest.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "ZhiBoClassCell.h"
 #import "BigWindCar.h"
 #import "AppDelegate.h"
@@ -17,6 +17,12 @@
 
 #import "DLViewController.h"
 #import "ClassAndLivePayViewController.h"
+
+// 百家云
+#import <BJLiveUI/BJLiveUI.h>
+
+#import "WebViewController.h"
+
 
 
 //GenSee
@@ -123,7 +129,9 @@
 
 @property (strong ,nonatomic)NSDictionary  *dataSource;
 
-
+// 百家云
+@property (nonatomic) BJLRoomViewController *roomViewController;
+@property (nonatomic) BJLIcRoomViewController *roomIcViewController;
 
 @end
 
@@ -170,6 +178,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // 退出教室
+    [self bjl_observe:BJLMakeMethod(self.roomIcViewController, roomViewController:didExitWithError:)
+             observer:^BOOL(BJLRoomViewController *roomVC, BJLError *error) {
+                 if (error) {
+                     NSLog(@"roomViewControllerDidExitWithError:%@", error);
+                 }
+                 else {
+                     AppDelegate *app = [AppDelegate delegate];
+                     app._allowRotation = NO;
+                     NSNumber *value = [NSNumber numberWithInt:UIDeviceOrientationPortrait];
+                     [[UIDevice currentDevice]setValue:value forKey:@"orientation"];
+                 }
+                 return YES;
+             }];
+    
     [self interFace];
     [self addTableView];
     [self netWorkLiveGetInfo];
@@ -228,7 +252,7 @@
     [_tableView deselectRowAtIndexPath:indexPath animated:YES];
     _indexPathRow = indexPath.row;
     if ([[[_dataArray objectAtIndex:indexPath.row] stringValueForKey:@"note"] isEqualToString:@"已结束"]) {
-        [TKProgressHUD showError:@"该课时已结束" toView:[UIApplication sharedApplication].keyWindow];
+        [MBProgressHUD showError:@"该课时已结束" toView:[UIApplication sharedApplication].keyWindow];
         return;
     }
     // 这里应该判断是否已经登录
@@ -260,7 +284,7 @@
                     NSString *secitonID = [[_dataArray objectAtIndex:indexPath.row] stringValueForKey:@"section_id"];
                     [self netWorkLiveGetCatalogWithSection:secitonID WithID:ID];
                 } else {//没有解锁
-                    [TKProgressHUD showError:@"请先解锁本直播才能观看" toView:[UIApplication sharedApplication].keyWindow];
+                    [MBProgressHUD showError:@"请先解锁本直播才能观看" toView:[UIApplication sharedApplication].keyWindow];
                     return;
                 }
             } else {
@@ -274,7 +298,7 @@
                     [self netWorkLiveGetCatalogWithSection:secitonID WithID:ID];
                 } else {//没有解锁
                     if ([[cellDict stringValueForKey:@"course_hour_price"] floatValue] == 0) {
-                        [TKProgressHUD showError:@"请先解锁本直播才能观看" toView:[UIApplication sharedApplication].keyWindow];
+                        [MBProgressHUD showError:@"请先解锁本直播才能观看" toView:[UIApplication sharedApplication].keyWindow];
                         return;
                     } else {
                         [self gotoBuyLive];
@@ -388,7 +412,7 @@
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
             if ([[dict stringValueForKey:@"type"] integerValue] == 1) {//gensee
-                [TKProgressHUD showError:@"不支持直播类型" toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:@"不支持直播类型" toView:[UIApplication sharedApplication].keyWindow];
                 return ;
                 BOOL isPlayBack = NO;
                 for (NSString *keyStr in [dict allKeys]) {
@@ -426,12 +450,24 @@
                     _CCDict = dict[@"body"];
                     [self CCPlayBack];
                 }
+            } else if ([[dict stringValueForKey:@"type"] integerValue] == 10) {//百家云大班课
+                if ([dict[@"body"][@"is_live"] integerValue] == 1) {//直播
+                    [self enterBaiJiaYunLive:dict[@"body"]];
+                } else if ([dict[@"body"][@"is_live"] integerValue] == 0){//回放
+                    [self enterBaiJiaYunLookBack:dict[@"body"]];
+                }
+            } else if ([[dict stringValueForKey:@"type"] integerValue] == 11) {//百家云小班课
+                if ([dict[@"body"][@"is_live"] integerValue] == 1) {//直播
+                    [self enterBaiJiaXiaoBanKe:dict[@"body"]];
+                } else if ([dict[@"body"][@"is_live"] integerValue] == 0){//回放
+                    [self enterBaiJiaYunLookBack:dict[@"body"]];
+                }
             } else {
-                [TKProgressHUD showError:@"不支持直播类型" toView: [UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:@"不支持直播类型" toView: [UIApplication sharedApplication].keyWindow];
                 return ;
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
             return ;
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -525,7 +561,7 @@
         message = reason;
     }
     
-    [TKProgressHUD showError:message toView:self.view];
+    [MBProgressHUD showError:message toView:self.view];
 }
 
 #pragma mark -- CC 回放
@@ -587,7 +623,50 @@
 }
 
 
+// 百家云
+- (void)enterBaiJiaYunLive:(NSDictionary *)dict {
+    NSString *domain = [NSString stringWithFormat:@"%@",[dict objectForKey:@"domain"]];
+    if ([domain containsString:@"http://"]) {
+        domain = [domain substringFromIndex:7];
+    }
+    if ([domain containsString:@"https://"]) {
+        domain = [domain substringFromIndex:8];
+    }
+    [BJLRoom setPrivateDomainPrefix:domain];
+    
+    self.roomViewController = [BJLRoomViewController instanceWithSecret:[NSString stringWithFormat:@"%@",[dict objectForKey:@"join_pwd"]]
+      userName:[NSString stringWithFormat:@"%@",[dict objectForKey:@"account"]]
+    userAvatar:nil];
+    [self presentViewController:self.roomViewController animated:YES completion:nil];
+}
 
+- (void)enterBaiJiaYunLookBack:(NSDictionary *)dict {
+    
+    WebViewController *vc = [[WebViewController alloc] init];
+    vc.titleString = @"直播回放";
+    vc.urlString = [NSString stringWithFormat:@"%@",[dict objectForKey:@"livePlayback"]];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
 
+// 百家云小班课
+- (void)enterBaiJiaXiaoBanKe:(NSDictionary *)dict {
+    
+    AppDelegate *app = [AppDelegate delegate];
+    app._allowRotation = YES;
+    
+    NSString *domain = [NSString stringWithFormat:@"%@",[dict objectForKey:@"domain"]];
+    if ([domain containsString:@"http://"]) {
+        domain = [domain substringFromIndex:7];
+    }
+    if ([domain containsString:@"https://"]) {
+        domain = [domain substringFromIndex:8];
+    }
+    [BJLRoom setPrivateDomainPrefix:domain];
+    self.roomIcViewController = [BJLIcRoomViewController instanceWithSecret:[NSString stringWithFormat:@"%@",[dict objectForKey:@"join_pwd"]]
+      userName:[NSString stringWithFormat:@"%@",[dict objectForKey:@"account"]]
+    userAvatar:nil];
+    [self presentViewController:self.roomViewController animated:YES completion:nil];
+}
 
 @end

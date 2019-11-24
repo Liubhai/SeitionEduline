@@ -43,7 +43,7 @@
 
 
 #if TARGET_OS_IPHONE
-BOOL doesAppRunInBackground(void);
+BOOL doesAppRunInBackground1(void);
 #endif
 
 unsigned long long const kDDDefaultLogMaxFileSize      = 1024 * 1024;      // 1 MB
@@ -468,7 +468,7 @@ unsigned long long const kDDDefaultLogFilesDiskQuota   = 20 * 1024 * 1024; // 20
             // NSFileProtectionCompleteUntilFirstUserAuthentication.
 
             NSString *key = _defaultFileProtectionLevel ? :
-                (doesAppRunInBackground() ? NSFileProtectionCompleteUntilFirstUserAuthentication : NSFileProtectionCompleteUnlessOpen);
+                (doesAppRunInBackground1() ? NSFileProtectionCompleteUntilFirstUserAuthentication : NSFileProtectionCompleteUnlessOpen);
 
             attributes = @{
                 NSFileProtectionKey: key
@@ -516,13 +516,13 @@ unsigned long long const kDDDefaultLogFilesDiskQuota   = 20 * 1024 * 1024; // 20
 #pragma mark -
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@interface DDLogFileFormatterDefault () {
+@interface DDLogFileFormatterDefault1 () {
     NSDateFormatter *_dateFormatter;
 }
 
 @end
 
-@implementation DDLogFileFormatterDefault
+@implementation DDLogFileFormatterDefault1
 
 - (instancetype)init {
     return [self initWithDateFormatter:nil];
@@ -589,7 +589,7 @@ unsigned long long const kDDDefaultLogFilesDiskQuota   = 20 * 1024 * 1024; // 20
 
         logFileManager = aLogFileManager;
 
-        self.logFormatter = [DDLogFileFormatterDefault new];
+        self.logFormatter = [DDLogFileFormatterDefault1 new];
     }
 
     return self;
@@ -909,7 +909,7 @@ unsigned long long const kDDDefaultLogFilesDiskQuota   = 20 * 1024 * 1024; // 20
             //
             // If user has owerwritten to NSFileProtectionNone there is no neeed to create a new one.
 
-            if (!_doNotReuseLogFiles && doesAppRunInBackground()) {
+            if (!_doNotReuseLogFiles && doesAppRunInBackground1()) {
                 NSString *key = mostRecentLogFileInfo.fileAttributes[NSFileProtectionKey];
 
                 if ([key length] > 0 && !([key isEqualToString:NSFileProtectionCompleteUntilFirstUserAuthentication] || [key isEqualToString:NSFileProtectionNone])) {
@@ -1466,7 +1466,7 @@ static int exception_count = 0;
  * want (even if device is locked). Thats why that attribute have to be changed to
  * NSFileProtectionCompleteUntilFirstUserAuthentication.
  */
-BOOL doesAppRunInBackground() {
+BOOL doesAppRunInBackground1() {
     BOOL answer = NO;
 
     NSArray *backgroundModes = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"UIBackgroundModes"];

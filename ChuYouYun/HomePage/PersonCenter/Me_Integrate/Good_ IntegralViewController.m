@@ -589,7 +589,7 @@
 - (void)textChange:(NSNotification *)not {
     NSLog(@"%@",_textField);
     if (_textField.text.length > 8) {
-        [TKProgressHUD showError:@"积分数量不能过大" toView:self.view];
+        [MBProgressHUD showError:@"积分数量不能过大" toView:self.view];
         _textField.text = [_textField.text substringToIndex:8];
         return;
     } else if (_textField.text.length == 0) {
@@ -695,7 +695,7 @@
 
 - (void)submitButtonCilck {
     if (_textField.text.length == 0) {
-        [TKProgressHUD showError:@"请输入兑换积分的个数" toView:self.view];
+        [MBProgressHUD showError:@"请输入兑换积分的个数" toView:self.view];
         return;
     }
     [self isSurePay];
@@ -800,7 +800,7 @@
             }
             
         } else {
-            [TKProgressHUD showError:[dataSource stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dataSource stringValueForKey:@"msg"] toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -826,7 +826,7 @@
         [mutabDict setObject:@"wxpay" forKey:@"type"];
     }
     if (_textField.text.length == 0) {
-        [TKProgressHUD showError:@"请输入兑换积分的个数" toView:self.view];
+        [MBProgressHUD showError:@"请输入兑换积分的个数" toView:self.view];
         return;
     } else {
         [mutabDict setObject:_textField.text  forKey:@"exchange_score"];
@@ -851,12 +851,12 @@
                 [self WXPay:[[[YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject] dictionaryValueForKey:@"wxpay"] dictionaryValueForKey:@"ios"]];
                 return;
             }
-            [TKProgressHUD showError:[dataSource stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dataSource stringValueForKey:@"msg"] toView:self.view];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self backPressed];
             });
         } else {
-            [TKProgressHUD showError:[dataSource stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dataSource stringValueForKey:@"msg"] toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -961,7 +961,7 @@
         NSLog(@"%@", responseObject);
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 0) {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             return ;
         } else if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];

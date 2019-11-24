@@ -853,7 +853,7 @@
             _wxPayDict =  [[_rechargeVipDict dictionaryValueForKey:@"wxpay"] dictionaryValueForKey:@"ios"];
             [self WXPay:_wxPayDict];
         } else if ([_payTypeStr integerValue] == 3) {
-            [TKProgressHUD showError:[dict objectForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:[dict objectForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
         }
 
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -900,7 +900,7 @@
         }
 
         if ([[_payDataSource stringValueForKey:@"code"] integerValue] == 0) {
-            [TKProgressHUD showError:[_payDataSource stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[_payDataSource stringValueForKey:@"msg"] toView:self.view];
             return ;
         } else if ([[_payDataSource stringValueForKey:@"code"] integerValue] == 1) {
             _payDataSource = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];

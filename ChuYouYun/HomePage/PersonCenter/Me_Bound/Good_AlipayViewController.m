@@ -169,11 +169,11 @@
         NSLog(@"%@",responseObject);
         NSString *msg = [responseObject stringValueForKey:@"msg"];
         if ([responseObject[@"code"] integerValue] == 1) {
-//            [TKProgressHUD showError:msg toView:self.view];
-            [TKProgressHUD showSuccess:msg toView:self.view];
+//            [MBProgressHUD showError:msg toView:self.view];
+            [MBProgressHUD showSuccess:msg toView:self.view];
             [self backPressed];
         } else {
-            [TKProgressHUD showError:msg toView:self.view];
+            [MBProgressHUD showError:msg toView:self.view];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -238,10 +238,10 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             [self backPressed];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {

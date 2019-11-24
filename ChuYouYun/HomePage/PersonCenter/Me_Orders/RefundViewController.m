@@ -13,7 +13,7 @@
 #import "BigWindCar.h"
 #import "MJRefresh.h"
 #import "BigWindCar.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "ZhiyiHTTPRequest.h"
 #import "BuyAgreementViewController.h"
 
@@ -457,11 +457,11 @@
 
 - (void)sureButtonCilck:(UIButton *)button {
     if (!_agreeButton.selected) {
-        [TKProgressHUD showError:@"请先同意服务协议" toView:self.view];
+        [MBProgressHUD showError:@"请先同意服务协议" toView:self.view];
         return;
     }
     if (_textView.text.length == 0) {
-        [TKProgressHUD showError:@"请填写申请原因" toView:self.view];
+        [MBProgressHUD showError:@"请填写申请原因" toView:self.view];
         return;
     }
 }
@@ -534,7 +534,7 @@
 
 - (void)commitButtonCilck:(UIButton *)button {
     if (!_agreeButton.selected) {
-        [TKProgressHUD showError:@"请先同意服务协议" toView:self.view];
+        [MBProgressHUD showError:@"请先同意服务协议" toView:self.view];
         return;
     }
     [self netWorkOrderRefund];
@@ -656,7 +656,7 @@
     }
     
     if ([_peaseNumber integerValue] == 100) {
-        [TKProgressHUD showError:@"请填写退款理由" toView:self.view];
+        [MBProgressHUD showError:@"请填写退款理由" toView:self.view];
         return;
     } else {
         if ([_peaseNumber integerValue] == 0) {
@@ -666,7 +666,7 @@
     }
     
     if (_textView.text.length == 0) {
-        [TKProgressHUD showError:@"请填写退款说明" toView:self.view];
+        [MBProgressHUD showError:@"请填写退款说明" toView:self.view];
         return;
     } else {
         [mutabDict setValue:_textView.text forKey:@"refund_note"];
@@ -700,12 +700,12 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self backPressed];
             });
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             return ;
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -744,7 +744,7 @@
             _imageID = [dict stringValueForKey:@"attach_id"];
             [_imageIDArray addObject:_imageID];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         

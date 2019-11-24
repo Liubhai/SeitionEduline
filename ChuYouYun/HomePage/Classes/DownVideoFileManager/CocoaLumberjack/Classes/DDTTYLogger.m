@@ -80,7 +80,7 @@
 #define MAP_TO_TERMINAL_APP_COLORS 1
 
 
-@interface DDTTYLoggerColorProfile : NSObject {
+@interface DDTTYLoggerColorProfile1 : NSObject {
     @public
     DDLogFlag mask;
     NSInteger context;
@@ -954,8 +954,8 @@ static DDTTYLogger *sharedInstance;
 - (void)setForegroundColor:(DDColor *)txtColor backgroundColor:(DDColor *)bgColor forFlag:(DDLogFlag)mask context:(NSInteger)ctxt {
     dispatch_block_t block = ^{
         @autoreleasepool {
-            DDTTYLoggerColorProfile *newColorProfile =
-                [[DDTTYLoggerColorProfile alloc] initWithForegroundColor:txtColor
+            DDTTYLoggerColorProfile1 *newColorProfile =
+                [[DDTTYLoggerColorProfile1 alloc] initWithForegroundColor:txtColor
                                                          backgroundColor:bgColor
                                                                     flag:mask
                                                                  context:ctxt];
@@ -964,7 +964,7 @@ static DDTTYLogger *sharedInstance;
 
             NSUInteger i = 0;
 
-            for (DDTTYLoggerColorProfile *colorProfile in _colorProfilesArray) {
+            for (DDTTYLoggerColorProfile1 *colorProfile in _colorProfilesArray) {
                 if ((colorProfile->mask == mask) && (colorProfile->context == ctxt)) {
                     break;
                 }
@@ -1000,8 +1000,8 @@ static DDTTYLogger *sharedInstance;
 
     dispatch_block_t block = ^{
         @autoreleasepool {
-            DDTTYLoggerColorProfile *newColorProfile =
-                [[DDTTYLoggerColorProfile alloc] initWithForegroundColor:txtColor
+            DDTTYLoggerColorProfile1 *newColorProfile =
+                [[DDTTYLoggerColorProfile1 alloc] initWithForegroundColor:txtColor
                                                          backgroundColor:bgColor
                                                                     flag:(DDLogFlag)0
                                                                  context:0];
@@ -1036,7 +1036,7 @@ static DDTTYLogger *sharedInstance;
         @autoreleasepool {
             NSUInteger i = 0;
 
-            for (DDTTYLoggerColorProfile *colorProfile in _colorProfilesArray) {
+            for (DDTTYLoggerColorProfile1 *colorProfile in _colorProfilesArray) {
                 if ((colorProfile->mask == mask) && (colorProfile->context == context)) {
                     break;
                 }
@@ -1168,7 +1168,7 @@ static DDTTYLogger *sharedInstance;
     if (logMsg) {
         // Search for a color profile associated with the log message
 
-        DDTTYLoggerColorProfile *colorProfile = nil;
+        DDTTYLoggerColorProfile1 *colorProfile = nil;
 
         if (_colorsEnabled) {
             if (logMessage->_tag) {
@@ -1176,7 +1176,7 @@ static DDTTYLogger *sharedInstance;
             }
 
             if (colorProfile == nil) {
-                for (DDTTYLoggerColorProfile *cp in _colorProfilesArray) {
+                for (DDTTYLoggerColorProfile1 *cp in _colorProfilesArray) {
                     if (logMessage->_flag & cp->mask) {
                         // Color profile set for this context?
                         if (logMessage->_context == cp->context) {
@@ -1368,7 +1368,7 @@ static DDTTYLogger *sharedInstance;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@implementation DDTTYLoggerColorProfile
+@implementation DDTTYLoggerColorProfile1
 
 - (instancetype)initWithForegroundColor:(DDColor *)fgColor backgroundColor:(DDColor *)bgColor flag:(DDLogFlag)aMask context:(NSInteger)ctxt {
     if ((self = [super init])) {
@@ -1474,7 +1474,7 @@ static DDTTYLogger *sharedInstance;
 
 - (NSString *)description {
     return [NSString stringWithFormat:
-            @"<DDTTYLoggerColorProfile: %p mask:%i ctxt:%ld fg:%u,%u,%u bg:%u,%u,%u fgCode:%@ bgCode:%@>",
+            @"<DDTTYLoggerColorProfile1: %p mask:%i ctxt:%ld fg:%u,%u,%u bg:%u,%u,%u fgCode:%@ bgCode:%@>",
             self, (int)mask, (long)context, fg_r, fg_g, fg_b, bg_r, bg_g, bg_b, fgCodeRaw, bgCodeRaw];
 }
 

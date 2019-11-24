@@ -402,12 +402,12 @@
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             _dataArray = (NSArray *)[YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
             if (_dataArray.count == 0) {
-                [TKProgressHUD showError:@"没有问答分类" toView:self.view];
+                [MBProgressHUD showError:@"没有问答分类" toView:self.view];
             } else {
                 [self addTableView];
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
 
         [_cateTableView reloadData];
@@ -424,18 +424,18 @@
     NSString *endUrlStr = YunKeTang_WenDa_wenda_release;
     NSString *allUrlStr = [YunKeTang_Api_Tool YunKeTang_GetFullUrl:endUrlStr];
     if (UserOathToken == nil) {
-        [TKProgressHUD showError:@"请先登录" toView:self.view];
+        [MBProgressHUD showError:@"请先登录" toView:self.view];
         return;
     }
     NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
     if (_currentCateDict == nil) {
-        [TKProgressHUD showError:@"请选择类型" toView:self.view];
+        [MBProgressHUD showError:@"请选择类型" toView:self.view];
         return;
     } else {
         [mutabDict setObject:[_currentCateDict stringValueForKey:@"zy_wenda_category_id"] forKey:@"typeid"];//问答的类型
     }
     if (self.textView.text.length == 0) {
-        [TKProgressHUD showError:@"请输入内容" toView:self.view];
+        [MBProgressHUD showError:@"请输入内容" toView:self.view];
         return;
     } else {
         [mutabDict setObject:self.textView.text forKey:@"content"];
@@ -461,12 +461,12 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {//发布成功
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self backPressed];
             });
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];
@@ -503,7 +503,7 @@
             NSString *imageID = [dict stringValueForKey:@"attach_id"];
             [_imageIDArray addObject:imageID];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         NSLog(@"---%@",dict);
         

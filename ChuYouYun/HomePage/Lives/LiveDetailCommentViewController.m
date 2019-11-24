@@ -293,7 +293,7 @@
         return;
     }
     if ([[_liveDataSource stringValueForKey:@"is_buy"] integerValue] == 0) {
-        [TKProgressHUD showError:@"解锁之后才能评论" toView:[UIApplication sharedApplication].keyWindow];
+        [MBProgressHUD showError:@"解锁之后才能评论" toView:[UIApplication sharedApplication].keyWindow];
         return;
     }
     
@@ -500,7 +500,7 @@
         oath_token_Str = [NSString stringWithFormat:@"%@:%@",UserOathToken,UserOathTokenSecret];
         //        [mutabDict setObject:oath_token_Str forKey:OAUTH_TOKEN];
     } else {
-        [TKProgressHUD showError:@"请先去登陆" toView:self.view];
+        [MBProgressHUD showError:@"请先去登陆" toView:self.view];
         return;
     }
     
@@ -514,11 +514,11 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
             [_allWindowView removeFromSuperview];
             [self netWorkVideoGetRender];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
             [_allWindowView removeFromSuperview];
         }
         

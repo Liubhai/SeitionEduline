@@ -27,7 +27,7 @@
 #import "BuyClass.h"
 #import "SYG.h"
 #import "UIColor+HTMLColors.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "ClassRevampCell.h"
 #import "Good_ClassMainViewController.h"
 #import "DLViewController.h"

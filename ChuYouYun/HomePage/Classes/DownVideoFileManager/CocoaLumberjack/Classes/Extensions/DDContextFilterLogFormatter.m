@@ -20,7 +20,7 @@
 #error This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
 #endif
 
-@interface DDLoggingContextSet : NSObject
+@interface DDLoggingContextSet1 : NSObject
 
 - (void)addToSet:(NSUInteger)loggingContext;
 - (void)removeFromSet:(NSUInteger)loggingContext;
@@ -36,7 +36,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 @interface DDContextWhitelistFilterLogFormatter () {
-    DDLoggingContextSet *_contextSet;
+    DDLoggingContextSet1 *_contextSet;
 }
 
 @end
@@ -46,7 +46,7 @@
 
 - (instancetype)init {
     if ((self = [super init])) {
-        _contextSet = [[DDLoggingContextSet alloc] init];
+        _contextSet = [[DDLoggingContextSet1 alloc] init];
     }
 
     return self;
@@ -82,18 +82,18 @@
 #pragma mark -
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@interface DDContextBlacklistFilterLogFormatter () {
-    DDLoggingContextSet *_contextSet;
+@interface DDContextBlacklistFilterLogFormatter1 () {
+    DDLoggingContextSet1 *_contextSet;
 }
 
 @end
 
 
-@implementation DDContextBlacklistFilterLogFormatter
+@implementation DDContextBlacklistFilterLogFormatter1
 
 - (instancetype)init {
     if ((self = [super init])) {
-        _contextSet = [[DDLoggingContextSet alloc] init];
+        _contextSet = [[DDLoggingContextSet1 alloc] init];
     }
 
     return self;
@@ -130,7 +130,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-@interface DDLoggingContextSet () {
+@interface DDLoggingContextSet1 () {
     OSSpinLock _lock;
     NSMutableSet *_set;
 }
@@ -138,7 +138,7 @@
 @end
 
 
-@implementation DDLoggingContextSet
+@implementation DDLoggingContextSet1
 
 - (instancetype)init {
     if ((self = [super init])) {

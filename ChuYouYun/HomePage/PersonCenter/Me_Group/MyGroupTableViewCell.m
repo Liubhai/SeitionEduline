@@ -9,7 +9,7 @@
 #import "MyGroupTableViewCell.h"
 #import "SYG.h"
 #import "UIImageView+WebCache.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 
 @implementation MyGroupTableViewCell
 

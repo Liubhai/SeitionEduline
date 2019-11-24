@@ -1333,7 +1333,7 @@
 - (void)onlyLogin:(NSNotification *)not {
     NSDictionary *dict = (NSDictionary *)not.object;
     NSString *message = [dict stringValueForKey:@"msg"];
-    [TKProgressHUD showError:message toView:self.view];
+    [MBProgressHUD showError:message toView:self.view];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         Passport *ps = [[Passport alloc] init];
         [ps goOutLogin];

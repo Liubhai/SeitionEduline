@@ -13,7 +13,7 @@
 #import "MyHttpRequest.h"
 #import "UIImageView+WebCache.h"
 #import "MJRefresh.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 
 #import "Passport.h"
 
@@ -284,7 +284,7 @@
                 self.imageView.hidden = YES;
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         [_tableView reloadData];
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {

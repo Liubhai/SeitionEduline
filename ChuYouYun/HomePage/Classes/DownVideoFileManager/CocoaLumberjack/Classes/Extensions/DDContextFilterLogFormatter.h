@@ -83,7 +83,7 @@
 /**
  * This class provides a log formatter that filters log statements from a logging context on the blacklist.
  **/
-@interface DDContextBlacklistFilterLogFormatter : NSObject <DDLogFormatter>
+@interface DDContextBlacklistFilterLogFormatter1 : NSObject <DDLogFormatter>
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 

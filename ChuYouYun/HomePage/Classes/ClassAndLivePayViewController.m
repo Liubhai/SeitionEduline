@@ -13,7 +13,7 @@
 #import "ZhiyiHTTPRequest.h"
 #import "BigWindCar.h"
 #import "MyHttpRequest.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "MJRefresh.h"
 #import "Good_DiscountMainViewController.h"
 #import "EntityCardViewController.h"
@@ -776,11 +776,11 @@
 //优惠券的按钮
 - (void)discountButtonCilck {
     if (_counpArray.count == 0) {
-        [TKProgressHUD showError:@"无可用优惠券" toView:self.view];
+        [MBProgressHUD showError:@"无可用优惠券" toView:self.view];
         return;
     }
     if (_entityDiscount.text.length > 0) {//说明已经使用实体卡了 不能再用优惠券了
-        [TKProgressHUD showError:@"已经使用实体卡" toView:self.view];
+        [MBProgressHUD showError:@"已经使用实体卡" toView:self.view];
         return;
     }
     
@@ -830,7 +830,7 @@
 
 - (void)submitButtonCilck {
     if ([_payTypeStr integerValue] == 0) {
-        [TKProgressHUD showError:@"暂无支付方式可选" toView:[UIApplication sharedApplication].keyWindow];
+        [MBProgressHUD showError:@"暂无支付方式可选" toView:[UIApplication sharedApplication].keyWindow];
         return;
     }
     if ([[_dict stringValueForKey:@"price"] floatValue] == 0) {//免费
@@ -1235,7 +1235,7 @@
         NSLog(@"%@", responseObject);
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 0) {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             return ;
         } else if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
@@ -1349,7 +1349,7 @@
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
             if ([[_entityReturnDict stringValueForKey:@"type"] integerValue] == 5) {//课程卡
-                [TKProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self backPressed];
                 });
@@ -1364,13 +1364,13 @@
                 [self WXPay:_wxPayDict];
                 isGoOut = YES;
             } else if ([_payTypeStr integerValue] == 3) {//余额
-                [TKProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self backPressed];
                 });
             }
         } else {
-                [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];
@@ -1435,7 +1435,7 @@
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
             if ([[_entityReturnDict stringValueForKey:@"type"] integerValue] == 5) {//课程卡
-                [TKProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self backPressed];
                 });
@@ -1450,13 +1450,13 @@
                 [self WXPay:_wxPayDict];
                 isGoOut = YES;
             } else if ([_payTypeStr integerValue] == 3) {//余额
-                [TKProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self backPressed];
                 });
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];
@@ -1514,7 +1514,7 @@
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
             if ([[_entityReturnDict stringValueForKey:@"type"] integerValue] == 5) {//课程卡
-                [TKProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self backPressed];
                 });
@@ -1529,7 +1529,7 @@
                 [self WXPay:_wxPayDict];
                 isGoOut = YES;
             } else if ([_payTypeStr integerValue] == 3) {//余额
-                [TKProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self backPressed];
                 });
@@ -1588,13 +1588,13 @@
                 [self WXPay:_wxPayDict];
                 isGoOut = YES;
             } else if ([_payTypeStr integerValue] == 3) {//余额
-                [TKProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self backPressed];
                 });
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];
@@ -1637,10 +1637,10 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             [self backPressed];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];
@@ -1694,7 +1694,7 @@
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
             if ([[_entityReturnDict stringValueForKey:@"type"] integerValue] == 5) {//课程卡
-                [TKProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self backPressed];
                 });
@@ -1709,13 +1709,13 @@
                 [self WXPay:_wxPayDict];
                 isGoOut = YES;
             } else if ([_payTypeStr integerValue] == 3) {//余额
-                [TKProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self backPressed];
                 });
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];
@@ -1755,17 +1755,17 @@
             }
             if ([[_videoDataSource stringValueForKey:@"is_buy"] integerValue] == 1) {
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [TKProgressHUD showError:@"支付成功" toView:[UIApplication sharedApplication].keyWindow];
+                    [MBProgressHUD showError:@"支付成功" toView:[UIApplication sharedApplication].keyWindow];
                 });
             } else {
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [TKProgressHUD showError:@"支付失败" toView:[UIApplication sharedApplication].keyWindow];
+                    [MBProgressHUD showError:@"支付失败" toView:[UIApplication sharedApplication].keyWindow];
                 });
             }
         }
 
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        [TKProgressHUD showError:@"请求错误" toView:self.view];
+        [MBProgressHUD showError:@"请求错误" toView:self.view];
         [self backPressed];
     }];
     [op start];
@@ -1803,16 +1803,16 @@
             }
             if ([[dict stringValueForKey:@"is_buy"] integerValue] == 1) {
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [TKProgressHUD showError:@"支付成功" toView:[UIApplication sharedApplication].keyWindow];
+                    [MBProgressHUD showError:@"支付成功" toView:[UIApplication sharedApplication].keyWindow];
                 });
             } else {
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [TKProgressHUD showError:@"支付失败" toView:[UIApplication sharedApplication].keyWindow];
+                    [MBProgressHUD showError:@"支付失败" toView:[UIApplication sharedApplication].keyWindow];
                 });
             }
         } else {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [TKProgressHUD showError:@"支付失败" toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:@"支付失败" toView:[UIApplication sharedApplication].keyWindow];
             });
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -1857,16 +1857,16 @@
             }
             if ([[dict stringValueForKey:@"is_buy"] integerValue] == 1) {
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [TKProgressHUD showError:@"支付成功" toView:[UIApplication sharedApplication].keyWindow];
+                    [MBProgressHUD showError:@"支付成功" toView:[UIApplication sharedApplication].keyWindow];
                 });
             } else {
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [TKProgressHUD showError:@"支付失败" toView:[UIApplication sharedApplication].keyWindow];
+                    [MBProgressHUD showError:@"支付失败" toView:[UIApplication sharedApplication].keyWindow];
                 });
             }
         } else {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [TKProgressHUD showError:@"支付失败" toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:@"支付失败" toView:[UIApplication sharedApplication].keyWindow];
             });
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -1940,7 +1940,7 @@
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
             if ([[_entityReturnDict stringValueForKey:@"type"] integerValue] == 5) {//课程卡
-                [TKProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self backPressed];
                 });
@@ -1955,13 +1955,13 @@
                 [self WXPay:_wxPayDict];
                 isGoOut = YES;
             } else if ([_payTypeStr integerValue] == 3) {//余额
-                [TKProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self backPressed];
                 });
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];

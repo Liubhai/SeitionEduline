@@ -159,7 +159,7 @@
             }
         } else {
             if ([responseObject[@"code"] integerValue] == 0) {//没有更多数据了
-                [TKProgressHUD showError:@"没有更多数据了" toView:self.view];
+                [MBProgressHUD showError:@"没有更多数据了" toView:self.view];
             } else {
                 NSArray *array = responseObject[@"data"];
                 [_dataArray addObjectsFromArray:array];
@@ -167,7 +167,7 @@
         }
         [_tableView reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [TKProgressHUD showError:@"请检查网络" toView:self.view];
+        [MBProgressHUD showError:@"请检查网络" toView:self.view];
     }];
 }
 
@@ -184,21 +184,21 @@
         [dic setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"oauthToken"] forKey:@"oauth_token"];
         [dic setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"oauthTokenSecret"] forKey:@"oauth_token_secret"];
     } else {
-        [TKProgressHUD showError:@"请先登陆" toView:self.view];
+        [MBProgressHUD showError:@"请先登陆" toView:self.view];
         return;
     }
     [dic setValue:_IDString forKey:@"group_id"];
     [manager BigWinCar_quitGroup:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *msg = responseObject[@"msg"];
         if ([responseObject[@"code"] integerValue] == 1) {
-            [TKProgressHUD showSuccess:@"退出成功" toView:self.view];
+            [MBProgressHUD showSuccess:@"退出成功" toView:self.view];
             [self netWorkGetJoinGroupListWithNumber:1];
         } else {
-            [TKProgressHUD showError:msg toView:self.view];
+            [MBProgressHUD showError:msg toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [TKProgressHUD showError:@"退出小组失败" toView:self.view];
+        [MBProgressHUD showError:@"退出小组失败" toView:self.view];
     }];
 }
 
@@ -213,21 +213,21 @@
 //        [dic setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"oauthToken"] forKey:@"oauth_token"];
 //        [dic setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"oauthTokenSecret"] forKey:@"oauth_token_secret"];
 //    } else {
-//        [TKProgressHUD showError:@"请先登陆" toView:self.view];
+//        [MBProgressHUD showError:@"请先登陆" toView:self.view];
 //        return;
 //    }
 //    [dic setValue:_IDString forKey:@"group_id"];
 //    [manager BigWinCar_deleteGroup:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //        NSLog(@"%@",responseObject);
 //        if ([responseObject[@"code"] integerValue] == 1) {
-//            [TKProgressHUD showSuccess:@"解散成功" toView:self.view];
+//            [MBProgressHUD showSuccess:@"解散成功" toView:self.view];
 //            [self backPressed];
 //        } else {
-//            [TKProgressHUD showError:@"解散失败" toView:self.view];
+//            [MBProgressHUD showError:@"解散失败" toView:self.view];
 //        }
 //        
 //    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        [TKProgressHUD showSuccess:@"解散失败" toView:self.view];
+//        [MBProgressHUD showSuccess:@"解散失败" toView:self.view];
 //    }];
 //    
 //    [self hideView];

@@ -259,13 +259,13 @@
     }
     
     if (_personTextField.text.length == 0) {
-        [TKProgressHUD showError:@"请输入收货人" toView:self.view];
+        [MBProgressHUD showError:@"请输入收货人" toView:self.view];
         return;
     } else {
         [mutabDict setObject:_personTextField.text forKey:@"name"];
     }
     if (_teleTextField.text.length == 0) {
-        [TKProgressHUD showError:@"请输入联系电话" toView:self.view];
+        [MBProgressHUD showError:@"请输入联系电话" toView:self.view];
         return;
     } else {
         [mutabDict setObject:_teleTextField.text forKey:@"phone"];

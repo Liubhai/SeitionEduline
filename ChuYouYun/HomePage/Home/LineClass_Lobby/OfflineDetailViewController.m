@@ -691,7 +691,7 @@
         return;
     }
     if ([[_dict stringValueForKey:@"is_buy"] integerValue] == 0) {
-        [TKProgressHUD showError:@"解锁之后才能评论" toView:self.view];
+        [MBProgressHUD showError:@"解锁之后才能评论" toView:self.view];
         return;
     }
     UIView *allWindowView = [[UIView alloc] initWithFrame:CGRectMake(0,0, MainScreenWidth, MainScreenHeight)];
@@ -803,7 +803,7 @@
         [self gotoSendMessage];
     } else if (buttonTag == 1) {
         if ([[_dict stringValueForKey:@"is_buy"] integerValue] == 1) {
-            [TKProgressHUD showError:@"已经解锁" toView:self.view];
+            [MBProgressHUD showError:@"已经解锁" toView:self.view];
             return;
         } else {
             
@@ -853,7 +853,7 @@
         [self addAllWindow];
         
     } else {
-        [TKProgressHUD showError:@"解锁了才能评论" toView:self.view];
+        [MBProgressHUD showError:@"解锁了才能评论" toView:self.view];
     }
 }
 
@@ -1082,7 +1082,7 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             if ([_collectStr integerValue] == 1) {
                 _collectStr = @"0";
                  [_collectButton setImage:Image(@"ic_collect@3x") forState:UIControlStateNormal];
@@ -1091,7 +1091,7 @@
                 [_collectButton setImage:Image(@"ic_collect_press@3x") forState:UIControlStateNormal];
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -1118,7 +1118,7 @@
         oath_token_Str = [NSString stringWithFormat:@"%@:%@",UserOathToken,UserOathTokenSecret];
         //        [mutabDict setObject:oath_token_Str forKey:OAUTH_TOKEN];
     } else {
-        [TKProgressHUD showError:@"请先去登陆" toView:self.view];
+        [MBProgressHUD showError:@"请先去登陆" toView:self.view];
         return;
     }
     
@@ -1132,12 +1132,12 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             [_allWindowView removeFromSuperview];
             [self netWorkLineVideoGetRender];
         } else {
             [_allWindowView removeFromSuperview];
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];
@@ -1178,7 +1178,7 @@
             shareUrl = [dict stringValueForKey:@"share_url"];
             [self lineVideoShare];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -1253,14 +1253,14 @@
     NSURL *url = nil;
     if (_typeNum == 1) {
         if (_alipayStr == nil) {
-            [TKProgressHUD showError:@"支付失败" toView:self.view];
+            [MBProgressHUD showError:@"支付失败" toView:self.view];
         } else {
             url = [NSURL URLWithString:_alipayStr];
         }
         
     } else if (_typeNum == 2) {
         if (_wxpayStr == nil) {
-            [TKProgressHUD showError:@"支付失败" toView:self.view];
+            [MBProgressHUD showError:@"支付失败" toView:self.view];
         } else {
             url = [NSURL URLWithString:_wxpayStr];
         }

@@ -14,7 +14,7 @@
 #import "NSData+CommonCrypto.h"
 #import "ZhiyiHTTPRequest.h"
 #import "UIButton+WebCache.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "UIImageView+WebCache.h"
 
 
@@ -342,7 +342,7 @@
     isUp = NO;
     
     if (_nameField.text.length > 15) {
-        [TKProgressHUD showError:@"昵称不能过长" toView:self.view];
+        [MBProgressHUD showError:@"昵称不能过长" toView:self.view];
         _nameField.text = [_nameField.text substringToIndex:15];
         return;
     }
@@ -351,7 +351,7 @@
 - (void)textViewTextChange:(NSNotification *)Not {
     
     if (_userInfo.text.length >= 50) {
-        [TKProgressHUD showError:@"输入文字长度不大于50字" toView:self.view];
+        [MBProgressHUD showError:@"输入文字长度不大于50字" toView:self.view];
         _userInfo.text = [_userInfo.text substringToIndex:50];
         [_scrollview setContentOffset:CGPointMake(0,200) animated:YES];
     }
@@ -405,14 +405,14 @@
         NSLog(@"%@",responseObject);
         NSString *msg = [responseObject objectForKey:@"msg"];
         if ([msg isEqualToString:@"ok"]) {//成功
-            [TKProgressHUD showSuccess:@"保存成功" toView:self.view];
+            [MBProgressHUD showSuccess:@"保存成功" toView:self.view];
             [self backPressed];
         } else {
-            [TKProgressHUD showError:@"保存失败" toView:self.view];
+            [MBProgressHUD showError:@"保存失败" toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-         [TKProgressHUD showError:@"保存失败" toView:self.view];
+         [MBProgressHUD showError:@"保存失败" toView:self.view];
     }];
 }
 
@@ -435,13 +435,13 @@
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *msg = [responseObject objectForKey:@"msg"];
         if ([msg isEqualToString:@"ok"]) {
-            [TKProgressHUD showSuccess:@"上传成功" toView:self.view];
+            [MBProgressHUD showSuccess:@"上传成功" toView:self.view];
         } else {
-            [TKProgressHUD showError:msg toView:self.view];
+            [MBProgressHUD showError:msg toView:self.view];
         }
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-          [TKProgressHUD showError:@"上传成功" toView:self.view];
+          [MBProgressHUD showError:@"上传成功" toView:self.view];
     }];
     
 }
@@ -527,7 +527,7 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *setInfoDict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[setInfoDict stringValueForKey:@"code"] integerValue] == 1) {
-            [TKProgressHUD showError:@"修改成功" toView:self.view];
+            [MBProgressHUD showError:@"修改成功" toView:self.view];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];
@@ -564,7 +564,7 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         if (error.code == -1016) {
-            [TKProgressHUD showError:@"上传成功" toView:self.view];
+            [MBProgressHUD showError:@"上传成功" toView:self.view];
         }
     }];
     
@@ -601,7 +601,7 @@
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_WithJson:[dict stringValueForKey:@"data"]];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         

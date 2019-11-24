@@ -765,7 +765,7 @@
         NSLog(@"%@", responseObject);
         _dataSource = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[_dataSource stringValueForKey:@"code"] integerValue] == 0) {
-            [TKProgressHUD showError:[_dataSource stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[_dataSource stringValueForKey:@"msg"] toView:self.view];
             return ;
         } else if ([[_dataSource stringValueForKey:@"code"] integerValue] == 1) {
             _dataSource = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
@@ -851,7 +851,7 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         _faceSceneDataSource = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[_faceSceneDataSource stringValueForKey:@"code"] integerValue] == 0) {
-            [TKProgressHUD showError:[_faceSceneDataSource stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[_faceSceneDataSource stringValueForKey:@"msg"] toView:self.view];
             return ;
         } else if ([[_faceSceneDataSource stringValueForKey:@"code"] integerValue] == 1) {
             if ([[_faceSceneDataSource dictionaryValueForKey:@"data"] isKindOfClass:[NSDictionary class]]) {
@@ -913,7 +913,7 @@
 //            [self NetWorkFaceLogin];
             [self NetWorkYouTuFaceLogin];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
@@ -946,7 +946,7 @@
                 if ([_NameField.text isEqualToString:[dataDict stringValueForKey:@"uname"]]) {//说明是同一个人
                     
                 } else {//说明不是同一个人人
-                    [TKProgressHUD showError:@"扫脸识别用户与账号并未绑定" toView:self.view];
+                    [MBProgressHUD showError:@"扫脸识别用户与账号并未绑定" toView:self.view];
                     return ;
                 }
             } else if ([_loginTypeStr integerValue] == 2) {//直接扫脸登录
@@ -970,7 +970,7 @@
                 [self.navigationController dismissViewControllerAnimated:YES completion:nil];
             }
         } else {
-            [TKProgressHUD showError:msg toView:self.view];
+            [MBProgressHUD showError:msg toView:self.view];
         }
         return ;
         
@@ -1002,14 +1002,14 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 0) {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             return ;
         } else if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
             if ([_loginTypeStr integerValue] == 1) {//用户名登录
                 if ([_NameField.text isEqualToString:[dict stringValueForKey:@"uname"]]) {//说明是同一个人
                 } else {//说明不是同一个人人
-                    [TKProgressHUD showError:@"扫脸识别用户与账号并未绑定" toView:self.view];
+                    [MBProgressHUD showError:@"扫脸识别用户与账号并未绑定" toView:self.view];
                     return ;
                 }
             } else if ([_loginTypeStr integerValue] == 2) {//直接扫脸登录
@@ -1071,7 +1071,7 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         _faceStatusDataSource = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[_faceStatusDataSource stringValueForKey:@"code"] integerValue] == 0) {
-            [TKProgressHUD showError:[_faceSceneDataSource stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[_faceSceneDataSource stringValueForKey:@"msg"] toView:self.view];
             return ;
         } else if ([[_faceStatusDataSource stringValueForKey:@"code"] integerValue] == 1) {
             if ([[_faceSceneDataSource dictionaryValueForKey:@"data"] isKindOfClass:[NSDictionary class]]) {
@@ -1141,7 +1141,7 @@
                 [self faceLogin];
             }
         } else {
-            [TKProgressHUD showError:[_statusDict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[_statusDict stringValueForKey:@"msg"] toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {

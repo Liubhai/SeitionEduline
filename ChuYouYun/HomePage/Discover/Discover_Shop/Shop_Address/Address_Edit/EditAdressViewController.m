@@ -159,7 +159,7 @@
     }
     
     if ([_province isEqualToString:@"(null)"]) {
-        [TKProgressHUD showError:@"修改成功" toView:self.view];
+        [MBProgressHUD showError:@"修改成功" toView:self.view];
         return;
 //        [dict setObject:@"" forKey:@"province"];
     } else {
@@ -565,19 +565,19 @@
 //    [mutabDict setObject:[_dict stringValueForKey:@"address_id"] forKey:@"address_id"];
     
     if (_proVinceID == nil) {
-        [TKProgressHUD showError:@"请选择所在省份" toView:self.view];
+        [MBProgressHUD showError:@"请选择所在省份" toView:self.view];
         return;
     } else {
         [mutabDict setObject:_proVinceID forKey:@"province"];//省的ID
     }
     if (_cityID == nil) {
-        [TKProgressHUD showError:@"请选择所在城市" toView:self.view];
+        [MBProgressHUD showError:@"请选择所在城市" toView:self.view];
         return;
     } else {
         [mutabDict setObject:_cityID forKey:@"city"];//城市的ID
     }
     if (_countyID == nil) {
-        [TKProgressHUD showError:@"请选择所在区域" toView:self.view];
+        [MBProgressHUD showError:@"请选择所在区域" toView:self.view];
         return;
     } else {
         [mutabDict setObject:_countyID forKey:@"area"];//区域的ID
@@ -599,12 +599,12 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self backPressed];
             });
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {

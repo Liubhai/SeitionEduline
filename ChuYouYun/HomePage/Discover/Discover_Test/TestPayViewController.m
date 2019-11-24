@@ -418,7 +418,7 @@
                 [self creatSubView];
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];
@@ -444,7 +444,7 @@
 - (void)submitButtonClick {
     // 先判断勾选了支付协议没有
     if (!_agreeButton.selected) {
-        [TKProgressHUD showError:@"请先阅读并同意《eduline解锁协议》" toView:self.view];
+        [MBProgressHUD showError:@"请先阅读并同意《eduline解锁协议》" toView:self.view];
         return;
     }
     [self netWorkGoodsBuyGoods];
@@ -492,14 +492,14 @@
             } else if ([_payTypeStr integerValue] == 2){//微信
                 [self WXPay:[[dict dictionaryValueForKey:@"wxpay"] dictionaryValueForKey:@"ios"]];
             } else if ([_payTypeStr integerValue] == 3) {
-                [TKProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
                 self.paySuccess([NSString stringWithFormat:@"%@",[_info stringValueForKey:@"exams_paper_id"]]);
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self.navigationController popViewControllerAnimated:YES];
                 });
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             return ;
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {

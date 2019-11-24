@@ -14,7 +14,7 @@
 #import "BigWindCar.h"
 #import "UIButton+WebCache.h"
 
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 
 @interface EditGroupViewController ()<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 {
@@ -463,15 +463,15 @@
         NSLog(@"======  %@",responseObject);
         
         if ([responseObject[@"code"]  integerValue] == 1) {
-            [TKProgressHUD showSuccess:@"修改成功" toView:self.view];
+            [MBProgressHUD showSuccess:@"修改成功" toView:self.view];
             [self.navigationController popViewControllerAnimated:YES];
             
         } else {
-            [TKProgressHUD showError:@"修改失败" toView:self.view];
+            [MBProgressHUD showError:@"修改失败" toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-       [TKProgressHUD showError:@"修改失败" toView:self.view];
+       [MBProgressHUD showError:@"修改失败" toView:self.view];
     }]; 
 }
 
@@ -513,10 +513,10 @@
             _imageID = responseObject[@"data"][0];
             NSLog(@"%@",_imageID);
         } else {
-            [TKProgressHUD showError:@"上传失败" toView:self.view] ;
+            [MBProgressHUD showError:@"上传失败" toView:self.view] ;
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [TKProgressHUD showError:@"上传失败" toView:self.view];
+        [MBProgressHUD showError:@"上传失败" toView:self.view];
     }];
 }
 

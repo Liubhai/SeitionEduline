@@ -815,7 +815,7 @@
 - (void)textChange:(NSNotification *)not {
     NSLog(@"%@",_textField);
     if (_textField.text.length > 6) {
-        [TKProgressHUD showError:@"提现金额不能过大" toView:self.view];
+        [MBProgressHUD showError:@"提现金额不能过大" toView:self.view];
         _textField.text = [_textField.text substringToIndex:6];
         return;
     }
@@ -866,7 +866,7 @@
             _balanceSeleButton.selected = YES;
             _bankSeleButton.selected = NO;
             _payTypeStr = @"2";
-            [TKProgressHUD showError:@"暂不支持提现到银行卡" toView:self.view];
+            [MBProgressHUD showError:@"暂不支持提现到银行卡" toView:self.view];
             return;
         } else {
             _balanceSeleButton.selected = NO;
@@ -903,7 +903,7 @@
 
 - (void)submitButtonCilck {
     if (_textField.text.length == 0) {
-        [TKProgressHUD showError:@"请输入要提现的金额" toView:self.view];
+        [MBProgressHUD showError:@"请输入要提现的金额" toView:self.view];
         return;
     }
     [self isSurePay];
@@ -1225,7 +1225,7 @@
     } else if ([_payTypeStr integerValue] == 2) {//收入兑换成积分
     }
     if (_textField.text.length == 0) {
-        [TKProgressHUD showError:@"请输入要提现的育币数量" toView:self.view];
+        [MBProgressHUD showError:@"请输入要提现的育币数量" toView:self.view];
         return;
     } else {
         [mutabDict setObject:_textField.text forKey:@"exchange_balance"];
@@ -1260,12 +1260,12 @@
         NSLog(@"%@", responseObject);
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self backPressed];
             });
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -1308,7 +1308,7 @@
             [self addAliPayView];
             [self addBankPayView];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {

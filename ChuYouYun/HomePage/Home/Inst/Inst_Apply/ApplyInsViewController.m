@@ -12,7 +12,7 @@
 #import "SYG.h"
 #import "BigWindCar.h"
 #import "ZhiyiHTTPRequest.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "PhotosView.h"
 #import "SubjectView.h"
 #import "Good_AddBankProvinceViewController.h"
@@ -392,7 +392,7 @@
     
     if (_textView8.text.length > 50) {
         _textView8.text = [_textView8.text substringToIndex:50];
-        [TKProgressHUD showError:@"内容不能过长" toView:self.view];
+        [MBProgressHUD showError:@"内容不能过长" toView:self.view];
         return;
     } else {
         
@@ -544,34 +544,34 @@
     
     NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
     if (_textField2.text.length == 0) {
-        [TKProgressHUD showError:@"机构名称不能为空" toView:self.view];
+        [MBProgressHUD showError:@"机构名称不能为空" toView:self.view];
         return;
     } else {
         [mutabDict setObject:_textField2.text forKey:@"title"];
     }
     
     if (_cateID == nil) {
-        [TKProgressHUD showError:@"请选择机构类型" toView:self.view];
+        [MBProgressHUD showError:@"请选择机构类型" toView:self.view];
         return;
     } else {
         [mutabDict setObject:_cateID forKey:@"cate_id"];
     }
     
     if (_textField7.text.length == 0) {
-        [TKProgressHUD showError:@"请填写认证理由" toView:self.view];
+        [MBProgressHUD showError:@"请填写认证理由" toView:self.view];
         return;
     } else {
         [mutabDict setObject:_textField7.text forKey:@"reason"];
     }
     
     if (_textField4.text.length == 0) {
-        [TKProgressHUD showError:@"请填写电话" toView:self.view];
+        [MBProgressHUD showError:@"请填写电话" toView:self.view];
         return;
     } else {
         [mutabDict setObject:_textField4.text forKey:@"phone"];
     }
     if (_textField3.text.length == 0) {
-        [TKProgressHUD showError:@"请填写身份证" toView:self.view];
+        [MBProgressHUD showError:@"请填写身份证" toView:self.view];
         return;
     } else {
         [mutabDict setObject:_textField3.text forKey:@"idcard"];
@@ -589,30 +589,30 @@
         [mutabDict setObject:adjunIDS forKey:@"attach_id"];//机构附件id
         
     } else {
-        [TKProgressHUD showError:@"请添加附件" toView:self.view];
+        [MBProgressHUD showError:@"请添加附件" toView:self.view];
         return;
     }
     if (_textField6.text.length > 0) {
         [mutabDict setObject:_textField6.text forKey:@"address"];
     } else {
-        [TKProgressHUD showError:@"请填写地址" toView:self.view];
+        [MBProgressHUD showError:@"请填写地址" toView:self.view];
         return;
     }
     
     if (_proVinceID == nil) {
-        [TKProgressHUD showError:@"请选择所在省份" toView:self.view];
+        [MBProgressHUD showError:@"请选择所在省份" toView:self.view];
         return;
     } else {
         [mutabDict setObject:_proVinceID forKey:@"province"];//省的ID
     }
     if (_cityID == nil) {
-        [TKProgressHUD showError:@"请选择所在城市" toView:self.view];
+        [MBProgressHUD showError:@"请选择所在城市" toView:self.view];
         return;
     } else {
         [mutabDict setObject:_cityID forKey:@"city"];//城市的ID
     }
     if (_countyID == nil) {
-        [TKProgressHUD showError:@"请选择所在区域" toView:self.view];
+        [MBProgressHUD showError:@"请选择所在区域" toView:self.view];
         return;
     } else {
         [mutabDict setObject:_countyID forKey:@"area"];//区域的ID
@@ -621,7 +621,7 @@
         [mutabDict setObject:_textField5.text forKey:@"location"];
     }
     if (_idCardIDArray.count == 0) {
-        [TKProgressHUD showError:@"请上传身份证附件" toView:self.view];
+        [MBProgressHUD showError:@"请上传身份证附件" toView:self.view];
         return;
     } else {
         NSString *identIDS = nil;
@@ -652,12 +652,12 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *statusDict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[statusDict stringValueForKey:@"code"] integerValue] == 1) {
-            [TKProgressHUD showError:@"申请成功，请等待审核" toView:self.view];
+            [MBProgressHUD showError:@"申请成功，请等待审核" toView:self.view];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popToRootViewControllerAnimated:YES];
             });
         } else {
-            [TKProgressHUD showError:[statusDict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[statusDict stringValueForKey:@"msg"] toView:self.view];
         }
 
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -704,7 +704,7 @@
                 _identityID = [dict stringValueForKey:@"attach_id"];
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
@@ -758,7 +758,7 @@
             }
 
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         

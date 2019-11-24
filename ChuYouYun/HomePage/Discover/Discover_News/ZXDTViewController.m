@@ -227,7 +227,7 @@
             _shareVideoUrl = [dict stringValueForKey:@"share_url"];
             [self NewsShare];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -271,7 +271,7 @@
                     [self addWebView];
                 }
             } else {
-                [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+                [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             }
             
         } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {

@@ -685,11 +685,11 @@
                 alert.tag = 2;
                 [alert show];
             } else {
-                [TKProgressHUD showError:@"已是最新版本" toView:self.view];
+                [MBProgressHUD showError:@"已是最新版本" toView:self.view];
                 return ;
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];

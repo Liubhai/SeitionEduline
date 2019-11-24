@@ -281,7 +281,7 @@ extern unsigned long long const kDDDefaultLogFilesDiskQuota;
  * In addition to the convenience of having a logical default formatter,
  * it will also provide a template that makes it easy for developers to copy and change.
  **/
-@interface DDLogFileFormatterDefault : NSObject <DDLogFormatter>
+@interface DDLogFileFormatterDefault1 : NSObject <DDLogFormatter>
 
 /**
  *  Default initializer

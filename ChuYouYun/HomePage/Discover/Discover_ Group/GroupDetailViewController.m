@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 #import "rootViewController.h"
 #import "SYG.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "UIImageView+WebCache.h"
 
 #import "EditGroupViewController.h"
@@ -452,10 +452,10 @@
         NSString *msg = responseObject[@"msg"];
         NSLog(@"----%@",msg);
         if ([responseObject[@"code"] integerValue] == 1) {
-            [TKProgressHUD showSuccess:msg toView:self.view];
+            [MBProgressHUD showSuccess:msg toView:self.view];
             [_addGroupButton setTitle:@"退出小组" forState:UIControlStateNormal];
         } else {
-            [TKProgressHUD showError:msg toView:self.view];
+            [MBProgressHUD showError:msg toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -485,14 +485,14 @@
     [manager BigWinCar_quitGroup:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *msg = responseObject[@"msg"];
         if ([responseObject[@"code"] integerValue] == 1) {
-            [TKProgressHUD showSuccess:@"退出成功" toView:self.view];
+            [MBProgressHUD showSuccess:@"退出成功" toView:self.view];
             [_addGroupButton setTitle:@"加入小组" forState:UIControlStateNormal];
         } else {
-            [TKProgressHUD showError:msg toView:self.view];
+            [MBProgressHUD showError:msg toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [TKProgressHUD showError:@"退出小组失败" toView:self.view];
+        [MBProgressHUD showError:@"退出小组失败" toView:self.view];
     }];
 }
 
@@ -516,14 +516,14 @@
     [manager BigWinCar_deleteGroup:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"%@",responseObject);
         if ([responseObject[@"code"] integerValue] == 1) {
-            [TKProgressHUD showSuccess:@"解散成功" toView:self.view];
+            [MBProgressHUD showSuccess:@"解散成功" toView:self.view];
             [self backPressed];
         } else {
-            [TKProgressHUD showError:@"解散失败" toView:self.view];
+            [MBProgressHUD showError:@"解散失败" toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-         [TKProgressHUD showSuccess:@"解散失败" toView:self.view];
+         [MBProgressHUD showSuccess:@"解散失败" toView:self.view];
     }];
     
     [self hideView];
@@ -555,15 +555,15 @@
         NSString *msg = responseObject[@"msg"];
 //        NSDictionary *dict = responseObject[@"data"];
         if ([responseObject[@"code"] integerValue] == 1) {
-            [TKProgressHUD showSuccess:msg toView:self.view];
+            [MBProgressHUD showSuccess:msg toView:self.view];
             [self netWorkTopic];
         } else if ([responseObject[@"code"] integerValue] == 0) {
-            [TKProgressHUD showSuccess:msg toView:self.view];
+            [MBProgressHUD showSuccess:msg toView:self.view];
             return ;
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [TKProgressHUD showError:@"操作失败" toView:self.view];
+        [MBProgressHUD showError:@"操作失败" toView:self.view];
     }];
     
     [self hideView];
@@ -591,14 +591,14 @@
     [manager BigWinCar_deleteTopic:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"%@",responseObject);
         if ([responseObject[@"code"] integerValue] == 1) {
-            [TKProgressHUD showSuccess:@"删除成功" toView:self.view];
+            [MBProgressHUD showSuccess:@"删除成功" toView:self.view];
             [self netWorkTopic];
         } else {
-            [TKProgressHUD showError:@"删除失败" toView:self.view];
+            [MBProgressHUD showError:@"删除失败" toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [TKProgressHUD showError:@"删除失败" toView:self.view];
+        [MBProgressHUD showError:@"删除失败" toView:self.view];
     }];
     
 }
@@ -608,7 +608,7 @@
     
     
     if (_textField.text.length == 0) {
-        [TKProgressHUD showError:@"请输入评论" toView:self.view];
+        [MBProgressHUD showError:@"请输入评论" toView:self.view];
         return;
     }
     
@@ -633,15 +633,15 @@
         NSLog(@"%@",responseObject[@"msg"]);
         NSString *msg = responseObject[@"msg"];
         if ([responseObject[@"code"] integerValue] == 1) {
-            [TKProgressHUD showSuccess:@"评论成功" toView:self.view];
+            [MBProgressHUD showSuccess:@"评论成功" toView:self.view];
             [self netWorkTopic];
             [self.view endEditing:YES];
         } else {
-            [TKProgressHUD showError:msg toView:self.view];
+            [MBProgressHUD showError:msg toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [TKProgressHUD showError:@"评论失败" toView:self.view];
+        [MBProgressHUD showError:@"评论失败" toView:self.view];
     }];
     
 }
@@ -1003,7 +1003,7 @@
 - (void)hideView {
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [TKProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     });
 
 }

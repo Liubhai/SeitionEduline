@@ -12,7 +12,7 @@
 #import "SYG.h"
 #import "BigWindCar.h"
 #import "UIImageView+WebCache.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "MyHttpRequest.h"
 #import "ZhiyiHTTPRequest.h"
 
@@ -25,7 +25,6 @@
 #import "DLViewController.h"
 #import "Good_ZhiBoDetailViewController.h"
 #import "ZhiBoClassViewController.h"
-#import "TKZhiBoViewController.h"
 #import "LiveDetailCommentViewController.h"
 
 #import "ClassAndLivePayViewController.h"
@@ -720,16 +719,16 @@
             [dic setObject:UserOathToken forKey:@"oauth_token"];
             [dic setObject:UserOathTokenSecret forKey:@"oauth_token_secret"];
         } else {
-            [TKProgressHUD showError:@"请先登陆" toView:self.view];
+            [MBProgressHUD showError:@"请先登陆" toView:self.view];
             return;
         }
         
         [manager collectLive:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
             [_zhiBoLikeButton setBackgroundImage:[UIImage imageNamed:@"空心五角星@2x"] forState:UIControlStateNormal];
-            [TKProgressHUD showSuccess:@"取消收藏成功" toView:self.view];
+            [MBProgressHUD showSuccess:@"取消收藏成功" toView:self.view];
             _collectStr = @"0";
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [TKProgressHUD showError:@"取消收藏失败" toView:self.view];
+            [MBProgressHUD showError:@"取消收藏失败" toView:self.view];
         }];
     }else if ([_collectStr intValue]==0){
         
@@ -742,10 +741,10 @@
         
         [manager collectLive:dic success:^(AFHTTPRequestOperation *operation, id responseObject){
             [_zhiBoLikeButton setBackgroundImage:[UIImage imageNamed:@"实心五角星@2x"] forState:UIControlStateNormal];
-            [TKProgressHUD showSuccess:@"收藏成功" toView:self.view];
+            [MBProgressHUD showSuccess:@"收藏成功" toView:self.view];
             _collectStr = @"1";
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [TKProgressHUD showError:@"收藏失败" toView:self.view];
+            [MBProgressHUD showError:@"收藏失败" toView:self.view];
         }];
     }
 }
@@ -771,7 +770,7 @@
                 [self.navigationController pushViewController:payVc animated:YES];
             }
         } else if ([_buyButton.titleLabel.text isEqualToString:@"已解锁"]) {
-            [TKProgressHUD showError:@"已经解锁过了" toView:self.view];
+            [MBProgressHUD showError:@"已经解锁过了" toView:self.view];
             return;
         } else if ([_buyButton.titleLabel.text isEqualToString:@"去分享"]) {
             if (SWNOTEmptyDictionary(_activityInfo)) {
@@ -991,7 +990,7 @@
         oath_token_Str = [NSString stringWithFormat:@"%@:%@",UserOathToken,UserOathTokenSecret];
 //        [mutabDict setObject:oath_token_Str forKey:OAUTH_TOKEN];
     } else {
-        [TKProgressHUD showError:@"请先去登陆" toView:self.view];
+        [MBProgressHUD showError:@"请先去登陆" toView:self.view];
         return;
     }
     
@@ -1005,7 +1004,7 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             if ([_collectStr integerValue] == 1) {
                 _collectStr = @"0";
                 [_zhiBoLikeButton setBackgroundImage:[UIImage imageNamed:@"空心五角星@2x"] forState:UIControlStateNormal];
@@ -1014,7 +1013,7 @@
                 [_zhiBoLikeButton setBackgroundImage:[UIImage imageNamed:@"实心五角星@2x"] forState:UIControlStateNormal];
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -1055,7 +1054,7 @@
             _shareLiveUrl = [dict stringValueForKey:@"share_url"];
             [self LiveShare];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -1765,7 +1764,7 @@
     if ([[_activityInfo objectForKey:@"is_start"] integerValue] == 1) {
         
     } else {
-        [TKProgressHUD showError:@"活动还未开始" toView:self.view];
+        [MBProgressHUD showError:@"活动还未开始" toView:self.view];
         return;
     }
     GroupListPopViewController *vc = [[GroupListPopViewController alloc] init];
@@ -1775,11 +1774,11 @@
         if (SWNOTEmptyArr([_activityInfo objectForKey:@"asb"])) {
             vc.dataSource = [NSMutableArray arrayWithArray:[_activityInfo objectForKey:@"asb"]];
         } else {
-            [TKProgressHUD showError:@"还没有相关团购活动" toView:self.view];
+            [MBProgressHUD showError:@"还没有相关团购活动" toView:self.view];
             return;
         }
     } else {
-        [TKProgressHUD showError:@"还没有相关团购活动" toView:self.view];
+        [MBProgressHUD showError:@"还没有相关团购活动" toView:self.view];
         return;
     }
     [self.view addSubview:vc.view];
@@ -1793,7 +1792,7 @@
     //            [self.view addSubview:vc.view];
     //            [self addChildViewController:vc];
     //        } else {
-    //            [TKProgressHUD showError:@"没有团可参与,可以去开团" toView:self.view];
+    //            [MBProgressHUD showError:@"没有团可参与,可以去开团" toView:self.view];
     //        }
     //    }
 }
@@ -1809,7 +1808,7 @@
     if ([[_activityInfo objectForKey:@"is_start"] integerValue] == 1) {
         
     } else {
-        [TKProgressHUD showError:@"活动还未开始" toView:self.view];
+        [MBProgressHUD showError:@"活动还未开始" toView:self.view];
         return;
     }
     ClassAndLivePayViewController *vc = [[ClassAndLivePayViewController alloc] init];

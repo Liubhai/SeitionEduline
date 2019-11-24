@@ -667,17 +667,17 @@
     [request setValue:encryptStr forHTTPHeaderField:HeaderKey];
     [request setValue:oath_token_Str forHTTPHeaderField:OAUTH_TOKEN];
     
-    [TKProgressHUD showMessag:@"加载中...." toView:[UIApplication sharedApplication].keyWindow];
+    [MBProgressHUD showMessag:@"加载中...." toView:[UIApplication sharedApplication].keyWindow];
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        [TKProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
+        [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
         _dataSource = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
         if ([_dataSource dictionaryValueForKey:@"paper_options"].allKeys.count == 0) {
-            [TKProgressHUD showError:@"考试数据为空" toView:self.view];
+            [MBProgressHUD showError:@"考试数据为空" toView:self.view];
             return ;
         }
         if ([[_dataSource dictionaryValueForKey:@"paper_options"] dictionaryValueForKey:@"options_questions"].allKeys.count == 0) {
-            [TKProgressHUD showError:@"考试数据为空" toView:self.view];
+            [MBProgressHUD showError:@"考试数据为空" toView:self.view];
             return ;
         }
         if ([_examsType integerValue] == 1) {//练习模式
@@ -694,8 +694,8 @@
             [self.navigationController pushViewController:vc animated:YES];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        [TKProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
-        [TKProgressHUD showError:@"加载失败" toView:self.view];
+        [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
+        [MBProgressHUD showError:@"加载失败" toView:self.view];
     }];
     [op start];
 }
@@ -905,7 +905,7 @@
             _faceID = [dict stringValueForKey:@"attach_id"];
             [self netWorkYouTuFaceverify];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
@@ -942,7 +942,7 @@
                 [self netWorkExamsGetPaperInfo];
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {

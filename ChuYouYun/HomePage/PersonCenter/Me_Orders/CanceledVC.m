@@ -12,7 +12,7 @@
 #import "rootViewController.h"
 #import "BigWindCar.h"
 #import "MJRefresh.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 
 #import "InstitutionListCell.h"
 #import "OrderCell.h"
@@ -307,7 +307,7 @@
     NSInteger index = button.tag;
     _orderDict = _dataArray[index];
     if ([[[_dataArray objectAtIndex:index] stringValueForKey:@"order_type"] integerValue] == 5) {
-        [TKProgressHUD showError:@"线下课暂时还不支持" toView:self.view];
+        [MBProgressHUD showError:@"线下课暂时还不支持" toView:self.view];
         return;
     }
     [self isSureDele];
@@ -438,7 +438,7 @@
         NSDictionary *cancelDict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
         
         if ([[cancelDict stringValueForKey:@"staust"] integerValue] == 1) {
-            [TKProgressHUD showSuccess:@"取消成功" toView:self.view];
+            [MBProgressHUD showSuccess:@"取消成功" toView:self.view];
             [self netWorkOrderGetList:_number];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -474,7 +474,7 @@
         NSDictionary *cancelDict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
         
         if ([[cancelDict stringValueForKey:@"staust"] integerValue] == 1) {
-            [TKProgressHUD showSuccess:@"取消成功" toView:self.view];
+            [MBProgressHUD showSuccess:@"取消成功" toView:self.view];
             [self netWorkOrderGetList:_number];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {

@@ -354,15 +354,15 @@
 //    NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
 //    NSString *userID = [[NSUserDefaults standardUserDefaults] objectForKey:@"User_id"];
 //    if ([userID isEqualToString:_uID]) {//说明是自己
-//        [TKProgressHUD showError:@"不能关注自己" toView:self.view];
+//        [MBProgressHUD showError:@"不能关注自己" toView:self.view];
 //        return;
 //    }
 //    if (_uID == nil) {
-//        [TKProgressHUD showError:@"不能关注自己的机构" toView:self.view];
+//        [MBProgressHUD showError:@"不能关注自己的机构" toView:self.view];
 //        return;
 //    } else {
 //        if ([_myUID integerValue] == [_uID integerValue]) {
-//            [TKProgressHUD showError:@"不能关注自己的机构" toView:self.view];
+//            [MBProgressHUD showError:@"不能关注自己的机构" toView:self.view];
 //            return;
 //        } else {
 //            [mutabDict setObject:_uID forKey:@"user_id"];
@@ -384,11 +384,11 @@
 //    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
 //        NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
 //        if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-//            [TKProgressHUD showSuccess:@"关注成功" toView:self.view];
+//            [MBProgressHUD showSuccess:@"关注成功" toView:self.view];
 //            [_attentionButton setTitle:@"已关注" forState:UIControlStateNormal];
 //            return ;
 //        } else {
-//            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+//            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
 //        }
 //
 //    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -407,7 +407,7 @@
 //    [mutabDict setValue:_uID forKey:@"user_id"];
 //    NSString *userID = [[NSUserDefaults standardUserDefaults] objectForKey:@"User_id"];
 //    if ([userID isEqualToString:_uID]) {//说明是自己
-//        [TKProgressHUD showError:@"不能关注自己" toView:self.view];
+//        [MBProgressHUD showError:@"不能关注自己" toView:self.view];
 //        return;
 //    }
 //
@@ -431,11 +431,11 @@
 //    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
 //        NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
 //        if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-//            [TKProgressHUD showSuccess:@"取消关注成功" toView:self.view];
+//            [MBProgressHUD showSuccess:@"取消关注成功" toView:self.view];
 //            [_attentionButton setTitle:@"关注" forState:UIControlStateNormal];
 //            return ;
 //        } else {
-//            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+//            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
 //        }
 //
 //    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {

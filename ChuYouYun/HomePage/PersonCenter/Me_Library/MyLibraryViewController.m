@@ -17,7 +17,7 @@
 
 #import "ZFDownloadManager.h"
 #import "GLNetWorking.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 
 
 #import "LibraryCell.h"
@@ -268,7 +268,7 @@
     NSString *libriyName = [NSString stringWithFormat:@"%@.%@",_downName,_downExtension];
     
     if (!_downUrl.length) {
-        [TKProgressHUD showError:@"下载地址为空" toView:self.view];
+        [MBProgressHUD showError:@"下载地址为空" toView:self.view];
         return ;
     }
     [[ZFDownloadManager sharedDownloadManager] downFileUrl:_downUrl filename:libriyName fileimage:image];
@@ -350,10 +350,10 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            [TKProgressHUD showError:@"兑换成功" toView:self.view];
+            [MBProgressHUD showError:@"兑换成功" toView:self.view];
             [self netWorkUserDocGetMyList];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         [_tableView reloadData];
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {

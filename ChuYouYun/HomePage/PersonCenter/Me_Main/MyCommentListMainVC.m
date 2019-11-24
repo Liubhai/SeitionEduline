@@ -9,7 +9,7 @@
 #import "MyCommentListMainVC.h"
 #import "SYG.h"
 #import "YunKeTang_Api.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "Passport.h"
 #import "AppDelegate.h"
 #import "MyCommentListVC.h"
@@ -68,7 +68,7 @@
             btn.selected = YES;
             _bottomLineView.centerX = btn.centerX;
             [_bottomLineView setWidth:btn.width];
-            CGPoint btnPoint = [_topScrollView convertPoint:CGPointMake(btn.x, btn.y) toView:self.view];
+            CGPoint btnPoint = [_topScrollView convertPoint:CGPointMake(btn.origin.x, btn.origin.y) toView:self.view];
             if ((btnPoint.x + btn.width) > MainScreenWidth) {
                 [_topScrollView setContentOffset:CGPointMake((btnPoint.x + btn.width) - MainScreenWidth, 0)];
             }

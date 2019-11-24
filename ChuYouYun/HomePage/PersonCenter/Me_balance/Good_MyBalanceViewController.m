@@ -841,7 +841,7 @@
 - (void)textChange:(NSNotification *)not {
     NSLog(@"%@",_textField);
     if (_textField.text.length > 6) {
-        [TKProgressHUD showError:@"充值金额不能过大" toView:self.view];
+        [MBProgressHUD showError:@"充值金额不能过大" toView:self.view];
         _textField.text = [_textField.text substringToIndex:6];
         return;
     } else if (_textField.text.length == 0) {
@@ -1006,10 +1006,10 @@
     
     // iTunesConnect 苹果后台配置的产品ID
     if (_productID == nil) {
-        [TKProgressHUD showError:@"请选择充值的金额" toView:self.view];
+        [MBProgressHUD showError:@"请选择充值的金额" toView:self.view];
         return;
     }
-    [TKProgressHUD showSuccess:@"请稍等" toView:self.view];
+    [MBProgressHUD showSuccess:@"请稍等" toView:self.view];
     [_iapManager startPurchWithID:_productID completeHandle:^(SIAPPurchType type,NSData *data) {
         NSLog(@"----%@",data);
         NSString *str =[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
@@ -1128,7 +1128,7 @@
         [dic setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"oauthToken"] forKey:@"oauth_token"];
         [dic setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"oauthTokenSecret"] forKey:@"oauth_token_secret"];
     } else {
-        [TKProgressHUD showError:@"请先登陆" toView:self.view];
+        [MBProgressHUD showError:@"请先登陆" toView:self.view];
         return;
     }
     
@@ -1146,7 +1146,7 @@
         }
         
     } else {
-        [TKProgressHUD showError:@"充值金额不能为空" toView:self.view];
+        [MBProgressHUD showError:@"充值金额不能为空" toView:self.view];
     }
 
 
@@ -1164,10 +1164,10 @@
                 _alipayStr = responseObject[@"data"][@"alipay"][@"ios"];
                 [self addWebView];
             } else {//免费
-                [TKProgressHUD showSuccess:@"解锁成功" toView:self.view];
+                [MBProgressHUD showSuccess:@"解锁成功" toView:self.view];
             }
         } else {
-            [TKProgressHUD showError:msg toView:self.view];
+            [MBProgressHUD showError:msg toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -1264,7 +1264,7 @@
         }
         
     } else {
-        [TKProgressHUD showError:@"充值育币不能为空" toView:self.view];
+        [MBProgressHUD showError:@"充值育币不能为空" toView:self.view];
         return;
     }
     

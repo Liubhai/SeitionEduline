@@ -1275,7 +1275,7 @@
                 
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         [self netWorkGoodsGetHomeDataWithID:nil];
         

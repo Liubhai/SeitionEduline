@@ -39,6 +39,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(endFullScreen) name:UIWindowDidBecomeHiddenNotification object:nil];
+    
     _titleLabel.text = _titleString;
     _titleImage.backgroundColor = BasidColor;
     _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, MACRO_UI_UPHEIGHT, MainScreenWidth, MainScreenHeight - MACRO_UI_UPHEIGHT)];
@@ -51,6 +54,12 @@
     NSURL *url = [NSURL URLWithString:_urlString];
     [_webView loadRequest:[NSURLRequest requestWithURL:url]];
     [self.view addSubview:_webView];
+}
+
+-(void)endFullScreen{
+
+    [[UIApplication sharedApplication]setStatusBarHidden:false animated:false];
+
 }
 
 /*

@@ -24,7 +24,7 @@
 #import "myBJ.h"
 #import "SYG.h"
 #import "UIColor+HTMLColors.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 
 
 @interface SYGBJViewController ()<UITableViewDataSource,UITableViewDelegate>

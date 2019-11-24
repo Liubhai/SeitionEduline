@@ -212,10 +212,10 @@
     
     [dic setValue:@"1" forKey:@"page"];
     [dic setValue:@"10" forKey:@"count"];
-    //    [TKProgressHUD showError:@"数据加载中...." toView:self.view];
+    //    [MBProgressHUD showError:@"数据加载中...." toView:self.view];
     
     [manager BigWinCar_GroupCate:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        //        [TKProgressHUD showError:@"加载成功..." toView:self.view];
+        //        [MBProgressHUD showError:@"加载成功..." toView:self.view];
         _cateArray = responseObject[@"data"];
         for (int i = 0 ; i < _cateArray.count ; i ++) {
             NSString *titleStr = _cateArray[i][@"title"];
@@ -226,7 +226,7 @@
         [self netWork];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [TKProgressHUD showError:@"请检查网络" toView:self.view];
+        [MBProgressHUD showError:@"请检查网络" toView:self.view];
     }];
     
 }
@@ -259,7 +259,7 @@
             }
 //            [self addControllerSrcollView];
         } else {
-            [TKProgressHUD showError:msg toView:self.view];
+            [MBProgressHUD showError:msg toView:self.view];
         }
         
         [_tableView reloadData];
@@ -270,7 +270,7 @@
         });
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [TKProgressHUD showError:@"请检查网络" toView:self.view];
+        [MBProgressHUD showError:@"请检查网络" toView:self.view];
     }];
     
 }
