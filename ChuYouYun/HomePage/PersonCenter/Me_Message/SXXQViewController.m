@@ -599,12 +599,12 @@
     NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
     [mutabDict setObject:self.list_is forKey:@"id"];
     if (self.speaktext.text.length == 0) {
-        [TKProgressHUD showError:@"请输入内容" toView:self.view];
+        [MBProgressHUD showError:@"请输入内容" toView:self.view];
         return;
     }
     [mutabDict setObject:self.speaktext.text forKey:@"reply_content"];
     if (self.toUid == nil) {
-        [TKProgressHUD showError:@"发送失败" toView:self.view];
+        [MBProgressHUD showError:@"发送失败" toView:self.view];
         return;
     }
     [mutabDict setObject:self.toUid forKey:@"to"];
@@ -626,7 +626,7 @@
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             [self netWorkMessageGetInfo];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"code"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"code"] toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {

@@ -12,7 +12,7 @@
 #import "SYG.h"
 #import "BigWindCar.h"
 #import "UIImageView+WebCache.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "MJRefresh.h"
 #import "DLViewController.h"
 #import "Passport.h"
@@ -248,7 +248,7 @@
                 }
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         if (_dataArray.count == 0) {
             self.imageView.hidden = NO;
@@ -292,14 +292,14 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            [TKProgressHUD showSuccess:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showSuccess:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
             [self netWorkSchoolGetGetCouponList:1];
         } else {
             if (dict == nil) {
-                [TKProgressHUD showSuccess:@"领取成功" toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showSuccess:@"领取成功" toView:[UIApplication sharedApplication].keyWindow];
                 [self netWorkSchoolGetGetCouponList:1];
             } else {
-                [TKProgressHUD showSuccess:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showSuccess:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
             }
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {

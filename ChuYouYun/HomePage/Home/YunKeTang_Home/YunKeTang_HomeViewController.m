@@ -9,7 +9,7 @@
 #import "YunKeTang_HomeViewController.h"
 #import "SYG.h"
 #import "YunKeTang_Api.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "Passport.h"
 #import "AppDelegate.h"
 
@@ -35,10 +35,6 @@
 #import "NewsMainViewController.h"
 #import "ZXDTViewController.h"
 #import "DLViewController.h"
-// 直播板块儿 cell
-#import "HomeLiveTableViewCell.h"
-// 线下课 cell
-#import "HomeOfflineTableViewCell.h"
 
 
 #define cellWidth (MainScreenWidth - 30 * WideEachUnit) / 2
@@ -130,9 +126,9 @@ static NSString *cellID = @"cell";
     _titleArray = [NSMutableArray array];
     _timeArray = [NSMutableArray array];
     if ([MoreOrSingle integerValue] == 1) {//单机构
-        _tableTitleArray = @[@"最近直播",@"精选课程",@"最新课程",@"预约课程",@"名师推荐"];
+        _tableTitleArray = @[@"精选课程",@"最新课程",@"预约课程",@"名师推荐"];
     } else if ([MoreOrSingle integerValue] == 2) {//多机构
-        _tableTitleArray = @[@"最近直播",@"精选课程",@"最新课程",@"预约课程",@"名师推荐",@"机构推荐"];
+        _tableTitleArray = @[@"精选课程",@"最新课程",@"预约课程",@"名师推荐",@"机构推荐"];
     }
     //定时器
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(NetWorkAgain) userInfo:nil repeats:YES];
@@ -203,7 +199,7 @@ static NSString *cellID = @"cell";
     cycleScrollView3.currentPageDotImage = [UIImage imageNamed:@"pageControlCurrentDot"];
     cycleScrollView3.pageDotImage = [UIImage imageNamed:@"pageControlDot"];
     cycleScrollView3.imageURLStringsGroup = _imageArray;
-    cycleScrollView3.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
+    cycleScrollView3.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
     cycleScrollView3.pageControlDotSize = CGSizeMake(5, 5);
     cycleScrollView3.delegate = self;
     [_imageScrollView addSubview:cycleScrollView3];
@@ -310,7 +306,7 @@ static NSString *cellID = @"cell";
     } else {
         _cateScrollView.frame = CGRectMake(0, CGRectGetMaxY(_imageScrollView.frame), MainScreenWidth,_cateArray.count>5?(2 * allH + 5  * SpaceBaside):(allH + 2 * SpaceBaside));
     }
-    _tableViewHeaderView.frame = CGRectMake(0, 0, MainScreenWidth, CGRectGetMaxY(_cateScrollView.frame) + 10 * WideEachUnit);
+    
 }
 
 
@@ -320,12 +316,6 @@ static NSString *cellID = @"cell";
         _liveHeaderView.backgroundColor = [UIColor whiteColor];
         [_tableViewHeaderView addSubview:_liveHeaderView];
         _liveHeaderView.userInteractionEnabled = YES;
-        
-        //蓝色标志
-        UIView *blueIcon = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 4, 20)];
-        blueIcon.backgroundColor = BasidColor;
-        [_liveHeaderView addSubview:blueIcon];
-        
         //标题
         UILabel *liveLabel = [[UILabel alloc] initWithFrame:CGRectMake(SpaceBaside, SpaceBaside, 150, 20)];
         liveLabel.text = @"最近直播";
@@ -334,17 +324,22 @@ static NSString *cellID = @"cell";
         [_liveHeaderView addSubview:liveLabel];
         liveLabel.userInteractionEnabled = YES;
         
-        blueIcon.centerY = liveLabel.centerY;
+        //添加线
+//        UIButton *HeaderLineButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 39, MainScreenWidth, 1)];
+//        HeaderLineButton.backgroundColor = [UIColor groupTableViewBackgroundColor];
+//        [_liveHeaderView addSubview:HeaderLineButton];
         
-        UILabel *liveMoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(MainScreenWidth - 115, SpaceBaside / 2 , 100, 30)];
-        liveMoreLabel.userInteractionEnabled = YES;
-        liveMoreLabel.text = @"查看全部";
-        liveMoreLabel.font = SYSTEMFONT(13);
-        liveMoreLabel.textColor = RGBHex(0x868686);
-        liveMoreLabel.textAlignment = NSTextAlignmentRight;
-        UITapGestureRecognizer *liveMoreLabelTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(liveMoreButtonCilck)];
-        [liveMoreLabel addGestureRecognizer:liveMoreLabelTap];
-        [_liveHeaderView addSubview:liveMoreLabel];
+        //添加更多按钮
+        UIButton *liveMoreButton = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth - 110, SpaceBaside / 2 , 100, 30)];
+        [liveMoreButton setTitle:@"更多" forState:UIControlStateNormal];
+        liveMoreButton.titleLabel.font = Font(14);
+        [liveMoreButton setTitleColor:BlackNotColor forState:UIControlStateNormal];
+        [liveMoreButton setImage:Image(@"ic_more@3x") forState:UIControlStateNormal];
+        liveMoreButton.imageEdgeInsets =  UIEdgeInsetsMake(0,80,0,0);
+        liveMoreButton.titleEdgeInsets = UIEdgeInsetsMake(0, 30, 0, 20);
+        [liveMoreButton addTarget:self action:@selector(liveMoreButtonCilck) forControlEvents:UIControlEventTouchUpInside];
+        liveMoreButton.tag = 100;
+        [_liveHeaderView addSubview:liveMoreButton];
     }
     
     if (_liveScrollView == nil) {
@@ -359,12 +354,8 @@ static NSString *cellID = @"cell";
     [_liveScrollView removeAllSubviews];
     
     CGFloat ButtonW = 120;
-    CGFloat ButtonH = 70 + 15;
+    CGFloat ButtonH = 80;
     NSInteger Num = _liveArray.count;
-    
-    for (int i = 0; i < Num; i++) {
-        
-    }
     
     //添加线
     UIButton *lineButton = [[UIButton alloc] initWithFrame:CGRectMake(SpaceBaside, 14, Num * (SpaceBaside + ButtonW), 1)];
@@ -544,11 +535,6 @@ static NSString *cellID = @"cell";
     UIView *cellHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MainScreenWidth, 40 * WideEachUnit)];
     cellHeaderView.backgroundColor = [UIColor whiteColor];
     
-    //蓝色标志
-    UIView *blueIcon = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 4, 20)];
-    blueIcon.backgroundColor = BasidColor;
-    [cellHeaderView addSubview:blueIcon];
-    
     //标题
     UILabel *liveLabel = [[UILabel alloc] initWithFrame:CGRectMake(SpaceBaside, SpaceBaside, 150, 20)];
     liveLabel.text = _tableTitleArray[section];
@@ -557,18 +543,23 @@ static NSString *cellID = @"cell";
     [cellHeaderView addSubview:liveLabel];
     liveLabel.userInteractionEnabled = YES;
     
-    blueIcon.centerY = liveLabel.centerY;
+//    //添加线
+//    UIButton *HeaderLineButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 39, MainScreenWidth, 1)];
+//    HeaderLineButton.backgroundColor = [UIColor groupTableViewBackgroundColor];
+//    [cellHeaderView addSubview:HeaderLineButton];
     
-    UILabel *liveMoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(MainScreenWidth - 115, SpaceBaside / 2 , 100, 30)];
-    liveMoreLabel.userInteractionEnabled = YES;
-    liveMoreLabel.text = @"查看全部";
-    liveMoreLabel.font = SYSTEMFONT(13);
-    liveMoreLabel.textColor = RGBHex(0x868686);
-    liveMoreLabel.textAlignment = NSTextAlignmentRight;
-    liveMoreLabel.tag = 100 * section;
-    UITapGestureRecognizer *liveMoreLabelTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(forViewMoreButtonClick:)];
-    [liveMoreLabel addGestureRecognizer:liveMoreLabelTap];
-    [cellHeaderView addSubview:liveMoreLabel];
+    //添加更多按钮
+    UIButton *liveMoreButton = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth - 110, SpaceBaside / 2 , 100, 30)];
+    [liveMoreButton setTitle:@"更多" forState:UIControlStateNormal];
+    liveMoreButton.titleLabel.font = Font(14);
+    [liveMoreButton setTitleColor:BlackNotColor forState:UIControlStateNormal];
+    [liveMoreButton setImage:Image(@"ic_more@3x") forState:UIControlStateNormal];
+    liveMoreButton.imageEdgeInsets =  UIEdgeInsetsMake(0,80,0,0);
+    liveMoreButton.titleEdgeInsets = UIEdgeInsetsMake(0, 30, 0, 20);
+    [liveMoreButton addTarget:self action:@selector(forViewMoreButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    liveMoreButton.tag = 100 * section;
+    [cellHeaderView addSubview:liveMoreButton];
+    
     
     return cellHeaderView;
 }
@@ -582,43 +573,54 @@ static NSString *cellID = @"cell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
-        return _liveArray.count;
-    } else if (section == 3) {
-        return _lineClassArray.count;
-    }
     return 1;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        // 直播
-        return 70 + 15;
-    } else if (indexPath.section == 1) {
         if (_choicenessArray.count == 0) {//精选课程
             return 0;
         } else {
             return (_choicenessArray.count / 2 + _choicenessArray.count % 2) * cellHight + 10 * WideEachUnit;
         }
-    } else if (indexPath.section == 2) {//最新课程
+//        else if (_choicenessArray.count == 1 || _choicenessArray.count == 2) {
+//            return cellHight + 10 * WideEachUnit;
+//        } else {
+//            return 10 * WideEachUnit + 2 * cellHight;
+//        }
+    } else if (indexPath.section == 1) {//最新课程
         if (_newsArray.count == 0) {
             return 0;
         } else {
             return (_newsArray.count / 2 + _newsArray.count % 2) * cellHight + 10 * WideEachUnit;
         }
-    } else if (indexPath.section == 3) {//线下课
-        return 70 + 15;
-    } else if (indexPath.section == 4){//名师推荐
+//        else if (_newsArray.count == 1 || _newsArray.count == 2) {
+//            return cellHight + 10 * WideEachUnit;
+//        } else {
+//            return 10 * WideEachUnit + 2 * cellHight;
+//        }
+    } else if (indexPath.section == 2) {//线下课
+        if (_lineClassArray.count == 0) {
+            return 0;
+        } else {
+            return (_lineClassArray.count / 2 + _lineClassArray.count % 2) * cellHight + 10 * WideEachUnit;
+        }
+//        else if (_lineClassArray.count == 1 || _lineClassArray.count == 2) {
+//            return cellHight + 10 * WideEachUnit;
+//        }  else {
+//            return 10 * WideEachUnit + 2 * cellHight;
+//        }
+    } else if (indexPath.section == 3){//名师推荐
         if (_teacherArray.count == 0) {
             return 0 * WideEachUnit;
         } else {
-            return 160 + 30;
+            return MainScreenWidth / 3 + 30 * WideEachUnit;
         }
-    } else if (indexPath.section == 5) {//机构推荐
+    } else if (indexPath.section == 4) {//机构推荐
         if (_schoolArray.count == 0) {
             return 0 * WideEachUnit;
         } else {
-            return 130;
+            return (MainScreenWidth - 80 * WideEachUnit) / 4 + 40 * WideEachUnit;
         }
     } else {
         return 100 * WideEachUnit;
@@ -627,91 +629,73 @@ static NSString *cellID = @"cell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.section == 0) {
-        static NSString *liveCell = @"liveCell";
-        HomeLiveTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:liveCell];
-        if (!cell) {
-            cell = [[HomeLiveTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:liveCell];
-        }
-        [cell setLiveInfo:_liveArray[indexPath.row] order_switch:_order_switch liveTime:_liveTimeArray[indexPath.row]];
-        return cell;
-    } else {
-        if (indexPath.section == 1) {//精选课程
-            static NSString *cellID = @"cellID1";
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    static NSString *cellID = @"cellID";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    cell.backgroundColor = [UIColor whiteColor];
+    
+    if (indexPath.section == 0) {//精选课程
+        for (int i = 0; i < _choicenessArray.count ; i++) {
             
-            cell.backgroundColor = [UIColor whiteColor];
-            for (int i = 0; i < _choicenessArray.count ; i++) {
-                
-                UIView *cellView = [[UIView alloc] initWithFrame:CGRectMake(cellSpace + (i % 2) * (cellWidth + cellSpace), cellSpace + (i / 2) * (cellHight) , cellWidth, cellHight)];
-                cellView.backgroundColor = [UIColor whiteColor];
-                cellView.tag = i;
-                [cell addSubview:cellView];
-                
-                UIImageView *photoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, cellWidth, cellWidth / 5 * 3)];
-                photoImageView.backgroundColor = [UIColor whiteColor];
-                NSString *urlStr = [[_choicenessArray objectAtIndex:i] stringValueForKey:@"cover"];
-                [photoImageView sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:Image(@"站位图")];
-                photoImageView.userInteractionEnabled = YES;
-                photoImageView.tag = i;
-                [cellView addSubview:photoImageView];
-                
-                //添加课程的标识
-                UIButton *logoLiveOrClassButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-                logoLiveOrClassButton.backgroundColor = [UIColor clearColor];
-                if ([[[_choicenessArray objectAtIndex:i] stringValueForKey:@"type"] integerValue] == 1) {//课程
-                    [logoLiveOrClassButton setImage:Image(@"course_ident@3x") forState:UIControlStateNormal];
-                } else if ([[[_choicenessArray objectAtIndex:i] stringValueForKey:@"type"] integerValue] == 2) {//直播
-                    [logoLiveOrClassButton setImage:Image(@"course_ident_live@3x") forState:UIControlStateNormal];
-                } else if ([[[_choicenessArray objectAtIndex:i] stringValueForKey:@"type"] integerValue] == 6) {
-                    // 班级课
-                    [logoLiveOrClassButton setImage:Image(@"course_class") forState:UIControlStateNormal];
-                }
-                [cellView addSubview:logoLiveOrClassButton];
-                
-                //添加名字
-                UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, cellHight / 5 * 3 + 10 * WideEachUnit , cellWidth, 20 * WideEachUnit)];
-                title.text = [[_choicenessArray objectAtIndex:i] stringValueForKey:@"video_title"];
-                title.numberOfLines = 1;
-                title.font = Font(14);
-                title.textColor = BlackNotColor;
-                [cellView addSubview:title];
-                
-                //添加人数
-                UILabel *person = [[UILabel alloc] initWithFrame:CGRectMake(cellWidth / 2, CGRectGetMaxY(title.frame) + 5 * WideEachUnit, cellWidth / 2, 20 * WideEachUnit)];
-                person.text = [NSString stringWithFormat:@"%@人正在学",[[_choicenessArray objectAtIndex:i] stringValueForKey:@"video_order_count"]];
-                if ([_order_switch integerValue] == 1) {
-                    person.text = [NSString stringWithFormat:@"%@人正在学",[[_choicenessArray objectAtIndex:i] stringValueForKey:@"video_order_count_mark"]];
-                }
-                person.font = Font(12);
-                person.textColor = [UIColor grayColor];
-                person.textAlignment = NSTextAlignmentRight;
-                [cellView addSubview:person];
-                
-                //添加价格
-                UILabel *price = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(title.frame) + 5 * WideEachUnit, cellWidth / 2 , 20 * WideEachUnit)];
-                NSString *eoprice = [NSString stringWithFormat:@"%@",[[_choicenessArray[i] objectForKey:@"mz_price"] objectForKey:@"eoPrice"]];
-                if (SWNOTEmptyStr(eoprice)) {
-                    if ([eoprice integerValue]>0) {
-                        price.text = [[_choicenessArray[i] objectForKey:@"mz_price"] objectForKey:@"selPrice"];
-                        if ([[[_choicenessArray[i] objectForKey:@"mz_price"] objectForKey:@"selPrice"] floatValue] == 0) {
-                            price.text = @"免费";
-                            price.textColor = [UIColor colorWithHexString:@"#47b37d"];
-                        } else {
-                            price.text = [NSString stringWithFormat:@"%@育币",[[_choicenessArray[i] objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
-                            price.textColor = PriceColor;
-                        }
+            UIView *cellView = [[UIView alloc] initWithFrame:CGRectMake(cellSpace + (i % 2) * (cellWidth + cellSpace), cellSpace + (i / 2) * (cellHight) , cellWidth, cellHight)];
+            cellView.backgroundColor = [UIColor whiteColor];
+//            cellView.layer.cornerRadius = 5 * WideEachUnit;
+//            cellView.layer.masksToBounds = YES;
+            cellView.tag = i;
+            [cell addSubview:cellView];
+            
+            UIImageView *photoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, cellWidth, cellWidth / 5 * 3)];
+            photoImageView.backgroundColor = [UIColor whiteColor];
+            NSString *urlStr = [[_choicenessArray objectAtIndex:i] stringValueForKey:@"cover"];
+            [photoImageView sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:Image(@"站位图")];
+//            photoImageView.layer.cornerRadius = 5 * WideEachUnit;
+//            photoImageView.layer.masksToBounds = YES;
+            photoImageView.userInteractionEnabled = YES;
+            photoImageView.tag = i;
+            [cellView addSubview:photoImageView];
+            
+            //添加课程的标识
+            UIButton *logoLiveOrClassButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+            logoLiveOrClassButton.backgroundColor = [UIColor clearColor];
+            if ([[[_choicenessArray objectAtIndex:i] stringValueForKey:@"type"] integerValue] == 1) {//课程
+                [logoLiveOrClassButton setImage:Image(@"course_ident@3x") forState:UIControlStateNormal];
+            } else {//直播
+                [logoLiveOrClassButton setImage:Image(@"course_ident_live@3x") forState:UIControlStateNormal];
+            }
+            [cellView addSubview:logoLiveOrClassButton];
+            
+            //添加名字
+            UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, cellHight / 5 * 3 + 10 * WideEachUnit , cellWidth, 20 * WideEachUnit)];
+            title.text = [[_choicenessArray objectAtIndex:i] stringValueForKey:@"video_title"];
+            title.numberOfLines = 1;
+            title.font = Font(14);
+            title.textColor = BlackNotColor;
+            [cellView addSubview:title];
+
+            //添加人数
+            UILabel *person = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(title.frame) + 5 * WideEachUnit, cellWidth / 2 , 20 * WideEachUnit)];
+            person.text = [NSString stringWithFormat:@"%@人学习",[[_choicenessArray objectAtIndex:i] stringValueForKey:@"video_order_count"]];
+            if ([_order_switch integerValue] == 1) {
+                 person.text = [NSString stringWithFormat:@"%@人学习",[[_choicenessArray objectAtIndex:i] stringValueForKey:@"video_order_count_mark"]];
+            }
+            person.font = Font(12);
+            person.textColor = [UIColor grayColor];
+            [cellView addSubview:person];
+
+            //添加价格
+            UILabel *price = [[UILabel alloc] initWithFrame:CGRectMake(cellWidth / 2, CGRectGetMaxY(title.frame) + 5 * WideEachUnit, cellWidth / 2, 20 * WideEachUnit)];
+            NSString *eoprice = [NSString stringWithFormat:@"%@",[[_choicenessArray[i] objectForKey:@"mz_price"] objectForKey:@"eoPrice"]];
+            if (SWNOTEmptyStr(eoprice)) {
+                if ([eoprice integerValue]>0) {
+                    price.text = [[_choicenessArray[i] objectForKey:@"mz_price"] objectForKey:@"selPrice"];
+                    if ([[[_choicenessArray[i] objectForKey:@"mz_price"] objectForKey:@"selPrice"] floatValue] == 0) {
+                        price.text = @"免费";
+                        price.textColor = [UIColor colorWithHexString:@"#47b37d"];
                     } else {
-                        price.text = [[_choicenessArray objectAtIndex:i] stringValueForKey:@"price"];
-                        if ([[[_choicenessArray objectAtIndex:i] stringValueForKey:@"price"] floatValue] == 0) {
-                            price.text = @"免费";
-                            price.textColor = [UIColor colorWithHexString:@"#47b37d"];
-                        } else {
-                            price.text = [NSString stringWithFormat:@"%@育币",[[_choicenessArray objectAtIndex:i] stringValueForKey:@"price"]];
-                            price.textColor = PriceColor;
-                        }
+                        price.text = [NSString stringWithFormat:@"%@育币",[[_choicenessArray[i] objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
+                        price.textColor = PriceColor;
                     }
                 } else {
                     price.text = [[_choicenessArray objectAtIndex:i] stringValueForKey:@"price"];
@@ -723,88 +707,83 @@ static NSString *cellID = @"cell";
                         price.textColor = PriceColor;
                     }
                 }
-                price.font = Font(13);
-                [cellView addSubview:price];
-                
-                //添加手势
-                [cellView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(chooseViewClick:)]];
+            } else {
+                price.text = [[_choicenessArray objectAtIndex:i] stringValueForKey:@"price"];
+                if ([[[_choicenessArray objectAtIndex:i] stringValueForKey:@"price"] floatValue] == 0) {
+                    price.text = @"免费";
+                    price.textColor = [UIColor colorWithHexString:@"#47b37d"];
+                } else {
+                    price.text = [NSString stringWithFormat:@"%@育币",[[_choicenessArray objectAtIndex:i] stringValueForKey:@"price"]];
+                    price.textColor = PriceColor;
+                }
             }
-            return cell;
-        } else if (indexPath.section == 2) {//最新课程
-            static NSString *cellID = @"cellID2";
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            price.textAlignment = NSTextAlignmentRight;
+            price.font = Font(13);
+            [cellView addSubview:price];
+
+            //添加手势
+            [cellView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(chooseViewClick:)]];
             
-            cell.backgroundColor = [UIColor whiteColor];
-            for (int i = 0; i < _newsArray.count ; i++) {
-                UIView *cellView = [[UIView alloc] initWithFrame:CGRectMake(cellSpace + (i % 2) * (cellWidth + cellSpace), cellSpace + (i / 2) * (cellHight) , cellWidth, cellHight)];
-                cellView.backgroundColor = [UIColor whiteColor];
-                cellView.tag = i;
-                [cell addSubview:cellView];
-                
-                UIImageView *photoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, cellWidth, cellWidth / 5 * 3)];
-                photoImageView.backgroundColor = [UIColor whiteColor];
-                NSString *urlStr = [[_newsArray objectAtIndex:i] stringValueForKey:@"cover"];
-                [photoImageView sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:Image(@"站位图")];
-                photoImageView.userInteractionEnabled = YES;
-                photoImageView.tag = i;
-                [cellView addSubview:photoImageView];
-                
-                //添加课程的标识
-                UIButton *logoLiveOrClassButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-                logoLiveOrClassButton.backgroundColor = [UIColor clearColor];
-                if ([[[_newsArray objectAtIndex:i] stringValueForKey:@"type"] integerValue] == 1) {//课程
-                    [logoLiveOrClassButton setImage:Image(@"course_ident@3x") forState:UIControlStateNormal];
-                } else if ([[[_newsArray objectAtIndex:i] stringValueForKey:@"type"] integerValue] == 2) {//直播
-                    [logoLiveOrClassButton setImage:Image(@"course_ident_live@3x") forState:UIControlStateNormal];
-                } else if ([[[_newsArray objectAtIndex:i] stringValueForKey:@"type"] integerValue] == 6) {
-                    // 班级课
-                    [logoLiveOrClassButton setImage:Image(@"course_class") forState:UIControlStateNormal];
-                }
-                [cellView addSubview:logoLiveOrClassButton];
-                
-                //添加名字
-                UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, cellHight / 5 * 3 + 10 * WideEachUnit , cellWidth, 20 * WideEachUnit)];
-                title.text = [[_newsArray objectAtIndex:i] stringValueForKey:@"video_title"];
-                title.numberOfLines = 1;
-                title.font = Font(14);
-                title.textColor = BlackNotColor;
-                [cellView addSubview:title];
-                
-                //添加人数
-                UILabel *person = [[UILabel alloc] initWithFrame:CGRectMake(cellWidth / 2, CGRectGetMaxY(title.frame) + 5 * WideEachUnit, cellWidth / 2, 20 * WideEachUnit)];
-                person.text = [NSString stringWithFormat:@"%@人正在学",[[_newsArray objectAtIndex:i] stringValueForKey:@"video_order_count"]];
-                if ([_order_switch integerValue] == 1) {
-                    person.text = [NSString stringWithFormat:@"%@人正在学",[[_newsArray objectAtIndex:i] stringValueForKey:@"video_order_count_mark"]];
-                }
-                person.font = Font(12);
-                person.textColor = [UIColor grayColor];
-                person.textAlignment = NSTextAlignmentRight;
-                [cellView addSubview:person];
-                
-                //添加价格
-                UILabel *price = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(title.frame) + 5 * WideEachUnit, cellWidth / 2 , 20 * WideEachUnit)];
-                NSString *eoprice = [NSString stringWithFormat:@"%@",[[_newsArray[i] objectForKey:@"mz_price"] objectForKey:@"eoPrice"]];
-                if (SWNOTEmptyStr(eoprice)) {
-                    if ([eoprice integerValue]>0) {
-                        price.text = [[_newsArray[i] objectForKey:@"mz_price"] objectForKey:@"selPrice"];
-                        if ([[[_newsArray[i] objectForKey:@"mz_price"] objectForKey:@"selPrice"] floatValue] == 0) {
-                            price.text = @"免费";
-                            price.textColor = [UIColor colorWithHexString:@"#47b37d"];
-                        } else {
-                            price.text = [NSString stringWithFormat:@"%@育币",[[_newsArray[i] objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
-                            price.textColor = PriceColor;
-                        }
+        }
+    } else if (indexPath.section == 1) {//最新课程
+        for (int i = 0; i < _newsArray.count ; i++) {
+            UIView *cellView = [[UIView alloc] initWithFrame:CGRectMake(cellSpace + (i % 2) * (cellWidth + cellSpace), cellSpace + (i / 2) * (cellHight) , cellWidth, cellHight)];
+            cellView.backgroundColor = [UIColor whiteColor];
+//            cellView.layer.cornerRadius = 5 * WideEachUnit;
+//            cellView.layer.masksToBounds = YES;
+            cellView.tag = i;
+            [cell addSubview:cellView];
+            
+            UIImageView *photoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, cellWidth, cellWidth / 5 * 3)];
+            photoImageView.backgroundColor = [UIColor whiteColor];
+            NSString *urlStr = [[_newsArray objectAtIndex:i] stringValueForKey:@"cover"];
+            [photoImageView sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:Image(@"站位图")];
+//            photoImageView.layer.cornerRadius = 5 * WideEachUnit;
+//            photoImageView.layer.masksToBounds = YES;
+            photoImageView.userInteractionEnabled = YES;
+            photoImageView.tag = i;
+            [cellView addSubview:photoImageView];
+            
+            //添加课程的标识
+            UIButton *logoLiveOrClassButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+            logoLiveOrClassButton.backgroundColor = [UIColor clearColor];
+            if ([[[_newsArray objectAtIndex:i] stringValueForKey:@"type"] integerValue] == 1) {//课程
+                [logoLiveOrClassButton setImage:Image(@"course_ident@3x") forState:UIControlStateNormal];
+            } else {//直播
+                [logoLiveOrClassButton setImage:Image(@"course_ident_live@3x") forState:UIControlStateNormal];
+            }
+            [cellView addSubview:logoLiveOrClassButton];
+            
+            //添加名字
+            UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, cellHight / 5 * 3 + 10 * WideEachUnit , cellWidth, 20 * WideEachUnit)];
+            title.text = [[_newsArray objectAtIndex:i] stringValueForKey:@"video_title"];
+            title.numberOfLines = 1;
+            title.font = Font(14);
+            title.textColor = BlackNotColor;
+            [cellView addSubview:title];
+            
+            //添加人数
+            UILabel *person = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(title.frame) + 5 * WideEachUnit, cellWidth / 2 , 20 * WideEachUnit)];
+            person.text = [NSString stringWithFormat:@"%@人学习",[[_newsArray objectAtIndex:i] stringValueForKey:@"video_order_count"]];
+            if ([_order_switch integerValue] == 1) {
+                 person.text = [NSString stringWithFormat:@"%@人学习",[[_newsArray objectAtIndex:i] stringValueForKey:@"video_order_count_mark"]];
+            }
+            person.font = Font(12);
+            person.textColor = [UIColor grayColor];
+            [cellView addSubview:person];
+            
+            //添加价格
+            UILabel *price = [[UILabel alloc] initWithFrame:CGRectMake(cellWidth / 2, CGRectGetMaxY(title.frame) + 5 * WideEachUnit, cellWidth / 2, 20 * WideEachUnit)];
+            NSString *eoprice = [NSString stringWithFormat:@"%@",[[_newsArray[i] objectForKey:@"mz_price"] objectForKey:@"eoPrice"]];
+            if (SWNOTEmptyStr(eoprice)) {
+                if ([eoprice integerValue]>0) {
+                    price.text = [[_newsArray[i] objectForKey:@"mz_price"] objectForKey:@"selPrice"];
+                    if ([[[_newsArray[i] objectForKey:@"mz_price"] objectForKey:@"selPrice"] floatValue] == 0) {
+                        price.text = @"免费";
+                        price.textColor = [UIColor colorWithHexString:@"#47b37d"];
                     } else {
-                        price.text = [[_newsArray objectAtIndex:i] stringValueForKey:@"price"];
-                        if ([[[_newsArray objectAtIndex:i] stringValueForKey:@"price"] floatValue] == 0) {
-                            price.text = @"免费";
-                            price.textColor = [UIColor colorWithHexString:@"#47b37d"];
-                        } else {
-                            price.text = [NSString stringWithFormat:@"%@育币",[[_newsArray objectAtIndex:i] stringValueForKey:@"price"]];
-                            price.textColor = PriceColor;
-                        }
+                        price.text = [NSString stringWithFormat:@"%@育币",[[_newsArray[i] objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
+                        price.textColor = PriceColor;
                     }
                 } else {
                     price.text = [[_newsArray objectAtIndex:i] stringValueForKey:@"price"];
@@ -816,211 +795,155 @@ static NSString *cellID = @"cell";
                         price.textColor = PriceColor;
                     }
                 }
-                price.font = Font(13);
-                [cellView addSubview:price];
-                
-                //添加手势
-                [cellView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(newsViewClick:)]];
+            } else {
+                price.text = [[_newsArray objectAtIndex:i] stringValueForKey:@"price"];
+                if ([[[_newsArray objectAtIndex:i] stringValueForKey:@"price"] floatValue] == 0) {
+                    price.text = @"免费";
+                    price.textColor = [UIColor colorWithHexString:@"#47b37d"];
+                } else {
+                    price.text = [NSString stringWithFormat:@"%@育币",[[_newsArray objectAtIndex:i] stringValueForKey:@"price"]];
+                    price.textColor = PriceColor;
+                }
             }
-            return cell;
-        } else if (indexPath.section == 3) {//线下课
-            static NSString *liveCell = @"offlineCell";
-            HomeOfflineTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:liveCell];
-            if (!cell) {
-                cell = [[HomeOfflineTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:liveCell];
+            price.textAlignment = NSTextAlignmentRight;
+            price.font = Font(13);
+            [cellView addSubview:price];
+            
+            //添加手势
+            [cellView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(newsViewClick:)]];
+        }
+    } else if (indexPath.section == 2) {//线下课
+        for (int i = 0; i < _lineClassArray.count ; i++) {
+            
+            UIView *cellView = [[UIView alloc] initWithFrame:CGRectMake(cellSpace + (i % 2) * (cellWidth + cellSpace), cellSpace + (i / 2) * (cellHight) , cellWidth, cellHight)];
+            cellView.backgroundColor = [UIColor whiteColor];
+//            cellView.layer.cornerRadius = 5 * WideEachUnit;
+//            cellView.layer.masksToBounds = YES;
+            cellView.tag = i;
+            [cell addSubview:cellView];
+            
+            UIImageView *photoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, cellWidth, cellWidth / 5 * 3)];
+            photoImageView.backgroundColor = [UIColor whiteColor];
+            NSString *urlStr = [[_lineClassArray objectAtIndex:i] stringValueForKey:@"cover"];
+            [photoImageView sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:Image(@"站位图")];
+//            photoImageView.layer.cornerRadius = 5 * WideEachUnit;
+//            photoImageView.layer.masksToBounds = YES;
+            photoImageView.userInteractionEnabled = YES;
+            photoImageView.tag = i;
+            [cellView addSubview:photoImageView];
+            
+            //添加名字
+            UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, cellHight / 5 * 3 + 10 * WideEachUnit , cellWidth, 20 * WideEachUnit)];
+            title.text = [[_lineClassArray objectAtIndex:i] stringValueForKey:@"course_name"];
+            title.numberOfLines = 1;
+            title.font = Font(14);
+            title.textColor = BlackNotColor;
+            [cellView addSubview:title];
+            
+            //添加人数
+            UILabel *person = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(title.frame) + 5 * WideEachUnit, cellWidth / 2 , 20 * WideEachUnit)];
+            person.text = [NSString stringWithFormat:@"%@人学习",[[_lineClassArray objectAtIndex:i] stringValueForKey:@"course_order_count"]];
+            if ([_order_switch integerValue] == 1) {
+                 person.text = [NSString stringWithFormat:@"%@人学习",[[_lineClassArray objectAtIndex:i] stringValueForKey:@"course_order_count_mark"]];
             }
-            [cell setOfflineInfo:_lineClassArray[indexPath.row] order_switch:_order_switch];
-            return cell;
-        } else if (indexPath.section == 4) {//名师推荐
-            static NSString *cellID = @"cellID4";
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-            if (!cell) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+            person.font = Font(12);
+            person.textColor = [UIColor grayColor];
+            [cellView addSubview:person];
+            
+            //添加价格
+            UILabel *price = [[UILabel alloc] initWithFrame:CGRectMake(cellWidth / 2, CGRectGetMaxY(title.frame) + 5 * WideEachUnit, cellWidth / 2, 20 * WideEachUnit)];
+            NSString *eoprice = [NSString stringWithFormat:@"%@",[[_lineClassArray[i] objectForKey:@"mz_price"] objectForKey:@"eoPrice"]];
+            if (SWNOTEmptyStr(eoprice)) {
+                if ([eoprice integerValue]>0) {
+                    price.text = [[_lineClassArray[i] objectForKey:@"mz_price"] objectForKey:@"selPrice"];
+                    if ([[[_lineClassArray[i] objectForKey:@"mz_price"] objectForKey:@"selPrice"] floatValue] == 0) {
+                        price.text = @"免费";
+                        price.textColor = [UIColor colorWithHexString:@"#47b37d"];
+                    } else {
+                        price.text = [NSString stringWithFormat:@"%@育币",[[_lineClassArray[i] objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
+                        price.textColor = PriceColor;
+                    }
+                } else {
+                    price.text = [[_lineClassArray objectAtIndex:i] stringValueForKey:@"price"];
+                    if ([[[_lineClassArray objectAtIndex:i] stringValueForKey:@"price"] floatValue] == 0) {
+                        price.text = @"免费";
+                        price.textColor = [UIColor colorWithHexString:@"#47b37d"];
+                    } else {
+                        price.text = [NSString stringWithFormat:@"%@育币",[[_lineClassArray objectAtIndex:i] stringValueForKey:@"price"]];
+                        price.textColor = PriceColor;
+                    }
+                }
+            } else {
+                price.text = [[_lineClassArray objectAtIndex:i] stringValueForKey:@"price"];
+                if ([[[_lineClassArray objectAtIndex:i] stringValueForKey:@"price"] floatValue] == 0) {
+                    price.text = @"免费";
+                    price.textColor = [UIColor colorWithHexString:@"#47b37d"];
+                } else {
+                    price.text = [NSString stringWithFormat:@"%@育币",[[_lineClassArray objectAtIndex:i] stringValueForKey:@"price"]];
+                    price.textColor = PriceColor;
+                }
             }
-            [cell removeAllSubviews];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.backgroundColor = [UIColor whiteColor];
-            CGFloat TeaViewWidth = 115;
-            CGFloat TeaViewHight = 160;
+            price.textAlignment = NSTextAlignmentRight;
+            price.font = Font(13);
+            [cellView addSubview:price];
             
-            UIScrollView *teacherScrollview = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, MainScreenWidth, 160 + 30)];
-            teacherScrollview.backgroundColor = [UIColor whiteColor];
-            teacherScrollview.contentSize = CGSizeMake(15 * 2 + (TeaViewWidth + 12) * _teacherArray.count - 12, 160 + 30);
-            teacherScrollview.showsVerticalScrollIndicator = NO;
-            teacherScrollview.showsHorizontalScrollIndicator = NO;
-            [cell addSubview:teacherScrollview];
+            //添加手势
+            [cellView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lineClassViewClick:)]];
+        }
+    } else if (indexPath.section == 3) {//名师推荐
+        for (int i = 0 ; i < _teacherArray.count; i ++) {
+            CGFloat TeaViewWidth = MainScreenWidth / 3;
+            CGFloat TeaViewHight = TeaViewWidth + 30 * WideEachUnit;
             
-            for (int i = 0 ; i < _teacherArray.count; i ++) {
-                UIView *view = [[UIView alloc] initWithFrame:CGRectMake(15 + (TeaViewWidth + 12) * i, 15, TeaViewWidth, TeaViewHight)];
-                view.tag = i;
-                view.layer.masksToBounds = NO;
-                view.layer.cornerRadius = 10;
-                view.backgroundColor = RGBHex(0xF5F5F5);
-                view.layer.shadowColor = RGBHex(0xCDCDCD).CGColor;
-                //剪切边界 如果视图上的子视图layer超出视图layer部分就截取掉 如果添加阴影这个属性必须是NO 不然会把阴影切掉
-                //阴影半径，默认3
-                view.layer.shadowRadius = 3;
-                //shadowOffset阴影偏移，默认(0, -3),这个跟shadowRadius配合使用
-                view.layer.shadowOffset = CGSizeMake(0.0f,0.0f);
-                // 阴影透明度，默认0
-                view.layer.shadowOpacity = 0.9f;
-                [teacherScrollview addSubview:view];
-                
-                //添加头像
-                UIImageView *TeaImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 15, 80, 80)];
-                NSString *urlStr = [[_teacherArray objectAtIndex:i] stringValueForKey:@"headimg"];
-                [TeaImageView sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:Image(@"站位图")];
-                TeaImageView.layer.masksToBounds = YES;
-                TeaImageView.layer.cornerRadius = 40;
-                TeaImageView.centerX = TeaViewWidth / 2.0;
-                [view addSubview:TeaImageView];
-                
-                //添加名字
-                UILabel *name = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(TeaImageView.frame) + 13, TeaViewWidth, 20)];
-                name.text = [[_teacherArray objectAtIndex:i] stringValueForKey:@"name"];
-                name.textAlignment = NSTextAlignmentCenter;
-                name.font = Font(14);
-                name.textColor = RGBHex(0x3C3C3C);
-                [view addSubview:name];
-                
-                //添加讲师等级
-                UILabel *teacherLevel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(name.frame) + 3, TeaViewWidth, 17)];
-                teacherLevel.text = [[_teacherArray objectAtIndex:i] stringValueForKey:@"teacher_title"];
-                teacherLevel.textAlignment = NSTextAlignmentCenter;
-                teacherLevel.font = Font(12);
-                teacherLevel.textColor = RGBHex(0x7E7E7E);
-                [view addSubview:teacherLevel];
-                
-                //添加手势
-                [view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(teacherViewClick:)]];
-            }
-            return cell;
-        } else if (indexPath.section == 5) {//机构推荐
-            static NSString *cellID = @"cellID5";
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-            if (!cell) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-            }
-            [cell removeAllSubviews];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.backgroundColor = [UIColor whiteColor];
+            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0 + TeaViewWidth * i, 0, TeaViewWidth, TeaViewHight)];
+            view.tag = i;
+            view.backgroundColor = [UIColor whiteColor];
+            [cell addSubview:view];
             
-            CGFloat TeaViewWidthMax = 315;
-            CGFloat TeaViewHight = 100;
+            //添加头像
+            UIImageView *TeaImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20 * WideEachUnit, 20 * WideEachUnit, TeaViewWidth - 40 * WideEachUnit, TeaViewWidth - 40 * WideEachUnit)];
+            NSString *urlStr = [[_teacherArray objectAtIndex:i] stringValueForKey:@"headimg"];
+            [TeaImageView sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:Image(@"站位图")];
+            TeaImageView.layer.cornerRadius = TeaViewWidth / 2 - 20 * WideEachUnit;
+            TeaImageView.layer.masksToBounds = YES;
+            [view addSubview:TeaImageView];
             
-            UIScrollView *organizationScrollview = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, MainScreenWidth, 100 + 30)];
-            organizationScrollview.backgroundColor = [UIColor whiteColor];
-            organizationScrollview.showsVerticalScrollIndicator = NO;
-            organizationScrollview.showsHorizontalScrollIndicator = NO;
-            [cell addSubview:organizationScrollview];
+            //添加名字
+            UILabel *name = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(TeaImageView.frame) + 10 * WideEachUnit, TeaViewWidth, 20 * WideEachUnit)];
+            name.text = [[_teacherArray objectAtIndex:i] stringValueForKey:@"name"];
+            name.textAlignment = NSTextAlignmentCenter;
+            name.font = Font(14);
+            [view addSubview:name];
             
-            CGFloat XX = 15;
+            //添加手势
+            [view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(teacherViewClick:)]];
             
-            for (int i = 0 ; i < _schoolArray.count ; i ++) {
-                
-                UIView *view = [[UIView alloc] initWithFrame:CGRectMake(XX, 15, TeaViewWidthMax, TeaViewHight)];
-                view.tag = i;
-                view.layer.masksToBounds = NO;
-                view.layer.cornerRadius = 8;
-                view.backgroundColor = RGBHex(0xF5F5F5);
-                view.layer.shadowColor = RGBHex(0xCDCDCD).CGColor;
-                //剪切边界 如果视图上的子视图layer超出视图layer部分就截取掉 如果添加阴影这个属性必须是NO 不然会把阴影切掉
-                //阴影半径，默认3
-                view.layer.shadowRadius = 3;
-                //shadowOffset阴影偏移，默认(0, -3),这个跟shadowRadius配合使用
-                view.layer.shadowOffset = CGSizeMake(0.0f,0.0f);
-                // 阴影透明度，默认0
-                view.layer.shadowOpacity = 0.9f;
-                [organizationScrollview addSubview:view];
-                
-                //添加头像
-                UIImageView *TeaImageView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 0, 58, 58)];
-                NSString *urlStr = [[_schoolArray objectAtIndex:i] stringValueForKey:@"cover"];
-                [TeaImageView sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:Image(@"站位图")];
-                TeaImageView.layer.masksToBounds = YES;
-                TeaImageView.layer.cornerRadius = 58 / 2.0;
-                TeaImageView.centerY = 50;
-                [view addSubview:TeaImageView];
-                
-                //添加名字
-                UILabel *name = [[UILabel alloc] initWithFrame:CGRectMake(TeaImageView.right + 15, TeaImageView.top + 12, TeaViewWidthMax, 20)];
-                name.text = [[_schoolArray objectAtIndex:i] stringValueForKey:@"title"];
-                name.font = Font(14);
-                name.textColor = RGBHex(0x454545);
-                [view addSubview:name];
-                
-                //添加讲师等级
-                UILabel *schoolIntro = [[UILabel alloc] initWithFrame:CGRectMake(TeaImageView.right + 15, name.bottom + 2, TeaViewWidthMax, 20)];
-                schoolIntro.text = @"判断机构名称和机构简介控件的长度";//[[_schoolArray objectAtIndex:i] stringValueForKey:@"title"];
-                schoolIntro.font = Font(13);
-                schoolIntro.textColor = RGBHex(0x868686);
-                [view addSubview:schoolIntro];
-                
-                // 判断机构名称和机构简介控件的长度 取最长的去决定整个 view 的宽度 但是有个最大宽度 TeaViewWidthMax
-                CGFloat nameWidth = [name.text sizeWithFont:name.font].width + 4;
-                CGFloat schoolWidth = [schoolIntro.text sizeWithFont:schoolIntro.font].width + 4;
-                [name setWidth:MAX(nameWidth, schoolWidth)];
-                [schoolIntro setWidth:MAX(nameWidth, schoolWidth)];
-                
-                [view setWidth:name.right + 15];
-                
-                // 重置下一个控件的横坐标
-                XX = XX + view.width + 15;
-
-                //添加手势
-                [view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(schoolViewClick:)]];
-            }
-            organizationScrollview.contentSize = CGSizeMake(XX, 100 + 30);
-            return cell;
-        } else {
-            static NSString *cellID = @"cellID2";
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+    } else if (indexPath.section == 4) {//机构推荐
+        CGFloat SchViewWidth = (MainScreenWidth - 80 * WideEachUnit) / 4;
+//        CGFloat SchViewHight = SchViewWidth + 40 * WideEachUnit;
+        for (int i = 0 ; i < _schoolArray.count ; i ++) {
             
-            cell.backgroundColor = [UIColor whiteColor];
-            return cell;
+            UIImageView *schoolImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10 * WideEachUnit + (20 * WideEachUnit + SchViewWidth ) * i,20 * WideEachUnit, SchViewWidth, SchViewWidth)];
+            schoolImageView.backgroundColor = [UIColor whiteColor];
+            schoolImageView.layer.borderWidth = 1;
+            schoolImageView.tag = i;
+            schoolImageView.userInteractionEnabled = YES;
+            schoolImageView.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+            NSString *urlStr = [[_schoolArray objectAtIndex:i] stringValueForKey:@"cover"];
+            [schoolImageView sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:Image(@"站位图")];
+            [cell addSubview:schoolImageView];
+            
+            //添加手势
+            [schoolImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(schoolViewClick:)]];
         }
     }
+    return cell;
+
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.section == 0) {
-        if ([HASALIPAY isEqualToString:@"0"]) {
-            if (!UserOathToken) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"查看详情需要登录,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
-                alert.tag = 100;
-                [alert show];
-                return;
-            }
-        }
-        NSString *Cid = [[_liveArray objectAtIndex:indexPath.row] stringValueForKey:@"id"];
-        NSString *Price = [[_liveArray objectAtIndex:indexPath.row] stringValueForKey:@"t_price"];
-        NSString *Title = [[_liveArray objectAtIndex:indexPath.row] stringValueForKey:@"video_title"];
-        NSString *ImageUrl = [[_liveArray objectAtIndex:indexPath.row] stringValueForKey:@"imageurl"];
-        
-        ZhiBoMainViewController *zhiBoMainVc = [[ZhiBoMainViewController alloc]initWithMemberId:Cid andImage:ImageUrl andTitle:Title andNum:(int)indexPath.row andprice:Price];
-        zhiBoMainVc.order_switch = _order_switch;
-        [self.navigationController pushViewController:zhiBoMainVc animated:YES];
-    } else if (indexPath.section == 3) {
-        if ([HASALIPAY isEqualToString:@"0"]) {
-            if (!UserOathToken) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"查看详情需要登录,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
-                alert.tag = 100;
-                [alert show];
-                return;
-            }
-        }
-        NSDictionary *dict = [_lineClassArray objectAtIndex:indexPath.row];
-        
-        OfflineDetailViewController *vc = [[OfflineDetailViewController alloc] init];
-        vc.ID = [dict stringValueForKey:@"course_id"];
-        vc.imageUrl = [dict stringValueForKey:@"cover"];
-        vc.titleStr = [dict stringValueForKey:@"course_name"];
-        vc.orderSwitch = _order_switch;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
 }
 
 #pragma mark - SDCycleScrollViewDelegate
@@ -1195,30 +1118,26 @@ static NSString *cellID = @"cell";
     
 }
 
-- (void)forViewMoreButtonClick:(UITapGestureRecognizer *)button {
+- (void)forViewMoreButtonClick:(UIButton *)button {
     
-    if (button.view.tag == 300) {
+    if (button.tag == 200) {
         OfflineMainViewController *vc = [[OfflineMainViewController alloc] init];
-        vc.orderSwitch = _order_switch;
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (button.view.tag == 400) {//名师推荐
+    } else if (button.tag == 300) {//名师推荐
         Good_TeacherMainViewController *vc = [[Good_TeacherMainViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (button.view.tag == 500) {//机构推荐
+    } else if (button.tag == 400) {//机构推荐
         Good_InstitutionMainViewController *homeInStVc = [[Good_InstitutionMainViewController alloc] init];
         [self.navigationController pushViewController:homeInStVc animated:YES];
-    } else if (button.view.tag == 0) {//机构推荐
-        ZhiBoBigRoomViewController *zhiboBigRoomVc = [[ZhiBoBigRoomViewController alloc] init];
-        [self.navigationController pushViewController:zhiboBigRoomVc animated:YES];
     } else {
         [self inGetSearchWithClass:button];
     }
 }
 
-- (void)inGetSearchWithClass:(UITapGestureRecognizer *)button {
+- (void)inGetSearchWithClass:(UIButton *)button {
     ClassSearchGoodViewController *getSearchVc = [[ClassSearchGoodViewController alloc] init];
     getSearchVc.typeStr = @"1";
-    if (button.view.tag == 100) {
+    if (button.tag == 0) {
         getSearchVc.screeningStr = @"best";
     }
     [self.navigationController pushViewController:getSearchVc animated:YES];
@@ -1246,17 +1165,6 @@ static NSString *cellID = @"cell";
         vc.imageUrl = [dict stringValueForKey:@"cover"];
         vc.videoUrl = [dict stringValueForKey:@"video_address"];
         vc.orderSwitch = _order_switch;
-        vc.isClassNew = NO;
-        [self.navigationController pushViewController:vc animated:YES];
-    } else if ([[dict stringValueForKey:@"type"] integerValue] == 6) {//班级
-        Good_ClassMainViewController *vc = [[Good_ClassMainViewController alloc] init];
-        vc.ID = [dict stringValueForKey:@"id"];
-        vc.videoTitle = [dict stringValueForKey:@"video_title"];
-        vc.price = [dict stringValueForKey:@"price"];
-        vc.imageUrl = [dict stringValueForKey:@"cover"];
-        vc.videoUrl = [dict stringValueForKey:@"video_address"];
-        vc.orderSwitch = _order_switch;
-        vc.isClassNew = YES;
         [self.navigationController pushViewController:vc animated:YES];
     } else {//直播
         NSString *Cid = nil;
@@ -1291,16 +1199,6 @@ static NSString *cellID = @"cell";
         vc.imageUrl = [dict stringValueForKey:@"cover"];
         vc.videoUrl = [dict stringValueForKey:@"video_address"];
         vc.orderSwitch = _order_switch;
-        [self.navigationController pushViewController:vc animated:YES];
-    } else if ([[dict stringValueForKey:@"type"] integerValue] == 6) {//班级
-        Good_ClassMainViewController *vc = [[Good_ClassMainViewController alloc] init];
-        vc.ID = [dict stringValueForKey:@"id"];
-        vc.videoTitle = [dict stringValueForKey:@"video_title"];
-        vc.price = [dict stringValueForKey:@"price"];
-        vc.imageUrl = [dict stringValueForKey:@"cover"];
-        vc.videoUrl = [dict stringValueForKey:@"video_address"];
-        vc.orderSwitch = _order_switch;
-        vc.isClassNew = YES;
         [self.navigationController pushViewController:vc animated:YES];
     } else {//直播
         NSString *Cid = nil;
@@ -1401,7 +1299,7 @@ static NSString *cellID = @"cell";
                 }
                 
                 NSString *banner_title = [[_imageDataArray objectAtIndex:i] stringValueForKey:@"banner_title"];
-//                [_titleArray addObject:banner_title];
+                [_titleArray addObject:banner_title];
             }
             if (_imageArray.count == _imageDataArray.count) {
                 [self addImageScrollView];
@@ -1748,7 +1646,7 @@ static NSString *cellID = @"cell";
                 }
                 
                 NSString *banner_title = [[_imageDataArray objectAtIndex:i] stringValueForKey:@"banner_title"];
-//                [_titleArray addObject:banner_title];
+                [_titleArray addObject:banner_title];
             }
             if (_imageArray.count == _imageDataArray.count) {
                 [self addImageScrollView];
@@ -1770,7 +1668,7 @@ static NSString *cellID = @"cell";
             if (SWNOTEmptyDictionary([dict objectForKey:@"live"])) {
                 _liveArray = (NSArray *)[[dict objectForKey:@"live"] arrayValueForKey:@"live_list"];
                 _liveTimeArray = (NSArray *)[[dict objectForKey:@"live"] arrayValueForKey:@"live_ctime"];
-//                [self addLiveScrollView];
+                [self addLiveScrollView];
             }
             _tableView.tableHeaderView = _tableViewHeaderView;
             [_tableView reloadData];
@@ -1802,7 +1700,7 @@ static NSString *cellID = @"cell";
                 }
                 
                 NSString *banner_title = [[_imageDataArray objectAtIndex:i] stringValueForKey:@"banner_title"];
-//                [_titleArray addObject:banner_title];
+                [_titleArray addObject:banner_title];
             }
             if (_imageArray.count == _imageDataArray.count) {
                 [self addImageScrollView];
@@ -1824,7 +1722,7 @@ static NSString *cellID = @"cell";
             if (SWNOTEmptyDictionary([dict objectForKey:@"live"])) {
                 _liveArray = (NSArray *)[[dict objectForKey:@"live"] arrayValueForKey:@"live_list"];
                 _liveTimeArray = (NSArray *)[[dict objectForKey:@"live"] arrayValueForKey:@"live_ctime"];
-//                [self addLiveScrollView];
+                [self addLiveScrollView];
             }
             _tableView.tableHeaderView = _tableViewHeaderView;
             [_tableView reloadData];

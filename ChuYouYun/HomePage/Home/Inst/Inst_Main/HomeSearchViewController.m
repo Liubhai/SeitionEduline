@@ -11,7 +11,7 @@
 #import "rootViewController.h"
 #import "SYG.h"
 #import "BigWindCar.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "SYGTextField.h"
 
 #import "HomeSearchCell.h"
@@ -633,7 +633,7 @@
         searchGetVc.typeStr = _typeStr;
         [self.navigationController pushViewController:searchGetVc animated:YES];
     } else {
-        [TKProgressHUD showError:@"请输入要搜索的内容" toView:self.view];
+        [MBProgressHUD showError:@"请输入要搜索的内容" toView:self.view];
         return;
     }
 }

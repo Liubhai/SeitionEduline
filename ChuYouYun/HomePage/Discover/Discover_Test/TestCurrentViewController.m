@@ -377,7 +377,7 @@
     //将数据分类
     NSLog(@"---%@",_dataSource);
     if ([[_dataSource dictionaryValueForKey:@"paper_options"] dictionaryValueForKey:@"options_questions_data"].allKeys.count == 0) {
-        [TKProgressHUD showError:@"数据为空" toView:self.view];
+        [MBProgressHUD showError:@"数据为空" toView:self.view];
         [self backPressed];
         return;
     }
@@ -1642,7 +1642,7 @@
     subjectNumber --;
     if (whichSubject == 1) {//当前单选
         if (subjectNumber < 0) {//说明该换题型了
-            [TKProgressHUD showError:@"已是第一题" toView:self.view];
+            [MBProgressHUD showError:@"已是第一题" toView:self.view];
             subjectAllNumber ++;
             subjectNumber ++;
             return;
@@ -1657,7 +1657,7 @@
                 whichSubject = 1;
                 [self Up_multipleConfig];
             } else {//最前面一题
-                [TKProgressHUD showError:@"已是第一题" toView:self.view];
+                [MBProgressHUD showError:@"已是第一题" toView:self.view];
                 subjectAllNumber ++;
                 subjectNumber ++;
                 return;
@@ -1679,7 +1679,7 @@
                 whichSubject = 1;
                 [self Up_multipleConfig];
             } else {//最前面一题
-                [TKProgressHUD showError:@"已是第一题" toView:self.view];
+                [MBProgressHUD showError:@"已是第一题" toView:self.view];
                 subjectAllNumber ++;
                 subjectNumber ++;
                 return;
@@ -1705,7 +1705,7 @@
                 whichSubject = 1;
                 [self Up_multipleConfig];
             } else {//最前面一题
-                [TKProgressHUD showError:@"已是第一题" toView:self.view];
+                [MBProgressHUD showError:@"已是第一题" toView:self.view];
                 subjectAllNumber ++;
                 subjectNumber ++;
                 return;
@@ -1736,7 +1736,7 @@
                 whichSubject = 1;
                 [self Up_multipleConfig];
             } else {//最前面一题
-                [TKProgressHUD showError:@"已是第一题" toView:self.view];
+                [MBProgressHUD showError:@"已是第一题" toView:self.view];
                 subjectAllNumber ++;
                 subjectNumber ++;
                 return;
@@ -2535,18 +2535,18 @@
     NSString *encryptStr = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetEncryptStr:mutabDict];
     [request setValue:encryptStr forHTTPHeaderField:HeaderKey];
     [request setValue:oath_token_Str forHTTPHeaderField:OAUTH_TOKEN];
-    [TKProgressHUD showMessag:@"保存答案中..." toView:self.view];
+    [MBProgressHUD showMessag:@"保存答案中..." toView:self.view];
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        [TKProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-         [TKProgressHUD hideAllHUDsForView:self.view animated:YES];
+         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
     [op start];
 }
@@ -2600,22 +2600,22 @@
     NSString *encryptStr = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetEncryptStr:mutabDict];
     [request setValue:encryptStr forHTTPHeaderField:HeaderKey];
     [request setValue:oath_token_Str forHTTPHeaderField:OAUTH_TOKEN];
-    [TKProgressHUD showMessag:@"交卷中..." toView:self.view];
+    [MBProgressHUD showMessag:@"交卷中..." toView:self.view];
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        [TKProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self GoOut];
             });
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        [TKProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
     [op start];
 }

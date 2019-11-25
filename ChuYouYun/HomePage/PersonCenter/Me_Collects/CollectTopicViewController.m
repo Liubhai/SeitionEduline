@@ -335,7 +335,7 @@
     
     
     if (_textField.text.length == 0) {
-        [TKProgressHUD showError:@"请输入评论" toView:self.view];
+        [MBProgressHUD showError:@"请输入评论" toView:self.view];
         return;
     }
     
@@ -347,7 +347,7 @@
         [dic setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"oauthToken"] forKey:@"oauth_token"];
         [dic setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"oauthTokenSecret"] forKey:@"oauth_token_secret"];
     } else {
-        [TKProgressHUD showError:@"请先登陆" toView:self.view];
+        [MBProgressHUD showError:@"请先登陆" toView:self.view];
         return;
     }
     [dic setValue:_topicID forKey:@"tid"];
@@ -357,15 +357,15 @@
         NSLog(@"%@",responseObject);
         NSString *msg = responseObject[@"msg"];
         if ([responseObject[@"code"] integerValue] == 1) {
-            [TKProgressHUD showSuccess:@"评论成功" toView:self.view];
+            [MBProgressHUD showSuccess:@"评论成功" toView:self.view];
             [self netWorkGetcollectTopic];
             [self.view endEditing:YES];
         } else {
-            [TKProgressHUD showError:msg toView:self.view];
+            [MBProgressHUD showError:msg toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [TKProgressHUD showError:@"评论失败" toView:self.view];
+        [MBProgressHUD showError:@"评论失败" toView:self.view];
     }];
     
 }
@@ -434,7 +434,7 @@
         [_tableView reloadData];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [TKProgressHUD showError:@"没有获取到数据" toView:self.view];
+        [MBProgressHUD showError:@"没有获取到数据" toView:self.view];
     }];
 }
 
@@ -497,12 +497,12 @@
         NSLog(@"%@",responseObject);
         NSLog(@"%@",responseObject[@"msg"]);
         if ([responseObject[@"code"] integerValue] == 1) {
-            [TKProgressHUD showSuccess:@"操作成功" toView:self.view];
+            [MBProgressHUD showSuccess:@"操作成功" toView:self.view];
             [self netWorkGetcollectTopic];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [TKProgressHUD showError:@"操作失败" toView:self.view];
+        [MBProgressHUD showError:@"操作失败" toView:self.view];
     }];
 }
 
@@ -522,14 +522,14 @@
     [manager BigWinCar_deleteTopic:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"%@",responseObject);
         if ([responseObject[@"code"] integerValue] == 1) {
-            [TKProgressHUD showSuccess:@"删除成功" toView:self.view];
+            [MBProgressHUD showSuccess:@"删除成功" toView:self.view];
             [self netWorkGetcollectTopic];
         } else {
-            [TKProgressHUD showError:@"删除失败" toView:self.view];
+            [MBProgressHUD showError:@"删除失败" toView:self.view];
         }
         [_tableView reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [TKProgressHUD showError:@"删除失败" toView:self.view];
+        [MBProgressHUD showError:@"删除失败" toView:self.view];
     }];
 }
 

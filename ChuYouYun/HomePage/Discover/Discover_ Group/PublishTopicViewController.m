@@ -14,9 +14,9 @@
 
 
 #import "photoImageView.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "ZhiyiHTTPRequest.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 
 
 
@@ -206,10 +206,10 @@
     
 //    if (_SYGTextField.text.length == 0 || view2.text.length == 0) {
 //        
-//        [TKProgressHUD showError:@"请输入标题或者内容" toView:self.view];
+//        [MBProgressHUD showError:@"请输入标题或者内容" toView:self.view];
 //        return;
 //    } else if (view2.text.length < 10) {
-//        [TKProgressHUD showSuccess:@"请输入内容超过10个字" toView:self.view];
+//        [MBProgressHUD showSuccess:@"请输入内容超过10个字" toView:self.view];
 //        return;
 //    }
     
@@ -301,10 +301,10 @@
         NSLog(@"%@",operation);
         NSString *msg = responseObject[@"msg"];
         if ([responseObject[@"code"] integerValue] == 1) {
-            [TKProgressHUD showSuccess:@"发布成功" toView:self.view];
+            [MBProgressHUD showSuccess:@"发布成功" toView:self.view];
             [self backPressed];
         } else {
-            [TKProgressHUD showError:msg toView:self.view];
+            [MBProgressHUD showError:msg toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -351,13 +351,13 @@
             [_imageIDArray addObject:_imageID];
             NSLog(@"%@",_imageID);
         } else {
-            [TKProgressHUD showError:@"上传失败" toView:self.view];
+            [MBProgressHUD showError:@"上传失败" toView:self.view];
         }
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
-        [TKProgressHUD showError:@"上传图片失败" toView:self.view];
+        [MBProgressHUD showError:@"上传图片失败" toView:self.view];
     }];
 }
 
@@ -366,7 +366,7 @@
 
 - (void)textField:(NSNotification *)Not {
     if (_SYGTextField.text.length > 20) {
-        [TKProgressHUD showError:@"标题不能超过15个字" toView:self.view];
+        [MBProgressHUD showError:@"标题不能超过15个字" toView:self.view];
         _SYGTextField.text = [_SYGTextField.text substringToIndex:20];
     }
     
@@ -374,7 +374,7 @@
 
 - (void)textView:(NSNotification *)Not {
 //    if (view2.text.length > 100) {
-//        [TKProgressHUD showError:@"内容不能过长" toView:self.view];
+//        [MBProgressHUD showError:@"内容不能过长" toView:self.view];
 //        view2.text = [view2.text substringToIndex:100];
 //    }
 }

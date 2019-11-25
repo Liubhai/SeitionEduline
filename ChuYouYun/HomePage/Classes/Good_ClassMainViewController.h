@@ -34,6 +34,4 @@
 
 @property (nonatomic, strong) AVCVideoConfig *config;
 
-@property (assign, nonatomic) BOOL isClassNew;//是不是班级课
-
 @end

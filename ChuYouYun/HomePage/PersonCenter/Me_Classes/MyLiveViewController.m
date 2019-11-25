@@ -18,7 +18,7 @@
 #import "UIColor+HTMLColors.h"
 #import "AppDelegate.h"
 #import "SYG.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "ZhiBoMainViewController.h"
 
 #import "ClassRevampCell.h"

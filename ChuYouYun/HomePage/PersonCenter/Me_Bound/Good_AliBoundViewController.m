@@ -144,14 +144,14 @@
     if (_aliTextField.text.length > 0) {
         [mutabDict setObject:_aliTextField.text forKey:@"alipay_account"];
     } else {
-        [TKProgressHUD showError:@"填写支付宝账号" toView:self.view];
+        [MBProgressHUD showError:@"填写支付宝账号" toView:self.view];
         return;
     }
     
     if (_nameTextField.text.length > 0) {
         [mutabDict setObject:_nameTextField.text forKey:@"real_name"];
     } else {
-        [TKProgressHUD showError:@"请填写真实姓名" toView:self.view];
+        [MBProgressHUD showError:@"请填写真实姓名" toView:self.view];
         return;
     }
     
@@ -181,7 +181,7 @@
                 }
             });
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             return ;
         }
         NSLog(@"----%@",dict);

@@ -24,7 +24,7 @@
 #import "myBJ.h"
 #import "SYG.h"
 #import "UIColor+HTMLColors.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 
 
 @interface SYGBJViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -42,7 +42,7 @@
 
 -(UIImageView *)imageView {
     if (!_imageView) {
-        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, MACRO_UI_UPHEIGHT, MainScreenWidth, MainScreenHeight - MACRO_UI_UPHEIGHT)];
+        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, MainScreenWidth, MainScreenHeight - 64)];
         _imageView.image = Image(@"云课堂_空数据");
         [self.view addSubview:_imageView];
     }

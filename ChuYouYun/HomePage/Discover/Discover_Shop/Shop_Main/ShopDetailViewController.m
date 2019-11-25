@@ -18,7 +18,7 @@
 #import "ManageAddressViewController.h"
 #import "ShopManagerAdressViewController.h"
 #import "DLViewController.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 
 
 @interface ShopDetailViewController ()<UIWebViewDelegate>{
@@ -150,7 +150,7 @@
     
     //判断是否登录
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"oauthToken"] == nil) {//没有登录的情况下
-//        [TKProgressHUD showError:@"请先登录" toView:self.view];
+//        [MBProgressHUD showError:@"请先登录" toView:self.view];
     } else {
         [dict setObject:UserOathToken forKey:@"oauth_token"];
         [dict setObject:UserOathTokenSecret forKey:@"oauth_token_secret"];
@@ -179,7 +179,7 @@
             }
         } else {
             
-//            [TKProgressHUD showError:msg toView:self.view];
+//            [MBProgressHUD showError:msg toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -491,7 +491,7 @@
 //确定
 -(void)sure{
     if ([_scoreStaus integerValue] == 0 && isHaveAilPay == NO && isHaveWxPay == NO) {
-        [TKProgressHUD showError:@"无法支付" toView:self.view];
+        [MBProgressHUD showError:@"无法支付" toView:self.view];
         return;
     }
     [self whichPayView];
@@ -1014,11 +1014,11 @@
         
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 0) {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             return ;
         } else {
             [_allWindowView removeFromSuperview];
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self backPressed];
             });
@@ -1080,7 +1080,7 @@
                 [self WXPay:_wxPayDict];
             } 
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             return ;
         }
         

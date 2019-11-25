@@ -14,7 +14,7 @@
 #import "UIImageView+WebCache.h"
 #import "MJRefresh.h"
 #import "ZXDTViewController.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "MyHttpRequest.h"
 #import "UIButton+WebCache.h"
 
@@ -358,7 +358,7 @@
                 [self addControllerSrcollView];
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];

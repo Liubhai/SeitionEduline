@@ -335,18 +335,6 @@ static NSString *cellID = @"cell";
         NSDictionary *dict = _dataArray[indexPath.row];
         [cell dataWithDict:dict withType:@"2" withOrderSwitch:_order_switch];
         return cell;
-    } else if ([_typeStr integerValue] == 5) {//班级
-        static NSString *CellID = nil;
-        CellID = [NSString stringWithFormat:@"cellClass - %ld",indexPath.row];
-        //自定义cell类
-        ClassRevampCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID];
-        //自定义cell类
-        if (cell == nil) {
-            cell = [[ClassRevampCell alloc] initWithReuseIdentifier:CellID];
-        }
-        NSDictionary *dict = _dataArray[indexPath.row];
-        [cell dataWithDict:dict withType:@"5" withOrderSwitch:_order_switch];
-        return cell;
     } else {
         static NSString *CellID = @"cellClass";
         //自定义cell类
@@ -373,7 +361,7 @@ static NSString *cellID = @"cell";
             return;
         }
     }
-    if ([_typeStr isEqualToString:@"1"] || [_typeStr isEqualToString:@"5"]) {//课程
+    if ([_typeStr isEqualToString:@"1"] || _typeStr == nil) {//课程
 
         Good_ClassMainViewController *vc = [[Good_ClassMainViewController alloc] init];
         vc.ID = [[_dataArray objectAtIndex:indexPath.row] stringValueForKey:@"id"];
@@ -382,7 +370,6 @@ static NSString *cellID = @"cell";
         vc.imageUrl = [[_dataArray objectAtIndex:indexPath.row] stringValueForKey:@"imageurl"];
         vc.videoUrl = [[_dataArray objectAtIndex:indexPath.row] stringValueForKey:@"video_address"];
         vc.orderSwitch = _order_switch;
-        vc.isClassNew = [_typeStr isEqualToString:@"5"] ? YES : NO;
         [self.navigationController pushViewController:vc animated:YES];
         
     }else if ([_typeStr isEqualToString:@"2"]) {
@@ -575,10 +562,9 @@ static NSString *cellID = @"cell";
     NSString *title = not.object;
     if ([title isEqualToString:@"直播课程"]) {
         _classType = @"2";
-    } else if ([title isEqualToString:@"点播课程"]) {
+    } else {
         _classType = @"1";
-    } else if ([title isEqualToString:@"班级课程"]) {
-        _classType = @"5";
+    
     }
     _typeStr = _classType;
     [_classOrLiveButton setTitle:title forState:UIControlStateNormal];

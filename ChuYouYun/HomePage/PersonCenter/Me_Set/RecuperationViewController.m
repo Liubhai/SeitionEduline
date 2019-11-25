@@ -13,7 +13,7 @@
 #import "AppDelegate.h"
 #import "ZhiyiHTTPRequest.h"
 #import "DLViewController.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "MyHttpRequest.h"
 #import "UIColor+HTMLColors.h"
 #import "SYG.h"
@@ -194,7 +194,7 @@
 
 - (void)TJButton:(UIButton *)sender {
     if (_titleTextView.text.length == 0 ) {
-        [TKProgressHUD showError:@"请输入内容" toView:self.view];
+        [MBProgressHUD showError:@"请输入内容" toView:self.view];
         return;
     }
     [self netWorkHomeFeedBack];
@@ -240,12 +240,12 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popViewControllerAnimated:YES];
             });
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];

@@ -11,7 +11,7 @@
 #import "rootViewController.h"
 #import "AppDelegate.h"
 #import "BigWindCar.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "MJRefresh.h"
 #import "DLViewController.h"
 
@@ -168,7 +168,7 @@
     NSLog(@"%@",adminUID);
     
     if ([adminUID isEqualToString:_memberID]) {//说明就是自己
-        [TKProgressHUD showError:@"不能对自己进行操作" toView:self.view];
+        [MBProgressHUD showError:@"不能对自己进行操作" toView:self.view];
         return;
     }
     
@@ -177,11 +177,11 @@
     } else {//不是管理元
         
         if ([managerID isEqualToString:_memberID]) {//说明你操作的是管理员
-            [TKProgressHUD showError:@"没有权限" toView:self.view];
+            [MBProgressHUD showError:@"没有权限" toView:self.view];
             return;
         } else {
             if ([[_dict stringValueForKey:@"is_admin"] integerValue] == 0) {//没有权限
-                [TKProgressHUD showError:@"没有权限" toView:self.view];
+                [MBProgressHUD showError:@"没有权限" toView:self.view];
                 return;
             } else {//有权限
                 adminStr = @"批准加入";
@@ -279,13 +279,13 @@
         NSLog(@"%@",responseObject[@"msg"]);
         NSString *msg = responseObject[@"msg"];
         if ([responseObject[@"code"] integerValue] == 1) {
-            [TKProgressHUD showSuccess:msg toView:self.view];
+            [MBProgressHUD showSuccess:msg toView:self.view];
         } else {
-            [TKProgressHUD showError:msg toView:self.view];
+            [MBProgressHUD showError:msg toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [TKProgressHUD showError:@"操作失败" toView:self.view];
+        [MBProgressHUD showError:@"操作失败" toView:self.view];
     }];
     
 }

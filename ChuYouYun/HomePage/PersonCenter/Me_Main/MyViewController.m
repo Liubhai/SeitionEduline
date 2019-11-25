@@ -31,7 +31,6 @@
 #import "GLReachabilityView.h"
 #include "MyDownLoadViewController.h"
 #import "LookRecodeViewController.h"
-#import "StudyRecodeViewController.h"
 
 #import "MyInstationViewController.h"
 #import "MyLibraryViewController.h"
@@ -1141,7 +1140,7 @@
                 [self.navigationController pushViewController:vc animated:YES];
             }
             if (button.tag == 7) {//观看记录
-                StudyRecodeViewController *lookVc = [[StudyRecodeViewController alloc] init];
+                LookRecodeViewController *lookVc = [[LookRecodeViewController alloc] init];
                 [self.navigationController pushViewController:lookVc animated:YES];
             }
             if (button.tag == 9) {//我的机构
@@ -1232,7 +1231,7 @@
                 [self.navigationController pushViewController:vc animated:YES];
             }
             if (button.tag == 8) {//观看记录
-                StudyRecodeViewController *lookVc = [[StudyRecodeViewController alloc] init];
+                LookRecodeViewController *lookVc = [[LookRecodeViewController alloc] init];
                 [self.navigationController pushViewController:lookVc animated:YES];
             }
             if (button.tag == 7) {//我的优惠券
@@ -1259,7 +1258,7 @@
 - (void)onlyLogin:(NSNotification *)not {
     NSDictionary *dict = (NSDictionary *)not.object;
     NSString *message = [dict stringValueForKey:@"msg"];
-    [TKProgressHUD showError:message toView:self.view];
+    [MBProgressHUD showError:message toView:self.view];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         Passport *ps = [[Passport alloc] init];
         [ps goOutLogin];

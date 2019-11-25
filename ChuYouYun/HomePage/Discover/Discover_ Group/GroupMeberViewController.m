@@ -12,7 +12,7 @@
 #import "SYG.h"
 #import "BigWindCar.h"
 #import "UIImageView+WebCache.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "DLViewController.h"
 
 #import "UIButton+WebCache.h"
@@ -500,7 +500,7 @@
     [manager BigWinCar_joinGroup:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"%@",responseObject);
         if ([responseObject[@"code"] integerValue] == 1) {
-            [TKProgressHUD showSuccess:@"加入成功" toView:self.view];
+            [MBProgressHUD showSuccess:@"加入成功" toView:self.view];
             [_addGroupButton setTitle:@"退出小组" forState:UIControlStateNormal];
         }
         
@@ -528,10 +528,10 @@
     [manager BigWinCar_quitGroup:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *msg = responseObject[@"msg"];
         if ([responseObject[@"code"] integerValue] == 1) {
-            [TKProgressHUD showSuccess:@"退出成功" toView:self.view];
+            [MBProgressHUD showSuccess:@"退出成功" toView:self.view];
             [_addGroupButton setTitle:@"加入小组" forState:UIControlStateNormal];
         } else {
-            [TKProgressHUD showError:msg toView:self.view];
+            [MBProgressHUD showError:msg toView:self.view];
         }
         
         
@@ -559,12 +559,12 @@
     [manager BigWinCar_deleteGroup:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"%@",responseObject);
         if ([responseObject[@"code"] integerValue] == 1) {
-            [TKProgressHUD showSuccess:@"解散成功" toView:self.view];
+            [MBProgressHUD showSuccess:@"解散成功" toView:self.view];
             [self backPressed];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [TKProgressHUD showSuccess:@"解散失败" toView:self.view];
+        [MBProgressHUD showSuccess:@"解散失败" toView:self.view];
     }];
 }
 

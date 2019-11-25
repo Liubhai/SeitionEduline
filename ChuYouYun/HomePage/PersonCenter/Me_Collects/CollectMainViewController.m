@@ -30,12 +30,10 @@
 @property (strong ,nonatomic)UIButton *instButton;
 @property (strong ,nonatomic)UIButton *newsButton;
 @property (strong, nonatomic) UIButton *comboButton;
-@property (strong, nonatomic) UIButton *newsClassButton;
 
 @property (assign ,nonatomic)CGFloat  buttonW;
 @property (strong ,nonatomic)UIButton *HDButton;
 @property (strong ,nonatomic)UIButton *seletedButton;
-@property (strong, nonatomic) NSArray *titleArray;
 
 @property (strong ,nonatomic)UIScrollView *controllerSrcollView;
 
@@ -124,15 +122,15 @@
     [self.view addSubview:WZView];
     //添加按钮
 //    NSArray *titleArray = @[@"直播",@"点播",@"线下课",@"帖子"];
-    _titleArray = @[@"直播",@"点播",@"线下课",@"机构",@"资讯",@"套餐",@"班级"];
+    NSArray *titleArray = @[@"直播",@"点播",@"线下课",@"机构",@"资讯",@"套餐"];
     CGFloat ButtonH = 20;
-    CGFloat ButtonW = MainScreenWidth / _titleArray.count;
+    CGFloat ButtonW = MainScreenWidth / titleArray.count;
     _buttonW = ButtonW;
-    for (int i = 0; i < _titleArray.count; i ++) {
+    for (int i = 0; i < titleArray.count; i ++) {
         UIButton *button = [[UIButton alloc] init];
         button.frame = CGRectMake(ButtonW * i, 7, ButtonW, ButtonH);
         button.tag = i;
-        [button setTitle:_titleArray[i] forState:UIControlStateNormal];
+        [button setTitle:titleArray[i] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1] forState:UIControlStateSelected];
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -155,8 +153,6 @@
             _newsButton = button;
         } else if (i == 5) {
             _comboButton = button;
-        } else if (i == 6) {
-            _newsClassButton = button;
         }
         
         
@@ -204,7 +200,7 @@
     _controllerSrcollView.delegate = self;
     _controllerSrcollView.bounces = NO;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    _controllerSrcollView.contentSize = CGSizeMake(MainScreenWidth * _titleArray.count,0);
+    _controllerSrcollView.contentSize = CGSizeMake(MainScreenWidth * 6,0);
     [self.view addSubview:_controllerSrcollView];
     _controllerSrcollView.backgroundColor = [UIColor whiteColor];
     
@@ -246,12 +242,6 @@
     [_controllerSrcollView addSubview:ComboVc.view];
     [self addChildViewController:ComboVc];
     
-    CollectClassViewController * newClassVc = [[CollectClassViewController alloc]init];
-    newClassVc.typeString = @"newClass";
-    newClassVc.view.frame = CGRectMake(MainScreenWidth * 6, 0, MainScreenWidth, MainScreenHeight - MACRO_UI_UPHEIGHT - 34 * HigtEachUnit);
-    [_controllerSrcollView addSubview:newClassVc.view];
-    [self addChildViewController:newClassVc];
-    
 }
 
 
@@ -280,7 +270,6 @@
             [_topicButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [_lineClassButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [_comboButton setTitleColor:[UIColor blackColor] forState:0];
-            [_newsClassButton setTitleColor:[UIColor blackColor] forState:0];
             
         } else if(point.x == MainScreenWidth) {
             
@@ -295,7 +284,6 @@
             [_newsButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [_lineClassButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [_comboButton setTitleColor:[UIColor blackColor] forState:0];
-            [_newsClassButton setTitleColor:[UIColor blackColor] forState:0];
             
         }else if (point.x == MainScreenWidth * 2) {
             
@@ -311,7 +299,6 @@
             [_lineClassButton setTitleColor:BasidColor forState:UIControlStateNormal];
             [_instButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [_comboButton setTitleColor:[UIColor blackColor] forState:0];
-            [_newsClassButton setTitleColor:[UIColor blackColor] forState:0];
             
             
         } else if (point.x == MainScreenWidth * 3) {
@@ -327,12 +314,11 @@
             [_instButton setTitleColor:BasidColor forState:UIControlStateNormal];
             [_newsButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [_comboButton setTitleColor:[UIColor blackColor] forState:0];
-            [_newsClassButton setTitleColor:[UIColor blackColor] forState:0];
         } else if (point.x == MainScreenWidth * 4) {
             _controllerSrcollView.contentOffset = CGPointMake(MainScreenWidth * 4, 0);
             
             [UIView animateWithDuration:0.25 animations:^{
-                _HDButton.frame = CGRectMake(_buttonW * 4, 27 + 3, _buttonW, 1);
+                _HDButton.frame = CGRectMake(_buttonW * 3, 27 + 3, _buttonW, 1);
             }];
             
             [_liveButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -341,12 +327,11 @@
             [_newsButton setTitleColor:BasidColor forState:UIControlStateNormal];
             [_instButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [_comboButton setTitleColor:[UIColor blackColor] forState:0];
-            [_newsClassButton setTitleColor:[UIColor blackColor] forState:0];
         } else if (point.x == MainScreenWidth * 5) {
             _controllerSrcollView.contentOffset = CGPointMake(MainScreenWidth * 5, 0);
             
             [UIView animateWithDuration:0.25 animations:^{
-                _HDButton.frame = CGRectMake(_buttonW * 5, 27 + 3, _buttonW, 1);
+                _HDButton.frame = CGRectMake(_buttonW * 3, 27 + 3, _buttonW, 1);
             }];
             
             [_liveButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -355,21 +340,6 @@
             [_newsButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [_instButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [_comboButton setTitleColor:BasidColor forState:0];
-            [_newsClassButton setTitleColor:[UIColor blackColor] forState:0];
-        } else if (point.x == MainScreenWidth * 6) {
-            _controllerSrcollView.contentOffset = CGPointMake(MainScreenWidth * 6, 0);
-            
-            [UIView animateWithDuration:0.25 animations:^{
-                _HDButton.frame = CGRectMake(_buttonW * 6, 27 + 3, _buttonW, 1);
-            }];
-            
-            [_liveButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [_classButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [_lineClassButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [_newsButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [_instButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [_comboButton setTitleColor:[UIColor blackColor] forState:0];
-            [_newsClassButton setTitleColor:BasidColor forState:0];
         }
     }
 }

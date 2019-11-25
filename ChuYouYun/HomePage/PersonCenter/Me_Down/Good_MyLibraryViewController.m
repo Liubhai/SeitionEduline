@@ -327,7 +327,7 @@
         vc.adStr = fileModel.fileURL;
         vc.titleStr = fileModel.fileName;
         if ([fileModel.fileType isEqualToString:@"zip"] || [fileModel.fileType isEqualToString:@"pptx"] || [fileModel.fileType isEqualToString:@"docx"] || [fileModel.fileType isEqualToString:@""] || [fileModel.fileType isEqualToString:@""]) {
-            [TKProgressHUD showError:@"不支持打开此类文库" toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:@"不支持打开此类文库" toView:[UIApplication sharedApplication].keyWindow];
             return;
         }
         [self.navigationController pushViewController:vc animated:YES];

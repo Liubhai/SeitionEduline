@@ -8,7 +8,7 @@
 
 #import "ClassSearchClassOrLiveViewController.h"
 #import "SYG.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "BigWindCar.h"
 #import "MJRefresh.h"
 
@@ -35,7 +35,7 @@
 
 - (void)interFace {
     self.view.backgroundColor = [UIColor clearColor];
-    _dataArray = @[@"直播课程",@"点播课程",@"班级课程"];
+    _dataArray = @[@"直播课程",@"点播课程"];
     
     //添加通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeSelfView) name:@"SearchClassOrLiveRemove" object:nil];

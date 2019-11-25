@@ -12,7 +12,7 @@
 
 #import "SYG.h"
 #import "YunKeTang_Api.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "Passport.h"
 #import "DLViewController.h"
 
@@ -141,7 +141,7 @@
 
 - (void)addCommentView {
     if ([[_originDict stringValueForKey:@"is_buy"] integerValue] == 0) {//没有解锁
-        [TKProgressHUD showError:@"解锁之后才能评论" toView:[UIApplication sharedApplication].keyWindow];
+        [MBProgressHUD showError:@"解锁之后才能评论" toView:[UIApplication sharedApplication].keyWindow];
         return;
     }
     UIView *allWindowView = [[UIView alloc] initWithFrame:CGRectMake(0,0, MainScreenWidth, MainScreenHeight)];
@@ -445,7 +445,7 @@
     if (UserOathToken) {
         oath_token_Str = [NSString stringWithFormat:@"%@:%@",UserOathToken,UserOathTokenSecret];
     } else {
-        [TKProgressHUD showError:@"请先去登陆" toView:self.view];
+        [MBProgressHUD showError:@"请先去登陆" toView:self.view];
         return;
     }
     
@@ -460,15 +460,15 @@
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         [self allWindowViewClick];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
             [self netWorkVideoGetRender];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
             [self netWorkVideoGetRender];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
         [self allWindowViewClick];
-        [TKProgressHUD showError:@"评论失败" toView:[UIApplication sharedApplication].keyWindow];
+        [MBProgressHUD showError:@"评论失败" toView:[UIApplication sharedApplication].keyWindow];
         NSLog(@"%@",error);
         NSLog(@"11111");
     }];

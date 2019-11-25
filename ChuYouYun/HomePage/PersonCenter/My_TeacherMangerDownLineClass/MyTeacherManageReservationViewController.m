@@ -154,7 +154,7 @@
     _cellDict = [_dataArray objectAtIndex:button.tag];
     if ([[_cellDict stringValueForKey:@"learn_status"] integerValue] == 0) {//学生自己还没有确定只有学生能自己确定
         if ([[_dict stringValueForKey:@"is_teacher"] integerValue] == 1) {
-            [TKProgressHUD showError:@"学生还待完成" toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:@"学生还待完成" toView:[UIApplication sharedApplication].keyWindow];
             return;
         }
     }
@@ -358,14 +358,14 @@
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             if ([[_dict stringValueForKey:@"is_teacher"] integerValue] == 1) {
-                [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
                 [self netWorkUserLineVideoManageMyList:1];
             } else {
-                [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
                 [self netWorkUserLineVideoGetMyList:1];
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
         }
         [_tableView reloadData];
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {

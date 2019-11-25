@@ -13,7 +13,7 @@
 #import "ZhiyiHTTPRequest.h"
 #import "BigWindCar.h"
 
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "DLViewController.h"
 
 @interface GreatViewController ()<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,UITextViewDelegate>
@@ -482,20 +482,20 @@
     if (_nameField.text.length > 0) {
          [dic setValue:_nameField.text forKey:@"name"];
     } else {
-        [TKProgressHUD showError:@"请填写小组名称" toView:self.view];
+        [MBProgressHUD showError:@"请填写小组名称" toView:self.view];
         return;
     }
     
     if (_imageID) {
          [dic setValue:_imageID forKey:@"group_logo"];
     } else {
-        [TKProgressHUD showError:@"请上传小组封面" toView:self.view];
+        [MBProgressHUD showError:@"请上传小组封面" toView:self.view];
         return;
     }
     if (_ID) {
         [dic setValue:_ID forKey:@"cate_id"];
     } else {
-        [TKProgressHUD showError:@"请选择小组类型" toView:self.view];
+        [MBProgressHUD showError:@"请选择小组类型" toView:self.view];
         return;
     }
     
@@ -508,13 +508,13 @@
     if (_textIntro.text.length > 0) {
         [dic setValue:_textIntro.text forKey:@"intro"];
     } else {
-        [TKProgressHUD showError:@"请填写小组简介" toView:self.view];
+        [MBProgressHUD showError:@"请填写小组简介" toView:self.view];
         return;
     }
     if (_textGG.text.length > 0) {
         [dic setValue:_textGG.text forKey:@"announce"];
     } else {
-        [TKProgressHUD showError:@"请填写小组公告" toView:self.view];
+        [MBProgressHUD showError:@"请填写小组公告" toView:self.view];
         return;
     }
     [manager BigWinCar_CreateGroup:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -523,14 +523,14 @@
         NSString *msg = responseObject[@"msg"];
 
          if ([responseObject[@"code"]  integerValue] == 1) {
-             [TKProgressHUD showMessag:@"创建成功" toView:self.view];
+             [MBProgressHUD showMessag:@"创建成功" toView:self.view];
              [self.navigationController popViewControllerAnimated:YES];
          } else {
-             [TKProgressHUD showError:msg toView:self.view];
+             [MBProgressHUD showError:msg toView:self.view];
          }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-         [TKProgressHUD showError:@"创建小组失败" toView:self.view];
+         [MBProgressHUD showError:@"创建小组失败" toView:self.view];
     }];
 }
 
@@ -574,7 +574,7 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
-        [TKProgressHUD showError:@"上传失败" toView:self.view];
+        [MBProgressHUD showError:@"上传失败" toView:self.view];
     }];
 }
 

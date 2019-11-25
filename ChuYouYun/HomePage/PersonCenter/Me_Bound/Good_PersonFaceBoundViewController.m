@@ -234,7 +234,7 @@
                 _personTitle.text = @"完善人物信息";
             }
         } else {
-            [TKProgressHUD showError:[_statusDict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[_statusDict stringValueForKey:@"msg"] toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {

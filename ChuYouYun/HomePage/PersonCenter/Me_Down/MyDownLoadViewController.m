@@ -21,7 +21,7 @@
 //#import "bigWindPlayViewController.h"
 #import "LibaryPlayViewController.h"
 
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 
 
 @interface MyDownLoadViewController ()<UITableViewDelegate,UITableViewDataSource,ZFDownloadDelegate>

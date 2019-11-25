@@ -12,7 +12,7 @@
 #import "SYG.h"
 #import "BigWindCar.h"
 #import "UIImageView+WebCache.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "MyHttpRequest.h"
 #import "ZhiyiHTTPRequest.h"
 #import "DLViewController.h"
@@ -461,7 +461,7 @@
         return;
     }
     if (_textField.text.length == 0) {
-        [TKProgressHUD showError:@"请输入评论" toView:self.view];
+        [MBProgressHUD showError:@"请输入评论" toView:self.view];
         return;
     }
     [self netWorkWendaDoComment];
@@ -522,7 +522,7 @@
     if (self.textField.text.length > 0) {
         [self netWorkWendaDoComment];
     } else {
-        [TKProgressHUD showError:@"内容不能为空" toView:self.view];
+        [MBProgressHUD showError:@"内容不能为空" toView:self.view];
     }
     [self.textField becomeFirstResponder];
     if ([textField.text isEqualToString:@"\n"]){
@@ -560,7 +560,7 @@
         if ([[_dataSource stringValueForKey:@"code"] integerValue] == 1) {
             _dataArray = (NSMutableArray *)[YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
         } else {
-            [TKProgressHUD showError:[_dataSource stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[_dataSource stringValueForKey:@"msg"] toView:self.view];
         }
         
         
@@ -602,10 +602,10 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         _dataSource = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[_dataSource stringValueForKey:@"code"] integerValue] == 1) {
-            [TKProgressHUD showError:[_dataSource stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[_dataSource stringValueForKey:@"msg"] toView:self.view];
             [self netWorkWendaGetCommentList];
         } else {
-            [TKProgressHUD showError:[_dataSource stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[_dataSource stringValueForKey:@"msg"] toView:self.view];
             return ;
         }
         _textField.text = @"";

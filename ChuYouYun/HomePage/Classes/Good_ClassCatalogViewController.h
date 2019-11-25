@@ -11,8 +11,6 @@
 
 @interface Good_ClassCatalogViewController : UIViewController
 
-@property (assign, nonatomic) BOOL isClassCourse;// 是否是班级课列表
-
 @property (assign, nonatomic) CGFloat tabelHeight;
 @property (strong, nonatomic) Good_ClassMainViewController *vc;
 @property (assign, nonatomic) BOOL cellTabelCanScroll;

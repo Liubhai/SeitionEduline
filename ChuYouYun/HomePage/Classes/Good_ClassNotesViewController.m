@@ -196,7 +196,7 @@
     if (_textView.text.length > 0) {
         [self netWorkVideoAddNote];
     } else {
-        [TKProgressHUD showError:@"请输入内容" toView:[UIApplication sharedApplication].keyWindow];
+        [MBProgressHUD showError:@"请输入内容" toView:[UIApplication sharedApplication].keyWindow];
         return;
     }
 }
@@ -294,11 +294,7 @@
     
     NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
     [mutabDict setObject:_ID forKey:@"kzid"];
-    if (_isNewClass) {
-        [mutabDict setValue:@"6" forKey:@"kztype"]; // 2为专辑 1 为课程
-    } else {
-        [mutabDict setValue:@"1" forKey:@"kztype"]; // 2为专辑 1 为课程
-    }
+    [mutabDict setValue:@"1" forKey:@"kztype"]; // 2为专辑 1 为课程
     [mutabDict setValue:@"3" forKey:@"type"];
     [mutabDict setValue:@"1" forKey:@"page"];
     [mutabDict setValue:@"6" forKey:@"count"];
@@ -344,11 +340,7 @@
     [mutabDict setValue:_textView.text forKey:@"content"];
     //评论星级
     [mutabDict setValue:@"1" forKey:@"is_open"];
-    if (_isNewClass) {
-        [mutabDict setValue:@"6" forKey:@"kztype"]; // 2为专辑 1 为课程
-    } else {
-        [mutabDict setValue:@"1" forKey:@"kztype"]; // 2为专辑 1 为课程
-    }
+    [mutabDict setValue:@"1" forKey:@"kztype"]; // 2为专辑 1 为课程
     
     
     NSString *oath_token_Str = nil;
@@ -356,7 +348,7 @@
         oath_token_Str = [NSString stringWithFormat:@"%@:%@",UserOathToken,UserOathTokenSecret];
         //        [mutabDict setObject:oath_token_Str forKey:OAUTH_TOKEN];
     } else {
-        [TKProgressHUD showError:@"请先去登陆" toView:self.view];
+        [MBProgressHUD showError:@"请先去登陆" toView:self.view];
         return;
     }
     
@@ -371,11 +363,11 @@
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             [_allWindowView removeFromSuperview];
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
             [self netWorkVideoGetRender];
         } else {
             [_allWindowView removeFromSuperview];
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
             [self netWorkVideoGetRender];
         }
         

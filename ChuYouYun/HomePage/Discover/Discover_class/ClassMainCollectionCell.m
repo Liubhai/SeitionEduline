@@ -80,15 +80,14 @@
     [_faceImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[dict objectForKey:@"imageurl"]]] placeholderImage:Image(@"站位图")];
     _themeLabel.text = [NSString stringWithFormat:@"%@",[dict objectForKey:@"album_title"]];
     _pricelabel.text = [NSString stringWithFormat:@"%@育币",[dict objectForKey:@"price"]];
-    CGFloat priceWidth = [_pricelabel.text sizeWithFont:_pricelabel.font].width + 4;
     _scanCountlabel.text = [NSString stringWithFormat:@"(%@人浏览)",[dict objectForKey:@"view_nums_mark"]];
     _studyCountlabel.text = [NSString stringWithFormat:@"(%@人在学习)",[dict objectForKey:@"order_count_mark"]];
     CGFloat studyWidth = [_studyCountlabel.text sizeWithFont:_studyCountlabel.font].width;
     if (index.row % 2 == 0) {
         _faceImageView.frame = CGRectMake(singleLeftSpace, topSpace, MainScreenWidth/2.0 - singleRightSpace - singleLeftSpace, faceImageHeight);
-        _pricelabel.frame = CGRectMake(_faceImageView.right - priceWidth - 4, 0, priceWidth, 15);
+        _themeLabel.frame = CGRectMake(singleLeftSpace + 5, _faceImageView.bottom + 10, _faceImageView.width - 10, 15);
+        _pricelabel.frame = CGRectMake(_faceImageView.right - 100 - 4, 0, 100, 15);
         _pricelabel.centerY = _themeLabel.centerY;
-        _themeLabel.frame = CGRectMake(singleLeftSpace + 5, _faceImageView.bottom + 10, _pricelabel.left - (singleLeftSpace + 5), 15);
         _scanIcon.frame = CGRectMake(_themeLabel.left, 0, 15, 15);
         _scanIcon.centerY = _themeLabel.bottom + 10 + 15 / 2.0;
         _scanCountlabel.frame = CGRectMake(_scanIcon.right + 4, 0, MainScreenWidth / 4.0, 15);
@@ -99,9 +98,9 @@
         _studyIcon.centerY = _scanIcon.centerY;
     } else {
         _faceImageView.frame = CGRectMake(0, topSpace, MainScreenWidth/2.0 - singleRightSpace - singleLeftSpace, faceImageHeight);
-        _pricelabel.frame = CGRectMake(_faceImageView.right - 4 - priceWidth, 0, priceWidth, 15);
+        _themeLabel.frame = CGRectMake(0 + 5, _faceImageView.bottom + 10, _faceImageView.width - 10, 15);
+        _pricelabel.frame = CGRectMake(_faceImageView.right - 4 - 100, 0, 100, 15);
         _pricelabel.centerY = _themeLabel.centerY;
-        _themeLabel.frame = CGRectMake(0 + 5, _faceImageView.bottom + 10, _pricelabel.left - 5, 15);
         _scanIcon.frame = CGRectMake(_themeLabel.left, 0, 15, 15);
         _scanIcon.centerY = _themeLabel.bottom + 10 + 15 / 2.0;
         _scanCountlabel.frame = CGRectMake(_scanIcon.right + 4, 0, MainScreenWidth / 4.0, 15);

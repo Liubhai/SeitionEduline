@@ -158,13 +158,6 @@
                          success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
-    if ([Show_Config isEqualToString:@"1"]) {
-        if (SWNOTEmptyDictionary(parameters)) {
-            [parameters setObject:Institution_Id forKey:@"mhm-id"];
-        } else {
-            parameters = [NSDictionary dictionaryWithObjectsAndKeys:Institution_Id,@"mhm-id", nil];
-        }
-    }
     NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"POST" URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters error:nil];
     
     // ----------------

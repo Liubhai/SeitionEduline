@@ -204,13 +204,13 @@
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
             if (dict.allKeys.count > 0) {
-                [TKProgressHUD showError:@"重置成功" toView:self.view];
+                [MBProgressHUD showError:@"重置成功" toView:self.view];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self backPressed];
                 });
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];

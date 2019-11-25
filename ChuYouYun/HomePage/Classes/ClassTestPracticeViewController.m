@@ -13,7 +13,7 @@
 #import "ZhiyiHTTPRequest.h"
 #import "BigWindCar.h"
 #import "MyHttpRequest.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "MJRefresh.h"
 
 #import "TestChooseTableViewCell.h"
@@ -359,7 +359,7 @@
     //将数据分类
     NSLog(@"---%@",_dataSource);
     if (_dataArray.count == 0) {
-        [TKProgressHUD showError:@"数据为空" toView:self.view];
+        [MBProgressHUD showError:@"数据为空" toView:self.view];
         [self backPressed];
         return;
     }
@@ -884,7 +884,7 @@
     subjectNumber --;
     if (whichSubject == 1) {//当前单选
         if (subjectNumber < 0) {//说明该换题型了
-            [TKProgressHUD showError:@"已是第一题" toView:self.view];
+            [MBProgressHUD showError:@"已是第一题" toView:self.view];
             subjectAllNumber ++;
             subjectNumber ++;
             return;
@@ -899,7 +899,7 @@
                 whichSubject = 1;
                 [self Up_multipleConfig];
             } else {//最前面一题
-                [TKProgressHUD showError:@"已是第一题" toView:self.view];
+                [MBProgressHUD showError:@"已是第一题" toView:self.view];
                 subjectAllNumber ++;
                 subjectNumber ++;
                 return;
@@ -921,7 +921,7 @@
                 whichSubject = 1;
                 [self Up_multipleConfig];
             } else {//最前面一题
-                [TKProgressHUD showError:@"已是第一题" toView:self.view];
+                [MBProgressHUD showError:@"已是第一题" toView:self.view];
                 subjectAllNumber ++;
                 subjectNumber ++;
                 return;
@@ -947,7 +947,7 @@
                 whichSubject = 1;
                 [self Up_multipleConfig];
             } else {//最前面一题
-                [TKProgressHUD showError:@"已是第一题" toView:self.view];
+                [MBProgressHUD showError:@"已是第一题" toView:self.view];
                 subjectAllNumber ++;
                 subjectNumber ++;
                 return;
@@ -978,7 +978,7 @@
                 whichSubject = 1;
                 [self Up_multipleConfig];
             } else {//最前面一题
-                [TKProgressHUD showError:@"已是第一题" toView:self.view];
+                [MBProgressHUD showError:@"已是第一题" toView:self.view];
                 subjectAllNumber ++;
                 subjectNumber ++;
                 return;
@@ -1429,17 +1429,17 @@
 //    [request setValue:encryptStr forHTTPHeaderField:HeaderKey];
 //    [request setValue:oath_token_Str forHTTPHeaderField:OAUTH_TOKEN];
 //
-//    [TKProgressHUD showMessag:@"加载中...." toView:[UIApplication sharedApplication].keyWindow];
+//    [MBProgressHUD showMessag:@"加载中...." toView:[UIApplication sharedApplication].keyWindow];
 //    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
 //    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-//        [TKProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
+//        [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
 //        _dataArray = (NSArray *)[YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
 //        NSLog(@"----%@",_dataArray);
 //        [self initialization];
 //        [_chooseTableView reloadData];
 //    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-//        [TKProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
-//        [TKProgressHUD showError:@"加载失败" toView:self.view];
+//        [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
+//        [MBProgressHUD showError:@"加载失败" toView:self.view];
 //    }];
 //    [op start];
 //}
@@ -1467,16 +1467,16 @@
 //    [request setValue:oath_token_Str forHTTPHeaderField:OAUTH_TOKEN];
 //    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
 //    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-//        [TKProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
+//        [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
 //        NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
-//        [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+//        [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
 //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //            [self backPressed];
 //        });
 //
 //    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-//        [TKProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
-//        [TKProgressHUD showError:@"加载失败" toView:self.view];
+//        [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
+//        [MBProgressHUD showError:@"加载失败" toView:self.view];
 //    }];
 //    [op start];
 //}

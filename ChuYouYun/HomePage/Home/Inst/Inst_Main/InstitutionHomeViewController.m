@@ -14,7 +14,7 @@
 
 #import "InstitionDiscountViewController.h"
 #import "ZhiBoMainViewController.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 
 
 

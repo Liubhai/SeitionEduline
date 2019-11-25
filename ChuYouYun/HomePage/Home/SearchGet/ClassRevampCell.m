@@ -192,8 +192,6 @@
     [_imageButton sd_setBackgroundImageWithURL:[NSURL URLWithString:urlStr] forState:UIControlStateNormal placeholderImage:Image(@"站位图")];
     if ([[dict stringValueForKey:@"type"] integerValue] == 1) {//课程
         [_logoLiveOrClassButton setImage:Image(@"course_ident@3x") forState:UIControlStateNormal];
-    } else if ([[dict stringValueForKey:@"type"] integerValue] == 6) {
-        [_logoLiveOrClassButton setImage:Image(@"course_class") forState:UIControlStateNormal];
     } else {//直播
         [_logoLiveOrClassButton setImage:Image(@"course_ident_live@3x") forState:UIControlStateNormal];
     }
@@ -240,7 +238,11 @@
     NSString *sectionStr = [NSString stringWithFormat:@"%@",[dict stringValueForKey:@"section_count"]];
     NSString *priceStr = [NSString stringWithFormat:@"%@",[dict stringValueForKey:@"price"]];
     NSString *selPrice = [NSString stringWithFormat:@"%@",[[dict objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
-    if ([type integerValue] == 1 || [type integerValue] == 5) {
+//    [dict stringValueForKey:@"" defaultValue:@""]
+    if ([type integerValue] == 1) {
+//        if ([sectionStr isEqualToString:@"(null)"]) {
+//            sectionStr = [NSString stringWithFormat:@"%@",[dict stringValueForKey:@"video_section_count"]];
+//        }
         _studyNum.text = [NSString stringWithFormat:@"%@人在学 · 共%@节",studyStr,sectionStr];
         if ([priceStr floatValue] == 0) {
             _kinsOf.text = [NSString stringWithFormat:@"免费"];
@@ -287,15 +289,14 @@
             eventTitle = @"秒杀";
             eventIcon = @"seckill";
         } else if ([eventType integerValue] == 6) {
-            eventTitle = @"拼团";
-            eventIcon = @"seckill";
-//            if ([priceStr floatValue] == 0) {
-//                _kinsOf.text = [NSString stringWithFormat:@"免费"];
-//                _kinsOf.textColor = [UIColor colorWithHexString:@"#47b37d"];
-//            } else {
-//                _kinsOf.text = [NSString stringWithFormat:@"育币%@",priceStr];
-//                _kinsOf.textColor = PriceColor;
-//            }
+            _activityType.hidden = YES;
+            if ([selPrice floatValue] == 0) {
+                _kinsOf.text = [NSString stringWithFormat:@"免费"];
+                _kinsOf.textColor = [UIColor colorWithHexString:@"#47b37d"];
+            } else {
+                _kinsOf.text = [NSString stringWithFormat:@"育币%@",selPrice];
+                _kinsOf.textColor = PriceColor;
+            }
         } else {
             _activityType.hidden = YES;
         }

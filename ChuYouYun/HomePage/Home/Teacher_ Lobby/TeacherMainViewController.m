@@ -12,7 +12,7 @@
 #import "SYG.h"
 #import "BigWindCar.h"
 #import "UIImageView+WebCache.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "MyHttpRequest.h"
 #import "ZhiyiHTTPRequest.h"
 
@@ -872,7 +872,7 @@
     }
     NSString *userID = [[NSUserDefaults standardUserDefaults] objectForKey:@"User_id"];
     if ([userID isEqualToString:_uID]) {//说明是自己
-        [TKProgressHUD showError:@"不能关注自己" toView:self.view];
+        [MBProgressHUD showError:@"不能关注自己" toView:self.view];
         return;
     }
     
@@ -891,12 +891,12 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            [TKProgressHUD showSuccess:@"关注成功" toView:self.view];
+            [MBProgressHUD showSuccess:@"关注成功" toView:self.view];
             [_attentionButton setTitle:@"取消关注" forState:UIControlStateNormal];
             _following = @"1";
             return ;
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -915,7 +915,7 @@
     [mutabDict setValue:_uID forKey:@"user_id"];
     NSString *userID = [[NSUserDefaults standardUserDefaults] objectForKey:@"User_id"];
     if ([userID isEqualToString:_uID]) {//说明是自己
-        [TKProgressHUD showError:@"不能关注自己" toView:self.view];
+        [MBProgressHUD showError:@"不能关注自己" toView:self.view];
         return;
     }
     
@@ -934,12 +934,12 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            [TKProgressHUD showSuccess:@"取消关注成功" toView:self.view];
+            [MBProgressHUD showSuccess:@"取消关注成功" toView:self.view];
             [_attentionButton setTitle:@"关注" forState:UIControlStateNormal];
             _following = @"0";
             return ;
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {

@@ -11,7 +11,6 @@
 
 @interface Good_ClassAskQuestionsViewController : UIViewController
 
-@property (assign, nonatomic) BOOL isNewClass;
 @property (assign, nonatomic) CGFloat tabelHeight;
 @property (strong, nonatomic) Good_ClassMainViewController *vc;
 @property (assign, nonatomic) BOOL cellTabelCanScroll;

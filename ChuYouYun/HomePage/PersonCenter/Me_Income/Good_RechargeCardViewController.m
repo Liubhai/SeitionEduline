@@ -245,7 +245,7 @@
     
     [dic setObject:@"cardpay" forKey:@"pay_for"];
     if (_textField.text.length == 0) {
-        [TKProgressHUD showError:@"请输入充值卡卡号" toView:self.view];
+        [MBProgressHUD showError:@"请输入充值卡卡号" toView:self.view];
         return;
     }
     [dic setObject:_textField.text forKey:@"card_number"];
@@ -256,7 +256,7 @@
         if ([responseObject[@"code"] integerValue] == 1) {//充值成功
             [self addMoreView];
         } else {
-            [TKProgressHUD showError:msg toView:self.view];
+            [MBProgressHUD showError:msg toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -274,7 +274,7 @@
     NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
     [mutabDict setObject:@"cardpay" forKey:@"pay_for"];
     if (_textField.text.length == 0) {
-        [TKProgressHUD showError:@"请输入充值卡卡号" toView:self.view];
+        [MBProgressHUD showError:@"请输入充值卡卡号" toView:self.view];
         return;
     }
     [mutabDict setObject:_textField.text forKey:@"card_number"];
@@ -296,7 +296,7 @@
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             [self addMoreView];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
         

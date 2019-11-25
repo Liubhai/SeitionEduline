@@ -13,7 +13,7 @@
 #import "ZhiyiHTTPRequest.h"
 #import "BigWindCar.h"
 #import "MyHttpRequest.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "MJRefresh.h"
 #import "Good_DiscountMainViewController.h"
 #import "EntityCardViewController.h"
@@ -111,9 +111,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSMutableDictionary *pass = [NSMutableDictionary dictionaryWithDictionary:_dict];
-    [pass setObject:[[pass objectForKey:@"mz_price"] objectForKey:@"selPrice"] forKey:@"price"];
-    _dict = [NSDictionary dictionaryWithDictionary:pass];
     _counpArray = [NSMutableArray new];
     _titleImage.backgroundColor = BasidColor;
     _titleLabel.text = [_typeStr isEqualToString:@"4"] ? @"解锁套餐" : @"解锁课程";
@@ -137,7 +134,7 @@
 - (void)interFace {
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     NSLog(@"---%@",_dict);
-    _payTypeStr = @"0";//默认是支付宝
+    _payTypeStr = @"1";//默认是支付宝
     NSLog(@"---%@",_typeStr);
     isGoOut = NO;
     
@@ -254,13 +251,8 @@
     price.text = [NSString stringWithFormat:@"育币%@",[_dict stringValueForKey:@"price"]];
     if (SWNOTEmptyDictionary(_activityInfo)) {
         NSString *eventType = [NSString stringWithFormat:@"%@",[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"]];
-        if ([eventType integerValue] == 6 && [[_activityInfo objectForKey:@"is_start"] integerValue] == 1 && _isBuyAlone) {
+        if ([eventType integerValue] == 6) {
             price.text = [NSString stringWithFormat:@"育币 %@",[[_dict objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
-            if (_isJoinGroup) {
-                price.text = [NSString stringWithFormat:@"育币 %@",[_activityInfo objectForKey:@"event_price_other"]];
-            } else {
-                price.text = [NSString stringWithFormat:@"育币 %@",[_activityInfo objectForKey:@"event_price"]];
-            }
         }
     }
     if (_cellDict != nil) {//单课时解锁
@@ -345,7 +337,7 @@
     }
     
     if (isAddAilpayView) {//有支付宝
-        _alipayStr = @"1";
+        
         CGFloat viewW = MainScreenWidth - 30 * WideEachUnit;
         CGFloat viewH = 50 * WideEachUnit;
         
@@ -636,13 +628,8 @@
             moneyLabel.text = [NSString stringWithFormat:@"育币%@",[_dict stringValueForKey:@"price"]];
             if (SWNOTEmptyDictionary(_activityInfo)) {
                 NSString *eventType = [NSString stringWithFormat:@"%@",[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"]];
-                if ([eventType integerValue] == 6 && [[_activityInfo objectForKey:@"is_start"] integerValue] == 1 && _isBuyAlone) {
+                if ([eventType integerValue] == 6) {
                     moneyLabel.text = [NSString stringWithFormat:@"育币 %@",[[_dict objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
-                    if (_isJoinGroup) {
-                        moneyLabel.text = [NSString stringWithFormat:@"育币 %@",[_activityInfo objectForKey:@"event_price_other"]];
-                    } else {
-                        moneyLabel.text = [NSString stringWithFormat:@"育币 %@",[_activityInfo objectForKey:@"event_price"]];
-                    }
                 }
             }
             if (_cellDict != nil) {
@@ -717,13 +704,8 @@
     realMoney.text = [NSString stringWithFormat:@"育币%@",[_dict stringValueForKey:@"price"]];
     if (SWNOTEmptyDictionary(_activityInfo)) {
         NSString *eventType = [NSString stringWithFormat:@"%@",[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"]];
-        if ([eventType integerValue] == 6 && [[_activityInfo objectForKey:@"is_start"] integerValue] == 1 && _isBuyAlone) {
+        if ([eventType integerValue] == 6) {
             realMoney.text = [NSString stringWithFormat:@"育币 %@",[[_dict objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
-            if (_isJoinGroup) {
-                realMoney.text = [NSString stringWithFormat:@"育币 %@",[_activityInfo objectForKey:@"event_price_other"]];
-            } else {
-                realMoney.text = [NSString stringWithFormat:@"育币 %@",[_activityInfo objectForKey:@"event_price"]];
-            }
         }
     }
     if (_cellDict != nil) {
@@ -769,21 +751,23 @@
 //优惠券的按钮
 - (void)discountButtonCilck {
     if (_counpArray.count == 0) {
-        [TKProgressHUD showError:@"无可用优惠券" toView:self.view];
+        [MBProgressHUD showError:@"无可用优惠券" toView:self.view];
         return;
     }
     if (_entityDiscount.text.length > 0) {//说明已经使用实体卡了 不能再用优惠券了
-        [TKProgressHUD showError:@"已经使用实体卡" toView:self.view];
+        [MBProgressHUD showError:@"已经使用实体卡" toView:self.view];
         return;
     }
     
     Good_DiscountMainViewController *vc = [[Good_DiscountMainViewController alloc] init];
     if (SWNOTEmptyDictionary(_activityInfo)) {
-        if ([[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"] integerValue] == 6) {
-            
-        } else {
-            if ([[_activityInfo objectForKey:@"is_start"] integerValue]) {
-                vc.showYouhui = YES;
+        if (SWNOTEmptyDictionary(_activityInfo)) {
+            if ([[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"] integerValue] == 6) {
+                
+            } else {
+                if ([[_activityInfo objectForKey:@"is_start"] integerValue]) {
+                    vc.showYouhui = YES;
+                }
             }
         }
     }
@@ -794,11 +778,6 @@
 }
 
 - (void)entityGoToUseButtonCilck {
-    if (SWNOTEmptyDictionary(_activityInfo)) {
-        if ([[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"] integerValue] == 6) {
-            return;
-        }
-    }
     EntityCardViewController *vc = [[EntityCardViewController alloc] init];
     vc.dict = _dict;
     vc.activityInfo = [NSDictionary dictionaryWithDictionary:_activityInfo];
@@ -822,10 +801,7 @@
 }
 
 - (void)submitButtonCilck {
-    if ([_payTypeStr integerValue] == 0) {
-        [TKProgressHUD showError:@"暂无支付方式可选" toView:[UIApplication sharedApplication].keyWindow];
-        return;
-    }
+    
     if ([[_dict stringValueForKey:@"price"] floatValue] == 0) {//免费
         [self netWorkOrderAddFreeOrder];
         return;
@@ -842,18 +818,11 @@
         } else {
             [self netWorkCourseCourseBuyLive];
         }
-    } else if ([_typeStr integerValue] == 3) {//线下课
+    } else if ([_typeStr integerValue] == 3) {//点播
         [self netWorkCourseCourseBuyLineCourse];
     } else if ([_typeStr integerValue] == 4) {
         // 套餐
         [self payForCombo];
-    } else if ([_typeStr integerValue] == 5) {
-        //班级购买
-        if (_cellDict != nil) {//单课时解锁
-            [self netWorkCourseBuyCourseHourById];
-        } else {
-            [self classBuy];
-        }
     }
 }
 
@@ -872,7 +841,7 @@
         CGFloat money1 = [[_dict stringValueForKey:@"price"] floatValue];
         if (SWNOTEmptyDictionary(_activityInfo)) {
             NSString *eventType = [NSString stringWithFormat:@"%@",[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"]];
-            if ([eventType integerValue] == 6 && [[_activityInfo objectForKey:@"is_start"] integerValue] == 1 && _isBuyAlone) {
+            if ([eventType integerValue] == 6) {
                 money1 = [[NSString stringWithFormat:@"%@",[[_dict objectForKey:@"mz_price"] objectForKey:@"selPrice"]] floatValue];
             }
         }
@@ -886,7 +855,7 @@
         CGFloat money1 = [[_dict stringValueForKey:@"price"] floatValue];
         if (SWNOTEmptyDictionary(_activityInfo)) {
             NSString *eventType = [NSString stringWithFormat:@"%@",[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"]];
-            if ([eventType integerValue] == 6 && [[_activityInfo objectForKey:@"is_start"] integerValue] == 1 && _isBuyAlone) {
+            if ([eventType integerValue] == 6) {
                 money1 = [[NSString stringWithFormat:@"%@",[[_dict objectForKey:@"mz_price"] objectForKey:@"selPrice"]] floatValue];
             }
         }
@@ -897,7 +866,7 @@
         _discountMoneyLabel.text = [NSString stringWithFormat:@"-育币%.2f",[[_dict stringValueForKey:@"price"] floatValue] - money1 * discount1 / 10];
         if (SWNOTEmptyDictionary(_activityInfo)) {
             NSString *eventType = [NSString stringWithFormat:@"%@",[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"]];
-            if ([eventType integerValue] == 6 && [[_activityInfo objectForKey:@"is_start"] integerValue] == 1 && _isBuyAlone) {
+            if ([eventType integerValue] == 6) {
                 _discountMoneyLabel.text = [NSString stringWithFormat:@"-育币%.2f",[[NSString stringWithFormat:@"%@",[[_dict objectForKey:@"mz_price"] objectForKey:@"selPrice"]] floatValue] - money1 * discount1 / 10];
             }
         }
@@ -911,7 +880,7 @@
         _discountMoneyLabel.text = [NSString stringWithFormat:@"-育币%@",[_dict stringValueForKey:@"price"]];
         if (SWNOTEmptyDictionary(_activityInfo)) {
             NSString *eventType = [NSString stringWithFormat:@"%@",[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"]];
-            if ([eventType integerValue] == 6 && [[_activityInfo objectForKey:@"is_start"] integerValue] == 1 && _isBuyAlone) {
+            if ([eventType integerValue] == 6) {
                 _discountMoneyLabel.text = [NSString stringWithFormat:@"-育币%@",[[_dict objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
             }
         }
@@ -930,7 +899,7 @@
         _realMoney.text = [NSString stringWithFormat:@"育币%@",[_dict stringValueForKey:@"price"]];
         if (SWNOTEmptyDictionary(_activityInfo)) {
             NSString *eventType = [NSString stringWithFormat:@"%@",[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"]];
-            if ([eventType integerValue] == 6 && [[_activityInfo objectForKey:@"is_start"] integerValue] == 1 && _isBuyAlone) {
+            if ([eventType integerValue] == 6) {
                 _realMoney.text = [NSString stringWithFormat:@"育币%@",[[_dict objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
             }
         }
@@ -947,7 +916,7 @@
         CGFloat money1 = [[_dict stringValueForKey:@"price"] floatValue];
         if (SWNOTEmptyDictionary(_activityInfo)) {
             NSString *eventType = [NSString stringWithFormat:@"%@",[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"]];
-            if ([eventType integerValue] == 6 && [[_activityInfo objectForKey:@"is_start"] integerValue] == 1 && _isBuyAlone) {
+            if ([eventType integerValue] == 6) {
                 money1 = [[NSString stringWithFormat:@"%@",[[_dict objectForKey:@"mz_price"] objectForKey:@"selPrice"]] floatValue];
             }
         }
@@ -961,7 +930,7 @@
         CGFloat money1 = [[_dict stringValueForKey:@"price"] floatValue];
         if (SWNOTEmptyDictionary(_activityInfo)) {
             NSString *eventType = [NSString stringWithFormat:@"%@",[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"]];
-            if ([eventType integerValue] == 6 && [[_activityInfo objectForKey:@"is_start"] integerValue] == 1 && _isBuyAlone) {
+            if ([eventType integerValue] == 6) {
                 money1 = [[NSString stringWithFormat:@"%@",[[_dict objectForKey:@"mz_price"] objectForKey:@"selPrice"]] floatValue];
             }
         }
@@ -979,7 +948,7 @@
         _counpID = [_entityReturnDict stringValueForKey:@"coupon_id"];
         if (SWNOTEmptyDictionary(_activityInfo)) {
             NSString *eventType = [NSString stringWithFormat:@"%@",[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"]];
-            if ([eventType integerValue] == 6 && [[_activityInfo objectForKey:@"is_start"] integerValue] == 1 && _isBuyAlone) {
+            if ([eventType integerValue] == 6) {
                 _discountMoneyLabel.text = [NSString stringWithFormat:@"-育币%@",[[_dict objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
             }
         }
@@ -1123,9 +1092,9 @@
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             [_counpArray removeAllObjects];
             [_counpArray addObjectsFromArray:(NSArray *)[YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject]];
-            if (SWNOTEmptyDictionary(_activityInfo) && _isBuyAlone) {
-                if ([[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"] integerValue] == 6 && [[_activityInfo objectForKey:@"is_start"] integerValue] == 1) {
-                    [_counpArray removeAllObjects];
+            if (SWNOTEmptyDictionary(_activityInfo)) {
+                if ([[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"] integerValue] == 6) {
+                    
                 } else {
                     if ([[_activityInfo objectForKey:@"is_start"] integerValue] && SWNOTEmptyArr(_counpArray)) {
                         for (int i = (int)(_counpArray.count - 1); i>=0; i--) {
@@ -1228,7 +1197,7 @@
         NSLog(@"%@", responseObject);
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 0) {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             return ;
         } else if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
@@ -1312,19 +1281,7 @@
     if (_counpID) {
         [mutabDict setValue:_counpID forKey:@"coupon_id"];
     }
-    if (SWNOTEmptyDictionary(_activityInfo) && _isBuyAlone) {
-        NSString *eventType = [NSString stringWithFormat:@"%@",[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"]];
-        if ([eventType integerValue] == 6) {
-            if ([[_activityInfo objectForKey:@"is_start"] integerValue]) {
-                //拼团
-                if (_isJoinGroup && SWNOTEmptyStr(_groupID)) {
-                    [mutabDict setObject:_groupID forKey:@"asb"];
-                } else {
-                    [mutabDict setObject:@"asb_ep" forKey:@"asb"];
-                }
-            }
-        }
-    }
+    
     NSString *oath_token_Str = nil;
     if (UserOathToken) {
         oath_token_Str = [NSString stringWithFormat:@"%@:%@",UserOathToken,UserOathTokenSecret];
@@ -1342,7 +1299,7 @@
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
             if ([[_entityReturnDict stringValueForKey:@"type"] integerValue] == 5) {//课程卡
-                [TKProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self backPressed];
                 });
@@ -1357,13 +1314,13 @@
                 [self WXPay:_wxPayDict];
                 isGoOut = YES;
             } else if ([_payTypeStr integerValue] == 3) {//余额
-                [TKProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self backPressed];
                 });
             }
         } else {
-                [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];
@@ -1375,9 +1332,6 @@
 - (void)netWorkCourseBuyCourseHourById {
     
     NSString *endUrlStr = YunKeTang_Course_Course_buyCourseHourById;
-    if ([_typeStr integerValue] == 5) {
-        endUrlStr = course_buyClassesHourById;
-    }
     NSString *allUrlStr = [YunKeTang_Api_Tool YunKeTang_GetFullUrl:endUrlStr];
     
     NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
@@ -1393,8 +1347,6 @@
         [mutabDict setValue:@"1" forKey:@"vtype"];
     } else if ([_typeStr integerValue] == 2) {//直播
         [mutabDict setValue:@"2" forKey:@"vtype"];
-    } else if ([_typeStr integerValue] == 5) {//直播
-        [mutabDict setValue:@"6" forKey:@"vtype"];
     }
     [mutabDict setValue:_cid forKey:@"vid"];
     if (_cellDict != nil) {
@@ -1402,8 +1354,6 @@
              [mutabDict setValue:[_cellDict stringValueForKey:@"id"] forKey:@"sid"];
         } else if ([_typeStr integerValue] == 2){//直播
              [mutabDict setValue:[_cellDict stringValueForKey:@"id"] forKey:@"sid"];
-        } else if ([_typeStr integerValue] == 5){//班级课
-            [mutabDict setValue:[_cellDict stringValueForKey:@"id"] forKey:@"sid"];
         }
     }
     
@@ -1428,7 +1378,7 @@
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
             if ([[_entityReturnDict stringValueForKey:@"type"] integerValue] == 5) {//课程卡
-                [TKProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self backPressed];
                 });
@@ -1443,13 +1393,13 @@
                 [self WXPay:_wxPayDict];
                 isGoOut = YES;
             } else if ([_payTypeStr integerValue] == 3) {//余额
-                [TKProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self backPressed];
                 });
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];
@@ -1476,19 +1426,6 @@
     if (_counpID) {
         [mutabDict setValue:_counpID forKey:@"coupon_id"];
     }
-    if (SWNOTEmptyDictionary(_activityInfo) && _isBuyAlone) {
-        NSString *eventType = [NSString stringWithFormat:@"%@",[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"]];
-        if ([eventType integerValue] == 6) {
-            if ([[_activityInfo objectForKey:@"is_start"] integerValue]) {
-                //拼团
-                if (_isJoinGroup && SWNOTEmptyStr(_groupID)) {
-                    [mutabDict setObject:_groupID forKey:@"asb"];
-                } else {
-                    [mutabDict setObject:@"asb_ep" forKey:@"asb"];
-                }
-            }
-        }
-    }
     
     NSString *oath_token_Str = nil;
     if (UserOathToken) {
@@ -1507,7 +1444,7 @@
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
             if ([[_entityReturnDict stringValueForKey:@"type"] integerValue] == 5) {//课程卡
-                [TKProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self backPressed];
                 });
@@ -1522,7 +1459,7 @@
                 [self WXPay:_wxPayDict];
                 isGoOut = YES;
             } else if ([_payTypeStr integerValue] == 3) {//余额
-                [TKProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self backPressed];
                 });
@@ -1581,13 +1518,13 @@
                 [self WXPay:_wxPayDict];
                 isGoOut = YES;
             } else if ([_payTypeStr integerValue] == 3) {//余额
-                [TKProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self backPressed];
                 });
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];
@@ -1607,8 +1544,6 @@
         [mutabDict setValue:@"2" forKey:@"vtype"];
     } else if ([_typeStr integerValue] == 3) {//线下课
         [mutabDict setValue:@"4" forKey:@"vtype"];
-    } else if ([_typeStr integerValue] == 5) {//线下课
-        [mutabDict setValue:@"6" forKey:@"vtype"];
     }
     [mutabDict setValue:_cid forKey:@"vid"];
     if (_counpID) {
@@ -1630,85 +1565,10 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             [self backPressed];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
-        }
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-    }];
-    [op start];
-}
-
-- (void)classBuy {
-    NSString *endUrlStr = course_buyClasses;
-    NSString *allUrlStr = [YunKeTang_Api_Tool YunKeTang_GetFullUrl:endUrlStr];
-    
-    NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
-    
-    if ([_payTypeStr integerValue] == 1) {
-        [mutabDict setValue:@"alipay" forKey:@"pay_for"];
-    } else if ([_payTypeStr integerValue] == 2) {
-        [mutabDict setValue:@"wxpay" forKey:@"pay_for"];
-    } else if ([_payTypeStr integerValue] == 3) {
-        [mutabDict setValue:@"lcnpay" forKey:@"pay_for"];
-    }
-    [mutabDict setValue:_cid forKey:@"vids"];
-    if (_counpID) {
-        [mutabDict setValue:_counpID forKey:@"coupon_id"];
-    }
-    if (SWNOTEmptyDictionary(_activityInfo) && _isBuyAlone) {
-        NSString *eventType = [NSString stringWithFormat:@"%@",[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"]];
-        if ([eventType integerValue] == 6) {
-            if ([[_activityInfo objectForKey:@"is_start"] integerValue]) {
-                //拼团
-                if (_isJoinGroup && SWNOTEmptyStr(_groupID)) {
-                    [mutabDict setObject:_groupID forKey:@"asb"];
-                } else {
-                    [mutabDict setObject:@"asb_ep" forKey:@"asb"];
-                }
-            }
-        }
-    }
-    NSString *oath_token_Str = nil;
-    if (UserOathToken) {
-        oath_token_Str = [NSString stringWithFormat:@"%@:%@",UserOathToken,UserOathTokenSecret];
-    }
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:allUrlStr]];
-    [request setHTTPMethod:NetWay];
-    NSString *encryptStr = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetEncryptStr:mutabDict];
-    [request setValue:encryptStr forHTTPHeaderField:HeaderKey];
-    [request setValue:oath_token_Str forHTTPHeaderField:OAUTH_TOKEN];
-    
-    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
-        if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
-            if ([[_entityReturnDict stringValueForKey:@"type"] integerValue] == 5) {//课程卡
-                [TKProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [self backPressed];
-                });
-                return;
-            }
-            if ([_payTypeStr integerValue] == 1) {//支付宝
-                _alipayStr = [[dict dictionaryValueForKey:@"alipay"] stringValueForKey:@"ios"];
-                [self addWebView];
-                isGoOut = YES;
-            } else if ([_payTypeStr integerValue] == 2){//微信
-                _wxPayDict = [[dict dictionaryValueForKey:@"wxpay"] dictionaryValueForKey:@"ios"];
-                [self WXPay:_wxPayDict];
-                isGoOut = YES;
-            } else if ([_payTypeStr integerValue] == 3) {//余额
-                [TKProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [self backPressed];
-                });
-            }
-        } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];
@@ -1748,17 +1608,17 @@
             }
             if ([[_videoDataSource stringValueForKey:@"is_buy"] integerValue] == 1) {
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [TKProgressHUD showError:@"支付成功" toView:[UIApplication sharedApplication].keyWindow];
+                    [MBProgressHUD showError:@"支付成功" toView:[UIApplication sharedApplication].keyWindow];
                 });
             } else {
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [TKProgressHUD showError:@"支付失败" toView:[UIApplication sharedApplication].keyWindow];
+                    [MBProgressHUD showError:@"支付失败" toView:[UIApplication sharedApplication].keyWindow];
                 });
             }
         }
 
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        [TKProgressHUD showError:@"请求错误" toView:self.view];
+        [MBProgressHUD showError:@"请求错误" toView:self.view];
         [self backPressed];
     }];
     [op start];
@@ -1796,16 +1656,16 @@
             }
             if ([[dict stringValueForKey:@"is_buy"] integerValue] == 1) {
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [TKProgressHUD showError:@"支付成功" toView:[UIApplication sharedApplication].keyWindow];
+                    [MBProgressHUD showError:@"支付成功" toView:[UIApplication sharedApplication].keyWindow];
                 });
             } else {
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [TKProgressHUD showError:@"支付失败" toView:[UIApplication sharedApplication].keyWindow];
+                    [MBProgressHUD showError:@"支付失败" toView:[UIApplication sharedApplication].keyWindow];
                 });
             }
         } else {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [TKProgressHUD showError:@"支付失败" toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:@"支付失败" toView:[UIApplication sharedApplication].keyWindow];
             });
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -1850,16 +1710,16 @@
             }
             if ([[dict stringValueForKey:@"is_buy"] integerValue] == 1) {
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [TKProgressHUD showError:@"支付成功" toView:[UIApplication sharedApplication].keyWindow];
+                    [MBProgressHUD showError:@"支付成功" toView:[UIApplication sharedApplication].keyWindow];
                 });
             } else {
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [TKProgressHUD showError:@"支付失败" toView:[UIApplication sharedApplication].keyWindow];
+                    [MBProgressHUD showError:@"支付失败" toView:[UIApplication sharedApplication].keyWindow];
                 });
             }
         } else {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [TKProgressHUD showError:@"支付失败" toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:@"支付失败" toView:[UIApplication sharedApplication].keyWindow];
             });
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -1903,19 +1763,7 @@
     if (_counpID) {
         [mutabDict setValue:_counpID forKey:@"coupon_id"];
     }
-    if (SWNOTEmptyDictionary(_activityInfo) && _isBuyAlone) {
-        NSString *eventType = [NSString stringWithFormat:@"%@",[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"]];
-        if ([eventType integerValue] == 6) {
-            if ([[_activityInfo objectForKey:@"is_start"] integerValue]) {
-                //拼团
-                if (_isJoinGroup && SWNOTEmptyStr(_groupID)) {
-                    [mutabDict setObject:_groupID forKey:@"asb"];
-                } else {
-                    [mutabDict setObject:@"asb_ep" forKey:@"asb"];
-                }
-            }
-        }
-    }
+    
     NSString *oath_token_Str = nil;
     if (UserOathToken) {
         oath_token_Str = [NSString stringWithFormat:@"%@:%@",UserOathToken,UserOathTokenSecret];
@@ -1933,7 +1781,7 @@
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
             if ([[_entityReturnDict stringValueForKey:@"type"] integerValue] == 5) {//课程卡
-                [TKProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self backPressed];
                 });
@@ -1948,13 +1796,13 @@
                 [self WXPay:_wxPayDict];
                 isGoOut = YES;
             } else if ([_payTypeStr integerValue] == 3) {//余额
-                [TKProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self backPressed];
                 });
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];

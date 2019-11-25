@@ -13,7 +13,7 @@
 #import "ZHCGViewController.h"
 #import "ZhiyiHTTPRequest.h"
 #import "AppDelegate.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "SYG.h"
 
 
@@ -128,7 +128,7 @@
 - (void)TJButton {
 
     if (_YXField.text.length == 0) {
-        [TKProgressHUD showError:@"请输入邮箱" toView:self.view];
+        [MBProgressHUD showError:@"请输入邮箱" toView:self.view];
     } else {
 //        [self YXNetWork];
         [self netWorkPassportDoFindPasswordByEmail];
@@ -156,7 +156,7 @@
         NSLog(@"%@",responseObject);
         NSString *msg = [responseObject objectForKey:@"msg"];
         if ([msg isEqualToString:@"ok"]) {//成功
-            [TKProgressHUD showSuccess:@"找回成功" toView:self.view];
+            [MBProgressHUD showSuccess:@"找回成功" toView:self.view];
             if ([_typeStr integerValue] == 123) {//说明是从设置界面退出登陆的
                 [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
             } else {
@@ -164,7 +164,7 @@
             }
 
         } else {
-            [TKProgressHUD showError:msg toView:self.view];
+            [MBProgressHUD showError:msg toView:self.view];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -181,7 +181,7 @@
     
     NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
     if (_YXField.text.length == 0) {
-        [TKProgressHUD showError:@"请输入邮箱" toView:self.view];
+        [MBProgressHUD showError:@"请输入邮箱" toView:self.view];
         return;
     } else {
         [mutabDict setObject:_YXField.text forKey:@"email"];
@@ -203,7 +203,7 @@
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
             if (dict.allKeys.count > 0) {
-                [TKProgressHUD showError:@"操作成功" toView:self.view];
+                [MBProgressHUD showError:@"操作成功" toView:self.view];
                 if ([_typeStr integerValue] == 123) {//说明是从设置界面退出登陆的
                     [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
                 } else {
@@ -211,7 +211,7 @@
                 }
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];

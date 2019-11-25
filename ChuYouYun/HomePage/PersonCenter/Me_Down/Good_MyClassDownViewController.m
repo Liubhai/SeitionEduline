@@ -165,7 +165,6 @@
     Good_ClassDownViewController *vc = [[Good_ClassDownViewController alloc] init];
     vc.videoDataSource = [_dataArray objectAtIndex:indexPath.row];
     vc.isDown = @"1";
-    vc.isClassCourse = [[[_dataArray objectAtIndex:indexPath.row] objectForKey:@"type"] integerValue] == 6 ? YES : NO;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

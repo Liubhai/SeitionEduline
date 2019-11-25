@@ -14,12 +14,9 @@
 
 
 
--(id)initWithReuseIdentifier:(NSString*)reuseIdentifier isClassNew:(BOOL)isClassNew cellSection:(NSInteger)cellSection cellRow:(NSInteger)cellRow {
+-(id)initWithReuseIdentifier:(NSString*)reuseIdentifier{
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     if (self) {
-        _isClassNew = isClassNew;
-        _cellSection = cellSection;
-        _cellRow = cellRow;
         [self initLayuot];
     }
     return self;
@@ -31,8 +28,15 @@
     
     self.backgroundColor = [UIColor whiteColor];
     
+    
+    //锁
+    _lockImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5 * WideEachUnit, 18 * WideEachUnit, 14 * WideEachUnit, 14 * WideEachUnit)];
+    _lockImageView.backgroundColor = [UIColor whiteColor];
+    _lockImageView.image = Image(@"suo2");
+    [self addSubview:_lockImageView];
+    
     //头像
-    _palyImage = [[UIImageView alloc] initWithFrame:CGRectMake(12 * WideEachUnit, 18.5 * WideEachUnit, 24 * WideEachUnit, 13 * WideEachUnit)];
+    _palyImage = [[UIImageView alloc] initWithFrame:CGRectMake(22 * WideEachUnit, 18 * WideEachUnit, 14 * WideEachUnit, 14 * WideEachUnit)];
     _palyImage.backgroundColor = [UIColor whiteColor];
     _palyImage.image = Image(@"icon_class");
     [self addSubview:_palyImage];
@@ -43,13 +47,7 @@
     _title.textColor = [UIColor colorWithHexString:@"#333"];
     [self addSubview:_title];
     
-    //锁
-    _lockImageView = [[UIImageView alloc] initWithFrame:CGRectMake(_title.right + 5, 18.5 * WideEachUnit, 10 * WideEachUnit, 13 * WideEachUnit)];
-    _lockImageView.backgroundColor = [UIColor whiteColor];
-    _lockImageView.image = Image(@"lock");
-    [self addSubview:_lockImageView];
-    
-    _freeLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_lockImageView.frame) + 5, 10 * WideEachUnit, 30 * WideEachUnit, 30 * WideEachUnit)];
+    _freeLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_title.frame), 10 * WideEachUnit, 30 * WideEachUnit, 30 * WideEachUnit)];
     _freeLabel.textColor = [UIColor colorWithHexString:@"#47b37d"];
     _freeLabel.layer.cornerRadius = 3;
     _freeLabel.layer.borderWidth = 1;
@@ -93,7 +91,7 @@
     _progressView = [[UAProgressView alloc] initWithFrame:CGRectMake(MainScreenWidth - 60 * WideEachUnit, 15 * WideEachUnit, 50 * WideEachUnit, 20 * WideEachUnit)];
     UIView *view = [[UIView alloc] initWithFrame:CGRectInset(self.progressView.bounds, self.progressView.bounds.size.width / 3.0, self.progressView.bounds.size.height / 3.0)];
     view.backgroundColor = [UIColor redColor];
-    view.userInteractionEnabled = NO;
+    view.userInteractionEnabled = NO; // Allows tap to pass through to the progress view.
     self.progressView.centralView = view;
     
     self.progressView.fillChangedBlock = ^(UAProgressView *progressView, BOOL filled, BOOL animated){
@@ -107,67 +105,45 @@
         }
     };
     _progressView.hidden = YES;
-    
-    if (_isClassNew) {
-        _cellTableViewSpace = [[UIView alloc] initWithFrame:CGRectMake(0, 49.5, MainScreenWidth, 0.5)];
-        _cellTableViewSpace.backgroundColor = RGBHex(0xEEEEEE);
-        [self addSubview:_cellTableViewSpace];
-        _dataSource = [NSMutableArray new];
-        _cellTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 50 * WideEachUnit, MainScreenWidth, 1)];
-        _cellTableView.dataSource = self;
-        _cellTableView.delegate = self;
-        _cellTableView.showsVerticalScrollIndicator = NO;
-        _cellTableView.showsHorizontalScrollIndicator = NO;
-        _cellTableView.bounces = NO;
-        _cellTableView.rowHeight = 50 * WideEachUnit;
-        [self addSubview:_cellTableView];
-    }
 }
 
 - (void)dataSourceWithDict:(NSDictionary *)dict withBuyString:(NSString *)buyString WithLiveInfo:(NSDictionary *)liveInfo{
-    
     _buyString = buyString;
     _cellDict = dict;
     _liveInfo = liveInfo;
-    
-    if ([[dict stringValueForKey:@"type"] integerValue] == 1) {
-        _palyImage.image = Image(@"视频");
-    } else if ([[dict stringValueForKey:@"type"] integerValue] == 2) {
-        _palyImage.image = Image(@"音频");
-    } else if ([[dict stringValueForKey:@"type"] integerValue] == 3) {
-        _palyImage.image = Image(@"文本");
-    } else if ([[dict stringValueForKey:@"type"] integerValue] == 4) {
-        _palyImage.image = Image(@"文档");
-    } else if ([[dict stringValueForKey:@"type"] integerValue] == 5) {
-        _palyImage.image = Image(@"icon_Test");
-    }
-    
-    [_lockImageView setLeft:_palyImage.right + 2];
-    if ([[liveInfo stringValueForKey:@"is_order"] integerValue] == 1) {
-        if ([[dict stringValueForKey:@"lock"] integerValue] == 1) {
-            _lockImageView.image = Image(@"");
-            _lockImageView.hidden = YES;
-            [_lockImageView setWidth:0];
-        } else {
-            _lockImageView.image = Image(@"lock");
-            _lockImageView.hidden = NO;
-            [_lockImageView setWidth:10];
-        }
-    } else {
-        _lockImageView.hidden = YES;
-        [_lockImageView setWidth:0];
-    }
-    
-    [_title setLeft:_lockImageView.right + 2];
     _title.text = [dict stringValueForKey:@"title"];
-    CGFloat titleWidth = [_title.text sizeWithFont:_title.font].width + 4;
-    [_title setWidth:titleWidth];
     _time.text = [dict stringValueForKey:@"duration"];
     if ([[dict stringValueForKey:@"type"] integerValue] == 3 || [[dict stringValueForKey:@"type"] integerValue] == 4) {
         _time.hidden = YES;
     }
     
-    [_freeLabel setLeft:_title.right + 5];
+    if ([[liveInfo stringValueForKey:@"is_order"] integerValue] == 1) {
+        if ([[dict stringValueForKey:@"lock"] integerValue] == 1) {
+            _lockImageView.image = Image(@"");
+            _lockImageView.hidden = NO;
+        } else {
+             _lockImageView.image = Image(@"classLock");
+            _lockImageView.hidden = NO;
+        }
+    } else {
+        _lockImageView.hidden = YES;
+    }
+
+    
+    if ([[dict stringValueForKey:@"type"] integerValue] == 1) {
+        _palyImage.image = Image(@"icon_classVideo");
+    } else if ([[dict stringValueForKey:@"type"] integerValue] == 2) {
+         _palyImage.image = Image(@"icon_classMusic");
+    } else if ([[dict stringValueForKey:@"type"] integerValue] == 3) {
+        _palyImage.image = Image(@"icon_classText");
+    } else if ([[dict stringValueForKey:@"type"] integerValue] == 4) {
+        _palyImage.image = Image(@"icon_classDoc");
+    } else if ([[dict stringValueForKey:@"type"] integerValue] == 5) {
+        _palyImage.image = Image(@"icon_Test");
+    }
+
+    
+    
     if ([buyString integerValue] == 1) {//已经解锁整个课程
         if ([[dict stringValueForKey:@"is_free"] integerValue] == 1) {
             _freeLabel.hidden = NO;
@@ -218,25 +194,8 @@
             }
         }
     }
-    
-    if (_isClassNew) {
-        [_cellTableView setHeight:[[dict objectForKey:@"child"] count] * 50 *WideEachUnit];
-        [_dataSource removeAllObjects];
-        [_dataSource addObjectsFromArray:[dict objectForKey:@"child"]];
-        [_cellTableView reloadData];
-        _palyImage.hidden = YES;
-        [_title setLeft:15];
-        _lockImageView.hidden = YES;
-        _freeLabel.hidden = YES;
-        _time.hidden = YES;
-        _isLookButton.hidden = YES;
-        _size.hidden = YES;
-        _progressView.hidden = YES;
-    }
-    
+
     [self selfSubfit];
-    CGFloat priceWidth = [_freeLabel.text sizeWithFont:_freeLabel.font].width + 4;
-    _freeLabel.frame = CGRectMake(CGRectGetMaxX(_title.frame) + 10 * WideEachUnit, 15 * WideEachUnit, priceWidth * WideEachUnit, 20 * WideEachUnit);
 }
 
 - (void)dataSourceWithDict:(NSDictionary *)dict withType:(NSString *)type {
@@ -361,28 +320,6 @@
             progressView.centralView.backgroundColor = color;
         }
     };
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _dataSource.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellReuse = @"classnew";
-    Good_ClassCatalogTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellReuse];
-    if (!cell) {
-        cell = [[Good_ClassCatalogTableViewCell alloc] initWithReuseIdentifier:cellReuse isClassNew:NO cellSection:0 cellRow:0];
-    }
-    NSDictionary *dic = [_dataSource objectAtIndex:indexPath.row];
-    [cell dataSourceWithDict:dic withBuyString:[_liveInfo stringValueForKey:@"is_buy"] WithLiveInfo:_liveInfo];
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [_cellTableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (_delegate && [_delegate respondsToSelector:@selector(classCourseCellTableViewCellSelected:cellSection:cellRow:classCellRow:)]) {
-        [_delegate classCourseCellTableViewCellSelected:[_dataSource objectAtIndex:indexPath.row] cellSection:_cellSection cellRow:_cellRow classCellRow:indexPath.row];
-    }
 }
 
 @end

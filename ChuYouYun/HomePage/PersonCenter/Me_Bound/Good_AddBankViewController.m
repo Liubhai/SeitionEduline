@@ -494,7 +494,7 @@
 //            _banksArray = [dict arrayValueForKey:@"bank"];
             [self addTableView];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         [_tableView reloadData];
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -514,28 +514,28 @@
     if (_bankNumberTextField.text.length > 0) {
         [mutabDict setObject:_bankNumberTextField.text forKey:@"account"];//银行卡号
     } else {
-        [TKProgressHUD showError:@"请填写银行卡号" toView:self.view];
+        [MBProgressHUD showError:@"请填写银行卡号" toView:self.view];
         return;
     }
     
     if (_nameTextField.text.length > 0) {
         [mutabDict setObject:_nameTextField.text forKey:@"accountmaster"];//姓名
     } else {
-        [TKProgressHUD showError:@"请填写姓名" toView:self.view];
+        [MBProgressHUD showError:@"请填写姓名" toView:self.view];
         return;
     }
     
     if (_addBankTitle.text.length > 0) {
         [mutabDict setObject:_addBankTitle.text forKey:@"accounttype"];//银行卡的名称
     } else {
-        [TKProgressHUD showError:@"请选择所属银行" toView:self.view];
+        [MBProgressHUD showError:@"请选择所属银行" toView:self.view];
         return;
     }
     
     if (_TelNumberTextField.text.length > 0) {
         [mutabDict setObject:_TelNumberTextField.text forKey:@"tel_num"];//手机号
     } else {
-        [TKProgressHUD showError:@"请填写手机号码" toView:self.view];
+        [MBProgressHUD showError:@"请填写手机号码" toView:self.view];
         return;
     }
     [mutabDict setObject:_allTextField.text forKey:@"location"];//手机号
@@ -543,19 +543,19 @@
         [mutabDict setObject:_nameTextField.text forKey:@"bankofdeposit"];//姓名
     }
     if (_proVinceID == nil) {
-        [TKProgressHUD showError:@"请选择所在省份" toView:self.view];
+        [MBProgressHUD showError:@"请选择所在省份" toView:self.view];
         return;
     } else {
         [mutabDict setObject:_proVinceID forKey:@"province"];//省的ID
     }
     if (_cityID == nil) {
-        [TKProgressHUD showError:@"请选择所在城市" toView:self.view];
+        [MBProgressHUD showError:@"请选择所在城市" toView:self.view];
         return;
     } else {
         [mutabDict setObject:_cityID forKey:@"city"];//城市的ID
     }
     if (_countyID == nil) {
-        [TKProgressHUD showError:@"请选择所在区域" toView:self.view];
+        [MBProgressHUD showError:@"请选择所在区域" toView:self.view];
         return;
     } else {
         [mutabDict setObject:_countyID forKey:@"area"];//区域的ID
@@ -576,12 +576,12 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
         if (dict.allKeys.count > 0 ) {
-            [TKProgressHUD showError:@"绑定成功" toView:self.view];
+            [MBProgressHUD showError:@"绑定成功" toView:self.view];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self backPressed];
             });
         } else {
-            [TKProgressHUD showError:@"绑定失败" toView:self.view];
+            [MBProgressHUD showError:@"绑定失败" toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {

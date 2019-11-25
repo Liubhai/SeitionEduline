@@ -12,7 +12,7 @@
 #import "UIView+Utils.h"
 #import "NSDictionary+Json.h"
 #import "Passport.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "SYGTextField.h"
 #import "UIButton+WebCache.h"
 #import "UIImageView+WebCache.h"
@@ -28,8 +28,7 @@
 #import "UIView+HUD.h"
 
 //配置单机构或者多机构 (1,单机构、2,多机构)
-#define MoreOrSingle ([Institution_Id isEqualToString:@"0"] || [[NSUserDefaults standardUserDefaults] objectForKey:@"institutionId"] == nil) ? @"2" : @"1"
-#define MoreOrSingle_HeaderUrl @"2"
+#define MoreOrSingle @"1"
 
 #ifndef ChuYouYun_SYG_h
 #define ChuYouYun_SYG_h
@@ -67,14 +66,10 @@
 
 
 
-#define NetKey [[NSUserDefaults standardUserDefaults] objectForKey:@"App_Key"] == nil ? @"2506957b1ea89b71" : [[NSUserDefaults standardUserDefaults] objectForKey:@"App_Key"]
+#define NetKey [[NSUserDefaults standardUserDefaults] objectForKey:@"App_Key"] == nil ? @"14655620465c9899" : [[NSUserDefaults standardUserDefaults] objectForKey:@"App_Key"]
 #define HeaderKey @"En-Params"
 
 #define HASALIPAY [[NSUserDefaults standardUserDefaults] objectForKey:@"hasAlipay"] == nil ? @"0" : [[NSUserDefaults standardUserDefaults] objectForKey:@"hasAlipay"]
-
-#define Show_Config [[NSUserDefaults standardUserDefaults] objectForKey:@"show_config"] == nil ? @"0" : [[NSUserDefaults standardUserDefaults] objectForKey:@"show_config"]
-
-#define Institution_Id [[NSUserDefaults standardUserDefaults] objectForKey:@"institutionId"] == nil ? @"0" : [[NSUserDefaults standardUserDefaults] objectForKey:@"institutionId"]
 
 
 
@@ -108,23 +103,17 @@
 //#define EncryptHeaderUrl @"https://t.v4.51eduline.com"
 
 /// 测试服(d单机构和多机构)
-#define EncryptUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://single.51eduline.com/service/" : @"https://t.v4.51eduline.com/service/"
-#define EncryptHeaderUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://single.51eduline.com" : @"https://t.v4.51eduline.com"
+#define EncryptUrl [MoreOrSingle integerValue] == 1 ? @"http://www.psd119.com/service/" : @"https://t.v4.51eduline.com/service/"
+#define EncryptHeaderUrl [MoreOrSingle integerValue] == 1 ? @"http://www.psd119.com" : @"https://t.v4.51eduline.com"
 
-#define basidUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://single.51eduline.com/service" : @"https://t.v4.51eduline.com/service"
-
-/// 正式服(单机构和多机构)
-//#define EncryptUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://demo.51eduline.com/service/" : @"https://v4.51eduline.com/service/"
-//#define EncryptHeaderUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://demo.51eduline.com" : @"https://v4.51eduline.com"
-//
-//#define basidUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://demo.51eduline.com/service" : @"https://v4.51eduline.com/service"
+#define basidUrl [MoreOrSingle integerValue] == 1 ? @"http://www.psd119.com" : @"https://t.v4.51eduline.com/service"
 
 
 
 
 #define Image(name) [UIImage imageNamed:name]
 #define PriceColor [UIColor redColor]
-#define BasidColor [UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1]
+#define BasidColor RGBHex(0xff3300)//[UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1]
 #define PartitionColor [UIColor colorWithRed:225.f / 255 green:225.f / 255 blue:225.f / 255 alpha:1]
 #define BackColor [UIColor colorWithRed:240.f / 255 green:240.f / 255 blue:240.f / 255 alpha:1]
 #define XXColor [UIColor colorWithRed:153.f / 255 green:153.f / 255 blue:153.f / 255 alpha:1]
@@ -207,43 +196,15 @@ alpha:1.0]
 #define WXAppId @"wxbbb961a0b0bf577a"
 #define WXAppSecret @"7ea0101aeabd53bc32859370cde278cc"
 // QQ分享
-#define QQAppId @"101400042"
-#define QQAppSecret @"a85c2fcd67839693d5c0bf13bec84779"
+#define QQAppId @"101574176"
+#define QQAppSecret @"799eefb9e2f35c6f39fceb43c779b15b"
 // 新浪分享
 #define SinaAppId @"3997129963"
 #define SinaAppSecret @"da07bcf6c9f30281e684f8abfd0b4fca"
 
 // 支付宝h5支付之后需要回到app
-#define AlipayBundleId @"com.saixin.eduline"
+#define AlipayBundleId @"com.pusidun.pusidun.www"
 
-// TKYUN
-#import "TKHelperUtil.h"
-#import "TKTheme.h"
-
-#import "TKMacro.h"
-#import "TKEnumHeader.h"
-
-#import "TKAlertView.h"
-
-#import "TKEduNetManager.h"
-#import "TKUtil.h"
-#import "TXSakuraKit.h"
-
-
-#import <TKRoomSDK/TKRoomSDK.h>
-
-#import <TKWhiteBoard/TKWhiteBoard.h>
-
-#import "UIView+TKExtension.h"
-#import "UIImageView+TKExtension.h"
-#import "UIImage+TKExtension.h"
-#import "UIView+TKRedDot.h"
-#import "UIControl+TKClickedOnce.h"
-#import "TKModelToJson.h"
-#import "TKSortTool.h"
-#import "TKNotificationHeader.h"
-#import "Masonry.h"
-#import "TKRoomJsonModel.h"
 #define ScreenFitWidth [UIScreen mainScreen].bounds.size.width / 375
 #define ScreenFitHeight [UIScreen mainScreen].bounds.size.height / 667
 

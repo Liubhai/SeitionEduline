@@ -13,7 +13,7 @@
 #import "BigWindCar.h"
 #import "UIImageView+WebCache.h"
 #import "UIButton+WebCache.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "MyHttpRequest.h"
 #import "ZhiyiHTTPRequest.h"
 #import "Passport.h"
@@ -399,7 +399,7 @@
                 [_dataArray addObjectsFromArray:(NSArray *)[YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStrFromData:responseObject]];
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         if (_dataArray.count == 0) {
             self.imageView.hidden = NO;
@@ -461,7 +461,7 @@
             [_dataArray addObjectsFromArray:newArray];
         } else {
             Num = Num - 1;
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         if (_dataArray.count == 0) {
             self.imageView.hidden = NO;
@@ -512,7 +512,7 @@
     if (UserOathToken) {
         oath_token_Str = [NSString stringWithFormat:@"%@:%@",UserOathToken,UserOathTokenSecret];
     } else {
-        [TKProgressHUD showError:@"请先去登陆" toView:self.view];
+        [MBProgressHUD showError:@"请先去登陆" toView:self.view];
         return;
     }
     
@@ -526,12 +526,12 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
             [_allWindowView removeFromSuperview];
             [self netWorkTeacherGetCommentList:1];
         } else {
             [_allWindowView removeFromSuperview];
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {

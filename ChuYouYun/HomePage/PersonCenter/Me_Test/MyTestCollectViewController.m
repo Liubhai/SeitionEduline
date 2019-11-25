@@ -207,7 +207,7 @@
                 [_dataArray addObjectsFromArray:(NSMutableArray *) [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject]];
             }
         } else {
-            [TKProgressHUD showError:[dataSource stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dataSource stringValueForKey:@"msg"] toView:self.view];
         }
         
         if (_dataArray.count == 0) {
@@ -256,7 +256,7 @@
         if ([[dataSource stringValueForKey:@"code"] integerValue] == 1) {
             [self netWorkExamsGetCollectList:1];
         } else {
-            [TKProgressHUD showError:[dataSource stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dataSource stringValueForKey:@"msg"] toView:self.view];
         }
         [self headerRerefreshings];
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {

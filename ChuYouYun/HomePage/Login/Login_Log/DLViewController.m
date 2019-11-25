@@ -144,7 +144,7 @@
     
     //添加view
     UIView *NavView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MainScreenWidth, NavigationBarHeight)];
-    NavView.backgroundColor = [UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1];
+    NavView.backgroundColor = BasidColor;//[UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1];
     [self.view addSubview:NavView];
     
     //添加登录
@@ -323,7 +323,7 @@
     DLButton.tag = 10;
     DLButton.titleLabel.font = [UIFont systemFontOfSize:18];
     [DLButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    DLButton.backgroundColor = [UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1];
+    DLButton.backgroundColor = BasidColor;//[UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1];
     DLButton.layer.cornerRadius = 4;
     _DLButton = DLButton;
     [self.view addSubview:DLButton];
@@ -434,15 +434,26 @@
         [self.view addSubview:SFLabel];
 
         //添加三方登录按钮
-        NSArray *SFArray = @[@"微博.png",@"QQ.png",@"微信.png"];
-        for (int i = 0 ; i < 3; i ++) {
-            UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth / 7 + MainScreenWidth / 7  * 2 * i, MainScreenHeight / 5 * 3 + 100, MainScreenWidth / 7, MainScreenWidth / 7)];
+        
+        NSArray *SFArray = @[@"QQ.png"];
+        for (int i = 0 ; i < 1; i ++) {
+            UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake((MainScreenWidth - MainScreenWidth / 7) / 2.0, MainScreenHeight / 5 * 3 + 100, MainScreenWidth / 7, MainScreenWidth / 7)];
             [button setBackgroundImage:[UIImage imageNamed:SFArray[i]] forState:UIControlStateNormal];
             button.tag = i;
             button.layer.cornerRadius = MainScreenWidth / 7 / 2;
             [button addTarget:self action:@selector(SYGButton:) forControlEvents:UIControlEventTouchUpInside];
             [self.view addSubview:button];
         }
+        
+//        NSArray *SFArray = @[@"微博.png",@"QQ.png",@"微信.png"];
+//        for (int i = 0 ; i < 3; i ++) {
+//            UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth / 7 + MainScreenWidth / 7  * 2 * i, MainScreenHeight / 5 * 3 + 100, MainScreenWidth / 7, MainScreenWidth / 7)];
+//            [button setBackgroundImage:[UIImage imageNamed:SFArray[i]] forState:UIControlStateNormal];
+//            button.tag = i;
+//            button.layer.cornerRadius = MainScreenWidth / 7 / 2;
+//            [button addTarget:self action:@selector(SYGButton:) forControlEvents:UIControlEventTouchUpInside];
+//            [self.view addSubview:button];
+//        }
     }
     
     if (iPhoneX) {//iphoneX 所有的适配都在这里
@@ -499,7 +510,8 @@
         [self faceLogin];
     }
     if (button.tag == 0) {//新浪
-        [self Sina];
+//        [self Sina];
+        [self Tencent];
     }
     if (button.tag == 1) {//扣扣
         [self Tencent];
@@ -765,7 +777,7 @@
         NSLog(@"%@", responseObject);
         _dataSource = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[_dataSource stringValueForKey:@"code"] integerValue] == 0) {
-            [TKProgressHUD showError:[_dataSource stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[_dataSource stringValueForKey:@"msg"] toView:self.view];
             return ;
         } else if ([[_dataSource stringValueForKey:@"code"] integerValue] == 1) {
             _dataSource = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
@@ -851,7 +863,7 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         _faceSceneDataSource = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[_faceSceneDataSource stringValueForKey:@"code"] integerValue] == 0) {
-            [TKProgressHUD showError:[_faceSceneDataSource stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[_faceSceneDataSource stringValueForKey:@"msg"] toView:self.view];
             return ;
         } else if ([[_faceSceneDataSource stringValueForKey:@"code"] integerValue] == 1) {
             if ([[_faceSceneDataSource dictionaryValueForKey:@"data"] isKindOfClass:[NSDictionary class]]) {
@@ -913,7 +925,7 @@
 //            [self NetWorkFaceLogin];
             [self NetWorkYouTuFaceLogin];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
@@ -946,7 +958,7 @@
                 if ([_NameField.text isEqualToString:[dataDict stringValueForKey:@"uname"]]) {//说明是同一个人
                     
                 } else {//说明不是同一个人人
-                    [TKProgressHUD showError:@"扫脸识别用户与账号并未绑定" toView:self.view];
+                    [MBProgressHUD showError:@"扫脸识别用户与账号并未绑定" toView:self.view];
                     return ;
                 }
             } else if ([_loginTypeStr integerValue] == 2) {//直接扫脸登录
@@ -970,7 +982,7 @@
                 [self.navigationController dismissViewControllerAnimated:YES completion:nil];
             }
         } else {
-            [TKProgressHUD showError:msg toView:self.view];
+            [MBProgressHUD showError:msg toView:self.view];
         }
         return ;
         
@@ -1002,14 +1014,14 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 0) {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             return ;
         } else if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
             if ([_loginTypeStr integerValue] == 1) {//用户名登录
                 if ([_NameField.text isEqualToString:[dict stringValueForKey:@"uname"]]) {//说明是同一个人
                 } else {//说明不是同一个人人
-                    [TKProgressHUD showError:@"扫脸识别用户与账号并未绑定" toView:self.view];
+                    [MBProgressHUD showError:@"扫脸识别用户与账号并未绑定" toView:self.view];
                     return ;
                 }
             } else if ([_loginTypeStr integerValue] == 2) {//直接扫脸登录
@@ -1071,7 +1083,7 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         _faceStatusDataSource = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[_faceStatusDataSource stringValueForKey:@"code"] integerValue] == 0) {
-            [TKProgressHUD showError:[_faceSceneDataSource stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[_faceSceneDataSource stringValueForKey:@"msg"] toView:self.view];
             return ;
         } else if ([[_faceStatusDataSource stringValueForKey:@"code"] integerValue] == 1) {
             if ([[_faceSceneDataSource dictionaryValueForKey:@"data"] isKindOfClass:[NSDictionary class]]) {
@@ -1141,7 +1153,7 @@
                 [self faceLogin];
             }
         } else {
-            [TKProgressHUD showError:[_statusDict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[_statusDict stringValueForKey:@"msg"] toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {

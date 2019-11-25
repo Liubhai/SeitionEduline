@@ -12,8 +12,8 @@
 #import "DLViewController.h"
 #import "SYG.h"
 #import "MyHttpRequest.h"
-#import "TKProgressHUD.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD.h"
+#import "MBProgressHUD+Add.h"
 
 @interface YYViewController ()<UITextViewDelegate,UIWebViewDelegate>{
     
@@ -77,7 +77,7 @@
     NSString *key = [ user objectForKey:@"oauthToken"];
     NSString *passWord = [ user objectForKey:@"oauthTokenSecret"];
     if (passWord == nil) {
-        [TKProgressHUD showError:@"要先登陆才能预约" toView:self.view];
+        [MBProgressHUD showError:@"要先登陆才能预约" toView:self.view];
         return;
     }
     
@@ -91,14 +91,14 @@
         
         if ([responseObject[@"code"] integerValue] == 1) {
             if ([responseObject[@"data"][@"is_free"] integerValue] == 1) {
-                [TKProgressHUD showSuccess:msg toView:self.view];
+                [MBProgressHUD showSuccess:msg toView:self.view];
             } else {//不免费
                 _aliPayUrl = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"alipay"][@"ios"]];
                 _WXPayUrl = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"wxpay"][@"ios"]];
                 [self whichPay];
             }
         } else {
-            [TKProgressHUD showError:msg toView:self.view];
+            [MBProgressHUD showError:msg toView:self.view];
         }
         
 
@@ -111,13 +111,13 @@
 //                    [self whichPay];
 //                }
 //            } else {//免费
-//                [TKProgressHUD showSuccess:@"解锁成功" toView:self.view];
+//                [MBProgressHUD showSuccess:@"解锁成功" toView:self.view];
 //            }
 //        } else {
-//            [TKProgressHUD showError:Msg toView:self.view];
+//            [MBProgressHUD showError:Msg toView:self.view];
 //        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [TKProgressHUD showError:@"获取数据失败" toView:self.view];
+        [MBProgressHUD showError:@"获取数据失败" toView:self.view];
     }];
 }
 
@@ -309,14 +309,14 @@
     NSURL *url = nil;
     if (typeNum == 1) {
         if (_aliPayUrl == nil) {
-            [TKProgressHUD showError:@"支付失败" toView:self.view];
+            [MBProgressHUD showError:@"支付失败" toView:self.view];
         } else {
             url = [NSURL URLWithString:_aliPayUrl];
         }
 
     } else if (typeNum == 2) {
         if (_WXPayUrl == nil) {
-            [TKProgressHUD showError:@"支付失败" toView:self.view];
+            [MBProgressHUD showError:@"支付失败" toView:self.view];
         } else {
             url = [NSURL URLWithString:_WXPayUrl];
         }

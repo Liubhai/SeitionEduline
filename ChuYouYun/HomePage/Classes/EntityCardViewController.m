@@ -271,7 +271,7 @@
     [dic setObject:[_dict stringValueForKey:@"price"] forKey:@"price"];
     
     if (_textField.text.length == 0) {
-        [TKProgressHUD showError:@"请输入实体卡卡号" toView:self.view];
+        [MBProgressHUD showError:@"请输入实体卡卡号" toView:self.view];
         return;
     }
     [dic setObject:_textField.text forKey:@"coupon_code"];
@@ -283,7 +283,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"NSNotificationEntityCardUse" object:[responseObject dictionaryValueForKey:@"data"]];
             [self backPressed];
         } else {
-            [TKProgressHUD showError:msg toView:self.view];
+            [MBProgressHUD showError:msg toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -310,12 +310,12 @@
         NSString *msg = responseObject[@"msg"];
         if ([responseObject[@"code"] integerValue] == 1) {//取消使用成功
             [[NSNotificationCenter defaultCenter] postNotificationName:@"NSNotificationEntityCardUse" object:nil];
-            [TKProgressHUD showError:msg toView:self.view];
+            [MBProgressHUD showError:msg toView:self.view];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self backPressed];
             });
         } else {
-            [TKProgressHUD showError:msg toView:self.view];
+            [MBProgressHUD showError:msg toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -340,7 +340,7 @@
     [mutabDict setObject:[_dict stringValueForKey:@"price"] forKey:@"price"];
     
     if (_textField.text.length == 0) {
-        [TKProgressHUD showError:@"请输入实体卡卡号" toView:self.view];
+        [MBProgressHUD showError:@"请输入实体卡卡号" toView:self.view];
         return;
     }
     [mutabDict setObject:_textField.text forKey:@"coupon_code"];
@@ -382,7 +382,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"NSNotificationEntityCardUse" object:dict];
             [self backPressed];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -423,12 +423,12 @@
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"NSNotificationEntityCardUse" object:nil];
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self backPressed];
             });
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {

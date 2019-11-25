@@ -147,10 +147,6 @@
     
     NSArray *titleArray = @[@"分类",@"校区",@"筛选条件"];
     NSArray *imageArray = @[@"ic_dropdown_live@3x",@"ic_dropdown_live@3x",@"ic_dropdown_live@3x"];
-    if (([MoreOrSingle integerValue] == 1)) {
-        titleArray = @[@"分类",@"筛选条件"];
-        imageArray = @[@"ic_dropdown_live@3x",@"ic_dropdown_live@3x"];
-    }
     CGFloat ButtonH = 45 * WideEachUnit;
     CGFloat ButtonW = MainScreenWidth / titleArray.count;
     
@@ -167,13 +163,8 @@
             _classButton = button;
             [button addTarget:self action:@selector(classButtonCilck:) forControlEvents:UIControlEventTouchUpInside];
         } else if (i == 1) {
-            if ([MoreOrSingle integerValue] == 1) {
-                _moreButton = button;
-                [button addTarget:self action:@selector(moreButtonCilck:) forControlEvents:UIControlEventTouchUpInside];
-            } else {
-                _schoolButton = button;
-                [button addTarget:self action:@selector(teacherButtonCilck:) forControlEvents:UIControlEventTouchUpInside];
-            }
+            _schoolButton = button;
+            [button addTarget:self action:@selector(teacherButtonCilck:) forControlEvents:UIControlEventTouchUpInside];
         } else if (i == 2) {
             _moreButton = button;
             [button addTarget:self action:@selector(moreButtonCilck:) forControlEvents:UIControlEventTouchUpInside];
@@ -273,7 +264,6 @@
     vc.ID = [[_dataArray objectAtIndex:indexPath.row] stringValueForKey:@"course_id"];
     vc.imageUrl = [[_dataArray objectAtIndex:indexPath.row] stringValueForKey:@"imageurl"];
     vc.titleStr = [[_dataArray objectAtIndex:indexPath.row] stringValueForKey:@"course_name"];
-    vc.orderSwitch = _orderSwitch;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -404,7 +394,7 @@
     NSDictionary *dict = _dataArray[button.tag];
     _ID = [dict stringValueForKey:@"course_id"];
     if ([[dict stringValueForKey:@"is_buy"] integerValue] == 1) {
-        [TKProgressHUD showError:@"已经解锁" toView:self.view];
+        [MBProgressHUD showError:@"已经解锁" toView:self.view];
         return;
     } else {
         [self whichPay];
@@ -531,7 +521,7 @@
                 }
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         if (_dataArray.count == 0) {
             self.imageView.hidden = NO;
@@ -584,14 +574,14 @@
     NSURL *url = nil;
     if (_typeNum == 1) {
         if (_alipayStr == nil) {
-            [TKProgressHUD showError:@"支付失败" toView:self.view];
+            [MBProgressHUD showError:@"支付失败" toView:self.view];
         } else {
             url = [NSURL URLWithString:_alipayStr];
         }
         
     } else if (_typeNum == 2) {
         if (_wxpayStr == nil) {
-            [TKProgressHUD showError:@"支付失败" toView:self.view];
+            [MBProgressHUD showError:@"支付失败" toView:self.view];
         } else {
             url = [NSURL URLWithString:_wxpayStr];
         }

@@ -20,7 +20,7 @@
 #import "Passport.h"
 #import "AppDelegate.h"
 #import "UIView+Utils.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 
 #import "XYViewController.h"
 #import "SYG.h"
@@ -247,19 +247,19 @@
 - (void)TJButtonCilck {
     
     if (_tempnum == 1) {
-        [TKProgressHUD showError:@"请先同意《云课堂服务协议》" toView:self.view];
-        [TKProgressHUD showError:[NSString stringWithFormat:@"请先同意《%@服务协议》",AppName] toView:self.view];
+        [MBProgressHUD showError:@"请先同意《云课堂服务协议》" toView:self.view];
+        [MBProgressHUD showError:[NSString stringWithFormat:@"请先同意《%@服务协议》",AppName] toView:self.view];
         return;
     }
     
     if (_PhoneField.text.length == 0 || _PhoneField.text.length != 11 ) {
-        [TKProgressHUD showError:@"请输入手机号或正确的格式" toView:self.view];
+        [MBProgressHUD showError:@"请输入手机号或正确的格式" toView:self.view];
         return;
     }else if (_YZMField.text.length == 0){
-        [TKProgressHUD showError:@"请输入验证码" toView:self.view];
+        [MBProgressHUD showError:@"请输入验证码" toView:self.view];
         return;
     }else if (_PassField.text.length == 0){
-        [TKProgressHUD showError:@"请输入密码" toView:self.view];
+        [MBProgressHUD showError:@"请输入密码" toView:self.view];
         return;
     }    
     
@@ -296,7 +296,7 @@
 - (void)YZMButtonPressed {
 
     if (_PhoneField.text.length == 0 || _PhoneField.text.length != 11 ) {
-        [TKProgressHUD showError:@"请输入手机号或正确的格式" toView:self.view];
+        [MBProgressHUD showError:@"请输入手机号或正确的格式" toView:self.view];
         return;
         
     } else {
@@ -337,7 +337,7 @@
             NSLog(@"%@", responseObject);
             _codeDict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
             if ([[_codeDict stringValueForKey:@"code"] integerValue] == 0) {
-                [TKProgressHUD showError:[_codeDict stringValueForKey:@"msg"] toView:self.view];
+                [MBProgressHUD showError:[_codeDict stringValueForKey:@"msg"] toView:self.view];
                 return ;
             } else if ([[_codeDict stringValueForKey:@"code"] integerValue] == 1) {
                 _codeDict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
@@ -409,7 +409,7 @@
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             [self TJNetWork];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             return ;
         }
         
@@ -443,7 +443,7 @@
         NSLog(@"%@", responseObject);
         _codeDict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[_codeDict stringValueForKey:@"code"] integerValue] == 0) {
-            [TKProgressHUD showError:[_codeDict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[_codeDict stringValueForKey:@"msg"] toView:self.view];
             return ;
         } else if ([[_codeDict stringValueForKey:@"code"] integerValue] == 1) {
             _codeDict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
@@ -456,7 +456,7 @@
             dispatch_async(dispatch_get_global_queue(0, 0), ^{
                 [Passport userDataWithSavelocality:base.data];
             });
-            [TKProgressHUD showSuccess:@"注册成功" toView:self.view];
+            [MBProgressHUD showSuccess:@"注册成功" toView:self.view];
             MyViewController *myVC = [[MyViewController alloc] init];
 
             if ([_type isEqualToString:@"123"]) {
@@ -497,7 +497,7 @@
         NSLog(@"%@", responseObject);
         _codeDict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[_codeDict stringValueForKey:@"code"] integerValue] == 0) {
-            [TKProgressHUD showError:[_codeDict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[_codeDict stringValueForKey:@"msg"] toView:self.view];
             return ;
         } else if ([[_codeDict stringValueForKey:@"code"] integerValue] == 1) {
             _codeDict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
@@ -508,7 +508,7 @@
                 [[NSUserDefaults standardUserDefaults]setObject:[_codeDict stringValueForKey:@"userface"] forKey:@"userface"];
                 [[NSUserDefaults standardUserDefaults]setObject:[_codeDict stringValueForKey:@"only_login_key"] forKey:@"only_login_key"];
                 
-                [TKProgressHUD showSuccess:@"注册成功" toView:self.view];
+                [MBProgressHUD showSuccess:@"注册成功" toView:self.view];
                 [self.navigationController dismissViewControllerAnimated:YES completion:nil];
                 if ([self.type isEqualToString:@"123"]) {//从设置页面过来
                     MyViewController *myVC = [[MyViewController alloc] init];
@@ -520,7 +520,7 @@
                 [self isBoundFace];
             }
         } else {
-            [TKProgressHUD showError:[_codeDict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[_codeDict stringValueForKey:@"msg"] toView:self.view];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];
@@ -546,7 +546,7 @@
             [[NSUserDefaults standardUserDefaults]setObject:[_codeDict stringValueForKey:@"userface"] forKey:@"userface"];
             [[NSUserDefaults standardUserDefaults]setObject:[_codeDict stringValueForKey:@"only_login_key"] forKey:@"only_login_key"];
             
-            [TKProgressHUD showSuccess:@"注册成功" toView:self.view];
+            [MBProgressHUD showSuccess:@"注册成功" toView:self.view];
             [self.navigationController dismissViewControllerAnimated:YES completion:nil];
             if ([self.type isEqualToString:@"123"]) {//从设置页面过来
                 MyViewController *myVC = [[MyViewController alloc] init];
@@ -604,7 +604,7 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         _faceSceneDataSource = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[_faceSceneDataSource stringValueForKey:@"code"] integerValue] == 0) {
-            [TKProgressHUD showError:[_faceSceneDataSource stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[_faceSceneDataSource stringValueForKey:@"msg"] toView:self.view];
             return ;
         } else if ([[_faceSceneDataSource stringValueForKey:@"code"] integerValue] == 1) {
             _faceSceneDataSource = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];

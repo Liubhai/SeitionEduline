@@ -105,7 +105,7 @@ dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), 
 kWindow.userInteractionEnabled = YES;\
 });\
 
-//10.设置加载提示框（第三方框架：TKProgressHUD）
+//10.设置加载提示框（第三方框架：MBProgressHUD）
 // 加载
 #define kShowNetworkActivityIndicator() [UIApplication sharedApplication].networkActivityIndicatorVisible = YES
 // 收起加载
@@ -127,10 +127,10 @@ aView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3]; \
 } \
 } \
 
-#define kShowHUDAndActivity kBackView;[TKProgressHUD showHUDAddedTo:kWindow animated:YES];kShowNetworkActivityIndicator()
+#define kShowHUDAndActivity kBackView;[MBProgressHUD showHUDAddedTo:kWindow animated:YES];kShowNetworkActivityIndicator()
 
 
-#define kHiddenHUD [TKProgressHUD hideAllHUDsForView:kWindow animated:YES]
+#define kHiddenHUD [MBProgressHUD hideAllHUDsForView:kWindow animated:YES]
 
 #define kRemoveBackView         for (UIView *item in kWindow.subviews) { \
 if(item.tag == 10000) \

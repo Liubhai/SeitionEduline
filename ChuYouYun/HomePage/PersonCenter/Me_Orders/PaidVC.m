@@ -12,7 +12,7 @@
 #import "rootViewController.h"
 #import "BigWindCar.h"
 #import "MJRefresh.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 
 #import "InstitutionListCell.h"
 #import "OrderCell.h"
@@ -237,11 +237,8 @@
             return;
         }
     }
-    if ([_dataArray[indexPath.row][@"order_type"] integerValue] == 4 || [_dataArray[indexPath.row][@"order_type"] integerValue] == 7) {//点播
+    if ([_dataArray[indexPath.row][@"order_type"] integerValue] == 4) {//点播
         NSString *ID = [NSString stringWithFormat:@"%@",_dataArray[indexPath.row][@"video_id"]];
-        if ([_dataArray[indexPath.row][@"order_type"] integerValue] == 7) {
-            ID = [NSString stringWithFormat:@"%@",_dataArray[indexPath.row][@"classes_id"]];
-        }
         NSString *price = _dataArray[indexPath.row][@"price"];
         NSString *title = _dataArray[indexPath.row][@"video_name"];
         NSString *videoUrl = _dataArray[indexPath.row][@"source_info"][@"video_address"];
@@ -254,7 +251,6 @@
         vc.videoUrl = videoUrl;
         vc.imageUrl = imageUrl;
         vc.orderSwitch = _order_switch;
-        vc.isClassNew = ([_dataArray[indexPath.row][@"order_type"] integerValue] == 7 ? YES : NO);
         [self.navigationController pushViewController:vc animated:YES];
         
     } else if ([_dataArray[indexPath.row][@"order_type"] integerValue] == 5) {
@@ -305,9 +301,6 @@
         _classTypeStr = @"6";
     } else if ([_classTypeStr integerValue] == 4) {
         _classTypeStr = @"2";
-    } else if ([_classTypeStr integerValue] == 5) {
-        // 班级课
-        _classTypeStr = @"7";
     }
     [self netWorkOrderGetList:1];
 }
@@ -325,9 +318,6 @@
         _classTypeStr = @"6";
     } else if ([_classTypeStr integerValue] == 4) {
         _classTypeStr = @"2";
-    } else if ([_classTypeStr integerValue] == 5) {
-        // 班级课
-        _classTypeStr = @"7";
     }
     [self netWorkSchoolGetOrderList:1];
 }
@@ -571,7 +561,7 @@
         NSDictionary *cancelDict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
         
         if ([[cancelDict stringValueForKey:@"staust"] integerValue] == 1) {
-            [TKProgressHUD showSuccess:@"取消成功" toView:self.view];
+            [MBProgressHUD showSuccess:@"取消成功" toView:self.view];
             [self netWorkOrderGetList:_number];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -606,7 +596,7 @@
         NSDictionary *cancelDict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
         
         if ([[cancelDict stringValueForKey:@"staust"] integerValue] == 1) {
-            [TKProgressHUD showSuccess:@"取消成功" toView:self.view];
+            [MBProgressHUD showSuccess:@"取消成功" toView:self.view];
             [self netWorkOrderGetList:_number];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {

@@ -8,9 +8,6 @@
 
 
 #import "LanchAnimationVC.h"
-#import "SYG.h"
-#import "YunKeTang_Api.h"
-#import "Passport.h"
 
 // 放大倍数 建议：1.1
 #define BgSale 1.1
@@ -61,13 +58,12 @@
     _timerbutton.clipsToBounds = YES;
     _timerbutton.layer.cornerRadius = 15;
     [_timerbutton setTitle:[NSString stringWithFormat:@"跳过 %@",@(timerCountDefault)] forState:0];
-    _timerbutton.backgroundColor = [UIColor colorWithRGBA:0x00000026];
+    _timerbutton.backgroundColor = RGBHex(0xEEEEEE);//[UIColor colorWithRGBA:0x00000026];
     [_timerbutton addTarget:self action:@selector(timerOut) forControlEvents:UIControlEventTouchUpInside];
     [_timerbutton setTitleColor:RGBHex(0x333333) forState:0];
     _timerbutton.titleLabel.font = SYSTEMFONT(14);
     [self.view addSubview:_timerbutton];
     _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerCount) userInfo:nil repeats:YES];
-    [self getHomeindexConfig];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -114,43 +110,6 @@
     
     [self.view removeAllSubviews];
 }
-
-// MARK: - 获取机构app是否开启
-- (void)getHomeindexConfig {
-    NSString *endUrlStr = config_indexConfig;
-    NSString *allUrlStr = [YunKeTang_Api_Tool YunKeTang_GetFullUrl:endUrlStr];
-    
-    NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
-    //获取当前的时间戳
-    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[[NSDate  date] timeIntervalSince1970]];
-    NSString *ggg = [Passport getHexByDecimal:[timeSp integerValue]];
-    
-    NSString *tokenStr =  [Passport md5:[NSString stringWithFormat:@"%@%@",timeSp,ggg]];
-    [mutabDict setObject:ggg forKey:@"hextime"];
-    [mutabDict setObject:tokenStr forKey:@"token"];
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:allUrlStr]];
-    [request setHTTPMethod:NetWay];
-    NSString *encryptStr = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetEncryptStr:mutabDict];
-    [request setValue:encryptStr forHTTPHeaderField:HeaderKey];
-    
-    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
-        if ([[dict objectForKey:@"code"] integerValue] == 1) {
-            dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStrFromData:responseObject];
-            [[NSUserDefaults standardUserDefaults] setObject:[dict objectForKey:@"show_config"] forKey:@"show_config"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-        } else {
-            [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"show_config"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-        }
-        
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-    }];
-    [op start];
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

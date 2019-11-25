@@ -375,7 +375,7 @@
 - (void)submitButtonClick {
     // 先判断勾选了支付协议没有
     if (!_agreeButton.selected) {
-        [TKProgressHUD showError:@"请先阅读并同意《eduline解锁协议》" toView:self.view];
+        [MBProgressHUD showError:@"请先阅读并同意《eduline解锁协议》" toView:self.view];
         return;
     }
     if ([_payMethodString integerValue] == 0) {//支付宝支付
@@ -463,7 +463,7 @@
                 [self WXPay:_wxPayDict];
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             return ;
         }
         
@@ -505,10 +505,10 @@
         
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 0) {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             return ;
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popViewControllerAnimated:YES];
             });

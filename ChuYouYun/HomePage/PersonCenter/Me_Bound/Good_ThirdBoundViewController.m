@@ -66,12 +66,18 @@
 - (void)interFace {
     self.view.backgroundColor = [UIColor whiteColor];
 //    isHaveAli = NO;
-    _titleArray = @[@"微信",@"QQ",@"微博"];
-    _imageArray = @[@"微信.png",@"QQ.png",@"微博.png"];
+    _titleArray = @[@"QQ"];
+    _imageArray = @[@"QQ.png"];
     _typeArray = [NSMutableArray array];
-    for (int i = 0 ; i < 3 ; i ++) {
+    for (int i = 0 ; i < 1 ; i ++) {
         [_typeArray addObject:@"0"];
     }
+//    _titleArray = @[@"微信",@"QQ",@"微博"];
+//    _imageArray = @[@"微信.png",@"QQ.png",@"微博.png"];
+//    _typeArray = [NSMutableArray array];
+//    for (int i = 0 ; i < 3 ; i ++) {
+//        [_typeArray addObject:@"0"];
+//    }
 }
 
 
@@ -156,7 +162,8 @@
     [_tableView deselectRowAtIndexPath:indexPath animated:YES];
     _typeStr = [_typeArray objectAtIndex:indexPath.row];
     if (indexPath.row == 0) {//微信
-        [self WeChat];
+        [self Tencent];
+//        [self WeChat];
     } else if (indexPath.row == 1) {//QQ
         [self Tencent];
     } else if (indexPath.row == 2) {//微博
@@ -272,22 +279,29 @@
             dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
         }
         [_typeArray removeAllObjects];
-        if ([[dict stringValueForKey:@"weixin"] integerValue] == 0) {
-            [_typeArray addObject:@"0"];
-        } else {
-            [_typeArray addObject:@"1"];
-        }
+        
         if ([[dict stringValueForKey:@"qzone"] integerValue] == 0) {
             [_typeArray addObject:@"0"];
         } else {
             [_typeArray addObject:@"1"];
         }
         
-        if ([[dict stringValueForKey:@"sina"] integerValue] == 0) {
-            [_typeArray addObject:@"0"];
-        } else {
-            [_typeArray addObject:@"1"];
-        }
+//        if ([[dict stringValueForKey:@"weixin"] integerValue] == 0) {
+//            [_typeArray addObject:@"0"];
+//        } else {
+//            [_typeArray addObject:@"1"];
+//        }
+//        if ([[dict stringValueForKey:@"qzone"] integerValue] == 0) {
+//            [_typeArray addObject:@"0"];
+//        } else {
+//            [_typeArray addObject:@"1"];
+//        }
+//
+//        if ([[dict stringValueForKey:@"sina"] integerValue] == 0) {
+//            [_typeArray addObject:@"0"];
+//        } else {
+//            [_typeArray addObject:@"1"];
+//        }
         [_tableView reloadData];
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];
@@ -327,16 +341,16 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             [self NetWorkUserBindData];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             return ;
         }
         [_tableView reloadData];
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        [TKProgressHUD showError:@"绑定失败" toView:self.view];
+        [MBProgressHUD showError:@"绑定失败" toView:self.view];
         return ;
     }];
     [op start];
@@ -371,10 +385,10 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             [self NetWorkUserBindData];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             return ;
         }
         [_tableView reloadData];

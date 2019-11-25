@@ -12,7 +12,7 @@
 #import "rootViewController.h"
 #import "BigWindCar.h"
 #import "MJRefresh.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 
 #import "InstitutionListCell.h"
 #import "OrderCell.h"
@@ -213,7 +213,7 @@
             return;
         }
     }
-    if ([_dataArray[indexPath.row][@"order_type"] integerValue] == 4 || [_dataArray[indexPath.row][@"order_type"] integerValue] == 7) {//点播
+    if ([_dataArray[indexPath.row][@"order_type"] integerValue] == 4) {//点播
         
         NSString *ID = [NSString stringWithFormat:@"%@",_dataArray[indexPath.row][@"source_info"][@"id"]];
         NSString *price = _dataArray[indexPath.row][@"source_info"][@"mz_price"][@"price"];
@@ -228,7 +228,6 @@
         vc.price = price;
         vc.ID = ID;
         vc.orderSwitch = _order_switch;
-        vc.isClassNew = ([_dataArray[indexPath.row][@"order_type"] integerValue] == 7 ? YES : NO);
         [self.navigationController pushViewController:vc animated:YES];
         
     } else if ([_dataArray[indexPath.row][@"order_type"] integerValue] == 5) {
@@ -299,7 +298,7 @@
     NSInteger index = button.tag;
     _orderDict = _dataArray[index];
     if ([[[_dataArray objectAtIndex:index] stringValueForKey:@"order_type"] integerValue] == 5) {//线下课
-//        [TKProgressHUD showError:@"线下课暂不支持取消订单" toView:self.view];
+//        [MBProgressHUD showError:@"线下课暂不支持取消订单" toView:self.view];
 //        return;
         [self isSureCancel];
     } else {
@@ -643,10 +642,10 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *cancelDict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[cancelDict stringValueForKey:@"code"] integerValue] == 1) {
-            [TKProgressHUD showError:@"取消成功" toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:@"取消成功" toView:[UIApplication sharedApplication].keyWindow];
             [self netWorkOrderGetList:_number];
         } else {
-            [TKProgressHUD showSuccess:[cancelDict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showSuccess:[cancelDict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];
@@ -680,7 +679,7 @@
         NSDictionary *cancelDict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
         
         if ([[cancelDict stringValueForKey:@"staust"] integerValue] == 1) {
-            [TKProgressHUD showError:@"取消成功" toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:@"取消成功" toView:[UIApplication sharedApplication].keyWindow];
             [self netWorkOrderGetList:_number];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -763,7 +762,7 @@
                 [self WXPay:_wxPayDict];
             } else if ([_payTypeStr integerValue] == 3) {//余额
                 [_allWindowView removeFromSuperview];
-                [TKProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
                 [self netWorkOrderGetList:1];
             }
         }
@@ -817,7 +816,7 @@
                 [self WXPay:_wxPayDict];
             } else if ([_payTypeStr integerValue] == 3) {//余额
                 [_allWindowView removeFromSuperview];
-                [TKProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
                 [self netWorkOrderGetList:1];
             }
         }
@@ -872,7 +871,7 @@
                 if (ali) {
                     [self addWebView];
                 } else {
-                    [TKProgressHUD showError:@"未检测到支付宝" toView:self.view];
+                    [MBProgressHUD showError:@"未检测到支付宝" toView:self.view];
                     return ;
                 }
             } else if ([_payTypeStr integerValue] == 2){//微信
@@ -880,7 +879,7 @@
                 [self WXPay:_wxPayDict];
             } else if ([_payTypeStr integerValue] == 3) {//余额
                 [_allWindowView removeFromSuperview];
-                [TKProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
                 [self netWorkOrderGetList:1];
             }
         }
@@ -932,7 +931,7 @@
                 [self WXPay:_wxPayDict];
             } else if ([_payTypeStr integerValue] == 3) {//余额
                 [_allWindowView removeFromSuperview];
-                [TKProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
+                [MBProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
                 [self netWorkOrderGetList:1];
             }
         }

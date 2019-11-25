@@ -9,7 +9,7 @@
 #import "OrderCell.h"
 #import "SYG.h"
 #import "UIImageView+WebCache.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 
 
 @implementation OrderCell
@@ -310,7 +310,7 @@
 #pragma mark ---- 手势
 
 - (void)longPressToDo:(UILongPressGestureRecognizer *)gest {
-    [TKProgressHUD showSuccess:@"请不要按了" toView:self];
+    [MBProgressHUD showSuccess:@"请不要按了" toView:self];
 }
 
 //去掉HTML字符

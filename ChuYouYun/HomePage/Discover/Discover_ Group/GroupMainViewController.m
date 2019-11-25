@@ -12,7 +12,7 @@
 #import "SYG.h"
 #import "BigWindCar.h"
 #import "UIImageView+WebCache.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "MyHttpRequest.h"
 #import "ZhiyiHTTPRequest.h"
 
@@ -353,7 +353,7 @@
         [self netWork];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [TKProgressHUD showError:@"请检查网络" toView:self.view];
+        [MBProgressHUD showError:@"请检查网络" toView:self.view];
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, MainScreenWidth, MainScreenHeight - 64)];
         imageView.image = [UIImage imageNamed:@"云课堂_空数据"];
         [self.view addSubview:imageView];
@@ -390,11 +390,11 @@
             }
             [self addControllerSrcollView];
         } else {
-            [TKProgressHUD showError:msg toView:self.view];
+            [MBProgressHUD showError:msg toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [TKProgressHUD showError:@"请检查网络" toView:self.view];
+        [MBProgressHUD showError:@"请检查网络" toView:self.view];
         //添加空白处理
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, MainScreenWidth, MainScreenHeight - 64)];
         imageView.image = [UIImage imageNamed:@"云课堂_空数据"];

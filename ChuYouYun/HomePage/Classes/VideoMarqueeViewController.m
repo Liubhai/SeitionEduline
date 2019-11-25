@@ -8,7 +8,7 @@
 
 #import "VideoMarqueeViewController.h"
 #import "SYG.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "BigWindCar.h"
 #import "MJRefresh.h"
 

@@ -273,45 +273,49 @@
     cycleScrollView3.currentPageDotImage = [UIImage imageNamed:@"pageControlCurrentDot"];
     cycleScrollView3.pageDotImage = [UIImage imageNamed:@"pageControlDot"];
     cycleScrollView3.imageURLStringsGroup = _imageArray;
-    cycleScrollView3.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
+    cycleScrollView3.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
     cycleScrollView3.delegate = self;
     [_imageScrollView addSubview:cycleScrollView3];
 }
 
 - (void)addRankView {
-    CGFloat ButtonW = (MainScreenWidth - 4 * SpaceBaside / 2 ) / 3.5;
-    CGFloat ButtonH = ButtonW;
     if (_liveHeaderView == nil) {
-        _liveHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_imageScrollView.frame) + 10, MainScreenWidth, ButtonH + 70)];
-        _liveHeaderView.backgroundColor = RGBHex(0xF7F7F7);
+        _liveHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_imageScrollView.frame) + 10, MainScreenWidth, 40)];
+        _liveHeaderView.backgroundColor = [UIColor whiteColor];
         [_tableHeaderView addSubview:_liveHeaderView];
         _liveHeaderView.userInteractionEnabled = YES;
         
         //标题
-        UILabel *liveLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 45, ButtonH + 70)];
-        liveLabel.text = @"排\n行\n榜";
-        liveLabel.font = Font(22);
-        liveLabel.numberOfLines = 0;
+        UILabel *liveLabel = [[UILabel alloc] initWithFrame:CGRectMake(SpaceBaside, SpaceBaside, MainScreenWidth - 2 * SpaceBaside, 20)];
+        liveLabel.text = @"兑换排行榜";
+        liveLabel.font = Font(16);
+        liveLabel.textColor = BasidColor;
+        liveLabel.backgroundColor = [UIColor whiteColor];
         [_liveHeaderView addSubview:liveLabel];
         liveLabel.userInteractionEnabled = YES;
         liveLabel.textAlignment = NSTextAlignmentCenter;
     }
-    _liveHeaderView.frame = CGRectMake(0, CGRectGetMaxY(_imageScrollView.frame) + 10, MainScreenWidth, ButtonH + 70);
+    _liveHeaderView.frame = CGRectMake(0, CGRectGetMaxY(_imageScrollView.frame) + 10, MainScreenWidth, 40);
     
     if (_rankScrollView == nil) {
-        _rankScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(45, 0, MainScreenWidth - 45 , ButtonH + 70)];
-        _rankScrollView.backgroundColor = RGBHex(0xF7F7F7);
+        _rankScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_liveHeaderView.frame), MainScreenWidth , 160)];
+        _rankScrollView.backgroundColor = [UIColor groupTableViewBackgroundColor];
         _rankScrollView.showsHorizontalScrollIndicator = NO;
         _rankScrollView.showsVerticalScrollIndicator = NO;
+        _rankScrollView.contentSize = CGSizeMake(MainScreenWidth * 2, 160);
         _rankScrollView.userInteractionEnabled = YES;
-        [_liveHeaderView addSubview:_rankScrollView];
+        [_tableHeaderView addSubview:_rankScrollView];
     } else {
         [_rankScrollView removeAllSubviews];
     }
     
-    NSInteger Num = _rankArray.count;
     
-    _rankScrollView.frame = CGRectMake(45, 0, MainScreenWidth - 45, ButtonH + 70);
+    CGFloat ButtonW = (MainScreenWidth - 4 * SpaceBaside / 2 ) / 3.5;
+    CGFloat ButtonH = ButtonW;
+    NSInteger Num = _rankArray.count;
+//    Num = 4;
+    
+    _rankScrollView.frame = CGRectMake(0, CGRectGetMaxY(_liveHeaderView.frame), MainScreenWidth, ButtonH + 70);
     
     //添加兑换课程课程
     for (int i = 0 ; i < Num; i ++) {
@@ -386,36 +390,39 @@
     //直播数据为空的时候 就隐藏
     if (_rankArray.count == 0) {
         _liveHeaderView.frame = CGRectMake(0, CGRectGetMaxY(_imageScrollView.frame), MainScreenWidth, 0);
-        _rankScrollView.frame = CGRectMake(45, 0, MainScreenWidth, 0);
+        _rankScrollView.frame = CGRectMake(0, CGRectGetMaxY(_liveHeaderView.frame), MainScreenWidth, 0);
         _liveHeaderView.hidden = YES;
         _rankScrollView.hidden = YES;
     }
     
-    _tableHeaderView.frame = CGRectMake(0, 0, MainScreenWidth, CGRectGetMaxY(_liveHeaderView.frame));
+    _tableHeaderView.frame = CGRectMake(0, 0, MainScreenWidth, CGRectGetMaxY(_rankScrollView.frame));
 }
 
 - (void)addExchangeView {
-    _exchangeView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MainScreenWidth, 200 - 30)];
+    _exchangeView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MainScreenWidth, 200)];
     if (twoTitle) {
         if (thereTitle) {
-            _exchangeView.frame = CGRectMake(0, 0, MainScreenWidth, 150 - 30 + 22);
+            _exchangeView.frame = CGRectMake(0, 0, MainScreenWidth, 150);
         } else {
-            _exchangeView.frame = CGRectMake(0, 0, MainScreenWidth, 110 - 30 + 22);
+            _exchangeView.frame = CGRectMake(0, 0, MainScreenWidth, 110);
         }
     } else {
-        _exchangeView.frame = CGRectMake(0, 0, MainScreenWidth, 70 - 30 + 22);
+        _exchangeView.frame = CGRectMake(0, 0, MainScreenWidth, 70);
     }
     [_headerView addSubview:_exchangeView];
     [_headerView setHeight:_exchangeView.height];
     
+    //添加横线
+    UIButton *lineButton = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth / 4, 14.5,MainScreenWidth / 2 , 1)];
+    lineButton.backgroundColor = BlackNotColor;
+    [_exchangeView addSubview:lineButton];
+    
     //添加品质交换
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 62, 62)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(MainScreenWidth / 2 - 60, 0, 120, 30)];
     label.textAlignment = NSTextAlignmentCenter;
-    label.text = @"品质\n兑换";
-    label.numberOfLines = 0;
+    label.text = @"品质兑换";
     label.backgroundColor = [UIColor whiteColor];
     label.textColor = BlackNotColor;
-    label.font = SYSTEMFONT(22);
     [_exchangeView addSubview:label];
     
     [self addExchangViewUp];
@@ -433,7 +440,7 @@
 
 - (void)addExchangViewUp {
     
-    _exchangViewUp = [[UIScrollView alloc] initWithFrame:CGRectMake(62, 0, MainScreenWidth - 62, 62)];
+    _exchangViewUp = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 30, MainScreenWidth, 40)];
     _exchangViewUp.backgroundColor = [UIColor whiteColor];
     [_exchangeView addSubview:_exchangViewUp];
 
@@ -455,8 +462,7 @@
     allButtonXUp = 0;
     for (int i = 0; i < _exchangArray.count ; i ++) {
         _exchangButtonUp = [[UIButton alloc] init];
-        _exchangButtonUp.frame = CGRectMake(buttonXUp, 0, (MainScreenWidth - 62) / 5, 40);
-        _exchangButtonUp.centerY = _exchangViewUp.height/2.0;
+        _exchangButtonUp.frame = CGRectMake(buttonXUp, 0, MainScreenWidth / 5, 40);
         [_exchangButtonUp setTitle:[[_exchangArray objectAtIndex:i] stringValueForKey:@"title"] forState:UIControlStateNormal];
         [_exchangViewUp addSubview:_exchangButtonUp];
         _exchangButtonUp.titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -477,12 +483,12 @@
         
         //按钮的自适应
         CGRect labelSize = [_exchangButtonUp.titleLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 40) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingTruncatesLastVisibleLine attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:16]} context:nil];
-        if (labelSize.size.width < (MainScreenWidth - 62) / 5 ) {
-            labelSize.size.width = (MainScreenWidth - 62) / 5;
+        if (labelSize.size.width < MainScreenWidth / 5 ) {
+            labelSize.size.width = MainScreenWidth / 5;
         }
         
         if (_exchangArray.count <= 5) {
-            CGFloat ButtonW = (MainScreenWidth - 62) / _exchangArray.count;
+            CGFloat ButtonW = MainScreenWidth / _exchangArray.count;
             _exchangButtonUp.frame = CGRectMake(ButtonW * i, 0, ButtonW, 40);
         } else {
             _exchangButtonUp.frame = CGRectMake(_exchangButtonUp.frame.origin.x, _exchangButtonUp.frame.origin.y,labelSize.size.width, 40);
@@ -504,8 +510,8 @@
     _exchangViewUp.contentSize = CGSizeMake(buttonXUp + 2, 40);
     for (int i = 0; i<_exchangUpButtonsArray.count; i++) {
         if (((UIButton *)_exchangUpButtonsArray[i]).tag == [upTypeStr integerValue]) {
-            if ((((UIButton *)_exchangUpButtonsArray[i]).left + (MainScreenWidth - 62)) > _exchangViewUp.contentSize.width) {
-                _exchangViewUp.contentOffset = CGPointMake(_exchangViewUp.contentSize.width - (MainScreenWidth - 62), 0);
+            if ((((UIButton *)_exchangUpButtonsArray[i]).left + MainScreenWidth) > _exchangViewUp.contentSize.width) {
+                _exchangViewUp.contentOffset = CGPointMake(_exchangViewUp.contentSize.width - MainScreenWidth, 0);
             } else {
                 _exchangViewUp.contentOffset = CGPointMake(((UIButton *)_exchangUpButtonsArray[i]).left, 0);
             }
@@ -799,14 +805,14 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (twoTitle) {//有两级以及两级以上分类
         if (thereTitle) {//
-            return 150 - 30 + 22;
+            return 150;
         } else {//只有两级分类的时候
-            return 110 - 30 + 22;
+            return 110;
         }
     } else {//只有一级分类
-        return 70 - 30 + 22;
+        return 70;
     }
-    return 150 - 30 + 22;
+    return 150;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -1275,7 +1281,7 @@
                 
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         [self netWorkGoodsGetHomeDataWithID:nil];
         

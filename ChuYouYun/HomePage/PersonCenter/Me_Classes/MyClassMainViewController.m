@@ -21,14 +21,12 @@
 @property (strong ,nonatomic)UIButton *liveButton;
 @property (strong ,nonatomic)UIButton *classButton;
 @property (strong ,nonatomic)UIButton *downButton;
-@property (strong ,nonatomic)UIButton *newsClassButton;
 
 @property (assign ,nonatomic)CGFloat  buttonW;
 @property (strong ,nonatomic)UIButton *HDButton;
 @property (strong ,nonatomic)UIButton *seletedButton;
 
 @property (strong ,nonatomic)UIScrollView *controllerSrcollView;
-@property (strong, nonatomic) NSArray *titleArray;
 
 @end
 
@@ -111,16 +109,17 @@
     WZView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:WZView];
     //添加按钮
-    _titleArray = @[@"直播",@"点播",@"线下课",@"班级课"];
+    NSArray *titleArray = @[@"直播",@"点播",@"线下课"];
+//    NSArray *titleArray = @[@"直播",@"点播"];
     
     CGFloat ButtonH = 20;
-    CGFloat ButtonW = MainScreenWidth / _titleArray.count;
+    CGFloat ButtonW = MainScreenWidth / titleArray.count;
     _buttonW = ButtonW;
-    for (int i = 0; i < _titleArray.count; i ++) {
+    for (int i = 0; i < titleArray.count; i ++) {
         UIButton *button = [[UIButton alloc] init];
         button.frame = CGRectMake(ButtonW * i, 7, ButtonW, ButtonH);
         button.tag = i;
-        [button setTitle:_titleArray[i] forState:UIControlStateNormal];
+        [button setTitle:titleArray[i] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1] forState:UIControlStateSelected];
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -137,8 +136,6 @@
             _classButton = button;
         } else if (i == 2) {
             _downButton = button;
-        } else if (i == 3) {
-            _newsClassButton = button;
         }
         
         //添加分割线
@@ -176,7 +173,7 @@
     _controllerSrcollView.delegate = self;
     _controllerSrcollView.bounces = NO;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    _controllerSrcollView.contentSize = CGSizeMake(MainScreenWidth * _titleArray.count,0);
+    _controllerSrcollView.contentSize = CGSizeMake(MainScreenWidth * 3,0);
     [self.view addSubview:_controllerSrcollView];
     _controllerSrcollView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
@@ -194,12 +191,6 @@
     downVc.view.frame = CGRectMake(MainScreenWidth * 2, 0, MainScreenWidth, MainScreenHeight - MACRO_UI_UPHEIGHT - 34);
     [_controllerSrcollView addSubview:downVc.view];
     [self addChildViewController:downVc];
-    
-    KCViewController * newClassVc = [[KCViewController alloc]init];
-    newClassVc.typeString = @"newClass";
-    newClassVc.view.frame = CGRectMake(MainScreenWidth * 3, 0, MainScreenWidth, MainScreenHeight - MACRO_UI_UPHEIGHT - 34);
-    [_controllerSrcollView addSubview:newClassVc.view];
-    [self addChildViewController:newClassVc];
     
 }
 
@@ -252,19 +243,6 @@
             [_liveButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [_classButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [_downButton setTitleColor:BasidColor forState:UIControlStateNormal];
-            
-        } else if (point.x == MainScreenWidth * 3) {
-            
-            _controllerSrcollView.contentOffset = CGPointMake(MainScreenWidth * 3, 0);
-            
-            [UIView animateWithDuration:0.25 animations:^{
-                _HDButton.frame = CGRectMake(_buttonW * 3, 27 + 3, _buttonW, 1);
-            }];
-            
-            [_liveButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [_classButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [_downButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [_newsClassButton setTitleColor:BasidColor forState:0];
             
         }
     }

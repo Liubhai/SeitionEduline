@@ -13,7 +13,7 @@
 #import "UMSocial.h"
 #import "MyHttpRequest.h"
 #import "ZhiyiHTTPRequest.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 
 #import "ReMD.h"
 #import "Passport.h"
@@ -248,11 +248,11 @@
 
 - (void)TJButton:(UIButton *)button {
     if (_tempnum == 1) {
-        [TKProgressHUD showError:[NSString stringWithFormat:@"请先同意《%@服务协议》",AppName] toView:self.view];
+        [MBProgressHUD showError:[NSString stringWithFormat:@"请先同意《%@服务协议》",AppName] toView:self.view];
         return;
     }
     if (self.EmailField.text.length == 0 || self.NameField.text.length == 0 || self.PassField.text.length == 0) {
-        [TKProgressHUD showError:@"请提交所需完善资料" toView:self.view];
+        [MBProgressHUD showError:@"请提交所需完善资料" toView:self.view];
         return;
     }
     [self.EmailField resignFirstResponder];
@@ -375,12 +375,12 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {//注册成功 直接去登录
-            [TKProgressHUD showError:@"注册成功" toView:self.view];
+            [MBProgressHUD showError:@"注册成功" toView:self.view];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self backPressed];
             });
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             return ;
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -408,7 +408,7 @@
         NSLog(@"%@", responseObject);
         _dataSource = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[_dataSource stringValueForKey:@"code"] integerValue] == 0) {
-            [TKProgressHUD showError:[_dataSource stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[_dataSource stringValueForKey:@"msg"] toView:self.view];
             return ;
         } else if ([[_dataSource stringValueForKey:@"code"] integerValue] == 1) {
             _dataSource = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
@@ -468,7 +468,7 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         _faceSceneDataSource = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[_faceSceneDataSource stringValueForKey:@"code"] integerValue] == 0) {
-            [TKProgressHUD showError:[_faceSceneDataSource stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[_faceSceneDataSource stringValueForKey:@"msg"] toView:self.view];
             return ;
         } else if ([[_faceSceneDataSource stringValueForKey:@"code"] integerValue] == 1) {
             _faceSceneDataSource = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];

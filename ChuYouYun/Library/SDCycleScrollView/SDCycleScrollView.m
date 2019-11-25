@@ -91,7 +91,7 @@ NSString * const ID = @"cycleCell";
     _pageDotColor = [UIColor lightGrayColor];
     _bannerImageViewContentMode = UIViewContentModeScaleToFill;
     
-    self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = [UIColor lightGrayColor];
     
 }
 
@@ -317,11 +317,6 @@ NSString * const ID = @"cycleCell";
         }
     }];
     self.imagePathsGroup = [temp copy];
-    if (self.imagePathsGroup.count <= 0) {
-        self.backgroundImageView.hidden = NO;
-    } else {
-        self.backgroundImageView.hidden = YES;
-    }
 }
 
 - (void)setLocalizationImageNamesGroup:(NSArray *)localizationImageNamesGroup
@@ -492,7 +487,7 @@ NSString * const ID = @"cycleCell";
     if (self.pageControlAliment == SDCycleScrollViewPageContolAlimentRight) {
         x = self.mainView.sd_width - size.width - 10;
     }
-    CGFloat y = self.mainView.sd_height - size.height - 10 - 10;//这里多减掉 10  是因为 cell 和 外部有一个间距 10
+    CGFloat y = self.mainView.sd_height - size.height - 10;
     
     if ([self.pageControl isKindOfClass:[TAPageControl class]]) {
         TAPageControl *pageControl = (TAPageControl *)_pageControl;

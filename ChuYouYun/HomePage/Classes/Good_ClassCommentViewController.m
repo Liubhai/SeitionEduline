@@ -50,7 +50,7 @@
 -(UIImageView *)imageView {
     if (!_imageView) {
         _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, MainScreenWidth, 200)];
-        _imageView.image = [UIImage imageNamed:@"云课堂_空数据 （小）"];
+        _imageView.image = [UIImage imageNamed:@"云课堂_空数据"];
         if (iPhone6) {
             _imageView.frame = CGRectMake(MainScreenWidth / 2 - 100, 150, 200, 200);
         } else if (iPhone6Plus) {
@@ -319,7 +319,7 @@
         return;
     }
     if ([[_videoDataSource stringValueForKey:@"is_buy"] integerValue] == 0) {//没有解锁
-        [TKProgressHUD showError:@"解锁之后才能评论" toView:[UIApplication sharedApplication].keyWindow];
+        [MBProgressHUD showError:@"解锁之后才能评论" toView:[UIApplication sharedApplication].keyWindow];
         return;
     }
     UIView *allWindowView = [[UIView alloc] initWithFrame:CGRectMake(0,0, MainScreenWidth, MainScreenHeight)];
@@ -469,12 +469,7 @@
     
     NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
     [mutabDict setObject:_ID forKey:@"kzid"];
-    if (_isNewClass) {
-       [mutabDict setValue:@"6" forKey:@"kztype"]; // 2为专辑 1 为课程
-    } else {
-        [mutabDict setValue:@"1" forKey:@"kztype"]; // 2为专辑 1 为课程
-    }
-    
+    [mutabDict setValue:@"1" forKey:@"kztype"]; // 2为专辑 1 为课程
     [mutabDict setValue:@"2" forKey:@"type"];
     
     NSString *oath_token_Str = nil;
@@ -527,18 +522,14 @@
     [mutabDict setValue:_textView.text forKey:@"content"];
     //评论星级
     [mutabDict setValue:_starStr forKey:@"score"];
-    if (_isNewClass) {
-        [mutabDict setValue:@"6" forKey:@"kztype"]; // 2为专辑 1 为课程
-    } else {
-        [mutabDict setValue:@"1" forKey:@"kztype"]; // 2为专辑 1 为课程
-    }
+    [mutabDict setValue:@"1" forKey:@"kztype"]; // 2为专辑 1 为课程
     
     NSString *oath_token_Str = nil;
     if (UserOathToken) {
         oath_token_Str = [NSString stringWithFormat:@"%@:%@",UserOathToken,UserOathTokenSecret];
         //        [mutabDict setObject:oath_token_Str forKey:OAUTH_TOKEN];
     } else {
-        [TKProgressHUD showError:@"请先去登陆" toView:self.view];
+        [MBProgressHUD showError:@"请先去登陆" toView:self.view];
         return;
     }
     
@@ -553,11 +544,11 @@
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             [_allWindowView removeFromSuperview];
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
             [self netWorkVideoGetRender];
         } else {
             [_allWindowView removeFromSuperview];
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
             [self netWorkVideoGetRender];
         }
         

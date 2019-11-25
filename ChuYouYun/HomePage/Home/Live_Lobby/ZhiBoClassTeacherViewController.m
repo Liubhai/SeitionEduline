@@ -8,7 +8,7 @@
 
 #import "ZhiBoClassTeacherViewController.h"
 #import "SYG.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "BigWindCar.h"
 #import "MJRefresh.h"
 
@@ -168,7 +168,7 @@
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             _dataArray = (NSMutableArray *)[YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStrFromData:responseObject];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         if (_dataArray.count<10) {
             [_tableView setFooterHidden:YES];
@@ -206,7 +206,7 @@
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             [pass addObjectsFromArray:[YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStrFromData:responseObject]];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         [_dataArray addObjectsFromArray:pass];
         if (pass.count<10) {

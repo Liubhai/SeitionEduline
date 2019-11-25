@@ -11,23 +11,23 @@
   */
 
 #import "UIViewController+HUD.h"
-#import "TKProgressHUD.h"
+#import "MBProgressHUD.h"
 #import <objc/runtime.h>
 
 static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
 
 @implementation UIViewController (HUD)
 
-- (TKProgressHUD *)HUD{
+- (MBProgressHUD *)HUD{
     return objc_getAssociatedObject(self, HttpRequestHUDKey);
 }
 
-- (void)setHUD:(TKProgressHUD *)HUD{
+- (void)setHUD:(MBProgressHUD *)HUD{
     objc_setAssociatedObject(self, HttpRequestHUDKey, HUD, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (void)showHudInView:(UIView *)view hint:(NSString *)hint{
-    TKProgressHUD *HUD = [[TKProgressHUD alloc] initWithView:view];
+    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:view];
     HUD.labelText = hint;
     [view addSubview:HUD];
     [HUD show:YES];
@@ -35,10 +35,10 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
 }
 
 - (void)showHudInView:(UIView *)view showHint:(NSString *)hint{
-    TKProgressHUD *hud = [TKProgressHUD showHUDAddedTo:view animated:YES];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
     hud.userInteractionEnabled = NO;
     // Configure for text only and offset down
-    hud.mode = TKProgressHUDModeText;
+    hud.mode = MBProgressHUDModeText;
     hud.labelText = hint;
     hud.margin = 10.f;
     hud.yOffset = iPhone5?150.f:100.f;

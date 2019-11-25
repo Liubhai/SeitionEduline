@@ -259,10 +259,10 @@
     NSString *encryptStr = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetEncryptStr:mutabDict];
     [request setValue:encryptStr forHTTPHeaderField:HeaderKey];
     [request setValue:oath_token_Str forHTTPHeaderField:OAUTH_TOKEN];
-    [TKProgressHUD showMessag:@"加载中..." toView:[UIApplication sharedApplication].keyWindow];
+    [MBProgressHUD showMessag:@"加载中..." toView:[UIApplication sharedApplication].keyWindow];
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        [TKProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:self];
+        [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:self];
         _dataSource = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[_dataSource stringValueForKey:@"code"] integerValue] == 1) {
             _dataSource = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
@@ -272,11 +272,11 @@
             vc.testDict = _testDict;
             [self.navigationController pushViewController:vc animated:YES];
         } else {
-            [TKProgressHUD showError:[_dataSource stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[_dataSource stringValueForKey:@"msg"] toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-            [TKProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:self];
+            [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:self];
     }];
     [op start];
 }
@@ -306,7 +306,7 @@
         if (deleDict.allKeys.count > 0 ) {
             [self netWorkExamsGetExamsLog:_Number];
         } else {
-            [TKProgressHUD showError:@"删除记录失败" toView:self.view];
+            [MBProgressHUD showError:@"删除记录失败" toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -334,10 +334,10 @@
     NSString *encryptStr = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetEncryptStr:mutabDict];
     [request setValue:encryptStr forHTTPHeaderField:HeaderKey];
     [request setValue:oath_token_Str forHTTPHeaderField:OAUTH_TOKEN];
-    [TKProgressHUD showMessag:@"加载中..." toView:[UIApplication sharedApplication].keyWindow];
+    [MBProgressHUD showMessag:@"加载中..." toView:[UIApplication sharedApplication].keyWindow];
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        [TKProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
+        [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
         _dataSource = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[_dataSource stringValueForKey:@"code"] integerValue] == 1) {
              _dataSource = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
@@ -352,11 +352,11 @@
             //这里写个通知 （目的是最后从出来的时候不会停留在练习记录的地方）
             [[NSNotificationCenter defaultCenter] postNotificationName:@"NSNotificationWrongExams" object:@"2"];
         } else {
-            [TKProgressHUD showError:[_dataSource stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
+            [MBProgressHUD showError:[_dataSource stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-            [TKProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
+            [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
     }];
     [op start];
 }

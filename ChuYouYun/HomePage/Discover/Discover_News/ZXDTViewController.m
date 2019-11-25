@@ -182,7 +182,7 @@
 - (void)NewsShare {
     _shareVideoUrl = [NSString stringWithFormat:@"%@/news/%@.html",EncryptHeaderUrl,_ID];
     
-    [UMSocialWechatHandler setWXAppId:WXAppId appSecret:WXAppSecret url:_shareVideoUrl];
+//    [UMSocialWechatHandler setWXAppId:WXAppId appSecret:WXAppSecret url:_shareVideoUrl];
     [UMSocialQQHandler setQQWithAppId:QQAppId appKey:QQAppSecret url:_shareVideoUrl];
 //    [UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:SinaAppId secret:SinaAppSecret RedirectURL:_shareVideoUrl];
     //    UMShareToSina
@@ -190,7 +190,7 @@
                                          appKey:@"574e8829e0f55a12f8001790"
                                       shareText:_titleStr
                                      shareImage:_shareImageView.image
-                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQQ,nil]
+                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToQQ,nil]
                                        delegate:self];
 }
 
@@ -227,7 +227,7 @@
             _shareVideoUrl = [dict stringValueForKey:@"share_url"];
             [self NewsShare];
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -271,7 +271,7 @@
                     [self addWebView];
                 }
             } else {
-                [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+                [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
             }
             
         } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {

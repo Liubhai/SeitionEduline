@@ -42,24 +42,24 @@
     if (url.length > 0) {
         __weak BRDownHelpManager *help = self;
         [[ZBLM3u8Manager shareInstance] downloadVideoWithUrlString:url downloadProgressHandler:^(float progress, NSString *oriUrl) {
-            [help br_updateProgressUrl:oriUrl progress:progress localPlayUrlString:nil courseInfo:info];
+            [help br_updateProgressUrl:oriUrl progress:progress localPlayUrlString:nil];
         } downloadSuccessBlock:^(NSString *localPlayUrlString, NSString *oriUrl) {
-            [help br_updateProgressUrl:oriUrl progress:1 localPlayUrlString:localPlayUrlString courseInfo:info];
+            [help br_updateProgressUrl:oriUrl progress:1 localPlayUrlString:localPlayUrlString];
 
         }];
     }
 }
 
-- (void)br_updateProgressUrl:(NSString *)oriUrl progress:(float)progress localPlayUrlString:(NSString *)localUrl courseInfo:(NSDictionary *)courseInfo {
+- (void)br_updateProgressUrl:(NSString *)oriUrl progress:(float)progress localPlayUrlString:(NSString *)localUrl{
     [self.delegatesArray.allObjects enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj conformsToProtocol:@protocol(BRUpdateDownProgressDelegate)]) {
             id<BRUpdateDownProgressDelegate> a_delegate = obj;
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (localUrl.length > 0) {
-                    [a_delegate downHelpUpdateProgress:progress url:oriUrl isDownFinish:YES courseInfo:courseInfo];
+                    [a_delegate downHelpUpdateProgress:progress url:oriUrl isDownFinish:YES];
                 }
                 else{
-                    [a_delegate downHelpUpdateProgress:progress url:oriUrl isDownFinish:NO courseInfo:courseInfo];
+                    [a_delegate downHelpUpdateProgress:progress url:oriUrl isDownFinish:NO];
                 }
             });
         }
@@ -74,27 +74,9 @@
         NSString *videoInfoPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES) objectAtIndex:0] stringByAppendingPathComponent:@"videoInfo"];
         NSString *folderPath = videoInfoPath;
         videoInfoPath = [videoInfoPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_down.data",id_str]];
-        [[NSFileManager defaultManager] removeItemAtPath:videoInfoPath error:nil];
 //        videoInfoPath = [NSString stringWithFormat:@"%@/%@_down.data",videoInfoPath,id_str];
         if ([ZBLM3u8FileManager exitItemWithPath:videoInfoPath]) {
-            [ZBLM3u8FileManager tryGreateDir:folderPath];
-            dispatch_async(_ioQueue, ^{
-                NSData *json_str_data = [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:nil];
-                NSString *json_str = [[NSString alloc] initWithData:json_str_data encoding:NSUTF8StringEncoding];
-                NSError *error;
-                json_str = [json_str stringByReplacingOccurrencesOfString:@"null" withString:@"\" \""];
-                json_str = [json_str stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-                json_str = [json_str stringByReplacingOccurrencesOfString:@"\r" withString:@""];
-                
-                BOOL end =  [json_str writeToFile:videoInfoPath atomically:YES encoding:NSUTF8StringEncoding error:&error];
-                if (end) {
-                    NSLog(@"写入成功");
-                }
-                else{
-                    NSLog(@"写入失败");
-                    [[NSFileManager defaultManager] removeItemAtPath:videoInfoPath error:nil];
-                }
-            });
+            
         }
         else{
             [ZBLM3u8FileManager tryGreateDir:folderPath];

@@ -112,18 +112,18 @@
     NSURL *url = nil;
     url = [NSURL URLWithString:_urlStr];
     [_webView loadRequest:[NSURLRequest requestWithURL:url]];
-    [TKProgressHUD showMessag:@"加载中...." toView:self.view];
+    [MBProgressHUD showMessag:@"加载中...." toView:self.view];
     
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
-    [TKProgressHUD hideAllHUDsForView:self.view animated:YES];
-    [TKProgressHUD showError:@"加载成功" toView:self.view];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    [MBProgressHUD showError:@"加载成功" toView:self.view];
 }
 
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    [TKProgressHUD hideAllHUDsForView:self.view animated:YES];
-    [TKProgressHUD showError:@"加载失败" toView:self.view];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    [MBProgressHUD showError:@"加载失败" toView:self.view];
 }
 
 

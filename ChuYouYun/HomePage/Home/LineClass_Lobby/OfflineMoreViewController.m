@@ -8,7 +8,7 @@
 
 #import "OfflineMoreViewController.h"
 #import "SYG.h"
-#import "TKProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "BigWindCar.h"
 
 @interface OfflineMoreViewController (){
@@ -422,7 +422,7 @@
                  [self addTypeView];
             }
         } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];
