@@ -1723,6 +1723,7 @@ static NSString *cellID = @"cell";
     NSString *tokenStr =  [Passport md5:[NSString stringWithFormat:@"%@%@",timeSp,ggg]];
     [mutabDict setObject:ggg forKey:@"hextime"];
     [mutabDict setObject:tokenStr forKey:@"token"];
+    [mutabDict setObject:@"1" forKey:@"is_ios"];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:allUrlStr]];
     [request setHTTPMethod:NetWay];
@@ -1754,6 +1755,7 @@ static NSString *cellID = @"cell";
     NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
     [mutabDict setObject:@"1"forKey:@"tab"];
     [mutabDict setObject:@"50"forKey:@"limit"];
+    [mutabDict setObject:@"1" forKey:@"is_ios"];
     
     NSString *oath_token_Str = nil;
     if (UserOathToken) {

@@ -182,7 +182,7 @@
     } else if (section == 0) {
         return 1;
     } else if (section == 3){
-        return 4;
+        return 3;
     }
     return 1;
 }
@@ -340,23 +340,23 @@
         }
         return cell;
     }else if (indexPath.section == 3) {
-        NSArray *array= @[@"版本检查更新",@"意见反馈",@"清除缓存",@"关于我们"];
+        NSArray *array= @[@"意见反馈",@"清除缓存",@"关于我们"];
         static NSString *identifier = @"Cell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         if (!cell) {
-            if (indexPath.row==0 || indexPath.row == 1) {
+            if (indexPath.row==0) {
                 cell = [[UITableViewCell alloc]initWithStyle:0 reuseIdentifier:identifier];
                 [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
                 UILabel *numberLbl = [[UILabel alloc]initWithFrame:CGRectMake(17, 12, MainScreenWidth-30, 21)];
                 numberLbl.text = array[indexPath.row];
                 [cell addSubview:numberLbl];
                 
-            }else if  (indexPath.row == 2){
+            }else if  (indexPath.row == 1){
                 
                 cell = [[UITableViewCell alloc]initWithStyle:0 reuseIdentifier:identifier];
                 [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
                 UILabel *numberLbl = [[UILabel alloc]initWithFrame:CGRectMake(17, 12, 125, 21)];
-                numberLbl.text = array[2];
+                numberLbl.text = array[1];
                 [cell addSubview:numberLbl];
                 
                 //添加缓存大小的按钮
@@ -372,11 +372,11 @@
                 
                 _sizeLabel.textAlignment = NSTextAlignmentRight;
                 [cell addSubview:_sizeLabel];
-            } else if (indexPath.row == 3) {
+            } else if (indexPath.row == 2) {
                 cell = [[UITableViewCell alloc]initWithStyle:0 reuseIdentifier:identifier];
                 [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
                 UILabel *numberLbl = [[UILabel alloc]initWithFrame:CGRectMake(17, 12, MainScreenWidth-30, 21)];
-                numberLbl.text = array[3];
+                numberLbl.text = array[2];
                 numberLbl.textColor = [UIColor redColor];
                 [cell addSubview:numberLbl];
             }
@@ -445,19 +445,15 @@
         case 3:
         {
             if (indexPath.row == 0) {
-                [self getCurrentVersion];
-                [self netWorkConfigGetAppVersion];
-            } else if (indexPath.row == 1) {
                 [self.navigationController pushViewController:[RecuperationViewController new] animated:YES];
-            } else if (indexPath.row == 2) {
+            } else if (indexPath.row == 1) {
                 UIActionSheet *shit = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"确定", nil];
                 shit.tag = 100;
                 [shit showInView:self.view];
-            } else if (indexPath.row == 3) {
+            } else if (indexPath.row == 2) {
                 AboutUsViewController *aboutVc = [[AboutUsViewController alloc] init];
                 [self.navigationController pushViewController:aboutVc animated:YES];
             }
-            
         }
             break;
         case 4:

@@ -1203,6 +1203,8 @@
     [mutabDict setObject:@"1"forKey:@"tab"];
     [mutabDict setObject:@"50"forKey:@"limit"];
     
+    [mutabDict setObject:@"1" forKey:@"is_ios"];
+    
     NSString *oath_token_Str = nil;
     if (UserOathToken) {
         oath_token_Str = [NSString stringWithFormat:@"%@:%@",UserOathToken,UserOathTokenSecret];

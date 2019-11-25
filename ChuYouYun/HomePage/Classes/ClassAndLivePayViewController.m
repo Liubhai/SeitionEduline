@@ -134,7 +134,7 @@
 - (void)interFace {
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     NSLog(@"---%@",_dict);
-    _payTypeStr = @"1";//默认是支付宝
+    _payTypeStr = @"";//默认是支付宝
     NSLog(@"---%@",_typeStr);
     isGoOut = NO;
     
@@ -1182,6 +1182,7 @@
     NSString *tokenStr =  [Passport md5:[NSString stringWithFormat:@"%@%@",timeSp,ggg]];
     [mutabDict setObject:ggg forKey:@"hextime"];
     [mutabDict setObject:tokenStr forKey:@"token"];
+    [mutabDict setObject:@"1" forKey:@"is_ios"];
     if (UserOathToken) {
         NSString *oath_token_Str = [NSString stringWithFormat:@"%@:%@",UserOathToken,UserOathTokenSecret];
         [mutabDict setObject:oath_token_Str forKey:OAUTH_TOKEN];
@@ -1228,6 +1229,7 @@
     NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
     [mutabDict setObject:@"1"forKey:@"tab"];
     [mutabDict setObject:@"50"forKey:@"limit"];
+    [mutabDict setObject:@"1" forKey:@"is_ios"];
     
     NSString *oath_token_Str = nil;
     if (UserOathToken) {

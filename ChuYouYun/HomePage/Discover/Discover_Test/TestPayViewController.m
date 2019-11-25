@@ -396,6 +396,7 @@
     NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
     [mutabDict setObject:@"1"forKey:@"tab"];
     [mutabDict setObject:@"50"forKey:@"limit"];
+    [mutabDict setObject:@"1" forKey:@"is_ios"];
     
     NSString *oath_token_Str = nil;
     if (UserOathToken) {
