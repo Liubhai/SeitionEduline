@@ -369,10 +369,10 @@
 
 
 //youtu
-#define YunKeTang_YouTu_youtu_isExist @"youtu.isExist"
-#define YunKeTang_YouTu_youtu_faceLogin @"youtu.faceLogin"
-#define YunKeTang_YouTu_youtu_faceverify @"youtu.faceverify"
-#define YunKeTang_YouTu_youtu_createPerson @"youtu.createPerson"
+#define YunKeTang_YouTu_youtu_isExist @"face.isExist"//@"youtu.isExist"
+#define YunKeTang_YouTu_youtu_faceLogin @"face.login"//@"youtu.faceLogin"
+#define YunKeTang_YouTu_youtu_faceverify @"face.verify"//@"youtu.faceverify"
+#define YunKeTang_YouTu_youtu_createPerson @"face.bind"//@"youtu.createPerson"
 
 
 //Basic

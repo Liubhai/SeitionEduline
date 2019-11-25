@@ -299,7 +299,8 @@
     }
     
     [dic setObject:@"" forKey:@"attach_ids"];
-    [manager BigWinCar_GetPublicWay:dic mod:@"Youtu" act:@"addFace" success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    // mod:@"Youtu" act:@"addFace"
+    [manager BigWinCar_GetPublicWay:dic mod:@"face" act:@"add" success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"%@",responseObject);
         NSLog(@"%@",responseObject[@"msg"]);
         NSString *msg = responseObject[@"msg"];
