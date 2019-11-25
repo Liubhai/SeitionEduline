@@ -384,11 +384,11 @@
     
     //判断是否应该有此支付方式
     BOOL isAddAilpayView = NO;
-    for (NSString *payStr in _payTypeArray) {
-        if ([payStr isEqualToString:@"alipay"]) {
-            isAddAilpayView = YES;
-        }
-    }
+//    for (NSString *payStr in _payTypeArray) {
+//        if ([payStr isEqualToString:@"alipay"]) {
+//            isAddAilpayView = YES;
+//        }
+//    }
     
     if (isAddAilpayView) {//有支付宝
         CGFloat viewW = MainScreenWidth;
@@ -457,11 +457,11 @@
     //判断是否应该有此支付方式
     BOOL isAddWxpayView = NO;
     //暂时体现没有微信
-    for (NSString *payStr in _payTypeArray) {
-        if ([payStr isEqualToString:@"wxpay"]) {
-            isAddWxpayView = YES;
-        }
-    }
+//    for (NSString *payStr in _payTypeArray) {
+//        if ([payStr isEqualToString:@"wxpay"]) {
+//            isAddWxpayView = YES;
+//        }
+//    }
     
     if (isAddWxpayView) {//有微信
         

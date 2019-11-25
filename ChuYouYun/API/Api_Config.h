@@ -395,19 +395,5 @@
 #define album_addReview @"album.addReview"
 #define album_getCommentList @"album.getCommentList"
 
-// 新增获取课时信息接口
-#define course_getSectionHour @"course.getSectionHour"
-// 班级课购买
-#define course_buyClasses @"course.buyClasses"
-// 班级科目或者单课时
-#define course_buyClassesHourById @"course.buyClassesHourById"
-// 班级课收藏列表
-#define classes_getCollectList @"classes.getCollectList"
-// 我的课程班级课列表
-#define classes_getMyList @"classes.getMyList"
 
-
-// 机构app是否开启
-#define config_indexConfig @"config.indexConfig"
-#define home_searchSchool @"home.searchSchool"
 #endif /* Header_h */

@@ -9,15 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "UAProgressView.h"
 
-@protocol Good_ClassCatalogTableViewCellDelegate <NSObject>
+@interface Good_ClassCatalogTableViewCell : UITableViewCell
 
-- (void)classCourseCellTableViewCellSelected:(NSDictionary *)classCourseCellDict cellSection:(NSInteger)cellSection cellRow:(NSInteger)cellRow classCellRow:(NSInteger)classCellRow;
-
-@end
-
-@interface Good_ClassCatalogTableViewCell : UITableViewCell<UITableViewDelegate, UITableViewDataSource>
-
-@property (assign, nonatomic) id<Good_ClassCatalogTableViewCellDelegate> delegate;
 @property (strong ,nonatomic)UIImageView      *lockImageView;
 @property (strong ,nonatomic)UIImageView      *palyImage;
 @property (strong ,nonatomic)UILabel          *title;
@@ -33,15 +26,8 @@
 @property (strong ,nonatomic)NSDictionary     *cellDict;
 @property (strong ,nonatomic)NSDictionary     *liveInfo;
 
-@property (strong, nonatomic) UITableView *cellTableView;
-@property (assign, nonatomic) BOOL isClassNew;
-@property (strong, nonatomic) NSMutableArray *dataSource;
-@property (strong, nonatomic) UIView *cellTableViewSpace;
-@property (assign, nonatomic) NSInteger cellRow;
-@property (assign, nonatomic) NSInteger cellSection;
 
-
--(id)initWithReuseIdentifier:(NSString*)reuseIdentifier isClassNew:(BOOL)isClassNew cellSection:(NSInteger)cellSection cellRow:(NSInteger)cellRow;
+-(id)initWithReuseIdentifier:(NSString*)reuseIdentifier;
 - (void)dataSourceWithDict:(NSDictionary *)dict withBuyString:(NSString *)buyString WithLiveInfo:(NSDictionary *)liveInfo;
 - (void)dataSourceWithDict:(NSDictionary *)dict withType:(NSString *)type;
 - (void)dataSourceWithDict:(NSDictionary *)dict withType:(NSString *)type withProgress:(CGFloat)progress;

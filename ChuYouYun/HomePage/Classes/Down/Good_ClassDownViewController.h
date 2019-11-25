@@ -15,6 +15,5 @@
 @property (strong ,nonatomic)NSString             *ID;
 @property (strong ,nonatomic)NSString             *isDown;
 @property (strong ,nonatomic)NSString             *orderSwitch;
-@property (assign, nonatomic) BOOL isClassCourse;
 
 @end

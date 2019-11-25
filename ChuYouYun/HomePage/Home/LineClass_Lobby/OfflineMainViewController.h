@@ -10,7 +10,4 @@
 
 @interface OfflineMainViewController : UIViewController
 
-//营销数据
-@property (strong ,nonatomic)NSString *orderSwitch;
-
 @end

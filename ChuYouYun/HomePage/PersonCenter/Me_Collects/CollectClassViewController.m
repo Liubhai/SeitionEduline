@@ -205,7 +205,6 @@
         detailVc.imageUrl = _dataArray[indexPath.row][@"imageurl"];
         detailVc.videoUrl = _dataArray[indexPath.row][@"videoAddress"];
         detailVc.orderSwitch = _order_switch;
-        detailVc.isClassNew = [_typeString isEqualToString:@"newClass"] ? YES : NO;
         [self.navigationController pushViewController:detailVc animated:YES];
     }
 }
@@ -218,16 +217,11 @@
     NSString *endUrlStr = YunKeTang_User_video_getCollectList;
     if ([_typeString isEqualToString:@"combo"]) {
         endUrlStr = album_getCollectList;
-    } else if ([_typeString isEqualToString:@"newClass"]) {
-        endUrlStr = classes_getCollectList;
     }
     NSString *allUrlStr = [YunKeTang_Api_Tool YunKeTang_GetFullUrl:endUrlStr];
     
     NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
     if ([_typeString isEqualToString:@"combo"]) {
-        [mutabDict setObject:[NSString stringWithFormat:@"%ld",Num] forKey:@"page"];
-        [mutabDict setObject:@"50" forKey:@"count"];
-    } else if ([_typeString isEqualToString:@"newClass"]) {
         [mutabDict setObject:[NSString stringWithFormat:@"%ld",Num] forKey:@"page"];
         [mutabDict setObject:@"50" forKey:@"count"];
     } else {

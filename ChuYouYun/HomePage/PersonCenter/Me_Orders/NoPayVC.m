@@ -235,12 +235,9 @@
             return;
         }
     }
-    if ([_dataArray[indexPath.row][@"order_type"] integerValue] == 4 || [_dataArray[indexPath.row][@"order_type"] integerValue] == 7) {//点播
+    if ([_dataArray[indexPath.row][@"order_type"] integerValue] == 4) {//点播
         
         NSString *ID = [NSString stringWithFormat:@"%@",_dataArray[indexPath.row][@"video_id"]];
-        if ([_dataArray[indexPath.row][@"order_type"] integerValue] == 7) {
-            ID = [NSString stringWithFormat:@"%@",_dataArray[indexPath.row][@"classes_id"]];
-        }
         NSString *price = _dataArray[indexPath.row][@"price"];
         NSString *title = _dataArray[indexPath.row][@"video_name"];
         NSString *videoUrl = _dataArray[indexPath.row][@"source_info"][@"video_address"];
@@ -252,7 +249,6 @@
         vc.videoUrl = videoUrl;
         vc.imageUrl = imageUrl;
         vc.orderSwitch = _order_switch;
-        vc.isClassNew = ([_dataArray[indexPath.row][@"order_type"] integerValue] == 7 ? YES : NO);
         [self.navigationController pushViewController:vc animated:YES];
         
     } else if ([_dataArray[indexPath.row][@"order_type"] integerValue] == 5) {
@@ -307,9 +303,6 @@
         _classTypeStr = @"6";
     } else if ([_classTypeStr integerValue] == 4) {
         _classTypeStr = @"2";
-    } else if ([_classTypeStr integerValue] == 5) {
-        // 班级课
-        _classTypeStr = @"7";
     }
     [self netWorkOrderGetList:1];
 }
@@ -394,14 +387,6 @@
     } else if ([[_orderDict stringValueForKey:@"order_type"] integerValue] == 2) {
         // 套餐解锁
         [self payForCombo];
-    } else if ([[_orderDict stringValueForKey:@"order_type"] integerValue] == 7) {
-        // 班级课解锁
-        //班级购买
-        if ([[_orderDict stringValueForKey:@"course_hour_id"] integerValue] != 0) {//单课时解锁
-            [self netWorkCourseBuyCourseHourById];
-        } else {
-            [self classBuy];
-        }
     }
 }
 
@@ -874,9 +859,6 @@
     } else if ([_payTypeStr integerValue] == 3) {
         [mutabDict setValue:@"lcnpay" forKey:@"pay_for"];
     }
-    if ([[_orderDict objectForKey:@"asb_id"] isKindOfClass:[NSString class]]) {
-        [mutabDict setObject:[_orderDict objectForKey:@"asb_id"] forKey:@"asb"];
-    }
     [mutabDict setValue:[_orderDict stringValueForKey:@"video_id"] forKey:@"vids"];
     if ([[_orderDict stringValueForKey:@"coupon_id"] integerValue] != 0) {
         [mutabDict setValue:[_orderDict stringValueForKey:@"coupon_id"] forKey:@"coupon_id"];
@@ -995,9 +977,6 @@
         [mutabDict setValue:@"wxpay" forKey:@"pay_for"];
     } else if ([_payTypeStr integerValue] == 3) {
         [mutabDict setValue:@"lcnpay" forKey:@"pay_for"];
-    }
-    if ([[_orderDict objectForKey:@"asb_id"] isKindOfClass:[NSString class]]) {
-        [mutabDict setObject:[_orderDict objectForKey:@"asb_id"] forKey:@"asb"];
     }
     [mutabDict setValue:[_orderDict stringValueForKey:@"live_id"] forKey:@"live_id"];
     if ([[_orderDict stringValueForKey:@"coupon_id"] integerValue] != 0) {
@@ -1306,58 +1285,6 @@
         [mutabDict setValue:@"lcnpay" forKey:@"pay_for"];
     }
     [mutabDict setValue:[_orderDict stringValueForKey:@"album_id"] forKey:@"album_id"];
-    if ([[_orderDict stringValueForKey:@"coupon_id"] integerValue] != 0) {
-        [mutabDict setValue:[_orderDict stringValueForKey:@"coupon_id"] forKey:@"coupon_id"];
-    }
-    NSString *oath_token_Str = nil;
-    if (UserOathToken) {
-        oath_token_Str = [NSString stringWithFormat:@"%@:%@",UserOathToken,UserOathTokenSecret];
-    }
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:allUrlStr]];
-    [request setHTTPMethod:NetWay];
-    NSString *encryptStr = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetEncryptStr:mutabDict];
-    [request setValue:encryptStr forHTTPHeaderField:HeaderKey];
-    [request setValue:oath_token_Str forHTTPHeaderField:OAUTH_TOKEN];
-    
-    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
-        if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
-            if ([_payTypeStr integerValue] == 1) {//支付宝
-                _alipayStr = [[dict dictionaryValueForKey:@"alipay"] stringValueForKey:@"ios"];
-                [self addWebView];
-            } else if ([_payTypeStr integerValue] == 2){//微信
-                _wxPayDict = [[dict dictionaryValueForKey:@"wxpay"] dictionaryValueForKey:@"ios"];
-                [self WXPay:_wxPayDict];
-            } else if ([_payTypeStr integerValue] == 3) {//余额
-                [TKProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
-            }
-        } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
-        }
-        [_allWindowView removeFromSuperview];
-        [self netWorkOrderGetList:_number];
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-    }];
-    [op start];
-}
-
-- (void)classBuy {
-    NSString *endUrlStr = course_buyClasses;
-    NSString *allUrlStr = [YunKeTang_Api_Tool YunKeTang_GetFullUrl:endUrlStr];
-    
-    NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
-    
-    if ([_payTypeStr integerValue] == 1) {
-        [mutabDict setValue:@"alipay" forKey:@"pay_for"];
-    } else if ([_payTypeStr integerValue] == 2) {
-        [mutabDict setValue:@"wxpay" forKey:@"pay_for"];
-    } else if ([_payTypeStr integerValue] == 3) {
-        [mutabDict setValue:@"lcnpay" forKey:@"pay_for"];
-    }
-    [mutabDict setValue:[_orderDict stringValueForKey:@"classes_id"] forKey:@"vids"];
     if ([[_orderDict stringValueForKey:@"coupon_id"] integerValue] != 0) {
         [mutabDict setValue:[_orderDict stringValueForKey:@"coupon_id"] forKey:@"coupon_id"];
     }

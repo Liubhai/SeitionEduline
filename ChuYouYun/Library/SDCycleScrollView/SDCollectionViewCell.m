@@ -70,10 +70,6 @@
 - (void)setupImageView
 {
     UIImageView *imageView = [[UIImageView alloc] init];
-    imageView.layer.masksToBounds = YES;
-    imageView.layer.cornerRadius = 15;
-    imageView.clipsToBounds = YES;
-    imageView.contentMode = UIViewContentModeScaleAspectFill;
     _imageView = imageView;
     [self.contentView addSubview:imageView];
 }
@@ -103,7 +99,7 @@
     if (self.onlyDisplayText) {
         _titleLabel.frame = self.bounds;
     } else {
-        _imageView.frame = CGRectMake(10, 10, self.bounds.size.width - 20, self.bounds.size.height - 20);
+        _imageView.frame = self.bounds;
         CGFloat titleLabelW = self.sd_width;
         CGFloat titleLabelH = _titleLabelHeight;
         CGFloat titleLabelX = 0;

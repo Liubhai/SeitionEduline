@@ -309,8 +309,8 @@
     moreView.userInteractionEnabled = YES;
     _allWindowView.userInteractionEnabled = YES;
     
-    NSArray *indexImageArray = @[@"icon_order_class",@"icon_order_live",@"icon_order_teacher",@"orderform",@"orderform",@"icon_order_class"];
-    NSArray *indexTitleArray = @[@"点播订单",@"直播订单",@"线下课订单",@"考试订单",@"套餐订单",@"班级订单"];
+    NSArray *indexImageArray = @[@"icon_order_class",@"icon_order_live",@"icon_order_teacher",@"orderform",@"orderform"];
+    NSArray *indexTitleArray = @[@"点播订单",@"直播订单",@"线下课订单",@"考试订单",@"套餐订单"];
     _indexTitleArray = indexTitleArray;
     CGFloat indexViewW = MainScreenWidth;
     CGFloat indexViewH = 50 * WideEachUnit;

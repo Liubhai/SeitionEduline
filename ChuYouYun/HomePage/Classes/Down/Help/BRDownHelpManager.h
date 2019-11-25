@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol BRUpdateDownProgressDelegate <NSObject>
 
 @optional
-- (void)downHelpUpdateProgress:(float)progress url:(NSString *)url isDownFinish:(BOOL)isFinish courseInfo:(NSDictionary *)courseInfo;
+- (void)downHelpUpdateProgress:(float)progress url:(NSString *)url isDownFinish:(BOOL)isFinish;
 @end
 @interface BRDownHelpManager : NSObject
 + (instancetype)manager;

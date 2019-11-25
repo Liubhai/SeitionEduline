@@ -189,14 +189,6 @@ static inline BOOL AFStateTransitionIsValid(AFOperationState fromState, AFOperat
 		return nil;
     }
 
-    if ([Show_Config isEqualToString:@"1"]) {
-        if (Institution_Id) {
-            NSMutableURLRequest *pass = (NSMutableURLRequest *)urlRequest;
-            [pass setValue:Institution_Id forHTTPHeaderField:@"mhm-id"];
-            urlRequest = (NSURLRequest *)pass;
-        }
-    }
-    
     _state = AFOperationReadyState;
 
     self.lock = [[NSRecursiveLock alloc] init];

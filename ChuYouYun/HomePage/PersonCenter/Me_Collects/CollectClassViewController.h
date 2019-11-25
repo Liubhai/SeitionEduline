@@ -11,6 +11,6 @@
 
 @interface CollectClassViewController : BaseViewController
 
-@property (nonatomic, strong) NSString *typeString;// combo 套餐 course 点播 newClass 班级
+@property (nonatomic, strong) NSString *typeString;// combo 套餐 course 点播
 
 @end

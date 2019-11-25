@@ -271,9 +271,6 @@
     }
 }
 
-- (void)coverButtonTouch {
-    [_NameField becomeFirstResponder];
-}
 
 - (void)addInfo {
     
@@ -289,18 +286,13 @@
     UITextField *pass = [[UITextField alloc] initWithFrame:CGRectMake(0, _NameField.bottom, MainScreenWidth, 0.5)];
     [self.view addSubview:pass];
     
-    /// 为了覆盖这个 0.5 的 textField
-    UIButton *coverButton = [[UIButton alloc] initWithFrame:pass.frame];
-    [coverButton addTarget:self action:@selector(coverButtonTouch) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:coverButton];
-    
     //添加输入图标
     UIButton *nameButton = [[UIButton alloc] initWithFrame:CGRectMake(17, 86 , 13, 18)];
     [nameButton setBackgroundImage:[UIImage imageNamed:@"iconfont-shouji@2x"] forState:UIControlStateNormal];
     [self.view addSubview:nameButton];
 
     //添加密码文本框
-    _PassField = [[UITextField alloc] initWithFrame:CGRectMake(0, coverButton.bottom, MainScreenWidth , 50)];
+    _PassField = [[UITextField alloc] initWithFrame:CGRectMake(0, 121, MainScreenWidth , 50)];
     _PassField.placeholder = @"请输入密码";
     _PassField.backgroundColor = [UIColor whiteColor];
     _PassField.secureTextEntry = YES;//密码形式
@@ -434,15 +426,26 @@
         [self.view addSubview:SFLabel];
 
         //添加三方登录按钮
-        NSArray *SFArray = @[@"微博.png",@"QQ.png",@"微信.png"];
-        for (int i = 0 ; i < 3; i ++) {
+        NSArray *SFArray = @[@"QQ.png",@"微信.png"];
+        for (int i = 0 ; i < 2; i ++) {
             UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth / 7 + MainScreenWidth / 7  * 2 * i, MainScreenHeight / 5 * 3 + 100, MainScreenWidth / 7, MainScreenWidth / 7)];
             [button setBackgroundImage:[UIImage imageNamed:SFArray[i]] forState:UIControlStateNormal];
             button.tag = i;
+            button.center = CGPointMake((MainScreenWidth - MainScreenWidth * 2 / 7)/3.0 * (i + 1) + (MainScreenWidth / 7)/2.0 * (i*2 + 1), button.center.y);
             button.layer.cornerRadius = MainScreenWidth / 7 / 2;
             [button addTarget:self action:@selector(SYGButton:) forControlEvents:UIControlEventTouchUpInside];
             [self.view addSubview:button];
         }
+//        //添加三方登录按钮
+//        NSArray *SFArray = @[@"微博.png",@"QQ.png",@"微信.png"];
+//        for (int i = 0 ; i < 3; i ++) {
+//            UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth / 7 + MainScreenWidth / 7  * 2 * i, MainScreenHeight / 5 * 3 + 100, MainScreenWidth / 7, MainScreenWidth / 7)];
+//            [button setBackgroundImage:[UIImage imageNamed:SFArray[i]] forState:UIControlStateNormal];
+//            button.tag = i;
+//            button.layer.cornerRadius = MainScreenWidth / 7 / 2;
+//            [button addTarget:self action:@selector(SYGButton:) forControlEvents:UIControlEventTouchUpInside];
+//            [self.view addSubview:button];
+//        }
     }
     
     if (iPhoneX) {//iphoneX 所有的适配都在这里
@@ -499,10 +502,12 @@
         [self faceLogin];
     }
     if (button.tag == 0) {//新浪
-        [self Sina];
+//        [self Sina];
+        [self Tencent];
     }
     if (button.tag == 1) {//扣扣
-        [self Tencent];
+//        [self Tencent];
+        [self WeChat];
     }
     if (button.tag == 2) {//微信
         [self WeChat];

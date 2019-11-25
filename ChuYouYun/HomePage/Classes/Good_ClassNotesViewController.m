@@ -294,11 +294,7 @@
     
     NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
     [mutabDict setObject:_ID forKey:@"kzid"];
-    if (_isNewClass) {
-        [mutabDict setValue:@"6" forKey:@"kztype"]; // 2为专辑 1 为课程
-    } else {
-        [mutabDict setValue:@"1" forKey:@"kztype"]; // 2为专辑 1 为课程
-    }
+    [mutabDict setValue:@"1" forKey:@"kztype"]; // 2为专辑 1 为课程
     [mutabDict setValue:@"3" forKey:@"type"];
     [mutabDict setValue:@"1" forKey:@"page"];
     [mutabDict setValue:@"6" forKey:@"count"];
@@ -344,11 +340,7 @@
     [mutabDict setValue:_textView.text forKey:@"content"];
     //评论星级
     [mutabDict setValue:@"1" forKey:@"is_open"];
-    if (_isNewClass) {
-        [mutabDict setValue:@"6" forKey:@"kztype"]; // 2为专辑 1 为课程
-    } else {
-        [mutabDict setValue:@"1" forKey:@"kztype"]; // 2为专辑 1 为课程
-    }
+    [mutabDict setValue:@"1" forKey:@"kztype"]; // 2为专辑 1 为课程
     
     
     NSString *oath_token_Str = nil;

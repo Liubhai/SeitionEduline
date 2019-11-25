@@ -29,7 +29,6 @@
 
 #import "AboutUsViewController.h"
 #import "BoundViewController.h"
-#import "InstitutionsChooseVC.h"
 
 
 @interface settingViewController ()
@@ -183,10 +182,6 @@
     } else if (section == 0) {
         return 1;
     } else if (section == 3){
-        if ([Show_Config isEqualToString:@"1"]) {
-            // 开启了机构app
-            return 5;
-        }
         return 4;
     }
     return 1;
@@ -346,13 +341,10 @@
         return cell;
     }else if (indexPath.section == 3) {
         NSArray *array= @[@"版本检查更新",@"意见反馈",@"清除缓存",@"关于我们"];
-        if ([Show_Config isEqualToString:@"1"]) {
-            array= @[@"版本检查更新",@"意见反馈",@"清除缓存",@"关于我们",@"设置机构"];
-        }
         static NSString *identifier = @"Cell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         if (!cell) {
-            if (indexPath.row==0 || indexPath.row == 1 || indexPath.row == 4) {
+            if (indexPath.row==0 || indexPath.row == 1) {
                 cell = [[UITableViewCell alloc]initWithStyle:0 reuseIdentifier:identifier];
                 [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
                 UILabel *numberLbl = [[UILabel alloc]initWithFrame:CGRectMake(17, 12, MainScreenWidth-30, 21)];
@@ -464,17 +456,6 @@
             } else if (indexPath.row == 3) {
                 AboutUsViewController *aboutVc = [[AboutUsViewController alloc] init];
                 [self.navigationController pushViewController:aboutVc animated:YES];
-            } else if (indexPath.row == 4) {
-                InstitutionsChooseVC *vc = [[InstitutionsChooseVC alloc] init];
-                vc.fromSetingVC = YES;
-                vc.institutionChooseFinished = ^(BOOL succesed) {
-                    [rootViewController destoryShared];
-                    rootViewController * tabbar = [rootViewController sharedBaseTabBarViewController];
-                    AppDelegate *app = [AppDelegate delegate];
-                    app.window.rootViewController = tabbar;
-                    [app.window makeKeyAndVisible];
-                };
-                [self.navigationController pushViewController:vc animated:YES];
             }
             
         }

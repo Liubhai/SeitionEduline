@@ -37,8 +37,6 @@
 
 /// 新增
 #import "LanchAnimationVC.h"
-/// 机构app首页
-#import "InstitutionsChooseVC.h"
 
 
 #define APP_ID @""
@@ -272,34 +270,25 @@
     self.window.rootViewController = lanchVC;
     [self.window makeKeyAndVisible];
     lanchVC.animationFinished = ^(BOOL successed){
-        if ([Show_Config isEqualToString:@"1"]) {
-            InstitutionsChooseVC* institutionsVC = [[InstitutionsChooseVC alloc]init];
-            self.window.rootViewController = institutionsVC;
-            [self.window makeKeyAndVisible];
-            institutionsVC.institutionChooseFinished = ^(BOOL succesed) {
-                self.tabbar = [rootViewController sharedBaseTabBarViewController];
-                self.window.rootViewController = self.tabbar;
-                [self.window makeKeyAndVisible];
-            };
-        } else {
-            self.tabbar = [rootViewController sharedBaseTabBarViewController];
-            self.window.rootViewController = self.tabbar;
-            [self.window makeKeyAndVisible];
-        }
+        self.tabbar = [rootViewController sharedBaseTabBarViewController];
+        self.window.rootViewController = self.tabbar;
+        
+        [self.window makeKeyAndVisible];
         
         NSMutableArray *images = [NSMutableArray new];
         
-        [images addObject:[UIImage imageNamed:@"new_ lead1.png"]];
-        [images addObject:[UIImage imageNamed:@"new_ lead2.png"]];
-        [images addObject:[UIImage imageNamed:@"new_ lead3.png"]];
+        [images addObject:[UIImage imageNamed:@"guide4"]];
+        [images addObject:[UIImage imageNamed:@"guide1"]];
+        [images addObject:[UIImage imageNamed:@"guide2"]];
+        [images addObject:[UIImage imageNamed:@"guide3"]];
         
         HcdGuideView *guideView = [HcdGuideView sharedInstance];
         guideView.window = self.window;
         [guideView showGuideViewWithImages:images
-                            andButtonTitle:@""
-                       andButtonTitleColor:[UIColor clearColor]
+                            andButtonTitle:@"立即体验"
+                       andButtonTitleColor:[UIColor whiteColor]
                           andButtonBGColor:[UIColor clearColor]
-                      andButtonBorderColor:[UIColor clearColor]];
+                      andButtonBorderColor:[UIColor whiteColor]];
     };
 
     //人脸识别

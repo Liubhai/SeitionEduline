@@ -349,23 +349,6 @@ static YunKeTang_Api_Tool *_sharedInstance;
     return [NSString stringWithFormat:@"%@小时%@分%@秒",hour,minite,second];
 }
 
-+ (NSString*)timeChangeWithSecondsFormat:(NSInteger)seconds {
-    NSInteger temp1 = seconds/60;
-    NSInteger temp2 = temp1/ 60;
-    NSInteger d = temp2 / 24;
-    NSInteger h = temp2 % 24;
-    NSInteger m = temp1 % 60;
-    NSInteger s = seconds %60;
-    NSString * hour = h< 9 ? [NSString stringWithFormat:@"0%ld",(long)h] :[NSString stringWithFormat:@"%ld",(long)h];
-    NSString *day = d < 9 ? [NSString stringWithFormat:@"%ld",(long)d] : [NSString stringWithFormat:@"%ld",(long)d];
-    NSString *minite = m < 9 ? [NSString stringWithFormat:@"0%ld",(long)m] : [NSString stringWithFormat:@"%ld",(long)m];
-    NSString *second = s < 9 ? [NSString stringWithFormat:@"0%ld",(long)s] : [NSString stringWithFormat:@"%ld",(long)s];
-    if ([day integerValue]>0) {
-        return [NSString stringWithFormat:@"%@:%@:%@:%@",day,hour,minite,second];
-    }
-    return [NSString stringWithFormat:@"%@:%@:%@",hour,minite,second];
-}
-
 -(CGFloat)tsShowWindowsWidth{
     
     if (_tsShowWindowsWidth == 0) {
@@ -427,85 +410,6 @@ static YunKeTang_Api_Tool *_sharedInstance;
     NSString *temp = [fmt stringFromDate:localeDate];       //得到当地当时的时间（年月日）
     
     return temp;
-}
-
-//时间戳转换成字符串
-+ (NSString *)formateTime:(NSString *)time
-{
-    if (!time) {
-        return @"";
-    }
-    NSTimeInterval secondsPer = 24*60*60;
-    NSDate *today = [[NSDate alloc]init];
-    NSDate *yesterday = [today dateByAddingTimeInterval:-secondsPer];
-    NSString *yesterdayString = [[yesterday description]substringToIndex:10];
-    NSString *todayString = [[today description]substringToIndex:10];
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:time.integerValue];
-    NSString *dateString = [[date description]substringToIndex:10];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
-    NSDate *nowDate = [NSDate dateWithTimeIntervalSince1970:time.integerValue];
-    NSString *theDay = [dateFormatter stringFromDate:nowDate];//日期的年月日
-    
-    NSString *currentDay = [dateFormatter stringFromDate:[NSDate date]];//当前年月日
-    NSString *nowYearStr = [currentDay substringToIndex:4];
-    NSString *yearStr = [theDay substringToIndex:4];
-    if ([dateString isEqualToString:todayString]) {
-        return [NSString stringWithFormat:@"%@",[theDay substringFromIndex:11]];
-    }else if ([dateString isEqualToString:yesterdayString]){
-        return [NSString stringWithFormat:@"昨天 %@",[theDay substringFromIndex:11]];
-    }else{
-        if ([yearStr isEqualToString:nowYearStr]) {
-            return [theDay substringFromIndex:5];
-        }
-        return [theDay substringToIndex:10];
-    }
-}
-
-+ (NSString *)timeForHHmm:(NSString *)time {
-    if (!time) {
-        return @"";
-    }
-    NSTimeInterval secondsPer = 24*60*60;
-    NSDate *today = [[NSDate alloc]init];
-    NSDate *yesterday = [today dateByAddingTimeInterval:-secondsPer];
-    NSString *yesterdayString = [[yesterday description]substringToIndex:10];
-    NSString *todayString = [[today description]substringToIndex:10];
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:time.integerValue];
-    NSString *dateString = [[date description]substringToIndex:10];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    
-    [dateFormatter setDateFormat:@"HH:mm"];
-    NSDate *nowDate = [NSDate dateWithTimeIntervalSince1970:time.integerValue];
-    NSString *theDay = [dateFormatter stringFromDate:nowDate];//日期的年月日
-    return theDay;
-}
-
-+ (NSString *)timeForYYYYMMDD:(NSString *)time {
-    if (!time) {
-        return @"";
-    }
-    NSTimeInterval secondsPer = 24*60*60;
-    NSDate *today = [[NSDate alloc]init];
-    NSDate *yesterday = [today dateByAddingTimeInterval:-secondsPer];
-    NSString *yesterdayString = [[yesterday description]substringToIndex:10];
-    NSString *todayString = [[today description]substringToIndex:10];
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:time.integerValue];
-    NSString *dateString = [[date description]substringToIndex:10];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    NSDate *nowDate = [NSDate dateWithTimeIntervalSince1970:time.integerValue];
-    NSString *theDay = [dateFormatter stringFromDate:nowDate];//日期的年月日
-    
-    NSString *currentDay = [dateFormatter stringFromDate:[NSDate date]];//当前年月日
-    NSString *nowYearStr = [currentDay substringToIndex:4];
-    NSString *yearStr = [theDay substringToIndex:4];
-    if ([yearStr isEqualToString:nowYearStr]) {
-        return [theDay substringFromIndex:5];
-    }
-    return [theDay substringToIndex:10];
 }
 
 @end

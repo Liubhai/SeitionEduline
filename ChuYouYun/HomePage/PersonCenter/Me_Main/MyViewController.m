@@ -31,7 +31,6 @@
 #import "GLReachabilityView.h"
 #include "MyDownLoadViewController.h"
 #import "LookRecodeViewController.h"
-#import "StudyRecodeViewController.h"
 
 #import "MyInstationViewController.h"
 #import "MyLibraryViewController.h"
@@ -766,22 +765,12 @@
     
     if ([MoreOrSingle integerValue] == 1) {//单机构
 
-        if ([HASALIPAY isEqualToString:@"0"]) {
-            if ([_isTeacher integerValue] == 1) {
-                SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"学习记录",@"兑换记录",@"我的推荐",@"我的授课"];
-                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"study@3x",@"record@3x",@"downLine",@"me_is_teacher"];
-            } else {
-                SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"学习记录",@"兑换记录",@"我的推荐"];
-                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"study@3x",@"record@3x",@"downLine"];
-            }
+        if ([_isTeacher integerValue] == 1) {
+            SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"我的机构",@"我的卡券",@"学习记录",@"兑换记录",@"我的推荐",@"我的授课"];
+            TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"org@3x",@"conpons@3x",@"study@3x",@"record@3x",@"downLine",@"me_is_teacher"];
         } else {
-            if ([_isTeacher integerValue] == 1) {
-                SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"我的卡券",@"学习记录",@"兑换记录",@"我的推荐",@"我的授课"];
-                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"conpons@3x",@"study@3x",@"record@3x",@"downLine",@"me_is_teacher"];
-            } else {
-                SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"我的卡券",@"学习记录",@"兑换记录",@"我的推荐"];
-                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"conpons@3x",@"study@3x",@"record@3x",@"downLine"];
-            }
+            SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"我的卡券",@"学习记录",@"兑换记录",@"我的推荐"];
+            TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"conpons@3x",@"study@3x",@"record@3x",@"downLine"];
         }
         
     } else if ([MoreOrSingle integerValue] == 2) {
@@ -967,104 +956,53 @@
 
 - (void)manyButtonSet:(UIButton *)button {
     if ([MoreOrSingle integerValue] == 1) {
-        if ([HASALIPAY isEqualToString:@"0"]) {
-            if (button.tag == 0) {//说明是课程
-                MyClassMainViewController *myClassVc = [[MyClassMainViewController alloc] init];
-                [self.navigationController pushViewController:myClassVc animated:YES];
-            }
-            if (button.tag == 1) {//说明是笔记
-                SYGBJViewController *SYGBJVC = [[SYGBJViewController alloc] init];
-                [self.navigationController pushViewController:SYGBJVC animated:YES];
-            }
-            if (button.tag == 2) {//说明是收藏
-                CollectMainViewController *collectMainVc = [[CollectMainViewController alloc] init];
-                [self.navigationController pushViewController:collectMainVc animated:YES];
-            }
-            if (button.tag == 3) {//说明是问答
-                MyAnswerMainViewController *answerMainVc = [[MyAnswerMainViewController alloc] init];
-                [self.navigationController pushViewController:answerMainVc animated:YES];
-            }
-            if (button.tag == 4) {//我的考试
-                MyExamMainViewController *myEaxmVc = [[MyExamMainViewController alloc] init];
-                [self.navigationController pushViewController:myEaxmVc animated:YES];
-            }
-            if (button.tag == 5) {//我的文库
-                MyLibraryViewController *myLibVc = [[MyLibraryViewController alloc] init];
-                [self.navigationController pushViewController:myLibVc animated:YES];
-            }
-            if (button.tag == 6) {//说明是我的下载
-                Good_MyDownLoadMainViewController *vc = [[Good_MyDownLoadMainViewController alloc] init];
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-//            if (button.tag == 7) {//我的优惠券
-//                Good_MyCardStockMainViewController *vc = [[Good_MyCardStockMainViewController alloc] init];
-//                [self.navigationController pushViewController:vc animated:YES];
-//            }
-            if (button.tag == 7) {//观看记录
-                LookRecodeViewController *lookVc = [[LookRecodeViewController alloc] init];
-                [self.navigationController pushViewController:lookVc animated:YES];
-            }
-            if (button.tag == 8) {//说明是兑换记录
-                ExchangeViewController *JYJLVC =  [[ExchangeViewController alloc] init];
-                [self.navigationController pushViewController:JYJLVC animated:YES];
-            }
-            if (button.tag == 9) {
-                MyDownLineViewController *vc = [[MyDownLineViewController alloc] init];
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-            if (button.tag == 10) {
-                MeTeacherMainViewController *vc = [[MeTeacherMainViewController alloc] init];
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-        } else {
-            if (button.tag == 0) {//说明是课程
-                MyClassMainViewController *myClassVc = [[MyClassMainViewController alloc] init];
-                [self.navigationController pushViewController:myClassVc animated:YES];
-            }
-            if (button.tag == 1) {//说明是笔记
-                SYGBJViewController *SYGBJVC = [[SYGBJViewController alloc] init];
-                [self.navigationController pushViewController:SYGBJVC animated:YES];
-            }
-            if (button.tag == 2) {//说明是收藏
-                CollectMainViewController *collectMainVc = [[CollectMainViewController alloc] init];
-                [self.navigationController pushViewController:collectMainVc animated:YES];
-            }
-            if (button.tag == 3) {//说明是问答
-                MyAnswerMainViewController *answerMainVc = [[MyAnswerMainViewController alloc] init];
-                [self.navigationController pushViewController:answerMainVc animated:YES];
-            }
-            if (button.tag == 4) {//我的考试
-                MyExamMainViewController *myEaxmVc = [[MyExamMainViewController alloc] init];
-                [self.navigationController pushViewController:myEaxmVc animated:YES];
-            }
-            if (button.tag == 5) {//我的文库
-                MyLibraryViewController *myLibVc = [[MyLibraryViewController alloc] init];
-                [self.navigationController pushViewController:myLibVc animated:YES];
-            }
-            if (button.tag == 6) {//说明是我的下载
-                Good_MyDownLoadMainViewController *vc = [[Good_MyDownLoadMainViewController alloc] init];
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-            if (button.tag == 7) {//我的优惠券
-                Good_MyCardStockMainViewController *vc = [[Good_MyCardStockMainViewController alloc] init];
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-            if (button.tag == 8) {//观看记录
-                LookRecodeViewController *lookVc = [[LookRecodeViewController alloc] init];
-                [self.navigationController pushViewController:lookVc animated:YES];
-            }
-            if (button.tag == 9) {//说明是兑换记录
-                ExchangeViewController *JYJLVC =  [[ExchangeViewController alloc] init];
-                [self.navigationController pushViewController:JYJLVC animated:YES];
-            }
-            if (button.tag == 10) {
-                MyDownLineViewController *vc = [[MyDownLineViewController alloc] init];
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-            if (button.tag == 11) {
-                MeTeacherMainViewController *vc = [[MeTeacherMainViewController alloc] init];
-                [self.navigationController pushViewController:vc animated:YES];
-            }
+        if (button.tag == 0) {//说明是课程
+            MyClassMainViewController *myClassVc = [[MyClassMainViewController alloc] init];
+            [self.navigationController pushViewController:myClassVc animated:YES];
+        }
+        if (button.tag == 1) {//说明是笔记
+            SYGBJViewController *SYGBJVC = [[SYGBJViewController alloc] init];
+            [self.navigationController pushViewController:SYGBJVC animated:YES];
+        }
+        if (button.tag == 2) {//说明是收藏
+            CollectMainViewController *collectMainVc = [[CollectMainViewController alloc] init];
+            [self.navigationController pushViewController:collectMainVc animated:YES];
+        }
+        if (button.tag == 3) {//说明是问答
+            MyAnswerMainViewController *answerMainVc = [[MyAnswerMainViewController alloc] init];
+            [self.navigationController pushViewController:answerMainVc animated:YES];
+        }
+        if (button.tag == 4) {//我的考试
+            MyExamMainViewController *myEaxmVc = [[MyExamMainViewController alloc] init];
+            [self.navigationController pushViewController:myEaxmVc animated:YES];
+        }
+        if (button.tag == 5) {//我的文库
+            MyLibraryViewController *myLibVc = [[MyLibraryViewController alloc] init];
+            [self.navigationController pushViewController:myLibVc animated:YES];
+        }
+        if (button.tag == 6) {//说明是我的下载
+            Good_MyDownLoadMainViewController *vc = [[Good_MyDownLoadMainViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        if (button.tag == 7) {//我的优惠券
+            Good_MyCardStockMainViewController *vc = [[Good_MyCardStockMainViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        if (button.tag == 8) {//观看记录
+            LookRecodeViewController *lookVc = [[LookRecodeViewController alloc] init];
+            [self.navigationController pushViewController:lookVc animated:YES];
+        }
+        if (button.tag == 9) {//说明是兑换记录
+            ExchangeViewController *JYJLVC =  [[ExchangeViewController alloc] init];
+            [self.navigationController pushViewController:JYJLVC animated:YES];
+        }
+        if (button.tag == 10) {
+            MyDownLineViewController *vc = [[MyDownLineViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        if (button.tag == 11) {
+            MeTeacherMainViewController *vc = [[MeTeacherMainViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
         }
         
     } else {
@@ -1141,7 +1079,7 @@
                 [self.navigationController pushViewController:vc animated:YES];
             }
             if (button.tag == 7) {//观看记录
-                StudyRecodeViewController *lookVc = [[StudyRecodeViewController alloc] init];
+                LookRecodeViewController *lookVc = [[LookRecodeViewController alloc] init];
                 [self.navigationController pushViewController:lookVc animated:YES];
             }
             if (button.tag == 9) {//我的机构
@@ -1232,7 +1170,7 @@
                 [self.navigationController pushViewController:vc animated:YES];
             }
             if (button.tag == 8) {//观看记录
-                StudyRecodeViewController *lookVc = [[StudyRecodeViewController alloc] init];
+                LookRecodeViewController *lookVc = [[LookRecodeViewController alloc] init];
                 [self.navigationController pushViewController:lookVc animated:YES];
             }
             if (button.tag == 7) {//我的优惠券

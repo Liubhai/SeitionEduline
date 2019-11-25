@@ -31,7 +31,7 @@ typedef enum : NSUInteger {
     kDownFinish,
 } KNownType;
 
-@interface Good_ClassDownViewController ()<UITableViewDataSource,UITableViewDelegate,BRUpdateDownProgressDelegate,BRAVideoDownShowNotXibTableViewCellDelegate>
+@interface Good_ClassDownViewController ()<UITableViewDataSource,UITableViewDelegate,BRUpdateDownProgressDelegate>
 {
     UITableView * _tableView;
     UILabel *lable;
@@ -91,9 +91,6 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) NSMutableDictionary *progressDict;
 
 @property (nonatomic, strong) BRCourseDownInfoTableViewCell *downHeaderInfoView;
-
-/** 如果是班级课的时候 点击下载的课时cell */
-@property (strong, nonatomic) BRAVideoDownShowNotXibTableViewCell *classCourseCurrentCell;
 
 //@property (nonatomic, strong) NSData *courseInfoData;
 @end
@@ -158,25 +155,13 @@ typedef enum : NSUInteger {
             for (int i = 0 ; i < _dataArray.count; i ++ ) {
                 NSArray *classArray = [[_dataArray objectAtIndex:i] arrayValueForKey:@"child"];
                 if (classArray.count == 0) {
-                    [_newsDataArray addObject:@[]];
                 } else {
                     [_newsDataArray addObject:classArray];
                     [classArray enumerateObjectsUsingBlock:^(NSDictionary *a_course, NSUInteger idx, BOOL * _Nonnull stop) {
-                        if (_isClassCourse) {
-                            NSArray *lastClassArray = [a_course arrayValueForKey:@"child"];
-                            [lastClassArray enumerateObjectsUsingBlock:^(NSDictionary *last_course, NSUInteger lastidx, BOOL * _Nonnull stop) {
-                                NSString *last_course_id = [last_course stringValueForKey:@"id"];
-                                NSString *last_video_address = [last_course stringValueForKey:@"video_address"];
-                                if ([[ZBLM3u8Manager shareInstance] exitLocalVideoWithUrlString:last_video_address]) {
-                                    ws.progressDict[last_course_id] = @(kDownFinish);
-                                }
-                            }];
-                        } else {
-                            NSString *course_id = [a_course stringValueForKey:@"id"];
-                            NSString *video_address = [a_course stringValueForKey:@"video_address"];
-                            if ([[ZBLM3u8Manager shareInstance] exitLocalVideoWithUrlString:video_address]) {
-                                ws.progressDict[course_id] = @(kDownFinish);
-                            }
+                        NSString *course_id = [a_course stringValueForKey:@"id"];
+                        NSString *video_address = [a_course stringValueForKey:@"video_address"];
+                        if ([[ZBLM3u8Manager shareInstance] exitLocalVideoWithUrlString:video_address]) {
+                            ws.progressDict[course_id] = @(kDownFinish);
                         }
                     }];
                 }
@@ -272,12 +257,45 @@ typedef enum : NSUInteger {
     _downHeaderInfoView.totalCourseLabel.text = [NSString stringWithFormat:@"共%@节",section_count];
     [self br_updateHadDownFile];
     
+//    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(125 * WideEachUnit, 10,MainScreenWidth - 140 * WideEachUnit, 36 * WideEachUnit)];
+//    title.text = [_videoDataSource stringValueForKey:@"video_title"];
+//    title.font = Font(15 * WideEachUnit);
+//    title.textColor = [UIColor colorWithHexString:@"#333"];
+//    [_tableViewHeaderView addSubview:title];
+//
+//    //添加线
+//    UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(0 * WideEachUnit, 36 * WideEachUnit,MainScreenWidth - 30 * WideEachUnit, 1 * WideEachUnit)];
+//    line.backgroundColor = [UIColor groupTableViewBackgroundColor];
+//    [_tableViewHeaderView addSubview:line];
+    
+    
+//    //添加图片
+//    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10 * WideEachUnit, 10 * WideEachUnit, 105 * WideEachUnit, 80 * WideEachUnit)];
+//    NSString *urlStr = [_videoDataSource stringValueForKey:@"cover"];
+//    [imageView sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:Image(@"站位图")];
+//    [_tableViewHeaderView addSubview:imageView];
+//
+//
+//    //添加课程价格
+//    UILabel *price = [[UILabel alloc] initWithFrame:CGRectMake(125 * WideEachUnit, 56 * WideEachUnit,MainScreenWidth - 140 * WideEachUnit, 20 * WideEachUnit)];
+//    price.font = Font(14 * WideEachUnit);
+//    price.textColor = [UIColor colorWithHexString:@"#fc0203"];
+//    price.textColor = [UIColor colorWithHexString:@"#888"];
+//    price.text = [NSString stringWithFormat:@"%@在学.共%@节",[_videoDataSource stringValueForKey:@"video_order_count"],[_videoDataSource stringValueForKey:@"section_count"]];
+////    price.text = [NSString stringWithFormat:@"育币%@",[_videoDataSource stringValueForKey:@"price"]];
+//    if ([_orderSwitch integerValue] == 1) {
+//        price.text = [NSString stringWithFormat:@"%@在学.共%@节",[_videoDataSource stringValueForKey:@"video_order_count_mark"],[_videoDataSource stringValueForKey:@"section_count"]];
+//    }
+//    price.hidden = YES;
+//    [_tableViewHeaderView addSubview:price];
+    
 }
 
 - (void)addTableView {
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, MACRO_UI_UPHEIGHT, MainScreenWidth, MainScreenHeight - MACRO_UI_UPHEIGHT) style:UITableViewStyleGrouped];
     _tableView.delegate = self;
     _tableView.dataSource = self;
+    _tableView.rowHeight = 50;
     _tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
 //    _tableView.scrollEnabled = NO;
     [self.view addSubview:_tableView];
@@ -402,82 +420,64 @@ typedef enum : NSUInteger {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    if (_isClassCourse) {
-        WS(ws);
-        NSArray *cellArray = _newsDataArray[indexPath.section];
-        NSDictionary *dict = [cellArray objectAtIndex:indexPath.row];
-        NSString *id_str = dict[@"id"];
-        NSString *cell_identifier = [NSString stringWithFormat:@"sadasdasdasd--%@",id_str];
-        BRAVideoDownShowNotXibTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cell_identifier];
-        if (cell == nil) {
-            cell = [[BRAVideoDownShowNotXibTableViewCell alloc] initWithReuseIdentifier:cell_identifier isClassNew:_isClassCourse cellSection:indexPath.section cellRow:indexPath.row];
-        }
-        
-        [cell setClassCourseDownListCellInfo:dict downLoadMutableDict:self.progressDict];
-        
-        cell.br_selectedBlock = ^(BRAVideoDownShowNotXibTableViewCell * _Nonnull cell1) {
-            NSIndexPath *selectedIndex = [tableView indexPathForCell:cell1];
-            NSArray *temp_array = ws.newsDataArray[selectedIndex.section];
-            NSDictionary *a_info_dict = temp_array[selectedIndex.row];
-            //            NSString *video_address = a_info_dict[@"video_address"];
-            [ws br_selectedDownInfo:a_info_dict];
-        };
-        
-        cell.nNameLabel.text = dict[@"title"];
-        if (_isClassCourse) {
-            cell.delegate = self;
-        }
-        return cell;
-    } else {
-        WS(ws);
-        NSArray *cellArray = _newsDataArray[indexPath.section];
-        NSDictionary *dict = [cellArray objectAtIndex:indexPath.row];
-        NSString *id_str = dict[@"id"];
-        NSString *cell_identifier = [NSString stringWithFormat:@"sadasdasdasd--%@",id_str];
-        BRAVideoDownShowNotXibTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cell_identifier];
-        if (cell == nil) {
-            cell = [[BRAVideoDownShowNotXibTableViewCell alloc] initWithReuseIdentifier:cell_identifier isClassNew:_isClassCourse cellSection:indexPath.section cellRow:indexPath.row];
-        }
-        
-        [cell setClassCourseDownListCellInfo:dict downLoadMutableDict:self.progressDict];
+//    static NSString *CellIdentifier = @"culture";
+//    //自定义cell类
+//    Good_ClassCatalogTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+//    if (cell == nil) {
+//        cell = [[Good_ClassCatalogTableViewCell alloc] initWithReuseIdentifier:CellIdentifier];
+//    }
+//    
+//    NSArray *cellArray = _newsDataArray[indexPath.section];
+//    NSDictionary *dict = [cellArray objectAtIndex:indexPath.row];
+//    if ([_isDown integerValue] == 1) {//下载界面
+//        [cell dataSourceWithDict:dict withType:@"2"];
+//    } else {
+//        [cell dataSourceWithDict:dict withType:@"1"];
+//    }
+//
+//    [cell.downButton addTarget:self action:@selector(cellDownButtonCilck:) forControlEvents:UIControlEventTouchUpInside];
+//    indexPathSection = indexPath.section;
+//    indexPathRow = indexPath.row;
+//    cell.downButton.tag = indexPathSection * 10 + indexPathRow;
+//    if (_downProgress > 0 && _downProgress < 1) {//说明正在下载中
+//        
+//    }
+//    return cell;
+    WS(ws);
+    NSArray *cellArray = _newsDataArray[indexPath.section];
+    NSDictionary *dict = [cellArray objectAtIndex:indexPath.row];
+    NSString *id_str = dict[@"id"];
+    NSString *cell_identifier = [NSString stringWithFormat:@"sadasdasdasd--%@",id_str];
+    BRAVideoDownShowNotXibTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cell_identifier];
+    if (cell == nil) {
+        cell = [[BRAVideoDownShowNotXibTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:id_str];
         NSInteger type = [self.progressDict[id_str] integerValue];
         if (type == kDownFinish) {
             [cell br_updateProgress:-1];
             cell.mStatusLabel.text = @"已下载";
-            
+
         }
         cell.br_selectedBlock = ^(BRAVideoDownShowNotXibTableViewCell * _Nonnull cell1) {
             NSIndexPath *selectedIndex = [tableView indexPathForCell:cell1];
             NSArray *temp_array = ws.newsDataArray[selectedIndex.section];
             NSDictionary *a_info_dict = temp_array[selectedIndex.row];
-            //            NSString *video_address = a_info_dict[@"video_address"];
+//            NSString *video_address = a_info_dict[@"video_address"];
             [ws br_selectedDownInfo:a_info_dict];
         };
-        
-        cell.nNameLabel.text = dict[@"title"];
-        if (_isClassCourse) {
-            cell.delegate = self;
-        }
-        return cell;
     }
     
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (_isClassCourse) {
-        NSArray *secitonArray = _newsDataArray[indexPath.section];
-        NSDictionary *dic = [secitonArray objectAtIndex:indexPath.row];
-        return 50 * WideEachUnit + [[dic objectForKey:@"child"] count] * 50 * WideEachUnit;
-    }
-    return 50 * WideEachUnit;
+   
+    cell.nNameLabel.text = dict[@"title"];
+//    NSInteger type = [self.progressDict[id_str] integerValue];
+//    if (type == ) {
+//        <#statements#>
+//    }
+//    
+    return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [_tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (_isClassCourse) {
-        return;
-    }
     _downRow = indexPath.row;
     _downSecition = indexPath.section;
     NSDictionary *dict = _newsDataArray[_downSecition][_downRow];
@@ -490,6 +490,8 @@ typedef enum : NSUInteger {
             NSString * localPlayUrlString = [[ZBLM3u8Manager shareInstance] localPlayUrlWithOriUrlString:url];
             
             NSURL *playUrl = [[ZBLM3u8Manager shareInstance] localPlayUrlWithOriUrlUrl:localPlayUrlString];
+//            MPMoviePlayerViewController *playerViewController =[[MPMoviePlayerViewController alloc]initWithContentURL:playUrl];
+//            [self presentMoviePlayerViewControllerAnimated:playerViewController];
             
             BRPlayM3u8VideoViewController *playVC = [[BRPlayM3u8VideoViewController alloc] init];
             playVC.playUrl = playUrl;
@@ -497,36 +499,14 @@ typedef enum : NSUInteger {
             [self.navigationController pushViewController:playVC animated:YES];
             return;
         }
-    }
-}
-
-- (void)downloadSelected:(NSDictionary *)dict currentCell:(BRAVideoDownShowNotXibTableViewCell *)currentCell {
-    if (_isClassCourse) {
-        _classCourseCurrentCell = currentCell;
-    }
-    [self br_selectedDownInfo:dict];
-}
-
-- (void)BRAVideoDownShowNotXibTableViewCellSelected:(NSDictionary *)classCourseCellDict cellSection:(NSInteger)cellSection cellRow:(NSInteger)cellRow classCellRow:(NSInteger)classCellRow {
-    _downRow = cellRow;
-    _downSecition = cellSection;
-    NSDictionary *dict = classCourseCellDict;//_newsDataArray[_downSecition][_downRow];
-    if ([_isDown integerValue] == 1) {
-        
-        NSString *url = dict[@"video_address"];
-        if ([[ZBLM3u8Manager shareInstance] exitLocalVideoWithUrlString:url]) {
-            [TKProgressHUD showError:@"已下载" toView:self.view];
-            
-            NSString * localPlayUrlString = [[ZBLM3u8Manager shareInstance] localPlayUrlWithOriUrlString:url];
-            
-            NSURL *playUrl = [[ZBLM3u8Manager shareInstance] localPlayUrlWithOriUrlUrl:localPlayUrlString];
-            
-            BRPlayM3u8VideoViewController *playVC = [[BRPlayM3u8VideoViewController alloc] init];
-            playVC.playUrl = playUrl;
-            playVC.filePath = localPlayUrlString;
-            [self.navigationController pushViewController:playVC animated:YES];
-            return;
-        }
+//        if ([[dict stringValueForKey:YunKeTang_CurrentDownExit] integerValue] == 1) {//去观看
+//
+//            return;
+//        } else {//去下载
+//            _downUrl = dict[@"video_address"];
+//            _downTitle = [dict stringValueForKey:@"title"];
+//            [self isSureDown];
+//        }
     }
 }
 
@@ -598,88 +578,54 @@ typedef enum : NSUInteger {
 }
 
 #pragma mark ---下载代理更新
--(void)downHelpUpdateProgress:(float)progress url:(NSString *)url isDownFinish:(BOOL)isFinish courseInfo:(nonnull NSDictionary *)courseInfo{
+-(void)downHelpUpdateProgress:(float)progress url:(NSString *)url isDownFinish:(BOOL)isFinish{
     
     WS(ws);
     if (url.length <= 0) {
         return;
     }
-    NSString *courseId = [NSString stringWithFormat:@"%@",[courseInfo objectForKey:@"id"]];
     NSString *downUrlRoot = [[url componentsSeparatedByString:@"?"] firstObject];
-    if (_isClassCourse) {
-        for (int i = 0; i< _newsDataArray.count; i++) {
-            NSArray *pass = _newsDataArray[i];
-            for (int j = 0; j<pass.count; j++) {
-                NSArray *last = [pass[j] objectForKey:@"child"];
-                for (int k = 0; k<last.count; k++) {
-//                    NSString *video_address = last[k][@"video_address"];
-//                    NSString * video_address_root = [[video_address componentsSeparatedByString:@"?"] firstObject];
-                    NSString *passCourseID = [NSString stringWithFormat:@"%@",last[k][@"id"]];
-                    if ([courseId isEqualToString:passCourseID]) { //找到相同的了
+    
+    [self.tableView.visibleCells enumerateObjectsUsingBlock:^(__kindof UITableViewCell * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSIndexPath *selectedIndex = [ws.tableView indexPathForCell:obj];
+        if (selectedIndex) {
+            if (selectedIndex.section < ws.newsDataArray.count) {
+                NSArray *temp_array = ws.newsDataArray[selectedIndex.section];
+                if (selectedIndex.row < temp_array.count) {
+                    NSDictionary *a_info_dict = temp_array[selectedIndex.row];
+                    NSString *video_address = a_info_dict[@"video_address"];
+                    NSString * video_address_root = [[video_address componentsSeparatedByString:@"?"] firstObject];
+                    if ([downUrlRoot isEqualToString:video_address_root]) { //找到相同的了
                         
-                        NSString *id_str = last[k][@"id"];
-                        
-                        if (_classCourseCurrentCell) {
+                        NSString *id_str = a_info_dict[@"id"];
+
+                        //需要判断是否同一个
+                        if ([obj isKindOfClass:[BRAVideoDownShowNotXibTableViewCell class]]) {
+                            BRAVideoDownShowNotXibTableViewCell *tempCell = obj;
                             if (isFinish) {
-                                _classCourseCurrentCell.mStatusLabel.text = @"已下载";
-                                [_classCourseCurrentCell br_updateProgress:-1];
+                                tempCell.mStatusLabel.text = @"已下载";
+                                [tempCell br_updateProgress:-1];
                                 [ws.progressDict setObject:@(kDownFinish) forKey:id_str];
                                 [ws br_updateHadDownFile];
                                 [ws br_saveDownInfoInCoreData];
                             }
                             else{
-                                _classCourseCurrentCell.mStatusLabel.text = nil;
-                                [_classCourseCurrentCell br_updateProgress:progress];
+                                tempCell.mStatusLabel.text = nil;
+                                [tempCell br_updateProgress:progress];
                                 [ws.progressDict setObject:@(kDowning) forKey:id_str];
                                 
                             }
                         }
                     }
+                  
                 }
             }
+          
         }
-    } else {
-        [self.tableView.visibleCells enumerateObjectsUsingBlock:^(__kindof UITableViewCell * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            NSIndexPath *selectedIndex = [ws.tableView indexPathForCell:obj];
-            if (selectedIndex) {
-                if (selectedIndex.section < ws.newsDataArray.count) {
-                    NSArray *temp_array = ws.newsDataArray[selectedIndex.section];
-                    if (selectedIndex.row < temp_array.count) {
-                        NSDictionary *a_info_dict = temp_array[selectedIndex.row];
-                        NSString *video_address = a_info_dict[@"video_address"];
-                        NSString * video_address_root = [[video_address componentsSeparatedByString:@"?"] firstObject];
-                        NSString *passCourseID = [NSString stringWithFormat:@"%@",a_info_dict[@"id"]];
-                        if ([courseId isEqualToString:passCourseID]) { //找到相同的了
-                            
-                            NSString *id_str = a_info_dict[@"id"];
-                            
-                            //需要判断是否同一个
-                            if ([obj isKindOfClass:[BRAVideoDownShowNotXibTableViewCell class]]) {
-                                BRAVideoDownShowNotXibTableViewCell *tempCell = obj;
-                                if (isFinish) {
-                                    tempCell.mStatusLabel.text = @"已下载";
-                                    [tempCell br_updateProgress:-1];
-                                    [ws.progressDict setObject:@(kDownFinish) forKey:id_str];
-                                    [ws br_updateHadDownFile];
-                                    [ws br_saveDownInfoInCoreData];
-                                }
-                                else{
-                                    tempCell.mStatusLabel.text = nil;
-                                    [tempCell br_updateProgress:progress];
-                                    [ws.progressDict setObject:@(kDowning) forKey:id_str];
-                                    
-                                }
-                            }
-                        }
-                        
-                    }
-                }
-                
-            }
-            
-        }];
-
-    }
+       
+    }];
+   
+    
 }
 #pragma mark --- 下载
 
@@ -697,142 +643,33 @@ typedef enum : NSUInteger {
 //MARK:新的下载方法
 - (void)br_selectedDownInfo:(NSDictionary *)downDict{
     
-    // 这里要先去请求下载地址 然后再去下载
-    NSString *endUrlStr = course_getSectionHour;
-    NSString *allUrlStr = [YunKeTang_Api_Tool YunKeTang_GetFullUrl:endUrlStr];
-    
-    NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
-    [mutabDict setObject:[NSString stringWithFormat:@"%@",[downDict objectForKey:@"id"]] forKey:@"id"];
-    NSString *course_id = [NSString stringWithFormat:@"%@",[downDict objectForKey:@"id"]];
-    NSString *oath_token_Str = nil;
-    if (UserOathToken) {
-        oath_token_Str = [NSString stringWithFormat:@"%@:%@",UserOathToken,UserOathTokenSecret];
+    NSString *url = downDict[@"video_address"];
+    if ([[ZBLM3u8Manager shareInstance] exitLocalVideoWithUrlString:url]) {
+        [TKProgressHUD showError:@"已下载" toView:self.view];
+        
+        NSString * localPlayUrlString = [[ZBLM3u8Manager shareInstance] localPlayUrlWithOriUrlString:url];
+        
+        NSURL *playUrl = [[ZBLM3u8Manager shareInstance] localPlayUrlWithOriUrlUrl:localPlayUrlString];
+//        MPMoviePlayerViewController *playerViewController =[[MPMoviePlayerViewController alloc]initWithContentURL:playUrl];
+//        [self presentMoviePlayerViewControllerAnimated:playerViewController];
+        BRPlayM3u8VideoViewController *playVC = [[BRPlayM3u8VideoViewController alloc] init];
+        playVC.playUrl = playUrl;
+        playVC.filePath = localPlayUrlString;
+        [self.navigationController pushViewController:playVC animated:YES];
+        return;
+    }
+    else{
+        if (![[GLNetWorking isConnectionAvailable] isEqualToString:@"wifi"]) {
+            UIAlertView *_downAlertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"如果您正在使用2G/3G/4G,如果继续运营商可能会收取流量费用" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"继续", nil];
+            _downAlertView.otherInfo = downDict;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_downAlertView show];
+            });
+        } else {
+            [[BRDownHelpManager manager] br_startDownUrl:url dictInfo:downDict];
+        }
     }
     
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:allUrlStr]];
-    [request setHTTPMethod:NetWay];
-    NSString *encryptStr = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetEncryptStr:mutabDict];
-    [request setValue:encryptStr forHTTPHeaderField:HeaderKey];
-    [request setValue:oath_token_Str forHTTPHeaderField:OAUTH_TOKEN];
-    
-    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
-        if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            NSDictionary *pass = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
-            NSString *url = pass[@"video_address"];
-            
-            NSInteger first = 0;
-            NSInteger second = 0;
-            NSInteger third = 0;
-            BOOL hasCourseID = NO;
-            NSMutableDictionary *passCourseInfo;
-            // 这里要重新组装数据源了 把地址装进数据源
-            NSMutableArray *passArray = [NSMutableArray arrayWithArray:_dataArray];
-            for (int i = 0; i<passArray.count; i++) {
-                if (hasCourseID) {
-                    break;
-                }
-                NSMutableArray *passArraySecond = [NSMutableArray arrayWithArray:[passArray[i] arrayValueForKey:@"child"]];
-                for (int j = 0; j<passArraySecond.count; j++) {
-                    if (hasCourseID) {
-                        break;
-                    }
-                    if (!_isClassCourse) {
-                        NSString *passCourse_id = [NSString stringWithFormat:@"%@",[passArraySecond[j] objectForKey:@"id"]];
-                        if ([passCourse_id isEqualToString:course_id]) {
-                            hasCourseID = YES;
-                            first = i;
-                            second = j;
-                            passCourseInfo = [NSMutableDictionary dictionaryWithDictionary:passArraySecond[j]];
-                            break;
-                        }
-                    } else {
-                        NSMutableArray *passArrayThird = [NSMutableArray arrayWithArray:[passArraySecond[j] arrayValueForKey:@"child"]];
-                        for (int k = 0; k<passArrayThird.count; k++) {
-                            NSString *passCourse_id = [NSString stringWithFormat:@"%@",[passArrayThird[k] objectForKey:@"id"]];
-                            if ([passCourse_id isEqualToString:course_id]) {
-                                hasCourseID = YES;
-                                first = i;
-                                second = j;
-                                third = k;
-                                passCourseInfo = [NSMutableDictionary dictionaryWithDictionary:passArrayThird[k]];
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-            
-            if (hasCourseID && SWNOTEmptyDictionary(passCourseInfo)) {
-                [passCourseInfo setObject:url forKey:@"video_address"];
-                if (_isClassCourse) {
-                    /// 三层 班级课
-                    
-                    // 取出第二层
-                    NSMutableArray *pass10 = [NSMutableArray arrayWithArray:[_dataArray[first] arrayValueForKey:@"child"]];
-                    // 取出第三层
-                    NSMutableArray *pass11 = [NSMutableArray arrayWithArray:[pass10[second] arrayValueForKey:@"child"]];
-                    // 替换第三层数据源
-                    [pass11 replaceObjectAtIndex:third withObject:[NSDictionary dictionaryWithDictionary:passCourseInfo]];
-                    
-                    // 取出第二层数据源
-                    NSMutableDictionary *pass11Dict = [NSMutableDictionary dictionaryWithDictionary:pass10[second]];
-                    // 替换第二层数据源
-                    [pass11Dict setObject:[NSArray arrayWithArray:pass11] forKey:@"child"];
-                    [pass10 replaceObjectAtIndex:second withObject:pass11Dict];
-                    
-                    
-                    NSMutableDictionary *pass11Dict1 = [NSMutableDictionary dictionaryWithDictionary:_dataArray[first]];
-                    [pass11Dict1 setObject:[NSArray arrayWithArray:pass10] forKey:@"child"];
-                    
-                    NSMutableArray *pass = [NSMutableArray arrayWithArray:_dataArray];
-                    [pass replaceObjectAtIndex:first withObject:pass11Dict1];
-                    _dataArray = [NSArray arrayWithArray:pass];
-                } else {
-                    /// 两层 点播课
-                    NSMutableArray *pass10 = [NSMutableArray arrayWithArray:[_dataArray[first] arrayValueForKey:@"child"]];
-                    [pass10 replaceObjectAtIndex:second withObject:[NSDictionary dictionaryWithDictionary:passCourseInfo]];
-                    
-                    NSMutableDictionary *pass11Dict = [NSMutableDictionary dictionaryWithDictionary:_dataArray[first]];
-                    [pass11Dict setObject:[NSArray arrayWithArray:pass10] forKey:@"child"];
-                    
-                    NSMutableArray *pass = [NSMutableArray arrayWithArray:_dataArray];
-                    [pass replaceObjectAtIndex:first withObject:pass11Dict];
-                    _dataArray = [NSArray arrayWithArray:pass];
-                }
-            }
-            
-            _dataSource = (NSDictionary *)_dataArray;
-            
-            if ([[ZBLM3u8Manager shareInstance] exitLocalVideoWithUrlString:url]) {
-                [TKProgressHUD showError:@"已下载" toView:self.view];
-                
-                NSString * localPlayUrlString = [[ZBLM3u8Manager shareInstance] localPlayUrlWithOriUrlString:url];
-                
-                NSURL *playUrl = [[ZBLM3u8Manager shareInstance] localPlayUrlWithOriUrlUrl:localPlayUrlString];
-                BRPlayM3u8VideoViewController *playVC = [[BRPlayM3u8VideoViewController alloc] init];
-                playVC.playUrl = playUrl;
-                playVC.filePath = localPlayUrlString;
-                [self.navigationController pushViewController:playVC animated:YES];
-                return;
-            }
-            else{
-                if (![[GLNetWorking isConnectionAvailable] isEqualToString:@"wifi"]) {
-                    UIAlertView *_downAlertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"如果您正在使用2G/3G/4G,如果继续运营商可能会收取流量费用" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"继续", nil];
-                    _downAlertView.otherInfo = downDict;
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [_downAlertView show];
-                    });
-                } else {
-                    [[BRDownHelpManager manager] br_startDownUrl:url dictInfo:downDict];
-                }
-            }
-        }
-            
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-    }];
-    [op start];
 }
 -(void)videoDown:(NSString *)url{
     if ([[ZBLM3u8Manager shareInstance] exitLocalVideoWithUrlString:url]) {
@@ -1097,31 +934,13 @@ typedef enum : NSUInteger {
             for (int i = 0 ; i < _dataArray.count; i ++ ) {
                 NSArray *classArray = [[_dataArray objectAtIndex:i] arrayValueForKey:@"child"];
                 if (classArray.count == 0) {
-                    [_newsDataArray addObject:@[]];
                 } else {
                     [_newsDataArray addObject:classArray];
                     [classArray enumerateObjectsUsingBlock:^(NSDictionary *a_course, NSUInteger idx, BOOL * _Nonnull stop) {
-                        if (_isClassCourse) {
-                            NSArray *lastClassArray = [a_course arrayValueForKey:@"child"];
-                            [lastClassArray enumerateObjectsUsingBlock:^(NSDictionary *last_course, NSUInteger lastidx, BOOL * _Nonnull stop) {
-                                NSString *last_course_id = [last_course stringValueForKey:@"id"];
-                                NSString *last_video_address = [last_course stringValueForKey:@"video_address"];
-                                if ([self isDownLoadVideo:last_course_id]) {
-                                    ws.progressDict[last_course_id] = @(kDownFinish);
-                                }
-//                                if ([[ZBLM3u8Manager shareInstance] exitLocalVideoWithUrlString:last_video_address]) {
-//                                    ws.progressDict[last_course_id] = @(kDownFinish);
-//                                }
-                            }];
-                        } else {
-                            NSString *course_id = [a_course stringValueForKey:@"id"];
-                            NSString *video_address = [a_course stringValueForKey:@"video_address"];
-                            if ([self isDownLoadVideo:course_id]) {
-                                ws.progressDict[course_id] = @(kDownFinish);
-                            }
-//                            if ([[ZBLM3u8Manager shareInstance] exitLocalVideoWithUrlString:video_address]) {
-//                                ws.progressDict[course_id] = @(kDownFinish);
-//                            }
+                        NSString *course_id = [a_course stringValueForKey:@"id"];
+                        NSString *video_address = [a_course stringValueForKey:@"video_address"];
+                        if ([[ZBLM3u8Manager shareInstance] exitLocalVideoWithUrlString:video_address]) {
+                            ws.progressDict[course_id] = @(kDownFinish);
                         }
                     }];
                 }
@@ -1151,53 +970,7 @@ typedef enum : NSUInteger {
     [op start];
 }
 
-// MARK: - 判断是否已经下载了
-- (BOOL)isDownLoadVideo:(NSString *)courseId {
-    id responseObject = [[BRDownHelpManager manager] br_getCourseInfoWithListCourseInfo:_videoDataSource];
-    BOOL isDown = NO;
-    if ([responseObject isKindOfClass:[NSArray class]]) {
-        NSArray *pass = (NSArray *)responseObject;
-        if (_isClassCourse) {
-            for (int i = 0; i<pass.count; i++) {
-                if (isDown) {
-                    break;
-                }
-                NSArray *pass1 = [NSArray arrayWithArray:[pass[i] objectForKey:@"child"]];
-                for (int j = 0; j<pass1.count; j++) {
-                    if (isDown) {
-                        break;
-                    }
-                    NSArray *pass2 = [NSArray arrayWithArray:[pass1[j] objectForKey:@"child"]];
-                    for (int k = 0; k < pass2.count; k++) {
-                        NSString *passCourseID = [NSString stringWithFormat:@"%@",[pass2[k] objectForKey:@"id"]];
-                        if ([passCourseID isEqualToString:courseId] && SWNOTEmptyStr([pass2[k] objectForKey:@"video_address"])) {
-                            isDown = YES;
-                            break;
-                        }
-                    }
-                }
-            }
-            return isDown;
-        } else {
-            for (int i = 0; i<pass.count; i++) {
-                if (isDown) {
-                    break;
-                }
-                NSArray *pass1 = [NSArray arrayWithArray:[pass[i] arrayValueForKey:@"child"]];
-                for (int j = 0; j < pass1.count; j++) {
-                    NSString *passCourseID = [NSString stringWithFormat:@"%@",[pass1[j] objectForKey:@"id"]];
-                    if ([passCourseID isEqualToString:courseId] && SWNOTEmptyStr([pass1[j] objectForKey:@"video_address"])) {
-                        isDown = YES;
-                        break;
-                    }
-                }
-            }
-            return isDown;
-        }
-    } else {
-        return NO;
-    }
-}
+
 
 
 @end

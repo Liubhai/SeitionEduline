@@ -59,9 +59,6 @@
 
 - (void)addAllView {
     _tabView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MainScreenWidth, _dataArray.count * 40)];
-    if (iPhoneX) {
-        _tabView.frame = CGRectMake(0, 24, MainScreenWidth, MainScreenHeight - 109 - 200 - 24);
-    }
     _tabView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.4];
     _tabView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [self.view addSubview:_tabView];
@@ -70,9 +67,6 @@
 - (void)addTabView {
     CGFloat tableViewW = MainScreenWidth / 3;
     _oneTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MainScreenWidth, 4 * 40) style:UITableViewStyleGrouped];
-    if (iPhoneX) {
-        _oneTableView.frame = CGRectMake(0, 30, MainScreenWidth, MainScreenHeight - 109 - 200);
-    }
     _oneTableView.backgroundColor = [UIColor whiteColor];
     _oneTableView.dataSource = self;
     _oneTableView.delegate = self;

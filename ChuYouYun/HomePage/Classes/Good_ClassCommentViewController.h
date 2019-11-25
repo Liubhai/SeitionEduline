@@ -14,7 +14,6 @@
 @property (assign, nonatomic) CGFloat tabelHeight;
 @property (strong, nonatomic) Good_ClassMainViewController *vc;
 @property (assign, nonatomic) BOOL cellTabelCanScroll;
-@property (assign, nonatomic) BOOL isNewClass;
 
 @property (strong ,nonatomic)UITableView     *tableView;
 

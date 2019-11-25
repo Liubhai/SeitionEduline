@@ -40,7 +40,7 @@
 //    button.hidden = YES;
     [button setFrame:CGRectMake(0, 0, 200, 44)];
     [button setFrame:CGRectMake(0, 0, MainScreenWidth, MainScreenHeight)];
-    [button setTitle:@"" forState:UIControlStateNormal];
+    [button setTitle:@"立即体验" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [button.layer setCornerRadius:5];
     [button.layer setBorderColor:[UIColor clearColor].CGColor];
@@ -60,6 +60,8 @@
         [self.button setCenter:CGPointMake(kHcdGuideViewBounds.size.width / 2, kHcdGuideViewBounds.size.height - 130)];
     } else if (iPhone4SOriPhone4) {
         [self.button setCenter:CGPointMake(kHcdGuideViewBounds.size.width / 2, kHcdGuideViewBounds.size.height - 90)];
+    } else {
+        [self.button setCenter:CGPointMake(kHcdGuideViewBounds.size.width / 2, kHcdGuideViewBounds.size.height - 130 - MACRO_UI_SAFEAREA)];
     }
     
 }

@@ -217,7 +217,6 @@
     vc.videoUrl = videoUrl;
     vc.imageUrl = imageUrl;
     vc.orderSwitch = _order_switch;
-    vc.isClassNew = [_typeString isEqualToString:@"newClass"] ? YES : NO;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -225,9 +224,6 @@
 - (void)netWorkUserVideoGetMyList:(NSInteger)Num {
     
     NSString *endUrlStr = YunKeTang_User_video_getMyList;
-    if ([_typeString isEqualToString:@"newClass"]) {
-        endUrlStr = classes_getMyList;
-    }
     NSString *allUrlStr = [YunKeTang_Api_Tool YunKeTang_GetFullUrl:endUrlStr];
     
     NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];

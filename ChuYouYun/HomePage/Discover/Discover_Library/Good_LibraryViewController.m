@@ -64,7 +64,7 @@
 
 -(UIImageView *)imageView {
     if (!_imageView) {
-        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64 + 45 * WideEachUnit, MainScreenWidth, MainScreenHeight - 64 - 45 * WideEachUnit)];
+        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, MACRO_UI_UPHEIGHT + 45 * WideEachUnit, MainScreenWidth, MainScreenHeight - MACRO_UI_UPHEIGHT - 45 * WideEachUnit)];
         _imageView.image = Image(@"云课堂_空数据.png");
         [self.view addSubview:_imageView];
     }

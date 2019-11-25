@@ -202,12 +202,9 @@
         }
     }
     NSLog(@"%@",_dataArray);
-    if ([_dataArray[indexPath.row][@"order_type"] integerValue] == 4 || [_dataArray[indexPath.row][@"order_type"] integerValue] == 7) {//点播
+    if ([_dataArray[indexPath.row][@"order_type"] integerValue] == 4) {//点播
         
         NSString *ID = [NSString stringWithFormat:@"%@",_dataArray[indexPath.row][@"video_id"]];
-        if ([_dataArray[indexPath.row][@"order_type"] integerValue] == 7) {
-            ID = [NSString stringWithFormat:@"%@",_dataArray[indexPath.row][@"classes_id"]];
-        }
         NSString *price = _dataArray[indexPath.row][@"price"];
         NSString *title = _dataArray[indexPath.row][@"video_name"];
         NSString *videoUrl = _dataArray[indexPath.row][@"source_info"][@"video_address"];
@@ -220,7 +217,6 @@
         vc.imageUrl = imageUrl;
         vc.videoUrl = videoUrl;
         vc.orderSwitch = _order_switch;
-        vc.isClassNew = ([_dataArray[indexPath.row][@"order_type"] integerValue] == 7 ? YES : NO);
         [self.navigationController pushViewController:vc animated:YES];
     } else if ([_dataArray[indexPath.row][@"order_type"] integerValue] == 5) {
         OfflineDetailViewController *vc = [[OfflineDetailViewController alloc] init];
@@ -271,9 +267,6 @@
         _classTypeStr = @"6";
     } else if ([_classTypeStr integerValue] == 4) {
         _classTypeStr = @"2";
-    } else if ([_classTypeStr integerValue] == 5) {
-        // 班级课
-        _classTypeStr = @"7";
     }
     [self netWorkOrderGetList:1];
 }

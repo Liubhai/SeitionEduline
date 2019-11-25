@@ -213,7 +213,7 @@
             return;
         }
     }
-    if ([_dataArray[indexPath.row][@"order_type"] integerValue] == 4 || [_dataArray[indexPath.row][@"order_type"] integerValue] == 7) {//点播
+    if ([_dataArray[indexPath.row][@"order_type"] integerValue] == 4) {//点播
         
         NSString *ID = [NSString stringWithFormat:@"%@",_dataArray[indexPath.row][@"source_info"][@"id"]];
         NSString *price = _dataArray[indexPath.row][@"source_info"][@"mz_price"][@"price"];
@@ -228,7 +228,6 @@
         vc.price = price;
         vc.ID = ID;
         vc.orderSwitch = _order_switch;
-        vc.isClassNew = ([_dataArray[indexPath.row][@"order_type"] integerValue] == 7 ? YES : NO);
         [self.navigationController pushViewController:vc animated:YES];
         
     } else if ([_dataArray[indexPath.row][@"order_type"] integerValue] == 5) {

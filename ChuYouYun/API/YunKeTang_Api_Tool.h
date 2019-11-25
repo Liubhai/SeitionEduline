@@ -47,9 +47,6 @@
 + (float) widthForString:(NSString *)value fontSize:(UIFont*)font andHeight:(float)height;
 
 + (NSString*)timeChangeWithSeconds:(NSInteger)seconds;
-+ (NSString*)timeChangeWithSecondsFormat:(NSInteger)seconds;
+
 + (NSString *)getLocalTime;
-+ (NSString *)formateTime:(NSString *)time;
-+ (NSString *)timeForHHmm:(NSString *)time;
-+ (NSString *)timeForYYYYMMDD:(NSString *)time;
 @end
