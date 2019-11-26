@@ -238,7 +238,8 @@
     UITextField *allTextField = [[UITextField alloc] initWithFrame:CGRectMake(15 * WideEachUnit, 20 * WideEachUnit, MainScreenWidth - 30 * WideEachUnit, 40 * WideEachUnit)];
     allTextField.backgroundColor = [UIColor whiteColor];
     allTextField.placeholder = @"点击选择地区";
-    [allTextField setValue:[UIFont boldSystemFontOfSize:14 * WideEachUnit] forKeyPath:@"_placeholderLabel.font"];
+//    [allTextField setValue:[UIFont boldSystemFontOfSize:14 * WideEachUnit] forKeyPath:@"_placeholderLabel.font"];
+    allTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"点击选择地区" attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]}];
     [_openProvinceView addSubview:allTextField];
     allTextField.userInteractionEnabled = YES;
     allTextField.leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 10 * WideEachUnit, 10 * WideEachUnit)];
