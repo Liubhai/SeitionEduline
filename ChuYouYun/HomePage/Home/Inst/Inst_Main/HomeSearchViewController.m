@@ -135,7 +135,8 @@
     }
     _searchText.placeholder = @"搜课程";
     _searchText.font = Font(14 * WideEachUnit);
-    [_searchText setValue:Font(16) forKeyPath:@"_placeholderLabel.font"];
+//    [_searchText setValue:Font(16) forKeyPath:@"_placeholderLabel.font"];
+    _searchText.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"搜课程" attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]}];
     [_searchText sygDrawPlaceholderInRect:CGRectMake(0, 10 * WideEachUnit, 0, 0)];
     _searchText.delegate = self;
     _searchText.returnKeyType = UIReturnKeySearch;

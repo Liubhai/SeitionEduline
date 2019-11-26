@@ -86,7 +86,8 @@
     SYGTextField *searchText = [[SYGTextField alloc] initWithFrame:CGRectMake(50, 25, MainScreenWidth - 100, 30)];
     searchText.placeholder = @"搜索问答";
     searchText.font = Font(15);
-    [searchText setValue:Font(16) forKeyPath:@"_placeholderLabel.font"];
+//    [searchText setValue:Font(16) forKeyPath:@"_placeholderLabel.font"];
+    searchText.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"搜索问答" attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]}];
     [searchText sygDrawPlaceholderInRect:CGRectMake(0, 10, 0, 0)];
     searchText.layer.borderWidth = 1;
     searchText.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
