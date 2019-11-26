@@ -134,7 +134,7 @@
 - (void)interFace {
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     NSLog(@"---%@",_dict);
-    _payTypeStr = @"1";//默认是支付宝
+    _payTypeStr = @"";//默认是支付宝
     NSLog(@"---%@",_typeStr);
     isGoOut = NO;
     
