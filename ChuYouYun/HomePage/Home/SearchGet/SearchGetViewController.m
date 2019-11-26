@@ -158,7 +158,8 @@
     //    //添加搜索
     _searchText = [[UITextField alloc] initWithFrame:CGRectMake(47.5, 20, MainScreenWidth - 90, 36)];
     _searchText.placeholder = @"搜索科目、老师、课程、机构";
-    [_searchText setValue:Font(14) forKeyPath:@"_placeholderLabel.font"];
+//    [_searchText setValue:Font(14) forKeyPath:@"_placeholderLabel.font"];
+    _searchText.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"搜索科目、老师、课程、机构" attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]}];
     _searchText.delegate = self;
     _searchText.returnKeyType = UIReturnKeySearch;
     _searchText.layer.borderWidth = 1;
