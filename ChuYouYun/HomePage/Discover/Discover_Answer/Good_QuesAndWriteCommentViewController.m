@@ -99,7 +99,8 @@
     UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(15 * WideEachUnit, 5 * WideEachUnit, MainScreenWidth - 120 * WideEachUnit, 34 * WideEachUnit)];
     textField.placeholder = @"添加评论";
     textField.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    [textField setValue:[UIFont boldSystemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
+//    [textField setValue:[UIFont boldSystemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
+    textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"添加评论" attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]}];
     textField.layer.cornerRadius = 3 ;
     [_downView addSubview:textField];
     
