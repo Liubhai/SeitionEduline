@@ -72,7 +72,8 @@
     }
     _institutionSearch.placeholder = @"输入机构名称";
     _institutionSearch.font = Font(14 * WideEachUnit);
-    [_institutionSearch setValue:Font(16) forKeyPath:@"_placeholderLabel.font"];
+//    [_institutionSearch setValue:Font(16) forKeyPath:@"_placeholderLabel.font"];
+    _institutionSearch.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"输入机构名称" attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]}];
     _institutionSearch.delegate = self;
     _institutionSearch.returnKeyType = UIReturnKeySearch;
     _institutionSearch.layer.cornerRadius = 18;

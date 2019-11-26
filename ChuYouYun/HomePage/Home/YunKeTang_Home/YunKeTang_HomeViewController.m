@@ -153,7 +153,8 @@ static NSString *cellID = @"cell";
     }
     searchText.placeholder = @"搜索课程";
     searchText.font = Font(15);
-    [searchText setValue:Font(16) forKeyPath:@"_placeholderLabel.font"];
+//    [searchText setValue:Font(16) forKeyPath:@"_placeholderLabel.font"];
+    searchText.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"搜索课程" attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]}];
     [searchText sygDrawPlaceholderInRect:CGRectMake(0, 10, 0, 0)];
     searchText.layer.borderWidth = 1;
     searchText.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
