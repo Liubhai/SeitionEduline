@@ -168,7 +168,7 @@ static NSString *cellID = @"cell";
     if (iPhoneX) {
         WZLabel.frame = CGRectMake(50, 45, MainScreenWidth - 100, 30);
     }
-    WZLabel.text = @"课程";
+    WZLabel.text = @"课堂";
     [WZLabel setTextColor:[UIColor whiteColor]];
     WZLabel.font = [UIFont systemFontOfSize:20];
     WZLabel.textAlignment = NSTextAlignmentCenter;

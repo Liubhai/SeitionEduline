@@ -74,7 +74,7 @@
     if (iPhoneX) {
         titleLabel.frame = CGRectMake(0, 45, MainScreenWidth, 30);
     }
-    titleLabel.text = @"发现";
+    titleLabel.text = @"文库";
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.font = [UIFont systemFontOfSize:20];
     titleLabel.textColor = [UIColor whiteColor];
