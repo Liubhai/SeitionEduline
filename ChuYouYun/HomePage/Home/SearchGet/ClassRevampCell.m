@@ -289,6 +289,9 @@
         } else if ([eventType integerValue] == 6) {
             eventTitle = @"拼团";
             eventIcon = @"seckill";
+        } else if ([eventType integerValue] == 7) {
+            eventTitle = @"砍价";
+            eventIcon = @"seckill";
         } else {
             _activityType.hidden = YES;
         }
