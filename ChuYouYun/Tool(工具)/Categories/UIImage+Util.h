@@ -16,5 +16,6 @@
  @return 渲染后的图片
  */
 - (UIImage *)converToMainColor;
+- (UIImage *)converToMainColor:(UIColor *)color;
 
 @end

@@ -35,7 +35,7 @@
 
 - (void)interFace {
     self.view.backgroundColor = [UIColor clearColor];
-    _dataArray = @[@"直播课程",@"点播课程",@"班级课程"];
+    _dataArray = @[@"线上课程",@"直播课程",@"班级课程"];
     
     //添加通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeSelfView) name:@"SearchClassOrLiveRemove" object:nil];

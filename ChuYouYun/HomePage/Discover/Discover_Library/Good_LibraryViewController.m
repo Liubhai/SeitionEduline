@@ -64,25 +64,23 @@
 
 -(UIImageView *)imageView {
     if (!_imageView) {
-        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64 + 45 * WideEachUnit, MainScreenWidth, MainScreenHeight - 64 - 45 * WideEachUnit)];
+        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, MACRO_UI_UPHEIGHT + 45 * WideEachUnit, MainScreenWidth, MainScreenHeight - MACRO_UI_UPHEIGHT - 45 * WideEachUnit)];
         _imageView.image = Image(@"云课堂_空数据.png");
         [self.view addSubview:_imageView];
     }
     return _imageView;
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
     AppDelegate *app = [AppDelegate delegate];
     rootViewController * nv = (rootViewController *)app.window.rootViewController;
-    [nv isHiddenCustomTabBarByBoolean:YES];
+    [nv isHiddenCustomTabBarByBoolean:NO];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
-    [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
-    
     //添加通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(GetLib_Category_ID:) name:@"NotificationLib_Category_ID" object:nil];
-    
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -92,7 +90,6 @@
     [nv isHiddenCustomTabBarByBoolean:NO];
     [super viewWillDisappear:animated];
     self.navigationController.navigationBar.hidden = NO;
-    
 }
 
 
@@ -138,7 +135,7 @@
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 20, 40, 40)];
     [backButton setImage:[UIImage imageNamed:@"ic_back@2x"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(backPressed) forControlEvents:UIControlEventTouchUpInside];
-    [SYGView addSubview:backButton];
+//    [SYGView addSubview:backButton];
     
     //添加中间的文字
     UILabel *WZLabel = [[UILabel  alloc] initWithFrame:CGRectMake(50, 25,MainScreenWidth - 100, 30)];
@@ -168,7 +165,7 @@
 
 
 - (void)addHeaderView {
-    _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, NavigationBarHeight, MainScreenWidth, 45 * WideEachUnit)];
+    _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, NavigationBarHeight, MainScreenWidth, 45)];
     _headerView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_headerView];
     
@@ -222,10 +219,7 @@
 - (void)addTableView {
     
 //    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + 45 * WideEachUnit, MainScreenWidth, MainScreenHeight - 64 - 45 * WideEachUnit + 36) style:UITableViewStyleGrouped];
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + 45 * WideEachUnit, MainScreenWidth, MainScreenHeight - 64 + 36) style:UITableViewStyleGrouped];
-    if (iPhoneX) {
-        _tableView.frame = CGRectMake(0, 88 + 45 * WideEachUnit, MainScreenWidth, MainScreenHeight - 88 + 36);
-    }
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, MACRO_UI_UPHEIGHT + 45, MainScreenWidth, MainScreenHeight - MACRO_UI_UPHEIGHT - 45 - MACRO_UI_TABBAR_HEIGHT) style:UITableViewStyleGrouped];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.rowHeight = 90 * WideEachUnit;
@@ -265,12 +259,12 @@
 #pragma mark --- UITableViewDataSource
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 0.1;
+    return 0.001;
 }
 
-//-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-//    return 0.01 * WideEachUnit;
-//}
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 0.001;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return _dataArray.count;

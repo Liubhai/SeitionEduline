@@ -16,7 +16,8 @@
 
 #import "ClassSearchGoodViewController.h"
 #import "YunKeTang_HomeViewController.h"
-
+#import "Good_LibraryViewController.h"
+#import "UIImage+Util.h"
 
 @interface rootViewController ()
 {
@@ -39,13 +40,16 @@ static rootViewController *sharedBaseTabBar;
     goodVc.typeTagStr = @"1";
     UINavigationController *goodNav = [[UINavigationController alloc] initWithRootViewController:goodVc];
     
+    Good_LibraryViewController *libVC = [[Good_LibraryViewController alloc] init];
+    UINavigationController *lib = [[UINavigationController alloc] initWithRootViewController:libVC];
+    
     MoreViewController *moreVC = [[MoreViewController alloc] init];
     UINavigationController *navi6 = [[UINavigationController alloc] initWithRootViewController:moreVC];
     
     MyViewController * more = [[MyViewController alloc]init];
     UINavigationController * navi5 = [[UINavigationController alloc]initWithRootViewController:more];
     
-    self.viewControllers = [NSArray arrayWithObjects:homeNav,goodNav,navi6,navi5, nil];
+    self.viewControllers = [NSArray arrayWithObjects:homeNav,goodNav,lib,navi6,navi5, nil];
     
     _imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, MainScreenHeight - 49 - MACRO_UI_SAFEAREA, self.view.frame.size.width, 49 + MACRO_UI_SAFEAREA)];
     _imageView.tag = 100;
@@ -61,12 +65,12 @@ static rootViewController *sharedBaseTabBar;
 //    NSArray *imageArray = @[@"home_no_press@2x",@"class_no_press@2x",@"tab_discover_nopress@2x",@"me_no_press@2x"];
 //    NSArray *selectedArray = @[@"home_press@2x",@"class_press@2x",@"tab_discover_press@2x",@"me_press@2x"];
     
-    NSArray *imageArray = @[@"tab_home'@2x",@"tab_course@2x",@"tab_found@2x",@"tab_my@2x"];
-    NSArray *selectedArray = @[@"tab_home_pre@2x",@"tab_course_pre@2x",@"tab_found_pre@2x",@"tab_my_pre@2x"];
+    NSArray *imageArray = @[@"tab1@2x",@"tab2@2x",@"unducoment",@"tab3@2x",@"tab4@2x"];
+    NSArray *selectedArray = @[@"tab_sel1@2x",@"tab_sel2@2x",@"ducoment",@"tab_sel3@2x",@"tab_sel4@2x"];
     
     //添加按钮
-    CGFloat space = (self.view.frame.size.width-40*4)/5;
-    for(int i=0;i<4;i++)
+    CGFloat space = (self.view.frame.size.width-40*imageArray.count)/(imageArray.count + 1);
+    for(int i=0;i<imageArray.count;i++)
     {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.frame = CGRectMake(space+(space+40)*i, 0, 40, 49);
@@ -75,6 +79,9 @@ static rootViewController *sharedBaseTabBar;
         [btn setImage:imageNol forState:UIControlStateNormal];
         //选中状态时的图片
         UIImage * imageSelected = [UIImage imageNamed:selectedArray[i]];
+        if (i == 2) {
+            imageSelected = [imageSelected converToMainColor:RGBHex(0x00a5c0)];
+        }
         [btn setImage:imageSelected forState:UIControlStateSelected];
         
         [_imageView addSubview:btn];

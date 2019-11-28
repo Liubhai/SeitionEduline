@@ -28,6 +28,7 @@
 #import "CardVoucherMainViewController.h"
 
 #import "ClassMainViewController.h"
+#import "Good_InstitutionMainViewController.h"
 
 
 @interface MoreViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -116,24 +117,26 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 1 || section == 0) {
-        return 2;
-    } else if (section == 2) {
+    if (section == 0) {
+        return 1;
+    } else if (section == 3) {
         if ([HASALIPAY isEqualToString:@"0"]) {
             return 1;
         } else {
             return 2;
         }
-    } else {
+    } else if (section == 2) {
         return 1;
+    } else {
+        return 2;
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
 //    NSArray *titleArray = @[@"资讯",@"商城",@"考试",@"文库",@"问答",@"小组",@"临时"];
-    NSArray *titleArray = @[@"资讯",@"商城",@"考试",@"文库",@"问答",@"卡券",@"套餐"];
-    NSArray *imageArray = @[@"资讯",@"商 城 (2)",@"考试(3)",@"文库",@"问答(4)",@"卡券(3)",@"发现_小组"];
+    NSArray *titleArray = @[@"线下课",@"资讯",@"商城",@"考试",@"文库",@"问答",@"卡券",@"套餐",@"机构"];
+    NSArray *imageArray = @[@"线下课",@"资讯",@"商 城 (2)",@"考试(3)",@"文库",@"问答(4)",@"卡券(3)",@"发现_小组",@"faxian_organization"];
     static NSString *CellIdentifier = @"culture";
     //自定义cell类
     MoreTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -148,14 +151,17 @@
         [cell.SYGButton setBackgroundImage:[UIImage imageNamed:imageArray[indexRow]] forState:UIControlStateNormal];
         cell.SYGLabel.text = titleArray[indexRow];
     } else if (indexSet == 1) {
-        [cell.SYGButton setBackgroundImage:[UIImage imageNamed:imageArray[indexRow + 2]] forState:UIControlStateNormal];
-        cell.SYGLabel.text = titleArray[indexRow+ 2];
+        [cell.SYGButton setBackgroundImage:[UIImage imageNamed:imageArray[indexRow + 1]] forState:UIControlStateNormal];
+        cell.SYGLabel.text = titleArray[indexRow+ 1];
     } else if (indexSet == 2) {
-        [cell.SYGButton setBackgroundImage:[UIImage imageNamed:imageArray[indexRow + 4]] forState:UIControlStateNormal];
-        cell.SYGLabel.text = titleArray[indexRow + 4];
+        [cell.SYGButton setBackgroundImage:[UIImage imageNamed:imageArray[indexRow + 3]] forState:UIControlStateNormal];
+        cell.SYGLabel.text = titleArray[indexRow + 3];
     } else if (indexSet == 3) {
-        [cell.SYGButton setBackgroundImage:[UIImage imageNamed:imageArray[indexRow + 6]] forState:UIControlStateNormal];
-        cell.SYGLabel.text = titleArray[indexRow + 6];
+        [cell.SYGButton setBackgroundImage:[UIImage imageNamed:imageArray[indexRow + 5]] forState:UIControlStateNormal];
+        cell.SYGLabel.text = titleArray[indexRow + 5];
+    } else if (indexSet == 4) {
+        [cell.SYGButton setBackgroundImage:[UIImage imageNamed:imageArray[indexRow + 7]] forState:UIControlStateNormal];
+        cell.SYGLabel.text = titleArray[indexRow + 7];
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;//表格箭头的样式
     
@@ -164,7 +170,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 5;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -184,7 +190,7 @@
     NSInteger indexSet = indexPath.section;
     NSInteger indexRow = indexPath.row;
     
-    if (indexSet == 0) {//第一列
+    if (indexSet == 1) {//第一列
         if (indexRow == 0) {//资讯
             NewsMainViewController *newsMainVc = [[NewsMainViewController alloc] init];
             [self.navigationController pushViewController:newsMainVc animated:YES];
@@ -193,7 +199,7 @@
             [self.navigationController pushViewController:shopVc animated:YES];
         }
         
-    } else if (indexSet == 1) {
+    } else if (indexSet == 2) {
 
         if (indexRow == 0) {//在线考试
             TestMainViewController *vc = [[TestMainViewController alloc] init];
@@ -205,7 +211,7 @@
             Good_LibraryViewController *vc = [[Good_LibraryViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }
-    } else if (indexSet == 2) {
+    } else if (indexSet == 3) {
         if (indexRow == 0) {//问答
 //            YunKeTang_questionViewController *vc = [[YunKeTang_questionViewController alloc] init];
 //            [self.navigationController pushViewController:vc animated:YES];
@@ -221,9 +227,17 @@
             [self.navigationController pushViewController:vc animated:YES];
         }
 
-    } else if (indexSet == 3) {//临时
-        ClassMainViewController *exchangeV = [[ClassMainViewController alloc]init];//TempViewController
-        [self.navigationController pushViewController:exchangeV animated:YES];
+    } else if (indexSet == 4) {//临时
+        if (indexRow == 0) {
+            ClassMainViewController *exchangeV = [[ClassMainViewController alloc]init];//TempViewController
+            [self.navigationController pushViewController:exchangeV animated:YES];
+        } else {
+            Good_InstitutionMainViewController *homeInStVc = [[Good_InstitutionMainViewController alloc] init];
+            [self.navigationController pushViewController:homeInStVc animated:YES];
+        }
+    } else if (indexSet == 0) {
+        OfflineMainViewController *vc = [[OfflineMainViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:NO];

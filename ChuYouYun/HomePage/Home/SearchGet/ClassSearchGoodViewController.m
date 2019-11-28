@@ -211,9 +211,9 @@ static NSString *cellID = @"cell";
     [self.view addSubview:_headerView];
     
     
-    NSArray *titleArray = @[@"点播课程",@"分类",@"综合条件",@"筛选"];
+    NSArray *titleArray = @[@"线上课程",@"分类",@"综合条件",@"筛选"];
     if (_cateStr != nil) {
-        titleArray = @[@"点播课程",_cateStr,@"综合条件",@"筛选"];
+        titleArray = @[@"线上课程",_cateStr,@"综合条件",@"筛选"];
     }
     NSArray *imageArray = @[@"ic_dropdown_live@3x",@"ic_dropdown_live@3x",@"ic_dropdown_live@3x",@"ic_dropdown_live@3x"];
     CGFloat ButtonH = 45 * WideEachUnit;
@@ -575,7 +575,7 @@ static NSString *cellID = @"cell";
     NSString *title = not.object;
     if ([title isEqualToString:@"直播课程"]) {
         _classType = @"2";
-    } else if ([title isEqualToString:@"点播课程"]) {
+    } else if ([title isEqualToString:@"线上课程"]) {
         _classType = @"1";
     } else if ([title isEqualToString:@"班级课程"]) {
         _classType = @"5";

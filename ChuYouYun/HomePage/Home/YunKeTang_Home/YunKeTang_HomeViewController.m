@@ -130,9 +130,9 @@ static NSString *cellID = @"cell";
     _titleArray = [NSMutableArray array];
     _timeArray = [NSMutableArray array];
     if ([MoreOrSingle integerValue] == 1) {//单机构
-        _tableTitleArray = @[@"最近直播",@"精选课程",@"最新课程",@"预约课程",@"名师推荐"];
+        _tableTitleArray = @[@"最近直播",@"精选课程",@"线上课程",@"线下课程",@"名师推荐"];
     } else if ([MoreOrSingle integerValue] == 2) {//多机构
-        _tableTitleArray = @[@"最近直播",@"精选课程",@"最新课程",@"预约课程",@"名师推荐",@"机构推荐"];
+        _tableTitleArray = @[@"最近直播",@"精选课程",@"线上课程",@"线下课程",@"名师推荐",@"机构推荐"];
     }
     //定时器
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(NetWorkAgain) userInfo:nil repeats:YES];
@@ -537,6 +537,19 @@ static NSString *cellID = @"cell";
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        if (_liveArray.count == 0) {
+            return 0.001;
+        } else {
+            return 40 * WideEachUnit;
+        }
+    } else if (section == 3) {
+        if (_lineClassArray.count == 0) {
+            return 0.001;
+        } else {
+            return 40 * WideEachUnit;
+        }
+    }
     return 40 * WideEachUnit;
 }
 
@@ -570,10 +583,33 @@ static NSString *cellID = @"cell";
     [liveMoreLabel addGestureRecognizer:liveMoreLabelTap];
     [cellHeaderView addSubview:liveMoreLabel];
     
+    if (section == 0) {
+        if (_liveArray.count == 0) {
+            return nil;
+        }
+    } else if (section == 3) {
+        if (_lineClassArray.count == 0) {
+            return nil;
+        }
+    }
+    
     return cellHeaderView;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if (section == 0) {
+        if (_liveArray.count == 0) {
+            return 0.001;
+        } else {
+            return 10 * WideEachUnit;
+        }
+    } else if (section == 3) {
+        if (_lineClassArray.count == 0) {
+            return 0.001;
+        } else {
+            return 10 * WideEachUnit;
+        }
+    }
     return 10 * WideEachUnit;
 }
 
