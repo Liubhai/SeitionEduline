@@ -39,7 +39,6 @@
 		091234521F7E23EB00CF5519 /* ic_share@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 091234501F7E23EB00CF5519 /* ic_share@3x.png */; };
 		0915CF661F8B740B00B11929 /* star1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0915CF651F8B740B00B11929 /* star1@3x.png */; };
 		091CACE61F8B76F600298D08 /* star2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 091CACE51F8B76F600298D08 /* star2@3x.png */; };
-		091F56CD1F0E44D500CD8742 /* 站位图.png in Resources */ = {isa = PBXBuildFile; fileRef = 091F56CC1F0E44D500CD8742 /* 站位图.png */; };
 		091FDAFB1FF4ED230074A481 /* tab_course@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 091FDAF91FF4ED230074A481 /* tab_course@2x.png */; };
 		091FDAFC1FF4ED230074A481 /* tab_course_pre@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 091FDAFA1FF4ED230074A481 /* tab_course_pre@2x.png */; };
 		092032E51FEA429D00DE370A /* IDLFaceSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 092032E01FEA429D00DE370A /* IDLFaceSDK.framework */; };
@@ -2411,6 +2410,10 @@
 		781F45C722D4671F006CF3C5 /* ClassCourseListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 781F45C022D4671D006CF3C5 /* ClassCourseListVC.m */; };
 		781F45C822D4671F006CF3C5 /* ClassMainCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 781F45C122D4671D006CF3C5 /* ClassMainCollectionCell.m */; };
 		781F45C922D4671F006CF3C5 /* ClassInfoDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 781F45C222D4671E006CF3C5 /* ClassInfoDetailVC.m */; };
+		782DFE4E238E8185000636D8 /* 站位图.png in Resources */ = {isa = PBXBuildFile; fileRef = 782DFE4D238E8184000636D8 /* 站位图.png */; };
+		782DFE52238E81D8000636D8 /* jianke1.png in Resources */ = {isa = PBXBuildFile; fileRef = 782DFE4F238E81D6000636D8 /* jianke1.png */; };
+		782DFE53238E81D8000636D8 /* jianke3.png in Resources */ = {isa = PBXBuildFile; fileRef = 782DFE50238E81D7000636D8 /* jianke3.png */; };
+		782DFE54238E81D8000636D8 /* jianke2.png in Resources */ = {isa = PBXBuildFile; fileRef = 782DFE51238E81D8000636D8 /* jianke2.png */; };
 		7832CEFA22DDC44F009921DE /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7832CEF922DDC44E009921DE /* NSData+Base64.m */; };
 		7832CEFE22DDC45C009921DE /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7832CEFC22DDC45B009921DE /* libcrypto.a */; };
 		7832CEFF22DDC45C009921DE /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7832CEFD22DDC45B009921DE /* libssl.a */; };
@@ -3810,7 +3813,6 @@
 		091234501F7E23EB00CF5519 /* ic_share@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_share@3x.png"; sourceTree = "<group>"; };
 		0915CF651F8B740B00B11929 /* star1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star1@3x.png"; sourceTree = "<group>"; };
 		091CACE51F8B76F600298D08 /* star2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star2@3x.png"; sourceTree = "<group>"; };
-		091F56CC1F0E44D500CD8742 /* 站位图.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "站位图.png"; sourceTree = "<group>"; };
 		091FDAF91FF4ED230074A481 /* tab_course@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_course@2x.png"; sourceTree = "<group>"; };
 		091FDAFA1FF4ED230074A481 /* tab_course_pre@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_course_pre@2x.png"; sourceTree = "<group>"; };
 		092032E01FEA429D00DE370A /* IDLFaceSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IDLFaceSDK.framework; sourceTree = "<group>"; };
@@ -4252,7 +4254,7 @@
 		504C759D1AA4395E00DF3018 /* Top2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Top2.png; sourceTree = "<group>"; };
 		504C759E1AA4395E00DF3018 /* Top3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Top3.png; sourceTree = "<group>"; };
 		5051459D1AE49F4E00CCCAE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		50566DFC1A6F44A400F093DE /* Eduline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Eduline.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		50566DFC1A6F44A400F093DE /* 简课教育.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "简课教育.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		50566E001A6F44A400F093DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50566E011A6F44A400F093DE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		50566E0C1A6F44A400F093DE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -6667,6 +6669,10 @@
 		781F45C022D4671D006CF3C5 /* ClassCourseListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassCourseListVC.m; sourceTree = "<group>"; };
 		781F45C122D4671D006CF3C5 /* ClassMainCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassMainCollectionCell.m; sourceTree = "<group>"; };
 		781F45C222D4671E006CF3C5 /* ClassInfoDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassInfoDetailVC.m; sourceTree = "<group>"; };
+		782DFE4D238E8184000636D8 /* 站位图.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "站位图.png"; sourceTree = "<group>"; };
+		782DFE4F238E81D6000636D8 /* jianke1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jianke1.png; sourceTree = "<group>"; };
+		782DFE50238E81D7000636D8 /* jianke3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jianke3.png; sourceTree = "<group>"; };
+		782DFE51238E81D8000636D8 /* jianke2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jianke2.png; sourceTree = "<group>"; };
 		7832CEF722DDC44D009921DE /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Base64.h"; sourceTree = "<group>"; };
 		7832CEF822DDC44E009921DE /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		7832CEF922DDC44E009921DE /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
@@ -9685,6 +9691,9 @@
 		09E0AEAC206B42A7009788C8 /* Lead_Photo */ = {
 			isa = PBXGroup;
 			children = (
+				782DFE4F238E81D6000636D8 /* jianke1.png */,
+				782DFE51238E81D8000636D8 /* jianke2.png */,
+				782DFE50238E81D7000636D8 /* jianke3.png */,
 				09250C3B2148F65100D9E5B4 /* 微博.png */,
 				09250C3A2148F65100D9E5B4 /* 微信.png */,
 				09250C392148F65100D9E5B4 /* QQ.png */,
@@ -10113,7 +10122,7 @@
 		50566DFD1A6F44A400F093DE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				50566DFC1A6F44A400F093DE /* Eduline.app */,
+				50566DFC1A6F44A400F093DE /* 简课教育.app */,
 				50566E151A6F44A400F093DE /* YunKeTang.xctest */,
 			);
 			name = Products;
@@ -23755,7 +23764,7 @@
 		F1B2E4BE1C5870DF00A3FBBE /* 发现 */ = {
 			isa = PBXGroup;
 			children = (
-				091F56CC1F0E44D500CD8742 /* 站位图.png */,
+				782DFE4D238E8184000636D8 /* 站位图.png */,
 				F1B3C22D1D0EA5E100EB780D /* 考试系统开心@2x.png */,
 				F1CCCDDE1CD3106300E9FDA3 /* 考试系统选择正确答案@2x.png */,
 				F1CCCDDC1CD3041D00E9FDA3 /* 考试系统难过@2x.png */,
@@ -23913,7 +23922,7 @@
 			);
 			name = YunKeTang;
 			productName = ChuYouYun;
-			productReference = 50566DFC1A6F44A400F093DE /* Eduline.app */;
+			productReference = 50566DFC1A6F44A400F093DE /* 简课教育.app */;
 			productType = "com.apple.product-type.application";
 		};
 		50566E141A6F44A400F093DE /* YunKeTangTests */ = {
@@ -24254,6 +24263,7 @@
 				817590BB1D475D7000151ED9 /* xiaowenda.png in Resources */,
 				81C4DE6D21B1246500A7CAD6 /* biaoqing_37.png in Resources */,
 				780F8518230F85EF00B67CEF /* tk_button_message_onview_jinyan_carton@2x.png in Resources */,
+				782DFE4E238E8185000636D8 /* 站位图.png in Resources */,
 				780F87D8230F85F200B67CEF /* tk_win_client_red_black@3x.png in Resources */,
 				780F863E230F85F000B67CEF /* tk_netstate_sign_down_red.png in Resources */,
 				780F8940230F85F300B67CEF /* tk_shixinyuan_out_selected_black@2x.png in Resources */,
@@ -25077,6 +25087,7 @@
 				780F876D230F85F100B67CEF /* tk_icon_video_voice_black@2x.png in Resources */,
 				8126EDFE21D63A42008C8547 /* chat_em_face2@3x.png in Resources */,
 				81C4DE6721B1246500A7CAD6 /* biaoqing_53.png in Resources */,
+				782DFE54238E81D8000636D8 /* jianke2.png in Resources */,
 				780F85F2230F85F000B67CEF /* tk_pen_default_cartoon@3x.png in Resources */,
 				F19EC0EC1C8D14270094C2A4 /* gouyin.png in Resources */,
 				F19EC1021C8D14270094C2A4 /* lanqiu.png in Resources */,
@@ -25234,6 +25245,7 @@
 				780F8656230F85F000B67CEF /* tk_black_default@3x.png in Resources */,
 				780F8579230F85EF00B67CEF /* tk_icon_voice@2x.png in Resources */,
 				819CDFCF2264896B00AFA698 /* me_press@2x.png in Resources */,
+				782DFE53238E81D8000636D8 /* jianke3.png in Resources */,
 				780F863C230F85F000B67CEF /* tk_netstate_sign_down_orange@2x.png in Resources */,
 				090F372A1E5D944500358899 /* excel.png in Resources */,
 				F1ED5F321C62F5BB0021E96F /* 笔记点赞@2x.png in Resources */,
@@ -25552,7 +25564,6 @@
 				780F87D0230F85F200B67CEF /* tk_icon_tv_white_black@3x.png in Resources */,
 				780F8430230F85EE00B67CEF /* tk_ipad_hd_red_cartoon.png in Resources */,
 				0911FBA21F9452A300AA0956 /* unchoose_s@3x.png in Resources */,
-				091F56CD1F0E44D500CD8742 /* 站位图.png in Resources */,
 				780F86A7230F85F000B67CEF /* tk_mp4_loading_black_00030.png in Resources */,
 				F19EC0D61C8D14270094C2A4 /* chajin.png in Resources */,
 				780F845B230F85EE00B67CEF /* tk_button_editor_disabled_cartoon.png in Resources */,
@@ -26338,6 +26349,7 @@
 				780F8913230F85F300B67CEF /* tk_pen_swb_selected_black@3x.png in Resources */,
 				09EB95311F55488600F3AE76 /* readyto@3x.png in Resources */,
 				F19EC0EB1C8D14270094C2A4 /* gangga.png in Resources */,
+				782DFE52238E81D8000636D8 /* jianke1.png in Resources */,
 				8126EE8721D63A43008C8547 /* 13.png in Resources */,
 				780F8722230F85F100B67CEF /* tk_res_surebtn_black.png in Resources */,
 				097DC28821D632850060C974 /* AlivcVideoPalySelect@2x.png in Resources */,
@@ -27947,6 +27959,7 @@
 					"$(SRCROOT)/ChuYouYun/Live_SDK/New_CC/CC资源/SDK",
 				);
 				MACH_O_TYPE = mh_execute;
+				MARKETING_VERSION = 1.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-force_load",
@@ -27955,8 +27968,8 @@
 					"\"$(SRCROOT)/ChuYouYun/Library/umeng_ios_social_sdk_5.2-2.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/SinaSSO/libWeiboSDK.a\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.saixin.eduline;
-				PRODUCT_NAME = Eduline;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jianke.jiaoyu;
+				PRODUCT_NAME = "简课教育";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
@@ -27973,10 +27986,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5QQ23A4NX6;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 2VGCGZZ87Y;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -28052,6 +28065,7 @@
 					"$(SRCROOT)/ChuYouYun/Live_SDK/New_CC/CC资源/SDK",
 				);
 				MACH_O_TYPE = mh_execute;
+				MARKETING_VERSION = 1.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-force_load",
@@ -28060,10 +28074,10 @@
 					"\"$(SRCROOT)/ChuYouYun/Library/umeng_ios_social_sdk_5.2-2.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/SinaSSO/libWeiboSDK.a\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.saixin.eduline;
-				PRODUCT_NAME = Eduline;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jianke.jiaoyu;
+				PRODUCT_NAME = "简课教育";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = appTongYongDis;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7s armv7 arm64";
