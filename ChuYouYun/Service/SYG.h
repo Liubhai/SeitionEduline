@@ -124,7 +124,7 @@
 
 #define Image(name) [UIImage imageNamed:name]
 #define PriceColor [UIColor redColor]
-#define BasidColor [UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1]
+#define BasidColor RGBHex(0x00a5c0)//[UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1]
 #define PartitionColor [UIColor colorWithRed:225.f / 255 green:225.f / 255 blue:225.f / 255 alpha:1]
 #define BackColor [UIColor colorWithRed:240.f / 255 green:240.f / 255 blue:240.f / 255 alpha:1]
 #define XXColor [UIColor colorWithRed:153.f / 255 green:153.f / 255 blue:153.f / 255 alpha:1]

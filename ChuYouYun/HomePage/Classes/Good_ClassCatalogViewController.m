@@ -241,14 +241,22 @@
         }
         CGFloat priceWidth = [price.text sizeWithFont:price.font].width + 4;
         price.frame = CGRectMake(MainScreenWidth - 50 * WideEachUnit - 5 * WideEachUnit - priceWidth * WideEachUnit, 10 * WideEachUnit, priceWidth * WideEachUnit, 30 * HigtEachUnit);
+        //添加标题
+        UILabel *sectionTitle = [[UILabel alloc] initWithFrame:CGRectMake(10 * WideEachUnit, 0, price.left - 10 * WideEachUnit, 50 * WideEachUnit)];
+        sectionTitle.text = _sectionArray[section];
+        sectionTitle.textColor = [UIColor colorWithHexString:@"333"];
+        sectionTitle.font = Font(14 * WideEachUnit);
+        [tableHeadView addSubview:sectionTitle];
+    } else {
+        //添加标题
+        UILabel *sectionTitle = [[UILabel alloc] initWithFrame:CGRectMake(10 * WideEachUnit, 0, MainScreenWidth - 50 * WideEachUnit - 55 * WideEachUnit - 10 * WideEachUnit, 50 * WideEachUnit)];
+        sectionTitle.text = _sectionArray[section];
+        sectionTitle.textColor = [UIColor colorWithHexString:@"333"];
+        sectionTitle.font = Font(14 * WideEachUnit);
+        [tableHeadView addSubview:sectionTitle];
     }
     
-    //添加标题
-    UILabel *sectionTitle = [[UILabel alloc] initWithFrame:CGRectMake(10 * WideEachUnit, 0, MainScreenWidth - 50 * WideEachUnit, 50 * WideEachUnit)];
-    sectionTitle.text = _sectionArray[section];
-    sectionTitle.textColor = [UIColor colorWithHexString:@"333"];
-    sectionTitle.font = Font(14 * WideEachUnit);
-    [tableHeadView addSubview:sectionTitle];
+    
     
     //添加箭头
     UIButton *arrowsButton = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth - 50 * WideEachUnit, 0, 40 * WideEachUnit, 50 * WideEachUnit)];
