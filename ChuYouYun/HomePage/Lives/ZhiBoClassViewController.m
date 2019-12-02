@@ -20,7 +20,8 @@
 
 
 //GenSee
-
+#import "GenSeeLiveViewController.h"
+#import "GenSeePlayBackViewController.h"
 
 //。CC 直播
 //#import "CCSDK/CCLiveUtil.h"
@@ -84,7 +85,7 @@
 
 
 
-@interface ZhiBoClassViewController ()<UITableViewDataSource,UITableViewDelegate,QRCodeReaderDelegate,RequestDataDelegate,RequestDataPlayBackDelegate,UIScrollViewDelegate>
+@interface ZhiBoClassViewController ()<UITableViewDataSource,UITableViewDelegate,QRCodeReaderDelegate,RequestDataDelegate,RequestDataPlayBackDelegate,UIScrollViewDelegate,VodDownLoadDelegate>
 {
     BOOL islivePlay;
     NSInteger _indexPathRow;
@@ -98,11 +99,12 @@
 @property (strong ,nonatomic)NSString *HDnickName;
 @property (strong ,nonatomic)NSString *HDwatchPassword;
 @property (strong ,nonatomic)NSString *HDroomNumber;
+@property (strong ,nonatomic)NSString *typeStr;
 
 @property (assign ,nonatomic)BOOL isBuyZhiBo;
-//@property (strong ,nonatomic) VodDownLoader *voddownloader;
+@property (strong ,nonatomic) VodDownLoader *voddownloader;
 @property (strong ,nonatomic)NSDictionary *playLiveBackDic;
-//@property (strong ,nonatomic)GenSeePlayBackViewController *genseePlayBackVc;
+@property (strong ,nonatomic)GenSeePlayBackViewController *genseePlayBackVc;
 
 
 @property (assign, nonatomic) NSInteger                 liveType;
@@ -388,36 +390,54 @@
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
             if ([[dict stringValueForKey:@"type"] integerValue] == 1) {//gensee
-                [TKProgressHUD showError:@"不支持直播类型" toView:[UIApplication sharedApplication].keyWindow];
-                return ;
-                BOOL isPlayBack = NO;
-                for (NSString *keyStr in [dict allKeys]) {
-                    if ([keyStr isEqualToString:@"livePlayback"]) {//回放
+                dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
+                _typeStr = [dict stringValueForKey:@"type"];
+                if ([[dict stringValueForKey:@"type"] integerValue] == 1) {//gensee
+                    BOOL isPlayBack = NO;
+                    if ([dict[@"body"][@"is_live"] integerValue] == 1) {//直播
+                        isPlayBack = NO;
+                    } else if ([dict[@"body"][@"is_live"] integerValue] == 0){//回放
                         isPlayBack = YES;
                     }
-                }
-                if (isPlayBack == NO) {
-                    //                    NSDictionary *bodyDict = [dict dictionaryValueForKey:@"body"];
-                    //                    NSString *title = _HDtitle;
-                    //                    NSString *name = [bodyDict stringValueForKey:@"account"];
-                    //                    NSString *pwd = [bodyDict stringValueForKey:@"pwd"];
-                    //                    NSString *number = [bodyDict stringValueForKey:@"number"];
-                    //                    GenSeeLiveViewController *vc = [[GenSeeLiveViewController alloc] init];
-                    //                    [vc initwithTitle:title nickName:name watchPassword:pwd roomNumber:number];
-                    //                    vc.account = name;
-                    //                    vc.domain = [bodyDict stringValueForKey:@"domain"];
-                    //                    [self.navigationController pushViewController:vc animated:YES];
-                } else if (isPlayBack == YES) {
-                    NSDictionary *livePlaybackDict = dict[@"body"];
-                    
-                    NSString *string = dict[@"live_url"];
-                    NSRange startRange = [string rangeOfString:@"https://"];
-                    NSRange endRange = [string rangeOfString:@"/training"];
-                    NSRange range = NSMakeRange(startRange.location + startRange.length, endRange.location - startRange.location - startRange.length);
-                    NSString *result = [string substringWithRange:range];
-                    NSLog(@"%@",result);
-                    
-                    //                    [_voddownloader addItem:result number:livePlaybackDict[@"number"] loginName:_HDnickName vodPassword:livePlaybackDict[@"token"] loginPassword:livePlaybackDict[@"number"] downFlag:0 serType:@"training" oldVersion:NO kToken:nil customUserID:0];
+                    if (isPlayBack == NO) {
+                        NSDictionary *bodyDict = [dict dictionaryValueForKey:@"body"];
+                        NSString *title = _HDtitle;
+                        NSString *name = [bodyDict stringValueForKey:@"account"];
+                        NSString *pwd = [bodyDict stringValueForKey:@"pwd"];
+                        NSString *number = [bodyDict stringValueForKey:@"number"];
+                        GenSeeLiveViewController *vc = [[GenSeeLiveViewController alloc] init];
+                        [vc initwithTitle:title nickName:name watchPassword:pwd roomNumber:number];
+                        vc.account = name;
+                        vc.domain = [bodyDict stringValueForKey:@"domain"];
+                        vc.typeStr = _typeStr;
+                        [self.navigationController pushViewController:vc animated:YES];
+                    } else if (isPlayBack == YES) {
+                        NSDictionary *livePlaybackDict = dict[@"body"];
+                        
+                        NSString *string = dict[@"live_url"];
+                        NSRange startRange = [string rangeOfString:@"https://"];
+                        NSRange endRange = [string rangeOfString:@"/training"];
+                        NSRange range = NSMakeRange(startRange.location + startRange.length, endRange.location - startRange.location - startRange.length);
+                        NSString *result = [string substringWithRange:range];
+                        NSLog(@"%@",result);
+                        
+                        NSString *playBackLiveUrl = [livePlaybackDict stringValueForKey:@"livePlayback"];
+                        NSArray *arrayOne = [playBackLiveUrl componentsSeparatedByString:@"?"];
+                        NSString *strOne = arrayOne[0];
+                        NSArray *arrayTwo = [strOne componentsSeparatedByString:@"/"];
+                        NSString *lastNumber = arrayTwo[arrayTwo.count - 1];
+                        
+                        NSString *tokenStrOne = arrayOne[1];
+                        NSArray  *arrayTokenOne = [tokenStrOne componentsSeparatedByString:@"="];
+                        NSString *lastToken = arrayTokenOne[arrayTokenOne.count - 1];
+                        if (!_voddownloader) {
+                            _voddownloader = [[VodDownLoader alloc] initWithDelegate:self];
+                        }
+                        [_voddownloader addItem:result number:lastNumber loginName:@"用户1" vodPassword:lastToken loginPassword:livePlaybackDict[@"number"] downFlag:0 serType:@"training" oldVersion:NO kToken:nil customUserID:0];
+                    }
+                } else {
+                    [TKProgressHUD showError:@"不支持直播类型" toView: [UIApplication sharedApplication].keyWindow];
+                    return ;
                 }
             } else if ([[dict stringValueForKey:@"type"] integerValue] == 4) {//CC
                 if ([dict[@"body"][@"is_live"] integerValue] == 1) {//直播
@@ -425,6 +445,64 @@
                 } else if ([dict[@"body"][@"is_live"] integerValue] == 0){//回放
                     _CCDict = dict[@"body"];
                     [self CCPlayBack];
+                }
+            } else if ([[dict stringValueForKey:@"type"] integerValue] == 9) {//新展示
+                BOOL isPlayBack = NO;
+                if ([dict[@"body"][@"is_live"] integerValue] == 1) {//直播
+                    isPlayBack = NO;
+                } else if ([dict[@"body"][@"is_live"] integerValue] == 0){//回放
+                    isPlayBack = YES;
+                }
+                if (isPlayBack == NO) {
+                    NSDictionary *bodyDict = [dict dictionaryValueForKey:@"body"];
+                    NSString *title = _HDtitle;
+                    NSString *name = [bodyDict stringValueForKey:@"account"];
+                    NSString *pwd = [bodyDict stringValueForKey:@"pwd"];
+                    NSString *number = [bodyDict stringValueForKey:@"number"];
+                    GenSeeLiveViewController *vc = [[GenSeeLiveViewController alloc] init];
+                    [vc initwithTitle:title nickName:name watchPassword:pwd roomNumber:number];
+                    vc.account = name;
+                    vc.domain = [bodyDict stringValueForKey:@"domain"];
+                    [self.navigationController pushViewController:vc animated:YES];
+                } else if (isPlayBack == YES) {
+                    NSDictionary *livePlaybackDict = dict[@"body"];
+                    
+                    NSString *string = livePlaybackDict[@"domain"];
+                    NSRange startRange = [string rangeOfString:@"https://"];
+                    NSRange endRange = [string rangeOfString:@"/webcast"];
+                    NSRange range = NSMakeRange(startRange.location + startRange.length, endRange.location - startRange.location - startRange.length);
+                    NSString *result = [string substringWithRange:range];
+                    NSLog(@"%@",result);
+                    
+                    NSString *playBackLiveUrl = [livePlaybackDict stringValueForKey:@"livePlayback"];
+                    NSArray *arrayOne = [playBackLiveUrl componentsSeparatedByString:@"?"];
+                    NSString *strOne = arrayOne[0];
+                    NSArray *arrayTwo = [strOne componentsSeparatedByString:@"-"];
+                    NSString *lastNumber = arrayTwo[arrayTwo.count - 1];
+                    
+//                    VodParam *item = [[VodParam alloc] init];
+//                    item.number = [livePlaybackDict stringValueForKey:@"number"];
+//                    item.loginName = [livePlaybackDict stringValueForKey:@"account"];
+//                    item.vodPassword = [livePlaybackDict stringValueForKey:@"join_pwd"];
+//                    item.loginPassword = [livePlaybackDict stringValueForKey:@"pwd"];
+//                    item.vodID = lastNumber;
+//                    item.serviceType = @"webcast";
+//                    [_voddownloader addItem:item];
+                    if (!_voddownloader) {
+                        _voddownloader = [[VodDownLoader alloc] initWithDelegate:self];
+                    }
+                    [_voddownloader addItem:result
+                                     number:[livePlaybackDict stringValueForKey:@"number"]
+                                  loginName:[livePlaybackDict stringValueForKey:@"account"]
+                                vodPassword:[livePlaybackDict stringValueForKey:@"join_pwd"]
+                              loginPassword:[livePlaybackDict stringValueForKey:@"pwd"]
+                                      vodid:lastNumber
+                                   downFlag:0
+                                    serType:@"webcast"
+                                 oldVersion:NO
+                                     kToken:nil
+                               customUserID:0];
+                    
                 }
             } else {
                 [TKProgressHUD showError:@"不支持直播类型" toView: [UIApplication sharedApplication].keyWindow];
@@ -440,6 +518,48 @@
 }
 
 #pragma mark --- GenSee
+- (void)onAddItemResult:(RESULT_TYPE)resultType voditem:(downItem *)item
+{
+    islivePlay = YES;
+    NSLog(@"状态resultType----%d",resultType);
+    
+    
+    if (resultType == RESULT_SUCCESS) {
+        if (islivePlay) {
+            if (!_genseePlayBackVc) {
+                _genseePlayBackVc = [[GenSeePlayBackViewController alloc] init];
+            }
+            [_genseePlayBackVc setItem:item];
+            [_genseePlayBackVc setIsLivePlay:YES];
+            _genseePlayBackVc.typeStr = _typeStr;
+            [self.navigationController pushViewController:_genseePlayBackVc animated:YES];
+        } else {
+            
+        }
+    }else if (resultType == RESULT_ROOM_NUMBER_UNEXIST){
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:NSLocalizedString(@"点播间不存在" ,@"") delegate:nil cancelButtonTitle:NSLocalizedString(@"知道了",@"") otherButtonTitles:nil, nil];
+        [alertView show];
+    }else if (resultType == RESULT_FAILED_NET_REQUIRED){
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:NSLocalizedString(@"网络请求失败" ,@"") delegate:nil cancelButtonTitle:NSLocalizedString(@"知道了",@"") otherButtonTitles:nil, nil];
+        [alertView show];
+    }else if (resultType == RESULT_FAIL_LOGIN){
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:NSLocalizedString(@"用户名或密码错误" ,@"") delegate:nil cancelButtonTitle:NSLocalizedString(@"知道了",@"") otherButtonTitles:nil, nil];
+        [alertView show];
+    }else if (resultType == RESULT_NOT_EXSITE){
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:NSLocalizedString(@"该点播的编号的点播不存在" ,@"") delegate:nil cancelButtonTitle:NSLocalizedString(@"知道了",@"") otherButtonTitles:nil, nil];
+        [alertView show];
+    }else if (resultType == RESULT_INVALID_ADDRESS){
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:NSLocalizedString(@"无效地址" ,@"") delegate:nil cancelButtonTitle:NSLocalizedString(@"知道了",@"") otherButtonTitles:nil, nil];
+        [alertView show];
+    }else if (resultType == RESULT_UNSURPORT_MOBILE){
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:NSLocalizedString(@"不支持移动设备" ,@"") delegate:nil cancelButtonTitle:NSLocalizedString(@"知道了",@"") otherButtonTitles:nil, nil];
+        [alertView show];
+    }else if (resultType == RESULT_FAIL_TOKEN){
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:NSLocalizedString(@"口令错误" ,@"") delegate:nil cancelButtonTitle:NSLocalizedString(@"知道了",@"") otherButtonTitles:nil, nil];
+        [alertView show];
+    }
+    [TKProgressHUD hideHUDForView:self.view animated:YES];
+}
 
 #pragma mark --- CC
 
