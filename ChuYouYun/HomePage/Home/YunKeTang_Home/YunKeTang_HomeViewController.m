@@ -538,10 +538,28 @@ static NSString *cellID = @"cell";
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        if (_liveArray.count == 0) {
+            return 0.001;
+        }
+    } else if (section == 3) {
+        if (_lineClassArray.count == 0) {
+            return 0.001;
+        }
+    }
     return 40 * WideEachUnit;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        if (_liveArray.count == 0) {
+            return nil;
+        }
+    } else if (section == 3) {
+        if (_lineClassArray.count == 0) {
+            return nil;
+        }
+    }
     UIView *cellHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MainScreenWidth, 40 * WideEachUnit)];
     cellHeaderView.backgroundColor = [UIColor whiteColor];
     
@@ -575,6 +593,15 @@ static NSString *cellID = @"cell";
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if (section == 0) {
+        if (_liveArray.count == 0) {
+            return 0.001;
+        }
+    } else if (section == 3) {
+        if (_lineClassArray.count == 0) {
+            return 0.001;
+        }
+    }
     return 10 * WideEachUnit;
 }
 

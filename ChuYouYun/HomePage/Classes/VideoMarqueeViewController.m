@@ -18,7 +18,7 @@
 }
 
 @property (strong ,nonatomic)NSTimer   *marqueeTimer;
-@property (strong ,nonatomic)UILabel   *marqueeLabel;
+@property (retain ,nonatomic)UILabel   *marqueeLabel;
 
 @property (strong ,nonatomic)NSString  *showTime;
 @property (strong ,nonatomic)NSString  *intervalTime;
@@ -30,21 +30,17 @@
 -(instancetype)initWithDict:(NSDictionary *)dict {
     if (!self) {
         self = [super init];
+        if (!_marqueeLabel) {
+            _marqueeLabel = [[UILabel alloc] init];
+            _marqueeLabel.backgroundColor = [UIColor clearColor];
+            _marqueeLabel.text = [_dict stringValueForKey:@"content"];
+            _marqueeLabel.textColor = [UIColor redColor];
+            _marqueeLabel.font = Font(12);
+            [self.view addSubview:_marqueeLabel];
+        }
     }
     _dict = dict;
     return self;
-}
-
--(UILabel *)marqueeLabel {
-    if (!_marqueeLabel) {
-        _marqueeLabel = [[UILabel alloc] init];
-        _marqueeLabel.backgroundColor = [UIColor clearColor];
-        _marqueeLabel.text = [_dict stringValueForKey:@"content"];
-        _marqueeLabel.textColor = [UIColor redColor];
-        _marqueeLabel.font = Font(12);
-        [self.view addSubview:_marqueeLabel];
-    }
-    return _marqueeLabel;
 }
 
 - (void)viewDidLoad {
@@ -56,6 +52,7 @@
 - (void)interFace {
     self.view.backgroundColor = [UIColor clearColor];
     self.view.userInteractionEnabled = NO;
+    
     _showTime = [_dict stringValueForKey:@"show"];
     _intervalTime = [_dict stringValueForKey:@"times"];
     Number = 0;

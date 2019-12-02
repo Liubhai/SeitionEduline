@@ -81,7 +81,6 @@
 }
 
 @property (strong ,nonatomic)UIView   *navigationView;
-@property (strong ,nonatomic)UIView   *videoView;//视频的地方
 @property (strong ,nonatomic)UIView   *mainDetailView;
 @property (strong ,nonatomic)UILabel  *videoTitleLabel;
 @property (strong ,nonatomic)UILabel  *classTitle;
@@ -1989,13 +1988,18 @@
                 _imageView.image = [UIImage imageNamed:@"试看结束@2x"];
                 [self.playerView addSubview:_imageView];
             } else {
-                _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, MainScreenWidth, CGRectGetHeight(self.playerView.frame))];
+                _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.playerView.frame), MainScreenWidth)];
                 _imageView.image = [UIImage imageNamed:@"试看结束@2x"];
                 [self.playerView addSubview:_imageView];
             }
             self.playerView.userInteractionEnabled = NO;
         } else {
             _imageView.hidden = NO;
+            if (self.playerView.frame.size.width == MainScreenWidth) {//说明是小屏的时候
+                _imageView.frame = CGRectMake(0, 0, MainScreenWidth, CGRectGetHeight(self.playerView.frame));
+            } else {
+                _imageView.frame = CGRectMake(0, 0, CGRectGetWidth(self.playerView.frame), MainScreenWidth);
+            }
             [self.playerView addSubview:_imageView];
             self.playerView.userInteractionEnabled = NO;
         }
@@ -2132,27 +2136,34 @@
         } else if (iPhone5o5Co5S) {
             _videoView.frame = CGRectMake(0, 0, 568, 320);
         }
+        _videoView.frame = CGRectMake(0, 0, MainScreenHeight, MainScreenWidth);
         _headerView.frame = _videoView.frame;
         _tableView.frame = _videoView.frame;
         _tableView.contentOffset = CGPointMake(0, 0);
         _mainDetailView.hidden = YES;
         _segleMentView.hidden = YES;
         _activityBackView.hidden = YES;
+        _teachersHeaderBackView.hidden = YES;
+        _activityBackView.hidden = YES;
+        _otherActivityBackView.hidden = YES;
         _tableView.tableHeaderView = self.headerView;
     } else {
         _moreButton.hidden = NO;
         _backButton.hidden = NO;
         _controllerSrcollView.userInteractionEnabled = YES;
         _videoView.frame = CGRectMake(0, 0, MainScreenWidth, 210 * WideEachUnit);
-        _headerView.frame = CGRectMake(0, 0, MainScreenWidth, 280 * WideEachUnit);
+        _headerView.frame = CGRectMake(0, 0, MainScreenWidth, _teachersHeaderBackView.bottom);//280 * WideEachUnit
         _tableView.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - MACRO_UI_SAFEAREA - 50 * HigtEachUnit);
         _controllerSrcollView.userInteractionEnabled = YES;
         _mainDetailView.hidden = NO;
         _segleMentView.hidden = NO;
         _activityBackView.hidden = NO;
+        _teachersHeaderBackView.hidden = NO;
+        _activityBackView.hidden = NO;
+        _otherActivityBackView.hidden = NO;
         _tableView.tableHeaderView = self.headerView;
+        [self tableViewCanNotScroll];
     }
-    
     //试看图片尺寸配置
     if (_imageView == nil || _imageView.subviews == nil) {
         
@@ -3670,7 +3681,7 @@
         _otherJoinIcon.titleLabel.font = SYSTEMFONT(13);
         _otherJoinIcon.layer.masksToBounds = YES;
         _otherJoinIcon.layer.cornerRadius = 3;
-        [_otherJoinIcon addTarget:self action:@selector(joinGroupActivity) forControlEvents:UIControlEventTouchUpInside];
+        [_otherJoinIcon addTarget:self action:@selector(getCurrentActivityInfoJoinGroupButtonClick) forControlEvents:UIControlEventTouchUpInside];
         [_otherActivityBackView addSubview:_otherJoinIcon];
         
         [_otherStarBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
@@ -4224,6 +4235,59 @@
         vc.schoolID = [NSString stringWithFormat:@"%@",[_schoolInfo objectForKey:@"school_id"]];
         [self.navigationController pushViewController:vc animated:YES];
     }
+}
+
+// 参团时候重新请求活动详情接口
+- (void)getCurrentActivityInfoJoinGroupButtonClick {
+    NSString *endUrlStr = YunKeTang_Course_Activity_Info;
+    NSString *allUrlStr = [YunKeTang_Api_Tool YunKeTang_GetFullUrl:endUrlStr];
+    
+    NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
+    [mutabDict setObject:_ID forKey:@"course_id"];
+    if (_isClassNew) {
+        [mutabDict setObject:@"6" forKey:@"course_type"];
+    } else {
+        [mutabDict setObject:@"1" forKey:@"course_type"];
+    }
+    
+    NSString *oath_token_Str = nil;
+    if (UserOathToken) {
+        oath_token_Str = [NSString stringWithFormat:@"%@:%@",UserOathToken,UserOathTokenSecret];
+    }
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:allUrlStr]];
+    [request setHTTPMethod:NetWay];
+    NSString *encryptStr = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetEncryptStr:mutabDict];
+    [request setValue:encryptStr forHTTPHeaderField:HeaderKey];
+    if (UserOathToken) {
+        [request setValue:oath_token_Str forHTTPHeaderField:OAUTH_TOKEN];
+    }
+    __weak Good_ClassMainViewController *wekself = self;
+    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        if ([[[YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject] objectForKey:@"code"] integerValue] == 1) {
+            if (SWNOTEmptyDictionary([YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStrFromData:responseObject])) {
+                _activityInfo = (NSDictionary *)[YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStrFromData:responseObject];
+                if (SWNOTEmptyDictionary(_activityInfo) && SWNOTEmptyDictionary([_activityInfo objectForKey:@"event_type_info"])) {
+                    NSString *eventType = [NSString stringWithFormat:@"%@",[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"]];
+                    if ([eventType integerValue] == 6 || [eventType integerValue] == 7) {
+                        [self makeGroupBuyUI];
+                        [self setJoinGroupActivityInfoData];
+                        if ([eventType integerValue] == 6) {
+                            [self joinGroupActivity];
+                        }
+                        return;
+                    }
+                    if ([[_activityInfo allKeys] containsObject:@"event_id"]) {
+                        [wekself setActivityData];
+                    }
+                }
+            }
+        }
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+    [op start];
 }
 
 @end

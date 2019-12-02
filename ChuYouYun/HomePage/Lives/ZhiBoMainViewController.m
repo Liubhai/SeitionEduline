@@ -925,6 +925,19 @@
     if ([numstr isEqualToString:@"1"]) {
         [_buyButton setTitle:@"已解锁" forState:UIControlStateNormal];
     }
+    if (SWNOTEmptyDictionary(_activityInfo)) {
+        NSDictionary *myActivityInfo;
+        if ([[_activityInfo objectForKey:@"user_asb"] isKindOfClass:[NSDictionary class]]) {
+            myActivityInfo = [NSDictionary dictionaryWithDictionary:[_activityInfo objectForKey:@"user_asb"]];
+        }
+        if (SWNOTEmptyDictionary(myActivityInfo)) {
+            if ([[myActivityInfo objectForKey:@"faild"] integerValue] == 1) {
+                
+            } else {
+                [_buyButton setTitle:@"去分享" forState:0];
+            }
+        }
+    }
 //    [self ordPriceDeal];//处理原价
     sectionHeight = MainScreenHeight - MACRO_UI_SAFEAREA - 50 * HigtEachUnit - MACRO_UI_UPHEIGHT;
     [self changeEventPriceUI];
@@ -1531,7 +1544,7 @@
         _otherJoinIcon.titleLabel.font = SYSTEMFONT(13);
         _otherJoinIcon.layer.masksToBounds = YES;
         _otherJoinIcon.layer.cornerRadius = 3;
-        [_otherJoinIcon addTarget:self action:@selector(joinGroupActivity) forControlEvents:UIControlEventTouchUpInside];
+        [_otherJoinIcon addTarget:self action:@selector(getCurrentActivityInfoJoinGroupButtonClick) forControlEvents:UIControlEventTouchUpInside];
         [_otherActivityBackView addSubview:_otherJoinIcon];
         
         _otherGroupBuyBtn = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth - 20 - 80, (_otherActivityBackView.height - 30) / 2.0, 80, 30)];
@@ -1815,7 +1828,7 @@
     ClassAndLivePayViewController *vc = [[ClassAndLivePayViewController alloc] init];
     vc.dict = _zhiBoDic;
     vc.typeStr = @"2";
-    vc.cid = [_zhiBoDic stringValueForKey:@"id"];
+    vc.cid = _ID;
     vc.activityInfo = [NSDictionary dictionaryWithDictionary:_activityInfo];
     vc.isBuyAlone = YES;
     [self.navigationController pushViewController:vc animated:YES];
@@ -1955,7 +1968,7 @@
         vc.dict = _zhiBoDic;
         vc.typeStr = @"1";
         vc.isBuyAlone = YES;
-        vc.cid = [_zhiBoDic stringValueForKey:@"id"];
+        vc.cid = _ID;
         vc.activityInfo = [NSDictionary dictionaryWithDictionary:_activityInfo];
         [self.navigationController pushViewController:vc animated:YES];
     } else {
@@ -2266,6 +2279,55 @@
         vc.schoolID = [NSString stringWithFormat:@"%@",[_schoolInfo objectForKey:@"school_id"]];
         [self.navigationController pushViewController:vc animated:YES];
     }
+}
+
+// 参团时候重新请求活动详情接口
+- (void)getCurrentActivityInfoJoinGroupButtonClick {
+    NSString *endUrlStr = YunKeTang_Course_Activity_Info;
+    NSString *allUrlStr = [YunKeTang_Api_Tool YunKeTang_GetFullUrl:endUrlStr];
+    
+    NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
+    [mutabDict setObject:_ID forKey:@"course_id"];
+    [mutabDict setObject:@"2" forKey:@"course_type"];
+    
+    NSString *oath_token_Str = nil;
+    if (UserOathToken) {
+        oath_token_Str = [NSString stringWithFormat:@"%@:%@",UserOathToken,UserOathTokenSecret];
+    }
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:allUrlStr]];
+    [request setHTTPMethod:NetWay];
+    NSString *encryptStr = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetEncryptStr:mutabDict];
+    [request setValue:encryptStr forHTTPHeaderField:HeaderKey];
+    if (UserOathToken) {
+        [request setValue:oath_token_Str forHTTPHeaderField:OAUTH_TOKEN];
+    }
+    __weak ZhiBoMainViewController *wekself = self;
+    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        if ([[[YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject] objectForKey:@"code"] integerValue] == 1) {
+            if (SWNOTEmptyDictionary([YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStrFromData:responseObject])) {
+                _activityInfo = (NSDictionary *)[YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStrFromData:responseObject];
+                if (SWNOTEmptyDictionary(_activityInfo) && SWNOTEmptyDictionary([_activityInfo objectForKey:@"event_type_info"])) {
+                    NSString *eventType = [NSString stringWithFormat:@"%@",[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"]];
+                    if ([eventType integerValue] == 6 || [eventType integerValue] == 7) {
+                        [self makeGroupBuyUI];
+                        [self setJoinGroupActivityInfoData];
+                        if ([eventType integerValue] == 6) {
+                            [self joinGroupActivity];
+                        }
+                        return;
+                    }
+                    if ([[_activityInfo allKeys] containsObject:@"event_id"]) {
+                        [wekself setActivityData];
+                    }
+                }
+            }
+        }
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+    [op start];
 }
 
 @end

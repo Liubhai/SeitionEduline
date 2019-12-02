@@ -9,7 +9,10 @@
 #import "GroupListPopViewController.h"
 #import "GrouListCell.h"
 
-@interface GroupListPopViewController ()<GrouListCellDelegate>
+@interface GroupListPopViewController ()<GrouListCellDelegate> {
+    NSInteger timeCount;
+    NSTimer *groupTimer;
+}
 
 @end
 
@@ -18,6 +21,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
+    timeCount = 0;
+    if (groupTimer) {
+        [groupTimer invalidate];
+        groupTimer = nil;
+    }
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(30, 0, MainScreenWidth - 60, 280)];
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -29,6 +37,8 @@
     _tableView.centerY = MainScreenHeight / 2.0;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
+    
+    groupTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(eventCellTimerDown) userInfo:nil repeats:YES];
     
     _groupTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(_tableView.left, _tableView.top - 40 + 3, MainScreenWidth - 60, 40)];
     _groupTitleLabel.text = @"开团详情";
@@ -58,14 +68,13 @@
     if (!cell) {
         cell = [[GrouListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    [cell setGroupInfo:_dataSource[indexPath.row]];
+    [cell setGroupListInfo:_dataSource[indexPath.row] timeCount:timeCount];
     cell.delegate = self;
     return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 7;
-//    return _dataSource.count
+    return _dataSource.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -90,8 +99,17 @@
 
 // MARK: - 关闭按钮
 - (void)closeButtonClick {
+    if (groupTimer) {
+        [groupTimer invalidate];
+        groupTimer = nil;
+    }
     [self.view removeFromSuperview];
     [self removeFromParentViewController];
+}
+
+- (void)eventCellTimerDown {
+    timeCount++;
+    [_tableView reloadData];
 }
 
 @end

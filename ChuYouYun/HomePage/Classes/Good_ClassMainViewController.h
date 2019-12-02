@@ -36,4 +36,6 @@
 
 @property (assign, nonatomic) BOOL isClassNew;//是不是班级课
 
+@property (strong ,nonatomic)UIView   *videoView;//视频的地方
+
 @end

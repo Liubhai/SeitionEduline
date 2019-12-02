@@ -41,8 +41,8 @@
 //# define ORIGIN_HEIGHT  568.f
 //# define ORIGIN_WIDTH   320.f
 
-#define WideEachUnit MainScreenWidth / 375
-#define HigtEachUnit  MainScreenHeight / 667
+#define WideEachUnit 1//MainScreenWidth / 375
+#define HigtEachUnit  1//MainScreenHeight / 667
 
 //#define WideEachUnit MainScreenWidth / 320.f
 //#define HigtEachUnit MainScreenHeight / 568.f

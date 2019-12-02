@@ -178,7 +178,8 @@
         
         //按钮的自适应
         
-        CGRect labelSize = [menubtn.titleLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 40) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingTruncatesLastVisibleLine attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:14]} context:nil];
+        CGRect labelSize = [menubtn.titleLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 40) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingTruncatesLastVisibleLine attributes:@{NSFontAttributeName: menubtn.titleLabel.font} context:nil];
+        labelSize = CGRectMake(labelSize.origin.x, labelSize.origin.y, labelSize.size.width + 5, labelSize.size.height);
         if (labelSize.size.width < MainScreenWidth / 5) {
             if (_dataArray.count < 5) {
                 labelSize.size.width = MainScreenWidth / _dataArray.count;

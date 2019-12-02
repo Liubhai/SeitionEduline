@@ -14,7 +14,10 @@
 
 @end
 
-@interface GrouListCell : UITableViewCell
+@interface GrouListCell : UITableViewCell {
+//    NSTimer *cellTimer;
+//    NSInteger timeSpan;
+}
 
 @property (assign, nonatomic) id<GrouListCellDelegate> delegate;
 @property (strong, nonatomic) UIImageView *groupFace;
@@ -24,6 +27,7 @@
 @property (strong, nonatomic) UIButton *groupJoinButton;
 @property (strong, nonatomic) NSDictionary *groupInfo;
 
-- (void)setGroupListInfo:(NSDictionary *)dict;
+
+- (void)setGroupListInfo:(NSDictionary *)dict timeCount:(NSInteger)timeCount;
 
 @end

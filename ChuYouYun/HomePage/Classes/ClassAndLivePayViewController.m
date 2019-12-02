@@ -384,6 +384,7 @@
         seleButton.tag = 0;
         _ailpaySeleButton = seleButton;
         _ailpaySeleButton.selected = YES;
+        [self seleButtonCilck:_ailpaySeleButton];
         [view addSubview:seleButton];
         
         UIButton *allClearButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, viewW, viewH)];

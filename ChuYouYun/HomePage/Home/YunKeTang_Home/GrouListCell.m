@@ -62,8 +62,18 @@
     [self addSubview:_groupJoinButton];
 }
 
-- (void)setGroupInfo:(NSDictionary *)groupInfo {
+- (void)setGroupListInfo:(NSDictionary *)groupInfo timeCount:(NSInteger)timeCount {
     _groupInfo = groupInfo;
+    [_groupFace sd_setImageWithURL:[NSURL URLWithString:[groupInfo objectForKey:@"avatar"]] placeholderImage:Image(@"站位图")];
+    _priceLabel.text = [NSString stringWithFormat:@"%@",[groupInfo objectForKey:@"eprice"]];
+    _groupTitle.text = [NSString stringWithFormat:@"还差%@人成团",[groupInfo objectForKey:@"rest_count"]];
+    NSInteger timeSpan = [[NSString stringWithFormat:@"%@",[groupInfo objectForKey:@"timespan"]] integerValue];
+    _timeCountDownLabel.text = [NSString stringWithFormat:@"剩余时间%@结束",[YunKeTang_Api_Tool timeChangeWithSeconds:timeSpan - timeCount]];
+//    if (cellTimer) {
+//        [cellTimer invalidate];
+//        cellTimer = nil;
+//    }
+//    cellTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(eventCellTimerDown) userInfo:nil repeats:YES];
 }
 
 - (void)joinGroupButtonClick {
@@ -75,5 +85,15 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 }
+
+//- (void)eventCellTimerDown {
+//    if (timeSpan<=0) {
+//        [cellTimer invalidate];
+//        cellTimer = nil;
+//    } else {
+//        timeSpan--;
+//        _timeCountDownLabel.text = [NSString stringWithFormat:@"剩余时间%@结束",[YunKeTang_Api_Tool timeChangeWithSeconds:timeSpan]];
+//    }
+//}
 
 @end

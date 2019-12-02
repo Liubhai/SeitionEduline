@@ -348,6 +348,8 @@
         [mutabDict setObject:[_dict stringValueForKey:@"id"] forKey:@"vid"];
     } else if ([[_dict stringValueForKey:@"type"] integerValue] == 2) {
         [mutabDict setObject:[_dict stringValueForKey:@"live_id"] forKey:@"vid"];
+    } else if ([[_dict stringValueForKey:@"type"] integerValue] == 6) {
+        [mutabDict setObject:[_dict stringValueForKey:@"id"] forKey:@"vid"];
     }
     if (_isCombo) {
        [mutabDict setObject:[_dict stringValueForKey:@"id"] forKey:@"vid"];

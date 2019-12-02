@@ -28079,6 +28079,7 @@
 					"$(SRCROOT)/ChuYouYun/Live_SDK/New_CC/CC资源/SDK",
 				);
 				MACH_O_TYPE = mh_execute;
+				MARKETING_VERSION = 4.2.2;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-force_load",
@@ -28105,10 +28106,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 2VGCGZZ87Y;
+				DEVELOPMENT_TEAM = "";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -28184,6 +28185,7 @@
 					"$(SRCROOT)/ChuYouYun/Live_SDK/New_CC/CC资源/SDK",
 				);
 				MACH_O_TYPE = mh_execute;
+				MARKETING_VERSION = 4.2.2;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-force_load",
@@ -28195,7 +28197,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.saixin.eduline;
 				PRODUCT_NAME = Eduline;
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = saixinDev;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7s armv7 arm64";
