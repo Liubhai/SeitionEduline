@@ -765,12 +765,22 @@
     
     if ([MoreOrSingle integerValue] == 1) {//单机构
 
-        if ([_isTeacher integerValue] == 1) {
-            SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"我的机构",@"我的卡券",@"学习记录",@"兑换记录",@"我的推荐",@"我的授课"];
-            TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"org@3x",@"conpons@3x",@"study@3x",@"record@3x",@"downLine",@"me_is_teacher"];
+        if ([HASALIPAY isEqualToString:@"0"]) {
+            if ([_isTeacher integerValue] == 1) {
+                SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"我的机构",@"学习记录",@"兑换记录",@"我的推荐",@"我的授课"];
+                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"org@3x",@"study@3x",@"record@3x",@"downLine",@"me_is_teacher"];
+            } else {
+                SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"学习记录",@"兑换记录",@"我的推荐"];
+                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"study@3x",@"record@3x",@"downLine"];
+            }
         } else {
-            SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"我的卡券",@"学习记录",@"兑换记录",@"我的推荐"];
-            TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"conpons@3x",@"study@3x",@"record@3x",@"downLine"];
+            if ([_isTeacher integerValue] == 1) {
+                SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"我的机构",@"我的卡券",@"学习记录",@"兑换记录",@"我的推荐",@"我的授课"];
+                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"org@3x",@"conpons@3x",@"study@3x",@"record@3x",@"downLine",@"me_is_teacher"];
+            } else {
+                SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"我的卡券",@"学习记录",@"兑换记录",@"我的推荐"];
+                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"conpons@3x",@"study@3x",@"record@3x",@"downLine"];
+            }
         }
         
     } else if ([MoreOrSingle integerValue] == 2) {
@@ -984,25 +994,44 @@
             Good_MyDownLoadMainViewController *vc = [[Good_MyDownLoadMainViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }
-        if (button.tag == 7) {//我的优惠券
-            Good_MyCardStockMainViewController *vc = [[Good_MyCardStockMainViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-        if (button.tag == 8) {//观看记录
-            LookRecodeViewController *lookVc = [[LookRecodeViewController alloc] init];
-            [self.navigationController pushViewController:lookVc animated:YES];
-        }
-        if (button.tag == 9) {//说明是兑换记录
-            ExchangeViewController *JYJLVC =  [[ExchangeViewController alloc] init];
-            [self.navigationController pushViewController:JYJLVC animated:YES];
-        }
-        if (button.tag == 10) {
-            MyDownLineViewController *vc = [[MyDownLineViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-        if (button.tag == 11) {
-            MeTeacherMainViewController *vc = [[MeTeacherMainViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
+        if ([HASALIPAY isEqualToString:@"0"]) {
+            if (button.tag == 7) {//观看记录
+                LookRecodeViewController *lookVc = [[LookRecodeViewController alloc] init];
+                [self.navigationController pushViewController:lookVc animated:YES];
+            }
+            if (button.tag == 8) {//说明是兑换记录
+                ExchangeViewController *JYJLVC =  [[ExchangeViewController alloc] init];
+                [self.navigationController pushViewController:JYJLVC animated:YES];
+            }
+            if (button.tag == 9) {
+                MyDownLineViewController *vc = [[MyDownLineViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            if (button.tag == 10) {
+                MeTeacherMainViewController *vc = [[MeTeacherMainViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        } else {
+            if (button.tag == 7) {//我的优惠券
+                Good_MyCardStockMainViewController *vc = [[Good_MyCardStockMainViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            if (button.tag == 8) {//观看记录
+                LookRecodeViewController *lookVc = [[LookRecodeViewController alloc] init];
+                [self.navigationController pushViewController:lookVc animated:YES];
+            }
+            if (button.tag == 9) {//说明是兑换记录
+                ExchangeViewController *JYJLVC =  [[ExchangeViewController alloc] init];
+                [self.navigationController pushViewController:JYJLVC animated:YES];
+            }
+            if (button.tag == 10) {
+                MyDownLineViewController *vc = [[MyDownLineViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            if (button.tag == 11) {
+                MeTeacherMainViewController *vc = [[MeTeacherMainViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
         }
         
     } else {
