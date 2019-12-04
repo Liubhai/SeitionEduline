@@ -383,7 +383,7 @@
         
         
     }
-    
+    /**
     if (iPhone4SOriPhone4) {
         
         //添加横线
@@ -444,18 +444,8 @@
             [button addTarget:self action:@selector(SYGButton:) forControlEvents:UIControlEventTouchUpInside];
             [self.view addSubview:button];
         }
-        
-//        NSArray *SFArray = @[@"微博.png",@"QQ.png",@"微信.png"];
-//        for (int i = 0 ; i < 3; i ++) {
-//            UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth / 7 + MainScreenWidth / 7  * 2 * i, MainScreenHeight / 5 * 3 + 100, MainScreenWidth / 7, MainScreenWidth / 7)];
-//            [button setBackgroundImage:[UIImage imageNamed:SFArray[i]] forState:UIControlStateNormal];
-//            button.tag = i;
-//            button.layer.cornerRadius = MainScreenWidth / 7 / 2;
-//            [button addTarget:self action:@selector(SYGButton:) forControlEvents:UIControlEventTouchUpInside];
-//            [self.view addSubview:button];
-//        }
     }
-    
+    */
     if (iPhoneX) {//iphoneX 所有的适配都在这里
         _NameField.frame = CGRectMake(0, 94, MainScreenWidth, 50);
         nameButton.frame = CGRectMake(17, 110, 13, 18);

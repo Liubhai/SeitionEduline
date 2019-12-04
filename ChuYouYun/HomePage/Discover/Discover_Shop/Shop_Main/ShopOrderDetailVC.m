@@ -113,7 +113,7 @@
     _line2.backgroundColor = RGBHex(0xE5E5E5);
     [_alipayBackView addSubview:_line2];
     _alipayIcon = [[UIImageView alloc] initWithFrame:CGRectMake(20 * WideEachUnit, 0, 24 * WideEachUnit, 24 *HigtEachUnit)];
-    _alipayIcon.image = Image(@"aliPay");
+    _alipayIcon.image = Image(@"aaaalliii");
     _alipayIcon.centerY = 42 * HigtEachUnit / 2.0;
     [_alipayBackView addSubview:_alipayIcon];
     _alipayLabel = [[UILabel alloc] initWithFrame:CGRectMake(_alipayIcon.right + 12 * WideEachUnit, 0, 100, 42 * HigtEachUnit)];

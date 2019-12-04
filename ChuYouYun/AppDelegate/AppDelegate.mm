@@ -241,7 +241,7 @@
     
 
     //注册APPID
-    [WXApi registerApp:WXAppId withDescription:@"Eduline"];
+    [WXApi registerApp:WXAppId withDescription:@"普思顿"];
     //隐藏未安装客户端的平台
     [UMSocialConfig hiddenNotInstallPlatforms:@[UMShareToQQ, UMShareToQzone, UMShareToWechatSession, UMShareToWechatTimeline]];
     

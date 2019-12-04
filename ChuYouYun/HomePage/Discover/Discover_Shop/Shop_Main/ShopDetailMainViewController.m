@@ -446,7 +446,7 @@
         return;
     }
     if ([_scoreStaus integerValue] == 0 && isHaveAilPay == NO && isHaveWxPay == NO) {
-        [MBProgressHUD showError:@"无法支付" toView:self.view];
+        [MBProgressHUD showError:@"您的积分不足" toView:self.view];
         return;
     }
     ShopOrderDetailVC *vc = [[ShopOrderDetailVC alloc] init];

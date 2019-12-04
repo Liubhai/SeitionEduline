@@ -267,7 +267,7 @@
     
     
     UIImageView *alipayIcon = [[UIImageView alloc] initWithFrame:CGRectMake(15 * WideEachUnit, 0, 24 * WideEachUnit, 24 *HigtEachUnit)];
-    alipayIcon.image = Image(@"aliPay");
+    alipayIcon.image = Image(@"aaaalliii");
     alipayIcon.centerY = 50 * HigtEachUnit / 2.0;
     [_alipayView addSubview:alipayIcon];
     UILabel *alipayLabel = [[UILabel alloc] initWithFrame:CGRectMake(alipayIcon.right + 12 * WideEachUnit, 0, 100, 50 * HigtEachUnit)];
