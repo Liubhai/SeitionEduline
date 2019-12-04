@@ -987,7 +987,11 @@ static NSString *cellID = @"cell";
                 
                 //添加讲师等级
                 UILabel *schoolIntro = [[UILabel alloc] initWithFrame:CGRectMake(TeaImageView.right + 15, name.bottom + 2, TeaViewWidthMax, 20)];
-                schoolIntro.text = @"判断机构名称和机构简介控件的长度";//[[_schoolArray objectAtIndex:i] stringValueForKey:@"title"];
+                if ([[_schoolArray objectAtIndex:i] stringValueForKey:@"title"]) {
+                    schoolIntro.text = [[_schoolArray objectAtIndex:i] stringValueForKey:@"title"];
+                } else {
+                    schoolIntro.text = @"";
+                }
                 schoolIntro.font = Font(13);
                 schoolIntro.textColor = RGBHex(0x868686);
                 [view addSubview:schoolIntro];
