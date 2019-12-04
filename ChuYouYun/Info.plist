@@ -149,6 +149,8 @@
 	<string>LaunchScreen</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>可以的</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>YES</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>能打开么？</string>
 	<key>UIBackgroundModes</key>
