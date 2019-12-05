@@ -23984,7 +23984,7 @@
 				TargetAttributes = {
 					50566DFB1A6F44A400F093DE = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 5QQ23A4NX6;
+						DevelopmentTeam = 2VGCGZZ87Y;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -27923,7 +27923,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5QQ23A4NX6;
+				DEVELOPMENT_TEAM = 2VGCGZZ87Y;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -28008,7 +28008,7 @@
 					"\"$(SRCROOT)/ChuYouYun/Library/umeng_ios_social_sdk_5.2-2.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/SinaSSO/libWeiboSDK.a\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jiangrenonline.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jiangrenonline.com;
 				PRODUCT_NAME = "匠人网校";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -28114,7 +28114,7 @@
 					"\"$(SRCROOT)/ChuYouYun/Library/umeng_ios_social_sdk_5.2-2.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/SinaSSO/libWeiboSDK.a\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jiangrenonline.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jiangrenonline.com;
 				PRODUCT_NAME = "匠人网校";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
