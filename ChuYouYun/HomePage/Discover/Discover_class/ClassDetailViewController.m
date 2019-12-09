@@ -140,7 +140,10 @@
     if (SWNOTEmptyDictionary(_originDict)) {
         [_faceImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[_originDict objectForKey:@"imageurl"]]] placeholderImage:Image(@"站位图")];
         _classTitle.text = [NSString stringWithFormat:@"%@",[_originDict objectForKey:@"album_title"]];
-        _priceLabel.text = [NSString stringWithFormat:@"%@",[_originDict objectForKey:@"price"]];
+        _priceLabel.text = [NSString stringWithFormat:@"%@育币",[_originDict objectForKey:@"price"]];
+        CGFloat priceWidth = [_priceLabel.text sizeWithFont:_priceLabel.font].width + 5;
+        // 避免遮挡
+        [_classTitle setWidth:MainScreenWidth - (_faceImageView.right + 10) - 20 - priceWidth];
         NSArray *teacherArr = [NSArray arrayWithArray:[_originDict objectForKey:@"teacher"]];
         if (SWNOTEmptyArr(teacherArr)) {
             _teacherLabel.text = [NSString stringWithFormat:@"讲师：%@",[teacherArr[0] objectForKey:@"name"]];
