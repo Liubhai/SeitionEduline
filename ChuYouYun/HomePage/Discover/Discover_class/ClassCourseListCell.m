@@ -72,6 +72,10 @@
     [_faceImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[dict objectForKey:@"imageurl"]]] placeholderImage:Image(@"站位图")];
     _themeLabel.text = [NSString stringWithFormat:@"%@",[dict objectForKey:@"video_title"]];
     _priceLabel.text = [NSString stringWithFormat:@"育币%@",[dict objectForKey:@"t_price"]];
+    CGFloat priceWidth = [_priceLabel.text sizeWithFont:_priceLabel.font].width + 4;
+    [_priceLabel setWidth:priceWidth];
+    [_priceLabel setRight:MainScreenWidth - 20];
+    [_themeLabel setWidth:MainScreenWidth - space * 2 - (_faceImageView.right + faceToThemeSpace) - priceWidth];
     _courseTimeLabel.text = [NSString stringWithFormat:@"课时：%@节",[dict objectForKey:@"sectionNum"]];
     _introLabel.text = [NSString stringWithFormat:@"%@",[dict objectForKey:@"video_intro"]];
 }
