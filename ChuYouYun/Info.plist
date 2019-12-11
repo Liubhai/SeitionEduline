@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Eduline</string>
+	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Eduline</string>
+	<string>佰汇网校</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -26,10 +26,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.saixin.eduline</string>
+			<string>com.baihuixue.edubaihui</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.saixin.eduline</string>
+				<string>com.baihuixue.edubaihui</string>
 			</array>
 		</dict>
 		<dict>
@@ -159,9 +159,9 @@
 	<string>LaunchScreen</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>可以的</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>App会在使用修改用户头像、保存图片到本地功能时,访问您的相机权限</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>App会在使用修改用户头像、保存图片到本地功能时,访问您的相机权限</string>
+	<key>NSPhotoLibraryUsageDescription</key>
 	<string>App会在使用修改用户头像、保存图片到本地功能时,访问您的相机权限</string>
 	<key>UIBackgroundModes</key>
 	<array>

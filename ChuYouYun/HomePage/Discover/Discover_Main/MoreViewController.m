@@ -116,7 +116,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 1 || section == 0) {
+    if (section == 1) {
         return 2;
     } else if (section == 2) {
         if ([HASALIPAY isEqualToString:@"0"]) {
@@ -132,8 +132,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
 //    NSArray *titleArray = @[@"资讯",@"商城",@"考试",@"文库",@"问答",@"小组",@"临时"];
-    NSArray *titleArray = @[@"资讯",@"商城",@"考试",@"文库",@"问答",@"卡券",@"套餐"];
-    NSArray *imageArray = @[@"资讯",@"商 城 (2)",@"考试(3)",@"文库",@"问答(4)",@"卡券(3)",@"发现_小组"];
+    NSArray *titleArray = @[@"资讯",@"考试",@"文库",@"问答",@"卡券",@"套餐"];
+    NSArray *imageArray = @[@"资讯",@"考试(3)",@"文库",@"问答(4)",@"卡券(3)",@"发现_小组"];
     static NSString *CellIdentifier = @"culture";
     //自定义cell类
     MoreTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -148,14 +148,14 @@
         [cell.SYGButton setBackgroundImage:[UIImage imageNamed:imageArray[indexRow]] forState:UIControlStateNormal];
         cell.SYGLabel.text = titleArray[indexRow];
     } else if (indexSet == 1) {
-        [cell.SYGButton setBackgroundImage:[UIImage imageNamed:imageArray[indexRow + 2]] forState:UIControlStateNormal];
-        cell.SYGLabel.text = titleArray[indexRow+ 2];
+        [cell.SYGButton setBackgroundImage:[UIImage imageNamed:imageArray[indexRow + 1]] forState:UIControlStateNormal];
+        cell.SYGLabel.text = titleArray[indexRow+ 1];
     } else if (indexSet == 2) {
-        [cell.SYGButton setBackgroundImage:[UIImage imageNamed:imageArray[indexRow + 4]] forState:UIControlStateNormal];
-        cell.SYGLabel.text = titleArray[indexRow + 4];
+        [cell.SYGButton setBackgroundImage:[UIImage imageNamed:imageArray[indexRow + 3]] forState:UIControlStateNormal];
+        cell.SYGLabel.text = titleArray[indexRow + 3];
     } else if (indexSet == 3) {
-        [cell.SYGButton setBackgroundImage:[UIImage imageNamed:imageArray[indexRow + 6]] forState:UIControlStateNormal];
-        cell.SYGLabel.text = titleArray[indexRow + 6];
+        [cell.SYGButton setBackgroundImage:[UIImage imageNamed:imageArray[indexRow + 5]] forState:UIControlStateNormal];
+        cell.SYGLabel.text = titleArray[indexRow + 5];
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;//表格箭头的样式
     
