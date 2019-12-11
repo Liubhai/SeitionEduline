@@ -213,9 +213,10 @@
         _TF.textColor = [UIColor colorWithHexString:@"#999999"];
         _TF.font = [UIFont systemFontOfSize:15*horizontalrate];
         [self.view addSubview:_TF];
-        if (i != 0) {
-           [_TF addTarget:self action:@selector(totalWealthDidChange:) forControlEvents:UIControlEventAllEvents];
-        }
+        [_TF addTarget:self action:@selector(totalWealthDidChange:) forControlEvents:UIControlEventAllEvents];
+//        if (i != 0) {
+//           [_TF addTarget:self action:@selector(totalWealthDidChange:) forControlEvents:UIControlEventAllEvents];
+//        }
         _TF.tag = i;
         //设置输入框内容的字体样式和大小
         _TF.font = [UIFont fontWithName:@"Arial" size:15*horizontalrate];
