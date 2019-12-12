@@ -144,7 +144,7 @@
     [self.view addSubview:WZView];
     
     //添加按钮
-    NSArray *titleArray = @[@"待支付",@"已取消",@"已完成",@"申请退款",@"已退款",@"退款驳回"];
+    NSArray *titleArray = @[@"待支付",@"已取消",@"已完成"];
     
     CGFloat ButtonH = 44 * WideEachUnit;
     CGFloat ButtonW = MainScreenWidth / titleArray.count;
@@ -236,7 +236,7 @@
     _controllerSrcollView.delegate = self;
     _controllerSrcollView.bounces = NO;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    _controllerSrcollView.contentSize = CGSizeMake(MainScreenWidth * 6,0);
+    _controllerSrcollView.contentSize = CGSizeMake(MainScreenWidth * 3,0);
     [self.view addSubview:_controllerSrcollView];
     _controllerSrcollView.backgroundColor = [UIColor redColor];
     
@@ -260,21 +260,6 @@
     paidVc.view.frame = CGRectMake(MainScreenWidth * 2, -64 - 44 * WideEachUnit, MainScreenWidth, MainScreenHeight);
     [self addChildViewController:paidVc];
     [_controllerSrcollView addSubview:paidVc.view];
-
-    NoRefundVC * noRefundVc = [[NoRefundVC alloc] initWithType:@"order"];
-    noRefundVc.view.frame = CGRectMake(MainScreenWidth * 3, -64 - 44 * WideEachUnit, MainScreenWidth, MainScreenHeight);
-    [self addChildViewController:noRefundVc];
-    [_controllerSrcollView addSubview:noRefundVc.view];
-    
-    RefundVC * refundVc = [[RefundVC alloc] initWithType:@"order"];
-    refundVc.view.frame = CGRectMake(MainScreenWidth * 4, -64 - 44 * WideEachUnit, MainScreenWidth, MainScreenHeight);
-    [self addChildViewController:refundVc];
-    [_controllerSrcollView addSubview:refundVc.view];
-    
-    RefundFailViewController *failVc = [[RefundFailViewController alloc] initWithType:@"order"];
-    failVc.view.frame = CGRectMake(MainScreenWidth * 5, -64 - 44 * WideEachUnit, MainScreenWidth, MainScreenHeight);
-    [self addChildViewController:failVc];
-    [_controllerSrcollView addSubview:failVc.view];
     
     
     //添加通知(通知所传达的地方必须要已经实体化，不然就不会相应通知的方法)
@@ -380,9 +365,6 @@
             [_allOrderButton setTitleColor:BasidColor forState:UIControlStateNormal];
             [_noPayButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [_canceledButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [_paidButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [_noRefundButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [_refundButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             
             
         } else if(point.x == MainScreenWidth) {
@@ -395,9 +377,7 @@
             [_allOrderButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [_noPayButton setTitleColor:BasidColor forState:UIControlStateNormal];
             [_canceledButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [_paidButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [_noRefundButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [_refundButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            
             
         }else if (point.x == MainScreenWidth * 2) {
             
@@ -410,9 +390,6 @@
             [_allOrderButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [_noPayButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [_canceledButton setTitleColor:BasidColor forState:UIControlStateNormal];
-            [_paidButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [_noRefundButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [_refundButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             
         } else if (point.x == MainScreenWidth * 3) {
             _controllerSrcollView.contentOffset = CGPointMake(MainScreenWidth * 3, 0);

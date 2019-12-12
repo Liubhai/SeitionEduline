@@ -383,7 +383,7 @@
         
         
     }
-    
+    /*
     if (iPhone4SOriPhone4) {
         
         //添加横线
@@ -444,7 +444,7 @@
             [self.view addSubview:button];
         }
     }
-    
+    */
     if (iPhoneX) {//iphoneX 所有的适配都在这里
         _NameField.frame = CGRectMake(0, 94, MainScreenWidth, 50);
         nameButton.frame = CGRectMake(17, 110, 13, 18);
