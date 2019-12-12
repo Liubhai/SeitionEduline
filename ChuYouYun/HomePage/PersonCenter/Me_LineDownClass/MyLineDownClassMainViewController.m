@@ -204,7 +204,7 @@
     resevationrVc.dict = _allMyDict;
     [_controllerSrcollView addSubview:resevationrVc.view];
     
-    MyLineDownCompleteViewController * completeVc = [[MyLineDownCompleteViewController alloc] initWithID:_allMyDict];
+    MyLineDownCompleteViewController * completeVc = [[MyLineDownCompleteViewController alloc] init];
     completeVc.dict = _allMyDict;
     completeVc.view.frame = CGRectMake(MainScreenWidth, -98, MainScreenWidth, MainScreenHeight * 2 + 500);
     [self addChildViewController:completeVc];

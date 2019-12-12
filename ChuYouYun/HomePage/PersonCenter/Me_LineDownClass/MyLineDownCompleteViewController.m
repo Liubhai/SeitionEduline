@@ -23,15 +23,6 @@
 
 @implementation MyLineDownCompleteViewController
 
--(instancetype)initWithID:(NSDictionary *)dict{
-    if (!self) {
-        self = [super init];
-        _dict = dict;
-    }
-    _dict = dict;
-    return self;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self interFace];

@@ -691,7 +691,7 @@
     CGFloat ButtonW = MainScreenWidth / 5;
     CGFloat ButtonH = ButtonW + 20;
     NSArray *titleArray = @[@"待支付",@"已取消",@"已完成",@"申请退款",@"已退款"];
-    NSArray *image = @[@"order_pay@3x",@"order_cancel@3x",@"order_finish@3x",@"order_apply@3x",@"order_refund@2x"];
+    NSArray *image = @[@"daozhifu",@"cancel",@"finish",@"shengqing",@"refund"];
     
     //确定View 的大小
     _orderView.frame = CGRectMake(0, CGRectGetMaxY(_headerView.frame) + 10 * WideEachUnit, MainScreenWidth,50 + ButtonH + SpaceBaside - SpaceBaside);
@@ -760,7 +760,7 @@
     CGFloat width = MainScreenWidth / 4 ;
     CGFloat spare = (MainScreenWidth / 4 - Bwidth) / 4;
     NSArray *SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"我的卡券",@"学习记录",@"兑换记录",@"我的机构",@"我的推荐"];
-    NSArray *TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"conpons@3x",@"study@3x",@"record@3x",@"org@3x",@"downLine"];
+    NSArray *TBArray = @[@"class",@"notes_center",@"collection",@"question",@"test",@"wenku",@"download_center",@"kaquan",@"xuexi",@"duihuan",@"jigou",@"tuijian"];
     
 
     
@@ -769,7 +769,7 @@
         if ([HASALIPAY isEqualToString:@"0"]) {
             if ([_isTeacher integerValue] == 1) {
                 SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"学习记录",@"兑换记录",@"我的推荐",@"我的授课"];
-                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"study@3x",@"record@3x",@"downLine",@"me_is_teacher"];
+                TBArray = @[@"class",@"notes_center",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"study@3x",@"record@3x",@"downLine",@"me_is_teacher"];
             } else {
                 SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"学习记录",@"兑换记录",@"我的推荐"];
                 TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"study@3x",@"record@3x",@"downLine"];
@@ -789,18 +789,18 @@
         if ([HASALIPAY isEqualToString:@"0"]) {
             if ([_isTeacher integerValue] == 1) {
                 SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"学习记录",@"兑换记录",@"我的机构",@"我的推荐",@"我的授课",@"我的分享",@"我的线下课",@"线下课管理"];
-                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"study@3x",@"record@3x",@"org@3x",@"downLine",@"me_is_teacher",@"icon-share",@"me_is_teacher",@"me_is_teacher"];
+                TBArray = @[@"class",@"notes_center",@"collection",@"question",@"test",@"wenku",@"download_center",@"xuexi",@"duihuan",@"jigou",@"tuijian",@"xianxia",@"fenxiang",@"xianxia",@"xianxia"];
             } else {
                 SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"学习记录",@"兑换记录",@"我的机构",@"我的推荐",@"我的分享",@"我的线下课"];
-                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"study@3x",@"record@3x",@"org@3x",@"downLine",@"icon-share",@"me_is_teacher"];
+                TBArray = @[@"class",@"notes_center",@"collection",@"question",@"test",@"wenku",@"download_center",@"xuexi",@"duihuan",@"jigou",@"tuijian",@"fenxiang",@"xianxia"];
             }
         } else {
             if ([_isTeacher integerValue] == 1) {
                 SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"我的卡券",@"学习记录",@"兑换记录",@"我的机构",@"我的推荐",@"我的授课",@"我的分享",@"我的线下课",@"线下课管理"];
-                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"conpons@3x",@"study@3x",@"record@3x",@"org@3x",@"downLine",@"me_is_teacher",@"icon-share",@"me_is_teacher",@"me_is_teacher"];
+                TBArray = @[@"class",@"notes_center",@"collection",@"question",@"test",@"wenku",@"download_center",@"kaquan",@"xuexi",@"duihuan",@"jigou",@"tuijian",@"xianxia",@"fenxiang",@"xianxia",@"xianxia"];
             } else {
                 SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"我的卡券",@"学习记录",@"兑换记录",@"我的机构",@"我的推荐",@"我的分享",@"我的线下课"];
-                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"conpons@3x",@"study@3x",@"record@3x",@"org@3x",@"downLine",@"icon-share",@"me_is_teacher"];
+                TBArray = @[@"class",@"notes_center",@"collection",@"question",@"test",@"wenku",@"download_center",@"kaquan",@"xuexi",@"duihuan",@"jigou",@"tuijian",@"fenxiang",@"xianxia"];
             }
         }
     }

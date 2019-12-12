@@ -116,6 +116,9 @@ static YunKeTang_Api_Tool *_sharedInstance;
 //解密之前的判断
 + (NSDictionary *)YunKeTang_Api_Tool_GetDecodeStr_Before:(id)responseObject {
     
+    if ([responseObject isKindOfClass:[NSDictionary class]]) {
+        return responseObject;
+    }
     NSString *receiveStr = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
     NSData * receiveData = [receiveStr dataUsingEncoding:NSUTF8StringEncoding];
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:receiveData options:NSJSONReadingMutableLeaves error:nil];
