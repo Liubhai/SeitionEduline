@@ -507,10 +507,10 @@
         [_headerView addSubview:SZLabel];
         if (i == 0) {
             _bancleLabel = SZLabel;
-            _bancleLabel.text = @"育币0";
+            _bancleLabel.text = @"马币0";
         } else if (i == 1) {
             _gainLabel = SZLabel;
-            _gainLabel.text = @"育币0";
+            _gainLabel.text = @"马币0";
         } else if (i == 2) {
             _scoreLabel = SZLabel;
             _scoreLabel.text = @"0";
@@ -1466,8 +1466,8 @@
         }
 
         NSLog(@"Vip---%@",_vipDict);
-        _bancleLabel.text = [NSString stringWithFormat:@"育币%@",[_userAccountDict stringValueForKey:@"learn" defaultValue:@"0"]];
-        _gainLabel.text = [NSString stringWithFormat:@"育币%@",[_userAccountDict stringValueForKey:@"split" defaultValue:@"0"]];
+        _bancleLabel.text = [NSString stringWithFormat:@"马币%@",[_userAccountDict stringValueForKey:@"learn" defaultValue:@"0"]];
+        _gainLabel.text = [NSString stringWithFormat:@"马币%@",[_userAccountDict stringValueForKey:@"split" defaultValue:@"0"]];
         _scoreLabel.text = [NSString stringWithFormat:@"%ld", [[_userAccountDict stringValueForKey:@"score" defaultValue:@"0"] integerValue]];
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {

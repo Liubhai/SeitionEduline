@@ -333,7 +333,7 @@
         [_balanceView addSubview:alipayIcon];
         
         UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(alipayIcon.right + 5, 0,60 * WideEachUnit, 50 * WideEachUnit)];
-        title.text = @"育币支付";
+        title.text = @"马币支付";
         title.font = Font(16 * WideEachUnit);
         title.textColor = [UIColor colorWithHexString:@"#333"];
         CGFloat titleWidth = [title.text sizeWithFont:title.font].width + 4;

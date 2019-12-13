@@ -217,18 +217,18 @@
     [self.view addSubview:segment];
     
     UILabel *lab1 = [[UILabel alloc]initWithFrame:CGRectMake(15, segment.current_y_h +20, MainScreenWidth - 30, 40)];
-    lab1.text = [NSString stringWithFormat:@"在线学习：%@ 育币",_lineonPrice];
+    lab1.text = [NSString stringWithFormat:@"在线学习：%@ 马币",_lineonPrice];
     if (_lineonPrice == nil) {
-        lab1.text = @"线上学习：0.00 育币";
+        lab1.text = @"线上学习：0.00 马币";
     }
     [self.view addSubview:lab1];
     lab1.textColor = [UIColor orangeColor];
     lab1.font = Font(18);
     
     UILabel *lab2 = [[UILabel alloc]initWithFrame:CGRectMake(15, lab1.current_y_h , MainScreenWidth - 30, 40)];
-    lab2.text = [NSString stringWithFormat:@"线下学习：%@ 育币",_lineoffprice];
+    lab2.text = [NSString stringWithFormat:@"线下学习：%@ 马币",_lineoffprice];
     if (_lineoffprice == nil) {
-        lab2.text = @"线下学习：0.00 育币";
+        lab2.text = @"线下学习：0.00 马币";
     }
     [self.view addSubview:lab2];
     lab2.textColor = [UIColor orangeColor];

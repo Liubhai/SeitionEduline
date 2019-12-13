@@ -83,7 +83,7 @@
 
 - (void)dataWithDict:(NSDictionary *)dict {
     
-    _price.text = [NSString stringWithFormat:@"%@育币",[dict stringValueForKey:@"price"]];
+    _price.text = [NSString stringWithFormat:@"%@马币",[dict stringValueForKey:@"price"]];
     if ([[dict stringValueForKey:@"status"] integerValue] == 1) {
         _discountStaus.text = @"优惠券";
     } else if ([[dict stringValueForKey:@"status"] integerValue] == 2) {

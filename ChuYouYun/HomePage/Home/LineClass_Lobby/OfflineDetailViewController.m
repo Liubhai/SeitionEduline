@@ -286,7 +286,7 @@
     }
 //    _adress.hidden = YES;
     
-    _price.text = [NSString stringWithFormat:@"育币 %@",[_dict stringValueForKey:@"price"]];
+    _price.text = [NSString stringWithFormat:@"马币 %@",[_dict stringValueForKey:@"price"]];
     if ([[_dict stringValueForKey:@"price"] floatValue] == 0) {
         _price.text = @"免费";
     }

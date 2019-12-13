@@ -666,7 +666,7 @@
         title = @[@"已关注",@"私信"];
     }
     
-    title = @[[NSString stringWithFormat:@"育币 %@",_price],@"立即解锁"];
+    title = @[[NSString stringWithFormat:@"马币 %@",_price],@"立即解锁"];
     if ([_price floatValue] == 0) {
         title = @[@"免费",@"立即解锁"];
     }
@@ -737,7 +737,7 @@
 #pragma mark --- 原价处理
 - (void)ordPriceDeal {
     
-    _ordPrice.text = [NSString stringWithFormat:@"育币%@",[_videoDataSource stringValueForKey:@"v_price"]];
+    _ordPrice.text = [NSString stringWithFormat:@"马币%@",[_videoDataSource stringValueForKey:@"v_price"]];
     _ordPrice.textAlignment = NSTextAlignmentCenter;
     NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
     NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:_ordPrice.text attributes:attribtDic];
@@ -2232,16 +2232,16 @@
         [_headerView setHeight:_teachersHeaderBackView.bottom];
         
         _ordPrice.text = [NSString stringWithFormat:@"在学%@人",[_videoDataSource stringValueForKey:@"video_order_count"]];
-        _priceLabel.text = [NSString stringWithFormat:@"育币%@",[_videoDataSource stringValueForKey:@"price"]];
-//        [_attentionButton setTitle:[NSString stringWithFormat:@"育币 %@",[_videoDataSource stringValueForKey:@"price"]] forState:0];
-        NSString *nowPrice = [NSString stringWithFormat:@"育币 %@",[_videoDataSource stringValueForKey:@"price"]];
+        _priceLabel.text = [NSString stringWithFormat:@"马币%@",[_videoDataSource stringValueForKey:@"price"]];
+//        [_attentionButton setTitle:[NSString stringWithFormat:@"马币 %@",[_videoDataSource stringValueForKey:@"price"]] forState:0];
+        NSString *nowPrice = [NSString stringWithFormat:@"马币 %@",[_videoDataSource stringValueForKey:@"price"]];
         if (SWNOTEmptyDictionary(_activityInfo)) {
             NSString *eventType = [NSString stringWithFormat:@"%@",[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"]];
             if ([eventType integerValue] == 6) {
-                nowPrice = [NSString stringWithFormat:@"育币 %@",[[_videoDataSource objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
+                nowPrice = [NSString stringWithFormat:@"马币 %@",[[_videoDataSource objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
             }
         }
-        NSString *oldPrice = [NSString stringWithFormat:@"育币%@",[_videoDataSource stringValueForKey:@"v_price"]];
+        NSString *oldPrice = [NSString stringWithFormat:@"马币%@",[_videoDataSource stringValueForKey:@"v_price"]];
         if ([[_videoDataSource stringValueForKey:@"price"] floatValue] == 0) {
             nowPrice = @"免费";
             _priceLabel.text = @"免费";
@@ -3347,8 +3347,8 @@
     _leftPriceLabel.font = SYSTEMFONT(13);
     _leftPriceLabel.textColor = [UIColor whiteColor];
     NSString *activityType = @"限时打折";
-    NSString *priceCount = @"育币963";
-    NSString *discount = @"育币1000";
+    NSString *priceCount = @"马币963";
+    NSString *discount = @"马币1000";
     NSString *leftPrice = [NSString stringWithFormat:@"%@%@%@",activityType,priceCount,discount];
     NSRange activityTypeRange = [leftPrice rangeOfString:activityType];
     NSRange priceRange = [leftPrice rangeOfString:priceCount];
@@ -3380,8 +3380,8 @@
         if (SWNOTEmptyDictionary(_videoDataSource)) {
             priceCount = [NSString stringWithFormat:@"%@",[[_videoDataSource objectForKey:@"mz_price"] objectForKey:@"eprice"]];
             discount = [NSString stringWithFormat:@"%@",[[_videoDataSource objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
-            NSString *nowPrice = [NSString stringWithFormat:@"育币 %@",[_videoDataSource stringValueForKey:@"price"]];
-            NSString *oldPrice = [NSString stringWithFormat:@"育币%@",[_videoDataSource stringValueForKey:@"v_price"]];
+            NSString *nowPrice = [NSString stringWithFormat:@"马币 %@",[_videoDataSource stringValueForKey:@"price"]];
+            NSString *oldPrice = [NSString stringWithFormat:@"马币%@",[_videoDataSource stringValueForKey:@"v_price"]];
             if ([[_activityInfo objectForKey:@"is_start"] integerValue] == 1) {
                 oldPrice = discount;
             }
@@ -3505,10 +3505,10 @@
                 activityType = @"即将开售";
             }
             if (SWNOTEmptyDictionary(_videoDataSource)) {
-                priceCount = [NSString stringWithFormat:@"%@育币",[[_videoDataSource objectForKey:@"mz_price"] objectForKey:@"eprice"]];
-                discount = [NSString stringWithFormat:@"%@育币",[[_videoDataSource objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
-                NSString *nowPrice = [NSString stringWithFormat:@"育币 %@",[_videoDataSource stringValueForKey:@"price"]];
-                NSString *oldPrice = [NSString stringWithFormat:@"育币%@",[_videoDataSource stringValueForKey:@"v_price"]];
+                priceCount = [NSString stringWithFormat:@"%@马币",[[_videoDataSource objectForKey:@"mz_price"] objectForKey:@"eprice"]];
+                discount = [NSString stringWithFormat:@"%@马币",[[_videoDataSource objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
+                NSString *nowPrice = [NSString stringWithFormat:@"马币 %@",[_videoDataSource stringValueForKey:@"price"]];
+                NSString *oldPrice = [NSString stringWithFormat:@"马币%@",[_videoDataSource stringValueForKey:@"v_price"]];
                 if ([[_activityInfo objectForKey:@"is_start"] integerValue] == 1) {
                     oldPrice = discount;
                 }
@@ -3708,10 +3708,10 @@
             activityType = @"即将开售";
         }
         if (SWNOTEmptyDictionary(_videoDataSource)) {
-            priceCount = [NSString stringWithFormat:@"%@育币",[[_videoDataSource objectForKey:@"mz_price"] objectForKey:@"eprice"]];
-            discount = [NSString stringWithFormat:@"%@育币",[[_videoDataSource objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
-            NSString *nowPrice = [NSString stringWithFormat:@"育币 %@",[_videoDataSource stringValueForKey:@"price"]];
-            NSString *oldPrice = [NSString stringWithFormat:@"育币%@",[_videoDataSource stringValueForKey:@"v_price"]];
+            priceCount = [NSString stringWithFormat:@"%@马币",[[_videoDataSource objectForKey:@"mz_price"] objectForKey:@"eprice"]];
+            discount = [NSString stringWithFormat:@"%@马币",[[_videoDataSource objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
+            NSString *nowPrice = [NSString stringWithFormat:@"马币 %@",[_videoDataSource stringValueForKey:@"price"]];
+            NSString *oldPrice = [NSString stringWithFormat:@"马币%@",[_videoDataSource stringValueForKey:@"v_price"]];
             if ([[_activityInfo objectForKey:@"is_start"] integerValue] == 1) {
                 oldPrice = discount;
             }

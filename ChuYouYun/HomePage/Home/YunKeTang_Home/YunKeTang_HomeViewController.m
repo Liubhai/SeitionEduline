@@ -436,11 +436,11 @@ static NSString *cellID = @"cell";
                     price.text = @"免费";
                     price.textColor = [UIColor colorWithHexString:@"#47b37d"];
                 } else {
-                    price.text = [NSString stringWithFormat:@"%@育币",[[_liveArray[i] objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
+                    price.text = [NSString stringWithFormat:@"%@马币",[[_liveArray[i] objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
                     price.textColor = PriceColor;
                 }
             } else {
-                price.text = [NSString stringWithFormat:@"%@育币",[[_liveArray objectAtIndex:i] stringValueForKey:@"t_price"]];
+                price.text = [NSString stringWithFormat:@"%@马币",[[_liveArray objectAtIndex:i] stringValueForKey:@"t_price"]];
                 price.font = Font(12);
                 price.textAlignment = NSTextAlignmentLeft;
                 price.textColor = [UIColor colorWithHexString:@"#f01414"];
@@ -450,7 +450,7 @@ static NSString *cellID = @"cell";
                 }
             }
         } else {
-            price.text = [NSString stringWithFormat:@"%@育币",[[_liveArray objectAtIndex:i] stringValueForKey:@"t_price"]];
+            price.text = [NSString stringWithFormat:@"%@马币",[[_liveArray objectAtIndex:i] stringValueForKey:@"t_price"]];
             price.font = Font(12);
             price.textAlignment = NSTextAlignmentLeft;
             price.textColor = [UIColor colorWithHexString:@"#f01414"];
@@ -701,7 +701,7 @@ static NSString *cellID = @"cell";
                             price.text = @"免费";
                             price.textColor = [UIColor colorWithHexString:@"#47b37d"];
                         } else {
-                            price.text = [NSString stringWithFormat:@"%@育币",[[_choicenessArray[i] objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
+                            price.text = [NSString stringWithFormat:@"%@马币",[[_choicenessArray[i] objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
                             price.textColor = PriceColor;
                         }
                     } else {
@@ -710,7 +710,7 @@ static NSString *cellID = @"cell";
                             price.text = @"免费";
                             price.textColor = [UIColor colorWithHexString:@"#47b37d"];
                         } else {
-                            price.text = [NSString stringWithFormat:@"%@育币",[[_choicenessArray objectAtIndex:i] stringValueForKey:@"price"]];
+                            price.text = [NSString stringWithFormat:@"%@马币",[[_choicenessArray objectAtIndex:i] stringValueForKey:@"price"]];
                             price.textColor = PriceColor;
                         }
                     }
@@ -720,7 +720,7 @@ static NSString *cellID = @"cell";
                         price.text = @"免费";
                         price.textColor = [UIColor colorWithHexString:@"#47b37d"];
                     } else {
-                        price.text = [NSString stringWithFormat:@"%@育币",[[_choicenessArray objectAtIndex:i] stringValueForKey:@"price"]];
+                        price.text = [NSString stringWithFormat:@"%@马币",[[_choicenessArray objectAtIndex:i] stringValueForKey:@"price"]];
                         price.textColor = PriceColor;
                     }
                 }
@@ -794,7 +794,7 @@ static NSString *cellID = @"cell";
                             price.text = @"免费";
                             price.textColor = [UIColor colorWithHexString:@"#47b37d"];
                         } else {
-                            price.text = [NSString stringWithFormat:@"%@育币",[[_newsArray[i] objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
+                            price.text = [NSString stringWithFormat:@"%@马币",[[_newsArray[i] objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
                             price.textColor = PriceColor;
                         }
                     } else {
@@ -803,7 +803,7 @@ static NSString *cellID = @"cell";
                             price.text = @"免费";
                             price.textColor = [UIColor colorWithHexString:@"#47b37d"];
                         } else {
-                            price.text = [NSString stringWithFormat:@"%@育币",[[_newsArray objectAtIndex:i] stringValueForKey:@"price"]];
+                            price.text = [NSString stringWithFormat:@"%@马币",[[_newsArray objectAtIndex:i] stringValueForKey:@"price"]];
                             price.textColor = PriceColor;
                         }
                     }
@@ -813,7 +813,7 @@ static NSString *cellID = @"cell";
                         price.text = @"免费";
                         price.textColor = [UIColor colorWithHexString:@"#47b37d"];
                     } else {
-                        price.text = [NSString stringWithFormat:@"%@育币",[[_newsArray objectAtIndex:i] stringValueForKey:@"price"]];
+                        price.text = [NSString stringWithFormat:@"%@马币",[[_newsArray objectAtIndex:i] stringValueForKey:@"price"]];
                         price.textColor = PriceColor;
                     }
                 }

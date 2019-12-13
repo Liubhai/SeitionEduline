@@ -185,7 +185,7 @@
     
     //添加返回的文本
     UILabel *back = [[UILabel alloc] initWithFrame:CGRectMake(0, 103 * WideEachUnit, 250 * WideEachUnit, 12 * WideEachUnit)];
-    back.text = @"3秒自动返回育币页";
+    back.text = @"3秒自动返回马币页";
     back.font = Font(12 * WideEachUnit);
     back.textAlignment = NSTextAlignmentCenter;
     back.textColor = [UIColor colorWithHexString:@"#888"];
@@ -226,7 +226,7 @@
 
 - (void)timePast {
     Number --;
-    _back.text = [NSString stringWithFormat:@"%ld秒自动返回育币页",Number];
+    _back.text = [NSString stringWithFormat:@"%ld秒自动返回马币页",Number];
 }
 
 

@@ -43,7 +43,7 @@
     _priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(MainScreenWidth - space - 100, _themeLabel.top, 100, 15)];
     _priceLabel.font = SYSTEMFONT(13);
     _priceLabel.textColor = RGBHex(0xFF0000);
-    _priceLabel.text = @"育币100";
+    _priceLabel.text = @"马币100";
     _priceLabel.textAlignment = NSTextAlignmentRight;
     _priceLabel.centerY = _themeLabel.centerY;
     [self addSubview:_priceLabel];
@@ -71,7 +71,7 @@
 - (void)setCourseInfo:(NSDictionary *)dict {
     [_faceImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[dict objectForKey:@"imageurl"]]] placeholderImage:Image(@"站位图")];
     _themeLabel.text = [NSString stringWithFormat:@"%@",[dict objectForKey:@"video_title"]];
-    _priceLabel.text = [NSString stringWithFormat:@"育币%@",[dict objectForKey:@"t_price"]];
+    _priceLabel.text = [NSString stringWithFormat:@"马币%@",[dict objectForKey:@"t_price"]];
     CGFloat priceWidth = [_priceLabel.text sizeWithFont:_priceLabel.font].width + 4;
     [_priceLabel setWidth:priceWidth];
     [_priceLabel setRight:MainScreenWidth - 20];

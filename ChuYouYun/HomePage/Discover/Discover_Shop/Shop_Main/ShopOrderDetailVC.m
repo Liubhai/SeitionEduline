@@ -194,7 +194,7 @@
     _line5.backgroundColor = RGBHex(0xE5E5E5);
     [_payMethodBackView addSubview:_line5];
     _tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(20 * WideEachUnit, _line5.bottom + 5, MainScreenWidth - 20 * WideEachUnit, 15 * HigtEachUnit)];
-    _tipLabel.text = [NSString stringWithFormat:@"注:育币与积分的兑换比例为1:%@",@(1 / _percentage)];
+    _tipLabel.text = [NSString stringWithFormat:@"注:马币与积分的兑换比例为1:%@",@(1 / _percentage)];
     _tipLabel.textColor = RGBHex(0xE94048);
     _tipLabel.font = SYSTEMFONT(12);
     _tipLabel.hidden = !_isHaveAilPay;
@@ -267,7 +267,7 @@
     _payCountLabel.textColor = RGBHex(0xE94048);
     _payCountLabel.textAlignment = NSTextAlignmentRight;
     _payCountLabel.font = [UIFont fontWithName:@"Alibaba-PuHuiTi-B" size:14];
-    _payCountLabel.text = @"育币500";
+    _payCountLabel.text = @"马币500";
     CGFloat Money = [[_originDict stringValueForKey:@"price"] integerValue] * _numValue + [[_originDict stringValueForKey:@"fare"] integerValue];
     if ([_scoreStaus integerValue] == 0) {
         Money = ([[_originDict stringValueForKey:@"price"] integerValue] * _numValue + [[_originDict stringValueForKey:@"fare"] integerValue]) * _percentage;
@@ -278,7 +278,7 @@
             Money = [[_originDict stringValueForKey:@"price"] integerValue] * _numValue + [[_originDict stringValueForKey:@"fare"] integerValue];
         }
     }
-    _payCountLabel.text = [NSString stringWithFormat:@"育币%.2f",Money];
+    _payCountLabel.text = [NSString stringWithFormat:@"马币%.2f",Money];
     [_payCountBackView addSubview:_payCountLabel];
 
     /// 解锁协议
@@ -326,7 +326,7 @@
     _allMoneyLabel.font = [UIFont fontWithName:@"Alibaba-PuHuiTi-B" size:14];
     _allMoneyLabel.textColor = RGBHex(0xE94048);
     _allMoneyLabel.textAlignment = NSTextAlignmentCenter;
-    _allMoneyLabel.text = @"合计：育币500";
+    _allMoneyLabel.text = @"合计：马币500";
     [self.view addSubview:_allMoneyLabel];
 
     _submitButton = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth / 2.0, _allMoneyLabel.top, MainScreenWidth / 2.0, 50 * HigtEachUnit)];

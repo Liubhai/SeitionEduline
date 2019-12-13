@@ -130,7 +130,7 @@
     price.textColor = [UIColor colorWithHexString:@"#f01414"];
     price.font = Font(18 * WideEachUnit);
     price.backgroundColor = [UIColor whiteColor];
-    price.text = @"育币0";
+    price.text = @"马币0";
     [_classDetailView addSubview:price];
     _price = price;
     
@@ -866,7 +866,7 @@
             if ([_orderSwitch integerValue] == 1) {
                 _personNumber.text = [NSString stringWithFormat:@"在学%@人",[_dataSource stringValueForKey:@"video_order_count_mark"]];
             }
-            _price.text = [NSString stringWithFormat:@"育币%@",[_dataSource stringValueForKey:@"price"]];
+            _price.text = [NSString stringWithFormat:@"马币%@",[_dataSource stringValueForKey:@"price"]];
             NSString *urlStr = [_dataSource stringValueForKey:@""];
             [_teacherImage sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:Image(@"站位图")];
             [_instImage sd_setImageWithURL:[NSURL URLWithString:[_schoolDict stringValueForKey:@"cover"]] placeholderImage:Image(@"站位图")];

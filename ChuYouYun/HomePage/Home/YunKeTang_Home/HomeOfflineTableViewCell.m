@@ -69,8 +69,8 @@
         _priceLabel.text = @"免费";
         _priceLabel.textColor = [UIColor colorWithHexString:@"#47b37d"];
     } else {
-        NSString *t_price = [NSString stringWithFormat:@"%@育币",[dict stringValueForKey:@"t_price"]];
-        _priceLabel.text = [NSString stringWithFormat:@"%@育币 %@",[dict stringValueForKey:@"price"],t_price];
+        NSString *t_price = [NSString stringWithFormat:@"%@马币",[dict stringValueForKey:@"t_price"]];
+        _priceLabel.text = [NSString stringWithFormat:@"%@马币 %@",[dict stringValueForKey:@"price"],t_price];
         _priceLabel.textColor = PriceColor;
         NSRange t_priceRange = [_priceLabel.text rangeOfString:t_price];
         NSMutableAttributedString *t_pricePass = [[NSMutableAttributedString alloc] initWithString:_priceLabel.text];
@@ -86,7 +86,7 @@
 //                _priceLabel.text = @"免费";
 //                _priceLabel.textColor = [UIColor colorWithHexString:@"#47b37d"];
 //            } else {
-//                _priceLabel.text = [NSString stringWithFormat:@"%@育币",[[dict objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
+//                _priceLabel.text = [NSString stringWithFormat:@"%@马币",[[dict objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
 //                _priceLabel.textColor = PriceColor;
 //            }
 //        } else {
@@ -95,7 +95,7 @@
 //                _priceLabel.text = @"免费";
 //                _priceLabel.textColor = [UIColor colorWithHexString:@"#47b37d"];
 //            } else {
-//                _priceLabel.text = [NSString stringWithFormat:@"%@育币",[dict stringValueForKey:@"price"]];
+//                _priceLabel.text = [NSString stringWithFormat:@"%@马币",[dict stringValueForKey:@"price"]];
 //                _priceLabel.textColor = PriceColor;
 //            }
 //        }
@@ -105,8 +105,8 @@
 //            _priceLabel.text = @"免费";
 //            _priceLabel.textColor = [UIColor colorWithHexString:@"#47b37d"];
 //        } else {
-//            NSString *t_price = [NSString stringWithFormat:@"%@育币",[dict stringValueForKey:@"t_price"]];
-//            _priceLabel.text = [NSString stringWithFormat:@"%@育币 %@",[dict stringValueForKey:@"price"],t_price];
+//            NSString *t_price = [NSString stringWithFormat:@"%@马币",[dict stringValueForKey:@"t_price"]];
+//            _priceLabel.text = [NSString stringWithFormat:@"%@马币 %@",[dict stringValueForKey:@"price"],t_price];
 //            _priceLabel.textColor = PriceColor;
 //            NSRange t_priceRange = [_priceLabel.text rangeOfString:t_price];
 //            NSMutableAttributedString *t_pricePass = [[NSMutableAttributedString alloc] initWithString:_titleLabel.text];

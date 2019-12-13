@@ -211,7 +211,7 @@
     
     //添加备注
     UILabel *remark = [[UILabel  alloc] initWithFrame:CGRectMake(20 * WideEachUnit, 90 * WideEachUnit ,MainScreenWidth - 40 * WideEachUnit, 15 * WideEachUnit)];
-    remark.text = @"需要花费育币0";
+    remark.text = @"需要花费马币0";
     remark.textColor = [UIColor colorWithHexString:@"#888"];
     remark.textAlignment = NSTextAlignmentCenter;
     remark.font = Font(12 * WideEachUnit);
@@ -221,7 +221,7 @@
     
     //兑换计算
     UILabel *exchange = [[UILabel  alloc] initWithFrame:CGRectMake(20 * WideEachUnit, 120 * WideEachUnit ,MainScreenWidth - 40 * WideEachUnit, 15 * WideEachUnit)];
-    exchange.text = @"(注：1 育币 = 10积分)";
+    exchange.text = @"(注：1 马币 = 10积分)";
     exchange.textColor = [UIColor colorWithHexString:@"#888"];
 //    exchange.textAlignment = NSTextAlignmentCenter;
     exchange.font = Font(12 * WideEachUnit);
@@ -416,9 +416,9 @@
     CGFloat viewW = MainScreenWidth;
     CGFloat viewH = 50 * WideEachUnit;
     
-    NSArray *titleArray = @[@"育币",@"收入"];
+    NSArray *titleArray = @[@"马币",@"收入"];
     NSArray *iconArray = @[@"money",@"income"];
-    NSArray *informationArray = @[@"(当前育币0)",@"(当前账户提成为育币0)"];
+    NSArray *informationArray = @[@"(当前马币0)",@"(当前账户提成为马币0)"];
     CGFloat topY = 0;
     for (int i = 0 ; i < 2 ; i ++) {
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, topY, viewW, viewH)];
@@ -564,8 +564,8 @@
     
     //实际钱
     UILabel *realMoney = [[UILabel alloc] initWithFrame:CGRectMake(115 * WideEachUnit, 0, 90 * WideEachUnit, 49 * WideEachUnit)];
-    //    realMoney.text = [NSString stringWithFormat:@"育币%@",[_dict stringValueForKey:@"t_price"]];
-    realMoney.text = @"育币0";
+    //    realMoney.text = [NSString stringWithFormat:@"马币%@",[_dict stringValueForKey:@"t_price"]];
+    realMoney.text = @"马币0";
     realMoney.font = Font(16 * WideEachUnit);
     realMoney.textColor = [UIColor colorWithHexString:@"#fc0203"];
     [_downView addSubview:realMoney];
@@ -594,14 +594,14 @@
         return;
     } else if (_textField.text.length == 0) {
         _textField.text = @"";
-        _remark.text = [NSString stringWithFormat:@"需要花费0个育币"];
-        _realMoney.text = @"育币 0";
+        _remark.text = [NSString stringWithFormat:@"需要花费0个马币"];
+        _realMoney.text = @"马币 0";
         return;
     } else {
         NSString *textStr = [_textField.text substringFromIndex:0];
         CGFloat hh = [textStr floatValue] / [_sple_score_str integerValue];
-        _remark.text = [NSString stringWithFormat:@"需要花费%.2f 育币",hh];
-        _realMoney.text = [NSString stringWithFormat:@"%.2f 育币",hh];
+        _remark.text = [NSString stringWithFormat:@"需要花费%.2f 马币",hh];
+        _realMoney.text = [NSString stringWithFormat:@"%.2f 马币",hh];
     }
 }
 
@@ -786,16 +786,16 @@
                 _sple_score_str = [NSString stringWithFormat:@"%@",_componentsArray[1]];
                 NSArray *array = [_sple_score_str componentsSeparatedByString:@"："];
                 _sple_score_str = array[1];
-                _exchange.text = [NSString stringWithFormat:@"(注:%@育币=%@积分)",@"1",_componentsArray[1]];
+                _exchange.text = [NSString stringWithFormat:@"(注:%@马币=%@积分)",@"1",_componentsArray[1]];
                 _exchange.text = [dataSource stringValueForKey:@"pay_note"];
             }
             
             for (int i = 0 ; i < array.count ; i ++) {
                 NSDictionary *dict = [array objectAtIndex:i];
                 if ([[dict stringValueForKey:@"pay_num"] isEqualToString:@"lcnpay"]) {//余额支付
-                    _balanceseInformationLabel.text = [NSString stringWithFormat:@"(当前育币%@)",[dict stringValueForKey:@"balance" defaultValue:@"0"]];
+                    _balanceseInformationLabel.text = [NSString stringWithFormat:@"(当前马币%@)",[dict stringValueForKey:@"balance" defaultValue:@"0"]];
                 } else if ([[dict stringValueForKey:@"pay_num"] isEqualToString:@"spipay"]) {
-                    _splitInformationLabel.text = [NSString stringWithFormat:@"(当前育币%@)",[dict stringValueForKey:@"balance" defaultValue:@"0"]];
+                    _splitInformationLabel.text = [NSString stringWithFormat:@"(当前马币%@)",[dict stringValueForKey:@"balance" defaultValue:@"0"]];
                 }
             }
             

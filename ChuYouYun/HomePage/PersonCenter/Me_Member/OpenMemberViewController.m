@@ -246,8 +246,8 @@
     [self.view addSubview:_moneyView];
     
     
-    NSString *monthStr = [NSString stringWithFormat:@"育币%@／月",[[_vipMoneyArray objectAtIndex:_currentSeleVip] stringValueForKey:@"vip_month"]];
-    NSString *yearStr = [NSString stringWithFormat:@"育币%@／年",[[_vipMoneyArray objectAtIndex:_currentSeleVip] stringValueForKey:@"vip_year"]];
+    NSString *monthStr = [NSString stringWithFormat:@"马币%@／月",[[_vipMoneyArray objectAtIndex:_currentSeleVip] stringValueForKey:@"vip_month"]];
+    NSString *yearStr = [NSString stringWithFormat:@"马币%@／年",[[_vipMoneyArray objectAtIndex:_currentSeleVip] stringValueForKey:@"vip_year"]];
     
     NSArray *titleArray = @[monthStr,yearStr];
     CGFloat buttonW = 165 * WideEachUnit;
@@ -532,7 +532,7 @@
         [_balanceView addSubview:alipayIcon];
         
         UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(alipayIcon.right + 5, 0,60 * WideEachUnit, 50 * WideEachUnit)];
-        title.text = @"育币支付";
+        title.text = @"马币支付";
         title.font = Font(16 * WideEachUnit);
         title.textColor = [UIColor colorWithHexString:@"#333"];
         CGFloat titleWidth = [title.text sizeWithFont:title.font].width + 4;
@@ -546,7 +546,7 @@
         residue.textColor = [UIColor colorWithHexString:@"#888"];
         [_balanceView addSubview:residue];
         _residue = residue;
-        _residue.text = [NSString stringWithFormat:@"(当前育币%@)",[_userBalanceDict stringValueForKey:@"learn" defaultValue:@"0"]];
+        _residue.text = [NSString stringWithFormat:@"(当前马币%@)",[_userBalanceDict stringValueForKey:@"learn" defaultValue:@"0"]];
         if (isHaveBanlance) {//说明是余额
             residue.text = [NSString stringWithFormat:@"(%@)",[_testDict stringValueForKey:@"pay_type_note"]];
         }
@@ -626,8 +626,8 @@
     
     //实际钱
     UILabel *realMoney = [[UILabel alloc] initWithFrame:CGRectMake(115 * WideEachUnit, 0, 90 * WideEachUnit, 49 * WideEachUnit)];
-    //    realMoney.text = [NSString stringWithFormat:@"育币%@",[_dict stringValueForKey:@"t_price"]];
-    realMoney.text = [NSString stringWithFormat:@"育币%@",[[_vipMoneyArray objectAtIndex:_currentSeleVip] stringValueForKey:@"vip_month"]];
+    //    realMoney.text = [NSString stringWithFormat:@"马币%@",[_dict stringValueForKey:@"t_price"]];
+    realMoney.text = [NSString stringWithFormat:@"马币%@",[[_vipMoneyArray objectAtIndex:_currentSeleVip] stringValueForKey:@"vip_month"]];
     realMoney.font = Font(16 * WideEachUnit);
     realMoney.textColor = [UIColor colorWithHexString:@"#fc0203"];
     [_downView addSubview:realMoney];
@@ -710,8 +710,8 @@
     NSLog(@"---%@",_currentVipID);
     
     
-    NSString *monthStr = [NSString stringWithFormat:@"育币%@／月",[[_vipMoneyArray objectAtIndex:button.tag] stringValueForKey:@"vip_month"]];
-    NSString *yearStr = [NSString stringWithFormat:@"育币%@／年",[[_vipMoneyArray objectAtIndex:button.tag] stringValueForKey:@"vip_year"]];
+    NSString *monthStr = [NSString stringWithFormat:@"马币%@／月",[[_vipMoneyArray objectAtIndex:button.tag] stringValueForKey:@"vip_month"]];
+    NSString *yearStr = [NSString stringWithFormat:@"马币%@／年",[[_vipMoneyArray objectAtIndex:button.tag] stringValueForKey:@"vip_year"]];
     [_monthButton setTitle:monthStr forState:UIControlStateNormal];
     [_yearButton setTitle:yearStr forState:UIControlStateNormal];
     
@@ -722,7 +722,7 @@
         _monthOrYearStr = [NSString stringWithFormat:@"%@",[[_vipMoneyArray objectAtIndex:_currentVipNumber] stringValueForKey:@"vip_year"]];
     }
     
-    _realMoney.text = [NSString stringWithFormat:@"育币%ld",Number * ([_monthOrYearStr integerValue])];
+    _realMoney.text = [NSString stringWithFormat:@"马币%ld",Number * ([_monthOrYearStr integerValue])];
     
 }
 
@@ -742,7 +742,7 @@
         _unitLabel.text = @"年";
         _monthOrYearStr = [NSString stringWithFormat:@"%@",[[_vipMoneyArray objectAtIndex:_currentVipNumber] stringValueForKey:@"vip_year"]];
     }
-    _realMoney.text = [NSString stringWithFormat:@"育币%ld",Number * ([_monthOrYearStr integerValue])];
+    _realMoney.text = [NSString stringWithFormat:@"马币%ld",Number * ([_monthOrYearStr integerValue])];
     
 }
 
@@ -758,7 +758,7 @@
         _numberLabel.text = [NSString stringWithFormat:@"%ld",Number];
     }
     
-    _realMoney.text = [NSString stringWithFormat:@"育币%ld",Number * ([_monthOrYearStr integerValue])];
+    _realMoney.text = [NSString stringWithFormat:@"马币%ld",Number * ([_monthOrYearStr integerValue])];
 
 }
 
@@ -941,7 +941,7 @@
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         _userBalanceDict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
-        _residue.text = [NSString stringWithFormat:@"(当前育币%@)",[_userBalanceDict stringValueForKey:@"learn" defaultValue:@"0"]];
+        _residue.text = [NSString stringWithFormat:@"(当前马币%@)",[_userBalanceDict stringValueForKey:@"learn" defaultValue:@"0"]];
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];

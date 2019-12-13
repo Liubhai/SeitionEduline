@@ -85,7 +85,7 @@
 //    _GKLabel.text = dict[@"video_order_count"];
 //    _XBLabel.text = dict[@""];
     
-    NSString *MoneyStr = [NSString stringWithFormat:@"%@  育币",dict[@"t_price"]];
+    NSString *MoneyStr = [NSString stringWithFormat:@"%@  马币",dict[@"t_price"]];
     NSString *XBStr = [NSString stringWithFormat:@"%@",dict[@"t_price"]];
     //变颜色
     NSMutableAttributedString *needStr = [[NSMutableAttributedString alloc] initWithString:MoneyStr];

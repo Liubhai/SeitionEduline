@@ -231,7 +231,7 @@
                         if ([_dataArray[section][@"course_hour_price"] floatValue] == 0) {
                             price.hidden = YES;
                         } else {
-                            price.text = [NSString stringWithFormat:@"%.2f育币",[_dataArray[section][@"course_hour_price"] floatValue]];
+                            price.text = [NSString stringWithFormat:@"%.2f马币",[_dataArray[section][@"course_hour_price"] floatValue]];
                             price.layer.borderColor = [UIColor redColor].CGColor;
                             price.textColor = [UIColor redColor];
                         }

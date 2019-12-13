@@ -360,7 +360,7 @@
         NSString *text1 = @" ";
         NSString *textStr = [NSString stringWithFormat:@"%@积分 %@",[[_rankArray objectAtIndex:i] stringValueForKey:@"price"],text1];
         if ([_scoreStaus integerValue] == 0) {
-             textStr = [NSString stringWithFormat:@"育币%.2f",[[[_rankArray objectAtIndex:i] stringValueForKey:@"price"] floatValue]  * percentage];
+             textStr = [NSString stringWithFormat:@"马币%.2f",[[[_rankArray objectAtIndex:i] stringValueForKey:@"price"] floatValue]  * percentage];
         }
         person.text = textStr;
         person.font = Font(11);
@@ -915,7 +915,7 @@
         UILabel *integral = [[UILabel alloc] initWithFrame:CGRectMake(cellW / 2, CGRectGetMaxY(name.frame), cellW / 2 - SpaceBaside, 30)];
         integral.text = [NSString stringWithFormat:@"%@积分",[[_dataArray objectAtIndex:i] stringValueForKey:@"price"]];
         if ([_scoreStaus integerValue] == 0) {
-            integral.text = [NSString stringWithFormat:@"%.2f育币",[[[_dataArray objectAtIndex:i] stringValueForKey:@"price"] floatValue]  * percentage];
+            integral.text = [NSString stringWithFormat:@"%.2f马币",[[[_dataArray objectAtIndex:i] stringValueForKey:@"price"] floatValue]  * percentage];
         }
         integral.font = Font(14);
         integral.textColor = [UIColor redColor];

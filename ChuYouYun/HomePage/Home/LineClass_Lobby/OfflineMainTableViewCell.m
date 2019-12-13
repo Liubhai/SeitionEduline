@@ -89,7 +89,7 @@
     
     
     _title.text = [dict stringValueForKey:@"course_name"];
-    _price.text = [NSString stringWithFormat:@"育币%@",[dict stringValueForKey:@"price"]];
+    _price.text = [NSString stringWithFormat:@"马币%@",[dict stringValueForKey:@"price"]];
     if ([[dict stringValueForKey:@"price"] floatValue] == 0) {
         _price.text = @"免费";
         _price.textColor = [UIColor colorWithHexString:@"#47b37d"];

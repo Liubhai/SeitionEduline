@@ -235,7 +235,7 @@
 
         //价格
         UILabel *priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imageView.frame) + SpaceBaside, SpaceBaside + 60, MainScreenWidth - SpaceBaside - CGRectGetMaxX(imageView.frame) - SpaceBaside , 20)];
-        priceLabel.text = @"2280.00育币";
+        priceLabel.text = @"2280.00马币";
         priceLabel.font = Font(15);
         priceLabel.textColor = [UIColor orangeColor];
         [listView addSubview:priceLabel];
@@ -320,7 +320,7 @@
         
         //时间
         UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imageView.frame) + SpaceBaside, SpaceBaside + 60, 120, 20)];
-        timeLabel.text = @"228育币/小时";
+        timeLabel.text = @"228马币/小时";
         timeLabel.font = Font(15);
         timeLabel.textColor = [UIColor orangeColor];
         [listView addSubview:timeLabel];

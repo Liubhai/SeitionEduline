@@ -125,7 +125,7 @@
     _lineClass.text = [dict stringValueForKey:@"course_name"];
     _teacher.text = [NSString stringWithFormat:@"讲师：%@",[dict stringValueForKey:@"teacher_name"]];
     _teacher.frame =CGRectMake(90 * WideEachUnit, 40 * WideEachUnit,MainScreenWidth - 180 * WideEachUnit, 20 * WideEachUnit);
-    _price.text = [NSString stringWithFormat:@"%@育币",[dict stringValueForKey:@"t_price"]];
+    _price.text = [NSString stringWithFormat:@"%@马币",[dict stringValueForKey:@"t_price"]];
     _adress.text = [NSString stringWithFormat:@"授课地点：%@",[dict stringValueForKey:@"address"]];
     if ([dict stringValueForKey:@"address"] == nil ||[[dict stringValueForKey:@"address"] isEqualToString:@""] ) {
         _adress.text = @"授课地点：暂无";
@@ -170,7 +170,7 @@
     _lineClass.text = [dict stringValueForKey:@"course_name"];
     _teacher.text = [NSString stringWithFormat:@"学生：%@",[dict stringValueForKey:@"student_name"]];
     _sexLabel.text = [NSString stringWithFormat:@"性别:%@",[[dict stringValueForKey:@"student_sex"] integerValue] == 1 ? @"男" : @"女"];
-    _price.text = [NSString stringWithFormat:@"%@育币",[dict stringValueForKey:@"price"]];
+    _price.text = [NSString stringWithFormat:@"%@马币",[dict stringValueForKey:@"price"]];
     _adress.text = [NSString stringWithFormat:@"授课地点：%@",[dict stringValueForKey:@"address"]];
     if ([dict stringValueForKey:@"address"] == nil ||[[dict stringValueForKey:@"address"] isEqualToString:@""] ) {
         _adress.text = @"授课地点：暂无";

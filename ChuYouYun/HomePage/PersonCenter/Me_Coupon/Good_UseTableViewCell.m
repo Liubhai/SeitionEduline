@@ -141,7 +141,7 @@
     if ([[dict stringValueForKey:@"type"] integerValue] == 1) {//优惠券
         self.typeImageView.image = Image(@"dis_coupon@3x");
         _type.text = @"优惠券";
-        NSString *allStr = [NSString stringWithFormat:@"育币%@",[dict stringValueForKey:@"price"]];
+        NSString *allStr = [NSString stringWithFormat:@"马币%@",[dict stringValueForKey:@"price"]];
         NSMutableAttributedString *noteStr1 = [[NSMutableAttributedString alloc] initWithString:allStr];
         [noteStr1 addAttribute:NSFontAttributeName value:Font(30 * WideEachUnit) range:[allStr rangeOfString:[NSString stringWithFormat:@"%@",[dict stringValueForKey:@"price"]]]];
         [_number setAttributedText:noteStr1];

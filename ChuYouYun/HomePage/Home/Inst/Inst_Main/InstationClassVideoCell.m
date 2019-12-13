@@ -104,7 +104,7 @@
     
     //价格
     UILabel *priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imageView.frame) + SpaceBaside, SpaceBaside + 60, MainScreenWidth - SpaceBaside - CGRectGetMaxX(imageView.frame) - SpaceBaside , 20)];
-    priceLabel.text = @"2280.00育币";
+    priceLabel.text = @"2280.00马币";
     priceLabel.font = Font(15);
     priceLabel.textColor = [UIColor orangeColor];
     [self addSubview:priceLabel];

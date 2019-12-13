@@ -234,7 +234,7 @@
         
         //添加每个月多少钱
         UILabel *monthMoney = [[UILabel  alloc] initWithFrame:CGRectMake(10 * WideEachUnit, 60 * WideEachUnit, viewW - 20 * WideEachUnit, 20 * WideEachUnit)];
-        NSString *money = [NSString stringWithFormat:@"%@育币／月",[[_VipListArray objectAtIndex:i] stringValueForKey:@"vip_month"]];
+        NSString *money = [NSString stringWithFormat:@"%@马币／月",[[_VipListArray objectAtIndex:i] stringValueForKey:@"vip_month"]];
         [monthMoney setTextColor:[UIColor colorWithHexString:@"#656565"]];
         monthMoney.font = [UIFont systemFontOfSize:10 * WideEachUnit];
         monthMoney.textAlignment = NSTextAlignmentCenter;
@@ -245,7 +245,7 @@
         
         //添加每年多少钱
         UILabel *yearMoney = [[UILabel  alloc] initWithFrame:CGRectMake(10 * WideEachUnit, 80 * WideEachUnit, viewW - 20 * WideEachUnit, 20 * WideEachUnit)];
-        NSString *yearMoneyString = [NSString stringWithFormat:@"%@育币／年",[[_VipListArray objectAtIndex:i] stringValueForKey:@"vip_year"]];
+        NSString *yearMoneyString = [NSString stringWithFormat:@"%@马币／年",[[_VipListArray objectAtIndex:i] stringValueForKey:@"vip_year"]];
         [yearMoney setTextColor:[UIColor colorWithHexString:@"#656565"]];
         yearMoney.font = [UIFont systemFontOfSize:10 * WideEachUnit];
         yearMoney.textAlignment = NSTextAlignmentCenter;
@@ -430,7 +430,7 @@
                 cellPrice.text = @"免费";
                 cellPrice.textColor = [UIColor colorWithHexString:@"#47b37d"];
             } else {
-                cellPrice.text = [NSString stringWithFormat:@"育币%@",[[_currentVipCourseArray objectAtIndex:i] stringValueForKey:@"price"]];
+                cellPrice.text = [NSString stringWithFormat:@"马币%@",[[_currentVipCourseArray objectAtIndex:i] stringValueForKey:@"price"]];
                 [cellPrice setTextColor:[UIColor redColor]];
             }
 

@@ -258,20 +258,20 @@
     UILabel *price = [[UILabel alloc] initWithFrame:CGRectMake(130 * WideEachUnit, 86 * WideEachUnit,MainScreenWidth - 140 * WideEachUnit, 20 * WideEachUnit)];
     price.font = Font(14 * WideEachUnit);
     price.textColor = [UIColor colorWithHexString:@"#fc0203"];
-    price.text = [NSString stringWithFormat:@"育币%@",[_dict stringValueForKey:@"price"]];
+    price.text = [NSString stringWithFormat:@"马币%@",[_dict stringValueForKey:@"price"]];
     if (SWNOTEmptyDictionary(_activityInfo)) {
         NSString *eventType = [NSString stringWithFormat:@"%@",[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"]];
         if ([eventType integerValue] == 6 && [[_activityInfo objectForKey:@"is_start"] integerValue] == 1 && _isBuyAlone) {
-            price.text = [NSString stringWithFormat:@"育币 %@",[[_dict objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
+            price.text = [NSString stringWithFormat:@"马币 %@",[[_dict objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
             if (_isJoinGroup) {
-                price.text = [NSString stringWithFormat:@"育币 %@",[_activityInfo objectForKey:@"event_price_other"]];
+                price.text = [NSString stringWithFormat:@"马币 %@",[_activityInfo objectForKey:@"event_price_other"]];
             } else {
-                price.text = [NSString stringWithFormat:@"育币 %@",[_activityInfo objectForKey:@"event_price"]];
+                price.text = [NSString stringWithFormat:@"马币 %@",[_activityInfo objectForKey:@"event_price"]];
             }
         }
     }
     if (_cellDict != nil) {//单课时解锁
-        price.text = [NSString stringWithFormat:@"育币%@",[_cellDict stringValueForKey:@"course_hour_price"]];
+        price.text = [NSString stringWithFormat:@"马币%@",[_cellDict stringValueForKey:@"course_hour_price"]];
     }
     [_classInformationView addSubview:price];
     
@@ -490,7 +490,7 @@
         [_balanceView addSubview:alipayIcon];
         
         UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(alipayIcon.right + 5, 0,60 * WideEachUnit, 50 * WideEachUnit)];
-        title.text = @"育币支付";
+        title.text = @"马币支付";
         title.font = Font(16 * WideEachUnit);
         title.textColor = [UIColor colorWithHexString:@"#333"];
         CGFloat titleWidth = [title.text sizeWithFont:title.font].width + 4;
@@ -504,7 +504,7 @@
         residue.textColor = [UIColor colorWithHexString:@"#888"];
         [_balanceView addSubview:residue];
         _residue = residue;
-        _residue.text = [NSString stringWithFormat:@"(当前育币%@)",[_userBalanceDict stringValueForKey:@"learn" defaultValue:@"0"]];
+        _residue.text = [NSString stringWithFormat:@"(当前马币%@)",[_userBalanceDict stringValueForKey:@"learn" defaultValue:@"0"]];
         if (isHaveBanlance) {//说明是余额
             residue.text = [NSString stringWithFormat:@"(%@)",[_testDict stringValueForKey:@"pay_type_note"]];
         }
@@ -640,24 +640,24 @@
         
         UILabel *moneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(labelW, labelH * i, labelW - 10 * WideEachUnit, labelH)];
         if (i == 0) {//原价
-            moneyLabel.text = [NSString stringWithFormat:@"育币%@",[_dict stringValueForKey:@"price"]];
+            moneyLabel.text = [NSString stringWithFormat:@"马币%@",[_dict stringValueForKey:@"price"]];
             if (SWNOTEmptyDictionary(_activityInfo)) {
                 NSString *eventType = [NSString stringWithFormat:@"%@",[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"]];
                 if ([eventType integerValue] == 6 && [[_activityInfo objectForKey:@"is_start"] integerValue] == 1 && _isBuyAlone) {
-                    moneyLabel.text = [NSString stringWithFormat:@"育币 %@",[[_dict objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
+                    moneyLabel.text = [NSString stringWithFormat:@"马币 %@",[[_dict objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
                     if (_isJoinGroup) {
-                        moneyLabel.text = [NSString stringWithFormat:@"育币 %@",[_activityInfo objectForKey:@"event_price_other"]];
+                        moneyLabel.text = [NSString stringWithFormat:@"马币 %@",[_activityInfo objectForKey:@"event_price_other"]];
                     } else {
-                        moneyLabel.text = [NSString stringWithFormat:@"育币 %@",[_activityInfo objectForKey:@"event_price"]];
+                        moneyLabel.text = [NSString stringWithFormat:@"马币 %@",[_activityInfo objectForKey:@"event_price"]];
                     }
                 }
             }
             if (_cellDict != nil) {
-                 moneyLabel.text = [NSString stringWithFormat:@"育币%@",[_cellDict stringValueForKey:@"course_hour_price"]];
+                 moneyLabel.text = [NSString stringWithFormat:@"马币%@",[_cellDict stringValueForKey:@"course_hour_price"]];
             }
         } else {//优惠
             _discountMoneyLabel = moneyLabel;
-            _discountMoneyLabel.text = @"-育币0.0";
+            _discountMoneyLabel.text = @"-马币0.0";
         }
         moneyLabel.textColor = [UIColor colorWithHexString:@"#fc0203"];
         moneyLabel.font = Font(14 * WideEachUnit);
@@ -721,20 +721,20 @@
     
     //实际钱
     UILabel *realMoney = [[UILabel alloc] initWithFrame:CGRectMake(115 * WideEachUnit, 0, 90 * WideEachUnit, 49 * WideEachUnit)];
-    realMoney.text = [NSString stringWithFormat:@"育币%@",[_dict stringValueForKey:@"price"]];
+    realMoney.text = [NSString stringWithFormat:@"马币%@",[_dict stringValueForKey:@"price"]];
     if (SWNOTEmptyDictionary(_activityInfo)) {
         NSString *eventType = [NSString stringWithFormat:@"%@",[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"]];
         if ([eventType integerValue] == 6 && [[_activityInfo objectForKey:@"is_start"] integerValue] == 1 && _isBuyAlone) {
-            realMoney.text = [NSString stringWithFormat:@"育币 %@",[[_dict objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
+            realMoney.text = [NSString stringWithFormat:@"马币 %@",[[_dict objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
             if (_isJoinGroup) {
-                realMoney.text = [NSString stringWithFormat:@"育币 %@",[_activityInfo objectForKey:@"event_price_other"]];
+                realMoney.text = [NSString stringWithFormat:@"马币 %@",[_activityInfo objectForKey:@"event_price_other"]];
             } else {
-                realMoney.text = [NSString stringWithFormat:@"育币 %@",[_activityInfo objectForKey:@"event_price"]];
+                realMoney.text = [NSString stringWithFormat:@"马币 %@",[_activityInfo objectForKey:@"event_price"]];
             }
         }
     }
     if (_cellDict != nil) {
-        realMoney.text = [NSString stringWithFormat:@"育币%@",[_cellDict stringValueForKey:@"course_hour_price"]];
+        realMoney.text = [NSString stringWithFormat:@"马币%@",[_cellDict stringValueForKey:@"course_hour_price"]];
     }
     realMoney.font = Font(16 * WideEachUnit);
     realMoney.textColor = [UIColor colorWithHexString:@"#fc0203"];
@@ -875,7 +875,7 @@
     NSDictionary *dict = (NSDictionary *)not.object;
     if ([[dict stringValueForKey:@"type"] integerValue] == 1) {//优惠券
         _reminderDiscount.text = [NSString stringWithFormat:@"优惠券 %@",[dict stringValueForKey:@"price"]];
-        _discountMoneyLabel.text = [NSString stringWithFormat:@"-育币%@",[dict stringValueForKey:@"price"]];
+        _discountMoneyLabel.text = [NSString stringWithFormat:@"-马币%@",[dict stringValueForKey:@"price"]];
         CGFloat money1 = [[_dict stringValueForKey:@"price"] floatValue];
         if (SWNOTEmptyDictionary(_activityInfo)) {
             NSString *eventType = [NSString stringWithFormat:@"%@",[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"]];
@@ -884,8 +884,8 @@
             }
         }
         CGFloat discount1 = [[dict stringValueForKey:@"price"] floatValue];
-        _realMoney.text = [NSString stringWithFormat:@"育币%1f",money1 - discount1];
-        NSString *money2 = [NSString stringWithFormat:@"育币%.2f",money1 - discount1];
+        _realMoney.text = [NSString stringWithFormat:@"马币%1f",money1 - discount1];
+        NSString *money2 = [NSString stringWithFormat:@"马币%.2f",money1 - discount1];
         _realMoney.text = money2;
     } else if ([[dict stringValueForKey:@"type"] integerValue] == 2) {//大折卡
         _reminderDiscount.text = [NSString stringWithFormat:@"打折卡 %@折",[dict stringValueForKey:@"discount"]];
@@ -898,14 +898,14 @@
             }
         }
         CGFloat discount1 = [[dict stringValueForKey:@"discount"] integerValue];
-        _realMoney.text = [NSString stringWithFormat:@"育币%1f",money1 * discount1 / 10];
-        NSString *money2 = [NSString stringWithFormat:@"育币%.2f",money1 * discount1 / 10];
+        _realMoney.text = [NSString stringWithFormat:@"马币%1f",money1 * discount1 / 10];
+        NSString *money2 = [NSString stringWithFormat:@"马币%.2f",money1 * discount1 / 10];
         _realMoney.text = money2;
-        _discountMoneyLabel.text = [NSString stringWithFormat:@"-育币%.2f",[[_dict stringValueForKey:@"price"] floatValue] - money1 * discount1 / 10];
+        _discountMoneyLabel.text = [NSString stringWithFormat:@"-马币%.2f",[[_dict stringValueForKey:@"price"] floatValue] - money1 * discount1 / 10];
         if (SWNOTEmptyDictionary(_activityInfo)) {
             NSString *eventType = [NSString stringWithFormat:@"%@",[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"]];
             if ([eventType integerValue] == 6 && [[_activityInfo objectForKey:@"is_start"] integerValue] == 1 && _isBuyAlone) {
-                _discountMoneyLabel.text = [NSString stringWithFormat:@"-育币%.2f",[[NSString stringWithFormat:@"%@",[[_dict objectForKey:@"mz_price"] objectForKey:@"selPrice"]] floatValue] - money1 * discount1 / 10];
+                _discountMoneyLabel.text = [NSString stringWithFormat:@"-马币%.2f",[[NSString stringWithFormat:@"%@",[[_dict objectForKey:@"mz_price"] objectForKey:@"selPrice"]] floatValue] - money1 * discount1 / 10];
             }
         }
     } else if ([[dict stringValueForKey:@"type"] integerValue] == 3) {
@@ -914,12 +914,12 @@
         _reminderDiscount.text = [NSString stringWithFormat:@"充值卡 %@",[dict stringValueForKey:@"price"]];
     } else if ([[dict stringValueForKey:@"type"] integerValue] == 5) {
         _reminderDiscount.text = @"课程卡";
-        _realMoney.text = @"0育币";
-        _discountMoneyLabel.text = [NSString stringWithFormat:@"-育币%@",[_dict stringValueForKey:@"price"]];
+        _realMoney.text = @"0马币";
+        _discountMoneyLabel.text = [NSString stringWithFormat:@"-马币%@",[_dict stringValueForKey:@"price"]];
         if (SWNOTEmptyDictionary(_activityInfo)) {
             NSString *eventType = [NSString stringWithFormat:@"%@",[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"]];
             if ([eventType integerValue] == 6 && [[_activityInfo objectForKey:@"is_start"] integerValue] == 1 && _isBuyAlone) {
-                _discountMoneyLabel.text = [NSString stringWithFormat:@"-育币%@",[[_dict objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
+                _discountMoneyLabel.text = [NSString stringWithFormat:@"-马币%@",[[_dict objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
             }
         }
     }
@@ -933,12 +933,12 @@
     if (_entityReturnDict == nil) {
         _reminderDiscount.text = @"使用优惠券";
          _entityDiscount.text = @"";
-        _discountMoneyLabel.text = [NSString stringWithFormat:@"-育币0.0"];
-        _realMoney.text = [NSString stringWithFormat:@"育币%@",[_dict stringValueForKey:@"price"]];
+        _discountMoneyLabel.text = [NSString stringWithFormat:@"-马币0.0"];
+        _realMoney.text = [NSString stringWithFormat:@"马币%@",[_dict stringValueForKey:@"price"]];
         if (SWNOTEmptyDictionary(_activityInfo)) {
             NSString *eventType = [NSString stringWithFormat:@"%@",[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"]];
             if ([eventType integerValue] == 6 && [[_activityInfo objectForKey:@"is_start"] integerValue] == 1 && _isBuyAlone) {
-                _realMoney.text = [NSString stringWithFormat:@"育币%@",[[_dict objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
+                _realMoney.text = [NSString stringWithFormat:@"马币%@",[[_dict objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
             }
         }
         return;
@@ -950,7 +950,7 @@
     
     if ([[_entityReturnDict stringValueForKey:@"type"] integerValue] == 1) {//优惠券
         _entityDiscount.text = [NSString stringWithFormat:@"优惠券 %@",[_entityReturnDict stringValueForKey:@"price"]];
-        _discountMoneyLabel.text = [NSString stringWithFormat:@"-育币%@",[_entityReturnDict stringValueForKey:@"price"]];
+        _discountMoneyLabel.text = [NSString stringWithFormat:@"-马币%@",[_entityReturnDict stringValueForKey:@"price"]];
         CGFloat money1 = [[_dict stringValueForKey:@"price"] floatValue];
         if (SWNOTEmptyDictionary(_activityInfo)) {
             NSString *eventType = [NSString stringWithFormat:@"%@",[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"]];
@@ -959,8 +959,8 @@
             }
         }
         CGFloat discount1 = [[_entityReturnDict stringValueForKey:@"price"] floatValue];
-        _realMoney.text = [NSString stringWithFormat:@"育币%2f",money1 - discount1];
-        NSString *money2 = [NSString stringWithFormat:@"育币%.2f",money1 - discount1];
+        _realMoney.text = [NSString stringWithFormat:@"马币%2f",money1 - discount1];
+        NSString *money2 = [NSString stringWithFormat:@"马币%.2f",money1 - discount1];
         _realMoney.text = money2;
     } else if ([[_entityReturnDict stringValueForKey:@"type"] integerValue] == 2) {//打折卡
         _entityDiscount.text = [NSString stringWithFormat:@"打折卡 %@折",[_entityReturnDict stringValueForKey:@"discount"]];
@@ -973,21 +973,21 @@
             }
         }
         CGFloat discount1 = [[_entityReturnDict stringValueForKey:@"discount"] integerValue];
-        _realMoney.text = [NSString stringWithFormat:@"育币%1f",money1 * discount1 / 10];
-        NSString *money2 = [NSString stringWithFormat:@"育币%.2f",money1 * discount1 / 10];
+        _realMoney.text = [NSString stringWithFormat:@"马币%1f",money1 * discount1 / 10];
+        NSString *money2 = [NSString stringWithFormat:@"马币%.2f",money1 * discount1 / 10];
         _realMoney.text = money2;
     } else if ([[_entityReturnDict stringValueForKey:@"type"] integerValue] == 3) {//会员卡
         
     } else if ([[_entityReturnDict stringValueForKey:@"type"] integerValue] == 4) {//充值卡
         
     } else if ([[_entityReturnDict stringValueForKey:@"type"] integerValue] == 5) {//课程卡
-        _realMoney.text = @"0育币";
-        _discountMoneyLabel.text = [NSString stringWithFormat:@"-育币%@",[_dict stringValueForKey:@"price"]];
+        _realMoney.text = @"0马币";
+        _discountMoneyLabel.text = [NSString stringWithFormat:@"-马币%@",[_dict stringValueForKey:@"price"]];
         _counpID = [_entityReturnDict stringValueForKey:@"coupon_id"];
         if (SWNOTEmptyDictionary(_activityInfo)) {
             NSString *eventType = [NSString stringWithFormat:@"%@",[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"]];
             if ([eventType integerValue] == 6 && [[_activityInfo objectForKey:@"is_start"] integerValue] == 1 && _isBuyAlone) {
-                _discountMoneyLabel.text = [NSString stringWithFormat:@"-育币%@",[[_dict objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
+                _discountMoneyLabel.text = [NSString stringWithFormat:@"-马币%@",[[_dict objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
             }
         }
     }
@@ -1089,7 +1089,7 @@
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         _userBalanceDict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
-        _residue.text = [NSString stringWithFormat:@"(当前育币%@)",[_userBalanceDict stringValueForKey:@"learn" defaultValue:@"0"]];
+        _residue.text = [NSString stringWithFormat:@"(当前马币%@)",[_userBalanceDict stringValueForKey:@"learn" defaultValue:@"0"]];
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];

@@ -111,7 +111,7 @@
 //        _tableView.estimatedSectionFooterHeight = 0;
 //    }
     
-    textArr = [[NSArray alloc]initWithObjects:@"我的育币",@"我的银行卡" ,nil];
+    textArr = [[NSArray alloc]initWithObjects:@"我的马币",@"我的银行卡" ,nil];
     imageArr = [NSArray arrayWithObjects:@"Shape 189.png",@"card.png", nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userFace:) name:@"userFace" object:nil];
 //    [self information];
@@ -275,7 +275,7 @@
                 
                 UILabel *numberLbl = [[UILabel alloc]initWithFrame:CGRectMake(MainScreenWidth - MainScreenWidth / 2, 14, MainScreenWidth / 2 - 10, 21)];
                 if (indexPath.row == 1) {
-                    NSString *learnMoney = [NSString stringWithFormat:@"%d 育币",99999];
+                    NSString *learnMoney = [NSString stringWithFormat:@"%d 马币",99999];
                     numberLbl.text = learnMoney;
                 }
                 numberLbl.text = [NSString stringWithFormat:@"%@积分",_score];
