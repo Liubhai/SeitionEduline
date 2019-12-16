@@ -15,7 +15,6 @@
 #import "Good_BoundCardViewController.h"
 #import "Good_IntegralParticularsViewController.h"
 #import "Good_AddBankViewController.h"
-#import "Good_AliBoundViewController.h"
 #import "BuyAgreementViewController.h"
 #import "UMSocial.h"
 
@@ -29,8 +28,6 @@
 @property (strong ,nonatomic)UIView   *payTypeView;
 @property (strong ,nonatomic)UIView   *payView;
 @property (strong ,nonatomic)UIView   *banlancepayView;
-@property (strong ,nonatomic)UIView   *alipayView;
-@property (strong ,nonatomic)UIView    *wxpayView;
 @property (strong ,nonatomic)UIView   *bankpayView;
 
 @property (strong ,nonatomic)UIView   *agreeView;
@@ -40,8 +37,6 @@
 @property (strong ,nonatomic)UITextField *textField;
 @property (strong ,nonatomic)UIButton  *balanceSeleButton;
 @property (strong ,nonatomic)UIButton  *bankSeleButton;
-@property (strong ,nonatomic)UIButton  *ailpaySeleButton;
-@property (strong ,nonatomic)UIButton  *wxSeleButton;
 @property (strong ,nonatomic)UIButton  *submitButton;
 @property (strong ,nonatomic)UIButton  *agreeButton;
 @property (strong ,nonatomic)UIButton  *myBankSeleButton;
@@ -104,14 +99,7 @@
     [self addScrollView];
     
     [self addMoneyView];
-//    [self addRechargeView];
-//    [self addPayTypeView];
-//    [self addPayView];
-//    [self addAgreeView];
-//    [self addDownView];
-//    [self NetWorkAccountInfo];
     [self netWorkUserSpiltConfig];
-//    [self NetWorkConfigPaySwitch];
 }
 
 - (void)interFace {
@@ -275,9 +263,7 @@
     if (SWNOTEmptyDictionary(_commissionDict)) {
         _remainLabel.text = [NSString stringWithFormat:@"%@",[_commissionDict stringValueForKey:@"pay_note"]];
     }
-    if ([_payTypeArray containsObject:@"alipay"]) {
-        _remainLabel.hidden = NO;
-    }
+    _remainLabel.hidden = NO;
     [_rechargeView addSubview:_remainLabel];
 }
 
@@ -323,17 +309,16 @@
         view.layer.borderWidth = 0.5 * WideEachUnit;
         view.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
         [_payView addSubview:view];
-        UIImageView *alipayIcon = [[UIImageView alloc] initWithFrame:CGRectMake(15 * WideEachUnit, 0, 24 * WideEachUnit, 24 *HigtEachUnit)];
-        alipayIcon.image = Image(iconArray[i]);
-        alipayIcon.centerY = 50 * HigtEachUnit / 2.0;
-        [view addSubview:alipayIcon];
+        UIImageView *payIcon = [[UIImageView alloc] initWithFrame:CGRectMake(15 * WideEachUnit, 0, 24 * WideEachUnit, 24 *HigtEachUnit)];
+        payIcon.image = Image(iconArray[i]);
+        payIcon.centerY = 50 * HigtEachUnit / 2.0;
+        [view addSubview:payIcon];
         //类型
         UILabel *typeLabel = [[UILabel  alloc] initWithFrame:CGRectMake(15 * WideEachUnit, 0 ,40 * WideEachUnit, 50 * WideEachUnit)];
         if (i == 0) {
-            typeLabel.frame = CGRectMake(alipayIcon.right, 0, 40 * WideEachUnit, 50 * WideEachUnit);
+            typeLabel.frame = CGRectMake(payIcon.right, 0, 40 * WideEachUnit, 50 * WideEachUnit);
         } else if (i == 1) {
-//            NSString *str = informationArray[1];
-            typeLabel.frame = CGRectMake(alipayIcon.right, 0, (60) * WideEachUnit, 50 * WideEachUnit);
+            typeLabel.frame = CGRectMake(payIcon.right, 0, (60) * WideEachUnit, 50 * WideEachUnit);
         }
         typeLabel.text = titleArray[i];
         typeLabel.textColor = [UIColor blackColor];
@@ -358,7 +343,7 @@
         [seleButton setImage:Image(@"ic_choose@3x") forState:UIControlStateSelected];
         [seleButton addTarget:self action:@selector(seleButtonCilck:) forControlEvents:UIControlEventTouchUpInside];
         seleButton.tag = i;
-        if (i == 0) {//支付宝
+        if (i == 0) {
             _balanceSeleButton = seleButton;
             _balanceSeleButton.selected = YES;
         } else {//微信
@@ -376,144 +361,9 @@
     }
 }
 
-- (void)addAliPayView {
-    
-    _alipayView = [[UIView alloc] initWithFrame:CGRectMake(0 * WideEachUnit, CGRectGetMaxY(_rechargeView.frame) + 10 * WideEachUnit, MainScreenWidth - 0 * WideEachUnit, 50 * WideEachUnit)];
-    _alipayView.backgroundColor = [UIColor whiteColor];
-    [_scrollView addSubview:_alipayView];
-    
-    //判断是否应该有此支付方式
-    BOOL isAddAilpayView = NO;
-    for (NSString *payStr in _payTypeArray) {
-        if ([payStr isEqualToString:@"alipay"]) {
-            isAddAilpayView = YES;
-        }
-    }
-    
-    if (isAddAilpayView) {//有支付宝
-        CGFloat viewW = MainScreenWidth;
-        CGFloat viewH = 50 * WideEachUnit;
-        
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0 * WideEachUnit , viewW, viewH)];
-        view.backgroundColor = [UIColor whiteColor];
-        view.layer.borderWidth = 0.5 * WideEachUnit;
-        view.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
-        [_alipayView addSubview:view];
-        
-        UIImageView *alipayIcon = [[UIImageView alloc] initWithFrame:CGRectMake(10 * WideEachUnit, 0, 24 * WideEachUnit, 24 *HigtEachUnit)];
-        alipayIcon.image = Image(@"aliPay");
-        alipayIcon.centerY = 50 * HigtEachUnit / 2.0;
-        [view addSubview:alipayIcon];
-        
-        UILabel *aliPayTitle = [[UILabel alloc] initWithFrame:CGRectMake(alipayIcon.right + 5,0, 60 * WideEachUnit, 50 * WideEachUnit)];
-        aliPayTitle.text = @"支付宝";
-        aliPayTitle.textColor = [UIColor blackColor];
-        aliPayTitle.font = Font(16 * WideEachUnit);
-        CGFloat titleWidth = [aliPayTitle.text sizeWithFont:aliPayTitle.font].width + 4;
-        aliPayTitle.frame = CGRectMake(alipayIcon.right + 5,0, titleWidth, 50 * WideEachUnit);
-        [view addSubview:aliPayTitle];
-        
-        //添加备注
-        UILabel *remainTitle = [[UILabel alloc] initWithFrame:CGRectMake(aliPayTitle.right,0, MainScreenWidth - 40 * WideEachUnit - aliPayTitle.right, 50 * WideEachUnit)];
-        
-        if (_aliNumber == 100) {
-            
-        } else {
-            if ([[[[_commissionDict arrayValueForKey:@"pay_type"] objectAtIndex:_aliNumber] stringValueForKey:@"pay_type_note"] isEqualToString:@""]) {
-                remainTitle.text = @"(去绑定)";
-            } else {
-                remainTitle.text = [NSString stringWithFormat:@"(%@)",[[[_commissionDict arrayValueForKey:@"pay_type"] objectAtIndex:_aliNumber] stringValueForKey:@"pay_type_note" defaultValue:@"去绑定"]];
-            }
-        }
-        remainTitle.textColor = [UIColor colorWithHexString:@"#888"];
-        remainTitle.font = Font(16 * WideEachUnit);
-        [view addSubview:remainTitle];
-        
-        UIButton *seleButton = [[UIButton alloc] initWithFrame:CGRectMake(viewW - 30 * WideEachUnit,(50-20)/2.0, 20 * WideEachUnit, 20 * WideEachUnit)];
-        [seleButton setImage:Image(@"ic_unchoose@3x") forState:UIControlStateNormal];
-        [seleButton setImage:Image(@"ic_choose@3x") forState:UIControlStateSelected];
-        [seleButton addTarget:self action:@selector(seleButtonCilck:) forControlEvents:UIControlEventTouchUpInside];
-        seleButton.tag = 1;
-        _ailpaySeleButton = seleButton;
-        _ailpaySeleButton.selected = YES;
-        [self seleButtonCilck:_ailpaySeleButton];
-        [view addSubview:seleButton];
-        
-        UIButton *allClearButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, viewW, viewH)];
-        allClearButton.backgroundColor = [UIColor clearColor];
-        allClearButton.tag = 1;
-        [allClearButton addTarget:self action:@selector(seleButtonCilck:) forControlEvents:UIControlEventTouchUpInside];
-        [view addSubview:allClearButton];
-    } else {
-        _alipayView.frame = CGRectMake(0 * WideEachUnit, CGRectGetMaxY(_rechargeView.frame) + 10 * WideEachUnit, 0, 0 * WideEachUnit);
-    }
-}
-
-- (void)addWxPayView {
-    _wxpayView = [[UIView alloc] initWithFrame:CGRectMake(0 * WideEachUnit, CGRectGetMaxY(_alipayView.frame), MainScreenWidth - 0 * WideEachUnit, 50 * WideEachUnit)];
-    _wxpayView.backgroundColor = [UIColor whiteColor];
-    [_scrollView addSubview:_wxpayView];
-    
-    //判断是否应该有此支付方式
-    BOOL isAddWxpayView = NO;
-    //暂时体现没有微信
-    for (NSString *payStr in _payTypeArray) {
-        if ([payStr isEqualToString:@"wxpay"]) {
-            isAddWxpayView = YES;
-        }
-    }
-    
-    if (isAddWxpayView) {//有微信
-        
-        CGFloat viewW = MainScreenWidth;
-        CGFloat viewH = 50 * WideEachUnit;
-        
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0 * WideEachUnit , viewW, viewH)];
-        view.backgroundColor = [UIColor whiteColor];
-        view.layer.borderWidth = 0.5 * WideEachUnit;
-        view.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
-        [_wxpayView addSubview:view];
-        
-        
-        UIImageView *alipayIcon = [[UIImageView alloc] initWithFrame:CGRectMake(10 * WideEachUnit, 0, 24 * WideEachUnit, 24 *HigtEachUnit)];
-        alipayIcon.image = Image(@"wxPay");
-        alipayIcon.centerY = 50 * HigtEachUnit / 2.0;
-        [view addSubview:alipayIcon];
-        
-        UILabel *aliPayTitle = [[UILabel alloc] initWithFrame:CGRectMake(alipayIcon.right + 5,0, 60 * WideEachUnit, 50 * WideEachUnit)];
-        aliPayTitle.text = @"微信";
-        aliPayTitle.textColor = [UIColor blackColor];
-        aliPayTitle.font = Font(16 * WideEachUnit);
-        CGFloat titleWidth = [aliPayTitle.text sizeWithFont:aliPayTitle.font].width + 4;
-        aliPayTitle.frame = CGRectMake(alipayIcon.right + 5,0, titleWidth, 50 * WideEachUnit);
-        [view addSubview:aliPayTitle];
-        
-        
-        UIButton *seleButton = [[UIButton alloc] initWithFrame:CGRectMake(viewW - 30 * WideEachUnit,(50-20)/2.0, 20 * WideEachUnit, 20 * WideEachUnit)];
-        [seleButton setImage:Image(@"ic_unchoose@3x") forState:UIControlStateNormal];
-        [seleButton setImage:Image(@"ic_choose@3x") forState:UIControlStateSelected];
-        [seleButton addTarget:self action:@selector(seleButtonCilck:) forControlEvents:UIControlEventTouchUpInside];
-        seleButton.tag = 3;
-        _wxSeleButton = seleButton;
-        _wxSeleButton.selected = NO;
-        if (_alipayView.frame.size.height == 0) {
-            [self seleButtonCilck:seleButton];
-        }
-        [view addSubview:seleButton];
-        
-        UIButton *allClearButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, viewW, viewH)];
-        allClearButton.backgroundColor = [UIColor clearColor];
-        allClearButton.tag = 3;
-        [allClearButton addTarget:self action:@selector(seleButtonCilck:) forControlEvents:UIControlEventTouchUpInside];
-        [view addSubview:allClearButton];
-    } else {
-        _wxpayView.frame = CGRectMake(0 * WideEachUnit, CGRectGetMaxY(_alipayView.frame), 0, 0 * WideEachUnit);
-    }
-}
-
 - (void)addBalancePayView {
     
-    _banlancepayView = [[UIView alloc] initWithFrame:CGRectMake(0 * WideEachUnit, CGRectGetMaxY(_wxpayView.frame), MainScreenWidth - 0 * WideEachUnit, 50 * WideEachUnit)];
+    _banlancepayView = [[UIView alloc] initWithFrame:CGRectMake(0 * WideEachUnit, CGRectGetMaxY(_payView.frame), MainScreenWidth - 0 * WideEachUnit, 50 * WideEachUnit)];
     _banlancepayView.backgroundColor = [UIColor whiteColor];
     [_scrollView addSubview:_banlancepayView];
     
@@ -535,12 +385,12 @@
         view.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
         [_banlancepayView addSubview:view];
         
-        UIImageView *alipayIcon = [[UIImageView alloc] initWithFrame:CGRectMake(10 * WideEachUnit, 0, 24 * WideEachUnit, 24 *HigtEachUnit)];
-        alipayIcon.image = Image(@"money");
-        alipayIcon.centerY = 50 * HigtEachUnit / 2.0;
-        [view addSubview:alipayIcon];
+        UIImageView *payIcon = [[UIImageView alloc] initWithFrame:CGRectMake(10 * WideEachUnit, 0, 24 * WideEachUnit, 24 *HigtEachUnit)];
+        payIcon.image = Image(@"money");
+        payIcon.centerY = 50 * HigtEachUnit / 2.0;
+        [view addSubview:payIcon];
         
-        UILabel *payTypeLabel = [[UILabel alloc] initWithFrame:CGRectMake(alipayIcon.right + 5,0, 40 * WideEachUnit, 50 * WideEachUnit)];
+        UILabel *payTypeLabel = [[UILabel alloc] initWithFrame:CGRectMake(payIcon.right + 5,0, 40 * WideEachUnit, 50 * WideEachUnit)];
         payTypeLabel.text = @"余额";
         payTypeLabel.textColor = [UIColor blackColor];
         payTypeLabel.font = Font(16 * WideEachUnit);
@@ -566,9 +416,7 @@
         [seleButton addTarget:self action:@selector(seleButtonCilck:) forControlEvents:UIControlEventTouchUpInside];
         seleButton.tag = 0;
         _balanceSeleButton = seleButton;
-        if (_wxpayView.frame.size.height == 0 && _alipayView.frame.size.height == 0) {
-            [self seleButtonCilck:_balanceSeleButton];
-        }
+        [self seleButtonCilck:_balanceSeleButton];
         [view addSubview:seleButton];
         
         UIButton *allClearButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, viewW, viewH)];
@@ -577,7 +425,7 @@
         [allClearButton addTarget:self action:@selector(seleButtonCilck:) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:allClearButton];
     } else {
-        _banlancepayView.frame = CGRectMake(0 * WideEachUnit, CGRectGetMaxY(_wxpayView.frame) + 10 * WideEachUnit, 0, 0 * WideEachUnit);
+        _banlancepayView.frame = CGRectMake(0 * WideEachUnit, CGRectGetMaxY(_payView.frame) + 10 * WideEachUnit, 0, 0 * WideEachUnit);
     }
 }
 
@@ -604,17 +452,17 @@
         view.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
         [_bankpayView addSubview:view];
         
-        UIImageView *alipayIcon = [[UIImageView alloc] initWithFrame:CGRectMake(10 * WideEachUnit, 0, 24 * WideEachUnit, 24 *HigtEachUnit)];
-        alipayIcon.image = Image(@"card");
-        alipayIcon.centerY = 50 * HigtEachUnit / 2.0;
-        [view addSubview:alipayIcon];
+        UIImageView *payIcon = [[UIImageView alloc] initWithFrame:CGRectMake(10 * WideEachUnit, 0, 24 * WideEachUnit, 24 *HigtEachUnit)];
+        payIcon.image = Image(@"card");
+        payIcon.centerY = 50 * HigtEachUnit / 2.0;
+        [view addSubview:payIcon];
         
-        UILabel *payTypeLabel = [[UILabel alloc] initWithFrame:CGRectMake(alipayIcon.right + 5,0, 50 * WideEachUnit, 50 * WideEachUnit)];
+        UILabel *payTypeLabel = [[UILabel alloc] initWithFrame:CGRectMake(payIcon.right + 5,0, 50 * WideEachUnit, 50 * WideEachUnit)];
         payTypeLabel.text = @"银行卡";
         payTypeLabel.textColor = [UIColor blackColor];
         payTypeLabel.font = Font(16 * WideEachUnit);
         CGFloat titleWidth = [payTypeLabel.text sizeWithFont:payTypeLabel.font].width + 4;
-        payTypeLabel.frame = CGRectMake(alipayIcon.right + 5,0, titleWidth, 50 * WideEachUnit);
+        payTypeLabel.frame = CGRectMake(payIcon.right + 5,0, titleWidth, 50 * WideEachUnit);
         [view addSubview:payTypeLabel];
         
         //添加备注
@@ -770,9 +618,6 @@
 #pragma mark --- UITextFieldDelegate
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-//    _textField.inputView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 10, 10)];
-//    [_textField resignFirstResponder];
-//    [_textField becomeFirstResponder];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
@@ -846,8 +691,6 @@
     if (button.tag == 0) {//余额
         _balanceSeleButton.selected = YES;
         _bankSeleButton.selected = NO;
-        _ailpaySeleButton.selected = NO;
-        _wxSeleButton.selected = NO;
         _payTypeStr = @"0";
         
         if (_balanNumber != 100) {//说明有余额这个支付方式
@@ -858,8 +701,6 @@
     } else if (button.tag == 1) {//支付宝
         _balanceSeleButton.selected = NO;
         _bankSeleButton.selected = NO;
-        _ailpaySeleButton.selected = YES;
-        _wxSeleButton.selected = NO;
         _payTypeStr = @"1";
     } else if (button.tag == 2) {//银行卡
         if ([_bankInformationLabel.text isEqualToString:@"(未绑定)"]) {
@@ -870,17 +711,13 @@
             return;
         } else {
             _balanceSeleButton.selected = NO;
-            _ailpaySeleButton.selected = NO;
             _bankSeleButton.selected = YES;
-            _wxSeleButton.selected = NO;
             _payTypeStr = @"2";
         }
     } else if (button.tag == 3) {
         /// 微信提现
         _balanceSeleButton.selected = NO;
-        _ailpaySeleButton.selected = NO;
         _bankSeleButton.selected = NO;
-        _wxSeleButton.selected = YES;
         _payTypeStr = @"3";
     }
 }
@@ -921,9 +758,7 @@
     
     //让银行卡选中
     _balanceSeleButton.selected = NO;
-    _ailpaySeleButton.selected = NO;
     _bankSeleButton.selected = YES;
-    _wxSeleButton.selected = NO;
     _payTypeStr = @"2";
     
     [self miss];
@@ -1072,62 +907,16 @@
 }
 
 - (void)SYGButton:(UIButton *)button {
-    
     _balanceSeleButton.selected = NO;
-    _ailpaySeleButton.selected = NO;
     _bankSeleButton.selected = YES;
     _payTypeStr = @"2";
-    
-    
-    
 }
 
 
 
 //是否 真要支付
 - (void)isSurePay {
-    
-    NSString *messageStr = [NSString stringWithFormat:@"确定要兑换%@育币到余额？",_textField.text];
-    if ([_payTypeStr integerValue] == 1) {//余额
-        if ([[[[_commissionDict arrayValueForKey:@"pay_type"] objectAtIndex:_aliNumber] stringValueForKey:@"pay_type_note"] isEqualToString:@""]) {
-            Good_AliBoundViewController *vc = [[Good_AliBoundViewController alloc] init];
-            vc.formCommission = @"commisson";
-            [self.navigationController pushViewController:vc animated:YES];
-            return;
-        }
-        messageStr = [NSString stringWithFormat:@"确定要兑换%@元到支付宝？",_textField.text];
-    } else if ([_payTypeStr integerValue] == 2) {
-        if (_cardListArray.count == 0) {//说明没有绑定银行卡
-            Good_AddBankViewController *vc = [[Good_AddBankViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-            return;
-        }
-        messageStr = [NSString stringWithFormat:@"确定要兑换%@元到银行卡？",_textField.text];
-    } else if ([_payTypeStr integerValue] == 0) {
-        messageStr = [NSString stringWithFormat:@"确定要兑换%@育币到余额？",_textField.text];
-    } else if ([_payTypeStr integerValue] == 3) {
-        messageStr = [NSString stringWithFormat:@"确定要兑换%@元到微信？",_textField.text];
-    }
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:messageStr preferredStyle:UIAlertControllerStyleAlert];
-    
-    NSMutableAttributedString *hogan = [[NSMutableAttributedString alloc] initWithString:messageStr];
-    [hogan addAttribute:NSFontAttributeName
-                  value:[UIFont systemFontOfSize:16 * WideEachUnit]
-                  range:NSMakeRange(0, messageStr.length)];
-    [alertController setValue:hogan forKey:@"attributedMessage"];
-    
-    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-        if ([_payTypeStr isEqualToString:@"3"]) {
-            [self WeChat];
-        } else {
-            [self NetWorkUserApplyWithdraw:nil weixinOpenId:nil];
-        }
-    }];
-    [alertController addAction:sureAction];
-    
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil];
-    [alertController addAction:cancelAction];
-    [self presentViewController:alertController animated:YES completion:nil];
+    return;
 }
 
 
@@ -1178,168 +967,9 @@
         [noteStr1 addAttribute:NSForegroundColorAttributeName value:BasidColor range:NSMakeRange(noteStr1.length - 4, 4)];
         [_allCommissionLabel setAttributedText:noteStr1];
         
-        //添加支付类型
-        
-        NSArray *payArray = [_commissionDict arrayValueForKey:@"pay_type"];
-        NSLog(@"%@",_payTypeArray);
-        for (int i = 0; i < payArray.count ; i ++) {
-            NSString *pay_num = [[payArray objectAtIndex:i] stringValueForKey:@"pay_num"];
-            [_payTypeArray addObject:pay_num];
-            
-            if ([pay_num isEqualToString:@"unionpay"]) {//银行卡
-                _cardListArray = [[payArray objectAtIndex:i] arrayValueForKey:@"card_list"];
-                _bankNumber = i;
-            } else if ([pay_num isEqualToString:@"alipay"]) {
-                _aliNumber =  i;
-            } else if ([pay_num isEqualToString:@"lcnpay"]) {
-                _balanNumber = i;
-            }
-        }
-        /// 这里优化处理  由于后台强制会有银行卡 这里根据是不是只有余额方式来显示
-        if (![_payTypeArray containsObject:@"alipay"] && [_payTypeArray containsObject:@"unionpay"]) {
-            [_payTypeArray removeObject:@"unionpay"];
-        }
-        if ([_payTypeArray containsObject:@"alipay"]) {
-            [self addRechargeView];
-            [self addAliPayView];
-            [self addWxPayView];
-            [self addBalancePayView];
-            [self addBankPayView];
-            [self addAgreeView];
-            [self addDownView];
-        }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];
     [op start];
 }
-
-//体现
-- (void)NetWorkUserApplyWithdraw:(NSString *)weixinName weixinOpenId:(NSString *)open_id {
-    
-    NSString *endUrlStr = YunKeTang_User_user_applyWithdraw;
-    NSString *allUrlStr = [YunKeTang_Api_Tool YunKeTang_GetFullUrl:endUrlStr];
-    
-    NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
-    if ([_payTypeStr integerValue] == 1) {//余额兑换积分
-        [mutabDict setObject:@"2" forKey:@"type"];
-    } else if ([_payTypeStr integerValue] == 2) {//收入兑换成积分
-    }
-    if (_textField.text.length == 0) {
-        [TKProgressHUD showError:@"请输入要提现的育币数量" toView:self.view];
-        return;
-    } else {
-        [mutabDict setObject:_textField.text forKey:@"exchange_balance"];
-    }
-    
-    if ([_payTypeStr integerValue] == 0) {//余额
-        [mutabDict setObject:@"lcnpay" forKey:@"type"];
-    } else if ([_payTypeStr integerValue] == 1) {//支付宝
-        [mutabDict setObject:@"alipay" forKey:@"type"];
-    } else if ([_payTypeStr integerValue] == 2) {//银行卡
-        [mutabDict setObject:@"unionpay" forKey:@"type"];
-        [mutabDict setObject:[_seleBankDict stringValueForKey:@"id"] forKey:@"card_id"];
-    } else if ([_payTypeStr integerValue] == 3) {//微信
-        [mutabDict setObject:@"wxpay" forKey:@"type"];
-        [mutabDict setObject:weixinName forKey:@"wx_nickname"];
-        [mutabDict setObject:open_id forKey:@"wx_openid"];
-    }
-
-    NSString *oath_token_Str = nil;
-    if (UserOathToken) {
-        oath_token_Str = [NSString stringWithFormat:@"%@:%@",UserOathToken,UserOathTokenSecret];
-    }
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:allUrlStr]];
-    [request setHTTPMethod:NetWay];
-    NSString *encryptStr = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetEncryptStr:mutabDict];
-    [request setValue:encryptStr forHTTPHeaderField:HeaderKey];
-    [request setValue:oath_token_Str forHTTPHeaderField:OAUTH_TOKEN];
-    
-    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        NSLog(@"%@", responseObject);
-        NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
-        if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self backPressed];
-            });
-        } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
-        }
-        
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-    }];
-    [op start];
-}
-
-
-
-//获取支付开关
-- (void)NetWorkConfigPaySwitch {
-    
-    NSString *endUrlStr = YunKeTang_config_paySwitch;
-    NSString *allUrlStr = [YunKeTang_Api_Tool YunKeTang_GetFullUrl:endUrlStr];
-    
-    NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
-    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[[NSDate  date] timeIntervalSince1970]];
-    NSString *ggg = [Passport getHexByDecimal:[timeSp integerValue]];
-    
-    NSString *tokenStr =  [Passport md5:[NSString stringWithFormat:@"%@%@",timeSp,ggg]];
-    [mutabDict setObject:ggg forKey:@"hextime"];
-    [mutabDict setObject:tokenStr forKey:@"token"];
-    if (UserOathToken) {
-        NSString *oath_token_Str = [NSString stringWithFormat:@"%@:%@",UserOathToken,UserOathTokenSecret];
-        [mutabDict setObject:oath_token_Str forKey:OAUTH_TOKEN];
-    }
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:allUrlStr]];
-    [request setHTTPMethod:NetWay];
-    NSString *encryptStr = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetEncryptStr:mutabDict];
-    [request setValue:encryptStr forHTTPHeaderField:HeaderKey];
-    
-    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        NSLog(@"%@", responseObject);
-        NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
-        if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
-            [self addBalancePayView];
-            [self addAliPayView];
-            [self addBankPayView];
-        } else {
-            [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
-        }
-        
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-    }];
-    [op start];
-}
-
-// MARK: - 先授权微信获取信息再请求提现接口
-- (void)WeChat {
-    
-    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession];
-    
-    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
-        
-        //          获取微博用户名、uid、token等
-        
-        NSLog(@"----%@",response);
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            
-            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:snsPlatform.platformName];
-            
-            NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
-            
-            [self NetWorkUserApplyWithdraw:snsAccount.userName weixinOpenId:snsAccount.openId];
-        }});
-    
-    
-}
-
-
-
-
 
 @end

@@ -77,9 +77,6 @@
 @property (assign ,nonatomic)CGFloat      commentHight;
 @property (assign ,nonatomic)NSInteger    typeNum;
 
-@property (strong ,nonatomic)NSString     *alipayStr;
-@property (strong ,nonatomic)NSString     *wxpayStr;
-@property (strong ,nonatomic)UIWebView    *webView;
 @property (strong ,nonatomic)UIButton     *buyButton;
 @property (strong ,nonatomic)NSString     *schoolID;//分享链接的时候要用到
 @property (strong ,nonatomic)NSString     *line_switch;
@@ -773,7 +770,6 @@
 - (void)lineVideoShare {
     [UMSocialWechatHandler setWXAppId:WXAppId appSecret:WXAppSecret url:shareUrl];
     [UMSocialQQHandler setQQWithAppId:QQAppId appKey:QQAppSecret url:shareUrl];
-//    [UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:SinaAppId secret:SinaAppSecret RedirectURL:shareUrl];UMShareToSina
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:@"574e8829e0f55a12f8001790"
                                       shareText:[NSString stringWithFormat:@"%@",[_dict stringValueForKey:@"course_name"]]
@@ -845,11 +841,6 @@
             [self.navigationController presentViewController:Nav animated:YES completion:nil];
             return;
         }
-//        SYGDPViewController *SYGDPVC = [[SYGDPViewController alloc] init];
-//        UINavigationController *Nav = [[UINavigationController alloc] initWithRootViewController:SYGDPVC];
-//        SYGDPVC.ID = _ID;
-//        SYGDPVC.isTeacher = @"lineClass";
-//        [self.navigationController presentViewController:Nav animated:YES completion:nil];
         [self addAllWindow];
         
     } else {
@@ -915,9 +906,6 @@
         _detailAndCommentScrollView.frame = CGRectMake(0, 40 * WideEachUnit, MainScreenWidth, 100 * WideEachUnit + _commentArray.count * 85 * WideEachUnit + 100 * WideEachUnit);
         _twoView.frame = CGRectMake(0, CGRectGetMaxY(_oneView.frame) + 10 * WideEachUnit, MainScreenWidth, 190 * WideEachUnit + _commentArray.count * 85 * WideEachUnit);
         _allScrollView.contentSize = CGSizeMake(MainScreenWidth, _commentHight + 50 * WideEachUnit + 160 * WideEachUnit + 10 * WideEachUnit + 100 * WideEachUnit);
-//        _twoView.frame = CGRectMake(0, CGRectGetMaxY(_oneView.frame) + 10 * WideEachUnit, MainScreenWidth, _commentHight + 40 * WideEachUnit);
-        
-        
     } else {//详情页面
         _detailButton.selected = YES;
         _commentButton.selected = NO;
@@ -1036,7 +1024,6 @@
                     _commentArray = (NSArray *)[YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
                 }
             }
-//            [self addCommentView];
             [self netWorkCourseReviewConf];
         }
         
@@ -1234,44 +1221,5 @@
     _cellHight = [not.object floatValue];
     [_tableView reloadData];
 }
-
-#pragma mark --- 支付
-
-#pragma mark --- 添加跳转识图
-- (void)addWebView {
-    
-    _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, MainScreenWidth * 2, MainScreenWidth,MainScreenHeight / 2)];
-    _webView.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:_webView];
-    
-    
-    [_webView setUserInteractionEnabled:YES];//是否支持交互
-    _webView.delegate=self;
-    [_webView setOpaque:YES];//opaque是不透明的意思
-    [_webView setScalesPageToFit:YES];//自适应
-    
-    NSURL *url = nil;
-    if (_typeNum == 1) {
-        if (_alipayStr == nil) {
-            [TKProgressHUD showError:@"支付失败" toView:self.view];
-        } else {
-            url = [NSURL URLWithString:_alipayStr];
-        }
-        
-    } else if (_typeNum == 2) {
-        if (_wxpayStr == nil) {
-            [TKProgressHUD showError:@"支付失败" toView:self.view];
-        } else {
-            url = [NSURL URLWithString:_wxpayStr];
-        }
-    }
-    
-    [_webView loadRequest:[NSURLRequest requestWithURL:url]];
-    
-}
-
-
-
-
 
 @end

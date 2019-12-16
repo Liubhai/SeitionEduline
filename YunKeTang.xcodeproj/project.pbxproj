@@ -3057,7 +3057,6 @@
 		8145DDC421B11E56005B838D /* Good_TeacherRankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8145DDB021B11E56005B838D /* Good_TeacherRankViewController.m */; };
 		8145DDC621B11E56005B838D /* Good_TeacherClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8145DDB221B11E56005B838D /* Good_TeacherClassViewController.m */; };
 		8145DDC821B11E56005B838D /* TeacherArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8145DDBC21B11E56005B838D /* TeacherArticleViewController.m */; };
-		8145DDC921B11E56005B838D /* YYViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8145DDBD21B11E56005B838D /* YYViewController.m */; };
 		8146A65B2283B9DD00121A5E /* tab_discover_nopress@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8146A6592283B9DC00121A5E /* tab_discover_nopress@2x.png */; };
 		8146A65C2283B9DD00121A5E /* tab_discover_press@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8146A65A2283B9DD00121A5E /* tab_discover_press@2x.png */; };
 		8149704B224360CC00A58C05 /* suo2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8149704A224360CC00A58C05 /* suo2.png */; };
@@ -3131,7 +3130,6 @@
 		815EFC4221AE73260026D35F /* EditAdressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 815EFC3A21AE73260026D35F /* EditAdressViewController.m */; };
 		815EFC4E21AE74060026D35F /* ShopManagerAdressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 815EFC4721AE74060026D35F /* ShopManagerAdressTableViewCell.m */; };
 		815EFC4F21AE74060026D35F /* ShoppingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 815EFC4821AE74060026D35F /* ShoppingViewController.m */; };
-		815EFC5021AE74060026D35F /* ShopDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 815EFC4921AE74060026D35F /* ShopDetailViewController.m */; };
 		815EFC5121AE74060026D35F /* ShopAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 815EFC4A21AE74060026D35F /* ShopAddressViewController.m */; };
 		815EFC5221AE74060026D35F /* ShopManagerAdressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 815EFC4B21AE74060026D35F /* ShopManagerAdressViewController.m */; };
 		815EFC5421AE74F90026D35F /* GLIMG0.png in Resources */ = {isa = PBXBuildFile; fileRef = 815EFC5321AE74F90026D35F /* GLIMG0.png */; };
@@ -3248,19 +3246,15 @@
 		815EFDC821AE89350026D35F /* Good_MyLibraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 815EFD5B21AE89340026D35F /* Good_MyLibraryViewController.m */; };
 		815EFDC921AE89350026D35F /* ZFDownloadedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 815EFD5D21AE89340026D35F /* ZFDownloadedCell.m */; };
 		815EFDCA21AE89350026D35F /* Good_MyClassDownViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 815EFD6121AE89340026D35F /* Good_MyClassDownViewController.m */; };
-		815EFDCE21AE8C960026D35F /* MemberCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 815EFDCD21AE8C960026D35F /* MemberCenterViewController.m */; };
-		815EFDD121AE8CBE0026D35F /* OpenMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 815EFDD021AE8CBD0026D35F /* OpenMemberViewController.m */; };
 		815EFDED21AE8DB20026D35F /* Good_AddBankProvinceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 815EFDD321AE8DB20026D35F /* Good_AddBankProvinceViewController.m */; };
 		815EFDEE21AE8DB20026D35F /* Good_PersonFaceBoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 815EFDD421AE8DB20026D35F /* Good_PersonFaceBoundViewController.m */; };
 		815EFDEF21AE8DB20026D35F /* Good_PersonFaceRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 815EFDD521AE8DB20026D35F /* Good_PersonFaceRegisterViewController.m */; };
 		815EFDF021AE8DB30026D35F /* Good_AddBankCountyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 815EFDD621AE8DB20026D35F /* Good_AddBankCountyViewController.m */; };
 		815EFDF121AE8DB30026D35F /* Good_ManagementCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 815EFDD721AE8DB20026D35F /* Good_ManagementCardViewController.m */; };
-		815EFDF221AE8DB30026D35F /* Good_AlipayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 815EFDD821AE8DB20026D35F /* Good_AlipayViewController.m */; };
 		815EFDF321AE8DB30026D35F /* Good_BankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 815EFDDA21AE8DB20026D35F /* Good_BankViewController.m */; };
 		815EFDF421AE8DB30026D35F /* Good_AddBankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 815EFDDC21AE8DB20026D35F /* Good_AddBankViewController.m */; };
 		815EFDF521AE8DB30026D35F /* Good_ManagementCardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 815EFDDD21AE8DB20026D35F /* Good_ManagementCardTableViewCell.m */; };
 		815EFDF621AE8DB30026D35F /* Good_AddBankCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 815EFDDE21AE8DB20026D35F /* Good_AddBankCityViewController.m */; };
-		815EFDF721AE8DB30026D35F /* Good_AliBoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 815EFDDF21AE8DB20026D35F /* Good_AliBoundViewController.m */; };
 		815EFDF821AE8DB30026D35F /* Good_BankTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 815EFDE621AE8DB20026D35F /* Good_BankTableViewCell.m */; };
 		815EFDF921AE8DB30026D35F /* BoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 815EFDE821AE8DB20026D35F /* BoundViewController.m */; };
 		815EFE0F21AE8E690026D35F /* yuan.png in Resources */ = {isa = PBXBuildFile; fileRef = 815EFDFA21AE8E640026D35F /* yuan.png */; };
@@ -7692,13 +7686,11 @@
 		8145DDAF21B11E56005B838D /* TeacherArticleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeacherArticleViewController.h; sourceTree = "<group>"; };
 		8145DDB021B11E56005B838D /* Good_TeacherRankViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Good_TeacherRankViewController.m; sourceTree = "<group>"; };
 		8145DDB221B11E56005B838D /* Good_TeacherClassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Good_TeacherClassViewController.m; sourceTree = "<group>"; };
-		8145DDB321B11E56005B838D /* YYViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYViewController.h; sourceTree = "<group>"; };
 		8145DDB421B11E56005B838D /* Good_TeacherMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Good_TeacherMainViewController.h; sourceTree = "<group>"; };
 		8145DDB621B11E56005B838D /* GLTeaTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLTeaTableViewCell.h; sourceTree = "<group>"; };
 		8145DDB921B11E56005B838D /* MessageSendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageSendViewController.h; sourceTree = "<group>"; };
 		8145DDBB21B11E56005B838D /* Good_TeacherRankViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Good_TeacherRankViewController.h; sourceTree = "<group>"; };
 		8145DDBC21B11E56005B838D /* TeacherArticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeacherArticleViewController.m; sourceTree = "<group>"; };
-		8145DDBD21B11E56005B838D /* YYViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYViewController.m; sourceTree = "<group>"; };
 		8145DDBE21B11E56005B838D /* Good_TeacherClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Good_TeacherClassViewController.h; sourceTree = "<group>"; };
 		8145DDCA21B12087005B838D /* CollectLiveViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectLiveViewController.h; sourceTree = "<group>"; };
 		8146A6592283B9DC00121A5E /* tab_discover_nopress@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_discover_nopress@2x.png"; sourceTree = "<group>"; };
@@ -7831,10 +7823,8 @@
 		815EFC3A21AE73260026D35F /* EditAdressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditAdressViewController.m; sourceTree = "<group>"; };
 		815EFC4421AE74060026D35F /* ShopManagerAdressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopManagerAdressViewController.h; sourceTree = "<group>"; };
 		815EFC4521AE74060026D35F /* ShopAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopAddressViewController.h; sourceTree = "<group>"; };
-		815EFC4621AE74060026D35F /* ShopDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopDetailViewController.h; sourceTree = "<group>"; };
 		815EFC4721AE74060026D35F /* ShopManagerAdressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopManagerAdressTableViewCell.m; sourceTree = "<group>"; };
 		815EFC4821AE74060026D35F /* ShoppingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingViewController.m; sourceTree = "<group>"; };
-		815EFC4921AE74060026D35F /* ShopDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopDetailViewController.m; sourceTree = "<group>"; };
 		815EFC4A21AE74060026D35F /* ShopAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopAddressViewController.m; sourceTree = "<group>"; };
 		815EFC4B21AE74060026D35F /* ShopManagerAdressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopManagerAdressViewController.m; sourceTree = "<group>"; };
 		815EFC4C21AE74060026D35F /* ShopManagerAdressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopManagerAdressTableViewCell.h; sourceTree = "<group>"; };
@@ -8061,33 +8051,25 @@
 		815EFD6121AE89340026D35F /* Good_MyClassDownViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Good_MyClassDownViewController.m; sourceTree = "<group>"; };
 		815EFD6221AE89340026D35F /* ZFDownloadingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFDownloadingCell.h; sourceTree = "<group>"; };
 		815EFD6321AE89340026D35F /* Good_MyLibraryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Good_MyLibraryViewController.h; sourceTree = "<group>"; };
-		815EFDCC21AE8C960026D35F /* MemberCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberCenterViewController.h; sourceTree = "<group>"; };
-		815EFDCD21AE8C960026D35F /* MemberCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberCenterViewController.m; sourceTree = "<group>"; };
-		815EFDCF21AE8CBD0026D35F /* OpenMemberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenMemberViewController.h; sourceTree = "<group>"; };
-		815EFDD021AE8CBD0026D35F /* OpenMemberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenMemberViewController.m; sourceTree = "<group>"; };
 		815EFDD321AE8DB20026D35F /* Good_AddBankProvinceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Good_AddBankProvinceViewController.m; sourceTree = "<group>"; };
 		815EFDD421AE8DB20026D35F /* Good_PersonFaceBoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Good_PersonFaceBoundViewController.m; sourceTree = "<group>"; };
 		815EFDD521AE8DB20026D35F /* Good_PersonFaceRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Good_PersonFaceRegisterViewController.m; sourceTree = "<group>"; };
 		815EFDD621AE8DB20026D35F /* Good_AddBankCountyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Good_AddBankCountyViewController.m; sourceTree = "<group>"; };
 		815EFDD721AE8DB20026D35F /* Good_ManagementCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Good_ManagementCardViewController.m; sourceTree = "<group>"; };
-		815EFDD821AE8DB20026D35F /* Good_AlipayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Good_AlipayViewController.m; sourceTree = "<group>"; };
 		815EFDD921AE8DB20026D35F /* BoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoundViewController.h; sourceTree = "<group>"; };
 		815EFDDA21AE8DB20026D35F /* Good_BankViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Good_BankViewController.m; sourceTree = "<group>"; };
 		815EFDDB21AE8DB20026D35F /* Good_BankTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Good_BankTableViewCell.h; sourceTree = "<group>"; };
 		815EFDDC21AE8DB20026D35F /* Good_AddBankViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Good_AddBankViewController.m; sourceTree = "<group>"; };
 		815EFDDD21AE8DB20026D35F /* Good_ManagementCardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Good_ManagementCardTableViewCell.m; sourceTree = "<group>"; };
 		815EFDDE21AE8DB20026D35F /* Good_AddBankCityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Good_AddBankCityViewController.m; sourceTree = "<group>"; };
-		815EFDDF21AE8DB20026D35F /* Good_AliBoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Good_AliBoundViewController.m; sourceTree = "<group>"; };
 		815EFDE021AE8DB20026D35F /* Good_AddBankCountyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Good_AddBankCountyViewController.h; sourceTree = "<group>"; };
 		815EFDE121AE8DB20026D35F /* Good_PersonFaceRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Good_PersonFaceRegisterViewController.h; sourceTree = "<group>"; };
 		815EFDE221AE8DB20026D35F /* Good_PersonFaceBoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Good_PersonFaceBoundViewController.h; sourceTree = "<group>"; };
 		815EFDE321AE8DB20026D35F /* Good_AddBankProvinceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Good_AddBankProvinceViewController.h; sourceTree = "<group>"; };
 		815EFDE421AE8DB20026D35F /* Good_ManagementCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Good_ManagementCardViewController.h; sourceTree = "<group>"; };
-		815EFDE521AE8DB20026D35F /* Good_AlipayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Good_AlipayViewController.h; sourceTree = "<group>"; };
 		815EFDE621AE8DB20026D35F /* Good_BankTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Good_BankTableViewCell.m; sourceTree = "<group>"; };
 		815EFDE721AE8DB20026D35F /* Good_BankViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Good_BankViewController.h; sourceTree = "<group>"; };
 		815EFDE821AE8DB20026D35F /* BoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoundViewController.m; sourceTree = "<group>"; };
-		815EFDE921AE8DB20026D35F /* Good_AliBoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Good_AliBoundViewController.h; sourceTree = "<group>"; };
 		815EFDEA21AE8DB20026D35F /* Good_AddBankCityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Good_AddBankCityViewController.h; sourceTree = "<group>"; };
 		815EFDEB21AE8DB20026D35F /* Good_ManagementCardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Good_ManagementCardTableViewCell.h; sourceTree = "<group>"; };
 		815EFDEC21AE8DB20026D35F /* Good_AddBankViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Good_AddBankViewController.h; sourceTree = "<group>"; };
@@ -22043,8 +22025,6 @@
 				8145DDAD21B11E56005B838D /* MessageSendViewController.m */,
 				8145DDAF21B11E56005B838D /* TeacherArticleViewController.h */,
 				8145DDBC21B11E56005B838D /* TeacherArticleViewController.m */,
-				8145DDB321B11E56005B838D /* YYViewController.h */,
-				8145DDBD21B11E56005B838D /* YYViewController.m */,
 				7803143522ADE4F00007EBBC /* GBActivityDetailWebVC.h */,
 				7803143422ADE4F00007EBBC /* GBActivityDetailWebVC.m */,
 			);
@@ -22315,8 +22295,6 @@
 				815EFC4821AE74060026D35F /* ShoppingViewController.m */,
 				815EFC4521AE74060026D35F /* ShopAddressViewController.h */,
 				815EFC4A21AE74060026D35F /* ShopAddressViewController.m */,
-				815EFC4621AE74060026D35F /* ShopDetailViewController.h */,
-				815EFC4921AE74060026D35F /* ShopDetailViewController.m */,
 				815EFC4421AE74060026D35F /* ShopManagerAdressViewController.h */,
 				815EFC4B21AE74060026D35F /* ShopManagerAdressViewController.m */,
 				815EFC4C21AE74060026D35F /* ShopManagerAdressTableViewCell.h */,
@@ -22538,10 +22516,6 @@
 		815EFCBC21AE89340026D35F /* Me_Member */ = {
 			isa = PBXGroup;
 			children = (
-				815EFDCC21AE8C960026D35F /* MemberCenterViewController.h */,
-				815EFDCD21AE8C960026D35F /* MemberCenterViewController.m */,
-				815EFDCF21AE8CBD0026D35F /* OpenMemberViewController.h */,
-				815EFDD021AE8CBD0026D35F /* OpenMemberViewController.m */,
 			);
 			path = Me_Member;
 			sourceTree = "<group>";
@@ -22867,7 +22841,6 @@
 				815EFDD521AE8DB20026D35F /* Good_PersonFaceRegisterViewController.m */,
 				815EFDD621AE8DB20026D35F /* Good_AddBankCountyViewController.m */,
 				815EFDD721AE8DB20026D35F /* Good_ManagementCardViewController.m */,
-				815EFDD821AE8DB20026D35F /* Good_AlipayViewController.m */,
 				815EFDDA21AE8DB20026D35F /* Good_BankViewController.m */,
 				815EFDDB21AE8DB20026D35F /* Good_BankTableViewCell.h */,
 				815EFDE621AE8DB20026D35F /* Good_BankTableViewCell.m */,
@@ -22876,15 +22849,12 @@
 				815EFDDC21AE8DB20026D35F /* Good_AddBankViewController.m */,
 				815EFDDD21AE8DB20026D35F /* Good_ManagementCardTableViewCell.m */,
 				815EFDDE21AE8DB20026D35F /* Good_AddBankCityViewController.m */,
-				815EFDDF21AE8DB20026D35F /* Good_AliBoundViewController.m */,
 				815EFDE021AE8DB20026D35F /* Good_AddBankCountyViewController.h */,
 				815EFDE121AE8DB20026D35F /* Good_PersonFaceRegisterViewController.h */,
 				815EFDE221AE8DB20026D35F /* Good_PersonFaceBoundViewController.h */,
 				815EFDE321AE8DB20026D35F /* Good_AddBankProvinceViewController.h */,
 				815EFDE421AE8DB20026D35F /* Good_ManagementCardViewController.h */,
-				815EFDE521AE8DB20026D35F /* Good_AlipayViewController.h */,
 				815EFDE721AE8DB20026D35F /* Good_BankViewController.h */,
-				815EFDE921AE8DB20026D35F /* Good_AliBoundViewController.h */,
 				815EFDEA21AE8DB20026D35F /* Good_AddBankCityViewController.h */,
 				815EFDEB21AE8DB20026D35F /* Good_ManagementCardTableViewCell.h */,
 			);
@@ -26836,7 +26806,6 @@
 				78DAEC212387CF8C0000311F /* UIView+Layout.m in Sources */,
 				815EFDAB21AE89350026D35F /* OrderCell.m in Sources */,
 				780F89AD230F85F400B67CEF /* NSAttributedString+TKEmoji.m in Sources */,
-				815EFDD121AE8CBE0026D35F /* OpenMemberViewController.m in Sources */,
 				780F89FB230F85F500B67CEF /* TKMessageTableViewCell.m in Sources */,
 				815EFC4121AE73260026D35F /* AdddressModle.m in Sources */,
 				815EFD8721AE89340026D35F /* alterPWViewController.m in Sources */,
@@ -26898,7 +26867,6 @@
 				09EC0FFF1F316950007C3E05 /* TYTextContainer.m in Sources */,
 				780313FE22ADE4480007EBBC /* NSData+YYAdd.m in Sources */,
 				7587B0D31B0DDD9600E39062 /* MZTimerLabel.m in Sources */,
-				815EFC5021AE74060026D35F /* ShopDetailViewController.m in Sources */,
 				780F8A30230F85F500B67CEF /* TKOneViewController+WhiteBoard.m in Sources */,
 				9412E4E31A8E049D005145CD /* SMBaseClass.m in Sources */,
 				50BACB561A709E7300E2B8A4 /* UIImageView+AFNetworking.m in Sources */,
@@ -26912,7 +26880,6 @@
 				8145DD7A21B11D98005B838D /* SubjectView.m in Sources */,
 				78F1099E22B770AA00288DEB /* DDContextFilterLogFormatter.m in Sources */,
 				786DB5C522C34ECF0094B7F4 /* WebViewController.m in Sources */,
-				815EFDF221AE8DB30026D35F /* Good_AlipayViewController.m in Sources */,
 				780F8A1F230F85F500B67CEF /* TKAnswerSheetSubmitView.m in Sources */,
 				7803143322ADE48F0007EBBC /* LBHTableView.m in Sources */,
 				787DFB5A22DDBC0200335A13 /* NSString+SBJSON.m in Sources */,
@@ -27036,7 +27003,6 @@
 				780F89D9230F85F400B67CEF /* TKCTUserListTableViewCell.m in Sources */,
 				815EFDA521AE89350026D35F /* RefundVC.m in Sources */,
 				8176A23B2228D170002AF076 /* MyLineDownCompleteViewController.m in Sources */,
-				815EFDCE21AE8C960026D35F /* MemberCenterViewController.m in Sources */,
 				7803141722ADE4480007EBBC /* ZLCameraViewController.m in Sources */,
 				9412E5061A8E05C7005145CD /* Data.m in Sources */,
 				09E091DD1F1C877D00C10221 /* JXPageView.m in Sources */,
@@ -27213,7 +27179,6 @@
 				50180BAF1A8F69A3005F441C /* CMBaseClass.m in Sources */,
 				780F89B3230F85F400B67CEF /* TKSortByNameCore.m in Sources */,
 				09E7D8051EA73F5C00701395 /* SearchCataLog.m in Sources */,
-				815EFDF721AE8DB30026D35F /* Good_AliBoundViewController.m in Sources */,
 				780313F422ADE4480007EBBC /* UIView+YYAdd.m in Sources */,
 				7803140422ADE4480007EBBC /* NSString+YYAdd.m in Sources */,
 				8145DC1521B1132E005B838D /* EntityCardViewController.m in Sources */,
@@ -27556,7 +27521,6 @@
 				78F109BB22B770AA00288DEB /* ZBLM3u8Setting.m in Sources */,
 				09EEBB2D20C543C50014D5CF /* UAProgressView.m in Sources */,
 				8145DC0621B10DED005B838D /* ZCViewController.m in Sources */,
-				8145DDC921B11E56005B838D /* YYViewController.m in Sources */,
 				9412E4D31A8E0480005145CD /* SBaseClass.m in Sources */,
 				50BACB541A709E7300E2B8A4 /* UIAlertView+AFNetworking.m in Sources */,
 				815EFE3221AE97290026D35F /* SXXQViewController.m in Sources */,

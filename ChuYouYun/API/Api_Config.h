@@ -307,11 +307,7 @@
 #define YunKeTang_User_user_bindBankCard @"user.bindBankCard"
 #define YunKeTang_User_user_unbindBankCard @"user.unbindBankCard"
 #define YunKeTang_User_user_bankCardList @"user.bankCardList"
-#define YunKeTang_User_user_getAlipayInfo @"user.getAlipayInfo"
-#define YunKeTang_User_user_setAlipay @"user.setAlipay"
-#define YunKeTang_User_user_unbindAlipay @"user.unbindAlipay"
 #define YunKeTang_User_user_getBankList @"user.getBankList"
-#define YunKeTang_User_user_getAlipayInfo @"user.getAlipayInfo"
 
 
 

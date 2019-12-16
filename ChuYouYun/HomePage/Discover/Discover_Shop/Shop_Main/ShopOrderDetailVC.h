@@ -15,8 +15,6 @@
 // 用户流水
 @property (strong ,nonatomic)NSDictionary   *userAccountDict;
 @property (assign, nonatomic) BOOL isHaveDefault;
-@property (assign, nonatomic) BOOL isHaveAilPay;
-@property (assign, nonatomic) BOOL isHaveWxPay;
 @property (strong, nonatomic) NSString *scoreStaus;
 @property (assign, nonatomic) CGFloat percentage;
 @property (assign, nonatomic) NSInteger numValue;
@@ -25,7 +23,6 @@
 // 整个容器
 @property (strong, nonatomic) UIScrollView *mainScrollView;
 
-/** 商品支付是否显示三方支付(用于应对上架时候切换) */
 @property (assign, nonatomic) BOOL showThirdPayMethod;
 
 /** 商品简介容器 */
@@ -43,22 +40,6 @@
 @property (strong, nonatomic) UIView *line1;
 @property (strong, nonatomic) UIView *line5;
 @property (strong, nonatomic) UILabel *tipLabel;
-
-// 支付宝
-@property (strong, nonatomic) UIView *alipayBackView;
-@property (strong, nonatomic) UIView *line2;
-@property (strong, nonatomic) UIImageView *alipayIcon;
-@property (strong, nonatomic) UILabel *alipayLabel;
-@property (strong, nonatomic) UIButton *alipayButton;
-@property (strong, nonatomic) UIButton *alipayBackButton;
-
-// 微信支付
-@property (strong, nonatomic) UIView *weixinBackView;
-@property (strong, nonatomic) UIView *line3;
-@property (strong, nonatomic) UIImageView *weixinIcon;
-@property (strong, nonatomic) UILabel *weixinLabel;
-@property (strong, nonatomic) UIButton *weixinButton;
-@property (strong, nonatomic) UIButton *weixinBackButton;
 
 // 积分支付
 @property (strong, nonatomic) UIView *integralBackView;
