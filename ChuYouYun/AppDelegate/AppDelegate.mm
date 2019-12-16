@@ -354,12 +354,6 @@
     
 }
 
-
-//- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options {
-//    return YES;
-//    return [UMSocialSnsService handleOpenURL:url];
-//}
-
 //使用第三方登录需要重写下面两个方法
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     
