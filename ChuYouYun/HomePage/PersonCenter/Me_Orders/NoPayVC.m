@@ -32,10 +32,6 @@
 
 @property (strong ,nonatomic)NSString *pay_status;//标示符
 
-@property (strong ,nonatomic)NSString *alipayStr;
-@property (strong ,nonatomic)NSString *wxpayStr;
-@property (strong ,nonatomic)NSDictionary *wxPayDict;
-@property (strong ,nonatomic)UIWebView *webView;
 @property (assign ,nonatomic)NSInteger typeNum;
 
 @property (assign ,nonatomic)NSInteger number;
@@ -47,8 +43,6 @@
 @property (strong ,nonatomic)NSDictionary *userAccountDict;
 
 @property (strong ,nonatomic)UIView     *allWindowView;
-@property (strong ,nonatomic)UIButton   *aliSeleButton;
-@property (strong ,nonatomic)UIButton   *wxSeleButton;
 @property (strong ,nonatomic)UIButton   *balanceSeleButton;
 @property (strong ,nonatomic)NSString   *classTypeStr;
 @property (strong ,nonatomic)NSString   *payTypeStr;//支付类型的字段
@@ -107,7 +101,6 @@
     _payTypeArray = [NSMutableArray new];
     [self interFace];
     [self addTableView];
-//    [self NetWorkGetOrderWithNumber:1];
     [self netWorkUserBalanceConfig];
     [self netWorkUserGetAccount];
     [self netWorkOrderGetList:1];
@@ -227,9 +220,9 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"---%@",_dataArray[indexPath.row]);
     [_tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if ([HASALIPAY isEqualToString:@"0"]) {
+    if ([HASEDULINE isEqualToString:@"0"]) {
         if (!UserOathToken) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"查看详情需要登录,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"登录后查看详情能获取更多优质内容,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
             alert.tag = 100;
             [alert show];
             return;
@@ -323,7 +316,6 @@
     NSString *title = button.titleLabel.text;
     
     if ([title isEqualToString:@"去支付"]) {
-//        [self whichPay];
         [self whichPayView];
         
     } else if ([title isEqualToString:@"申请退款"]) {
@@ -345,24 +337,8 @@
 }
 
 - (void)seleButtonCilck:(UIButton *)button {
-    NSInteger buttonTag = button.tag;
-    
-    if (buttonTag == 0) {
-        _aliSeleButton.selected = YES;
-        _payTypeStr = @"1";
-        _wxSeleButton.selected = NO;
-        _balanceSeleButton.selected = NO;
-    } else if (buttonTag == 1) {
-        _wxSeleButton.selected = YES;
-        _payTypeStr = @"2";
-        _aliSeleButton.selected = NO;
-        _balanceSeleButton.selected = NO;
-    } else if (buttonTag == 2) {
-        _balanceSeleButton.selected = YES;
-        _payTypeStr = @"3";
-        _aliSeleButton.selected = NO;
-        _wxSeleButton.selected = NO;
-    }
+    _balanceSeleButton.selected = YES;
+    _payTypeStr = @"3";
 }
 
 - (void)nowPayButtonCilck {
@@ -489,27 +465,6 @@
 
 
 #pragma mark --- 添加视图
-
-//是否 真要删除小组
-- (void)whichPay {
-    
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"请选择支付方式" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *aliAction = [UIAlertAction actionWithTitle:@"支付宝" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-        _typeNum = 1;
-    }];
-    [alertController addAction:aliAction];
-    
-    UIAlertAction *wxAction = [UIAlertAction actionWithTitle:@"微信" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-        _typeNum = 2;
-    }];
-    [alertController addAction:wxAction];
-    
-    
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil];
-    [alertController addAction:cancelAction];
-    [self presentViewController:alertController animated:YES completion:nil];
-}
-
 - (void)whichPayView {
     if (_allWindowView == nil) {
         _allWindowView = [[UIView alloc] initWithFrame:CGRectMake(0,0, MainScreenWidth, MainScreenHeight)];
@@ -532,60 +487,29 @@
     
     
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(10 * WideEachUnit, 0, MainScreenWidth - 10 * WideEachUnit, 50 * WideEachUnit)];
-    title.text = @"请选择支付方式";
+    title.text = @"支付方式";
     title.textColor = BlackNotColor;
     title.backgroundColor = [UIColor whiteColor];
     title.font = Font(16);
     [buyView addSubview:title];
     
-    NSArray *imageArray = @[@"Alipay@3x",@"weixinpay@3x",@""];
-    //判断是否应该有此支付方式
-    BOOL isAddAilpayView = NO;
-    for (NSString *payStr in _payTypeArray) {
-        if ([payStr isEqualToString:@"alipay"]) {
-            isAddAilpayView = YES;
-        }
-    }
-    //判断是否应该有此支付方式
-    BOOL isAddWxpayView = NO;
-    for (NSString *payStr in _payTypeArray) {
-        if ([payStr isEqualToString:@"wxpay"]) {
-            isAddWxpayView = YES;
-        }
-    }
+    NSArray *imageArray = @[@""];
+    
     CGFloat viewW = MainScreenWidth;
     CGFloat viewH = 50 * WideEachUnit;
     CGFloat ButtonTop = 50 * WideEachUnit;
-    for (int i = 0 ; i < 3 ; i ++) {
-        UIView *payView = [[UIView alloc] initWithFrame:CGRectMake(0, ButtonTop  , viewW, viewH)];
+    for (int i = 0 ; i < imageArray.count ; i ++) {
+        UIView *payView = [[UIView alloc] initWithFrame:CGRectMake(0, ButtonTop, viewW, viewH)];
         payView.backgroundColor = [UIColor whiteColor];
         payView.layer.borderWidth = 0.5 * WideEachUnit;
         payView.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
         [buyView addSubview:payView];
-        if (i == 0) {
-            if (isAddAilpayView) {
-                [payView setHeight:viewH];
-                payView.hidden = NO;
-            } else {
-                [payView setHeight:0];
-                payView.hidden = NO;
-            }
-        }
-        if (i == 1) {
-            if (isAddWxpayView) {
-                [payView setHeight:viewH];
-                payView.hidden = NO;
-            } else {
-                [payView setHeight:0];
-                payView.hidden = NO;
-            }
-        }
         
         UIButton *payTypeButton = [[UIButton alloc] initWithFrame:CGRectMake(10 * WideEachUnit,0, 80 * WideEachUnit, 50 * WideEachUnit)];
         [payTypeButton setImage:Image(imageArray[i]) forState:UIControlStateNormal];
         [payView addSubview:payTypeButton];
         
-        if (i == 2) {
+        if (i == 0) {
             payTypeButton.hidden = YES;
             UILabel *payType = [[UILabel alloc] initWithFrame:CGRectMake(10 * WideEachUnit, 0, 250 * WideEachUnit, 50 * WideEachUnit)];
             payType.text = @"余额";
@@ -600,32 +524,8 @@
         [seleButton setImage:Image(@"ic_choose@3x") forState:UIControlStateSelected];
         [seleButton addTarget:self action:@selector(seleButtonCilck:) forControlEvents:UIControlEventTouchUpInside];
         seleButton.tag = i;
-        if (i == 0) {
-            _aliSeleButton = seleButton;
-            if (isAddAilpayView) {
-                _aliSeleButton.selected = YES;
-                [self seleButtonCilck:_aliSeleButton];
-            } else {
-                _aliSeleButton.selected = NO;
-            }
-        } else if (i == 1) {
-            _wxSeleButton = seleButton;
-            if (isAddWxpayView && !isAddAilpayView) {
-                _wxSeleButton.selected = YES;
-                [self seleButtonCilck:_wxSeleButton];
-            } else {
-                _wxSeleButton.selected = NO;
-            }
-        } else if (i == 2) {
-            _balanceSeleButton = seleButton;
-            if (!isAddAilpayView && !isAddWxpayView) {
-                _balanceSeleButton.selected = YES;
-                [self seleButtonCilck:_balanceSeleButton];
-            } else {
-                _balanceSeleButton.selected = NO;
-            }
-        }
-        
+        _balanceSeleButton.selected = YES;
+        [self seleButtonCilck:_balanceSeleButton];
         [payView addSubview:seleButton];
         
         UIButton *allClearButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, viewW, viewH)];
@@ -686,61 +586,6 @@
         [_allButton removeFromSuperview];
         [_buyView removeFromSuperview];
     });
-}
-
-
-
-#pragma mark --- 添加跳转识图
-- (void)addWebView {
-    
-    _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, MainScreenWidth * 2, MainScreenWidth,MainScreenHeight / 2)];
-    _webView.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:_webView];
-    
-    
-    [_webView setUserInteractionEnabled:YES];//是否支持交互
-    _webView.delegate=self;
-    [_webView setOpaque:YES];//opaque是不透明的意思
-    [_webView setScalesPageToFit:YES];//自适应
-    
-    NSURL *url = nil;
-    url = [NSURL URLWithString:_alipayStr];
-    [_webView loadRequest:[NSURLRequest requestWithURL:url]];
-}
-
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    NSString *url = request.URL.absoluteString;
-    if ([url containsString:@"alipay://alipayclient"]) {
-        NSMutableString *param = [NSMutableString stringWithFormat:@"%@", (__bridge_transfer NSString *)CFURLCreateStringByReplacingPercentEscapesUsingEncoding(NULL, (__bridge CFStringRef)url, CFSTR(""), CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding))];
-        
-        NSRange range = [param rangeOfString:@"{"];
-        // 截取 json 部分
-        NSString *param1 = [param substringFromIndex:range.location];
-        if ([param1 rangeOfString:@"\"fromAppUrlScheme\":"].length > 0) {
-            NSData *data = [param1 dataUsingEncoding:NSUTF8StringEncoding];
-            NSDictionary *tempDic = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            
-            if (![tempDic isKindOfClass:[NSDictionary class]]) {
-                return NO;
-            }
-            
-            NSMutableDictionary *dicM = [NSMutableDictionary dictionaryWithDictionary:tempDic];
-            dicM[@"fromAppUrlScheme"] = AlipayBundleId;
-            
-            NSError *error;
-            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dicM options:NSJSONWritingPrettyPrinted error:&error];
-            NSString *jsonStr = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
-            
-            NSString *encodedString = (NSString*) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,                           (CFStringRef)jsonStr, NULL, (CFStringRef)@"!*'();:@&=+$,/?%#[]", kCFStringEncodingUTF8));
-            
-            // 只替换 json 部分
-            [param replaceCharactersInRange:NSMakeRange(range.location, param.length - range.location)  withString:encodedString];
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:param]];
-            
-            return NO;
-        }
-    }
-    return NO;
 }
 
 //获取用户的流水数据
@@ -851,12 +696,7 @@
     NSString *allUrlStr = [YunKeTang_Api_Tool YunKeTang_GetFullUrl:endUrlStr];
     
     NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
-    
-    if ([_payTypeStr integerValue] == 1) {
-        [mutabDict setValue:@"alipay" forKey:@"pay_for"];
-    } else if ([_payTypeStr integerValue] == 2) {
-        [mutabDict setValue:@"wxpay" forKey:@"pay_for"];
-    } else if ([_payTypeStr integerValue] == 3) {
+    if ([_payTypeStr integerValue] == 3) {
         [mutabDict setValue:@"lcnpay" forKey:@"pay_for"];
     }
     [mutabDict setValue:[_orderDict stringValueForKey:@"video_id"] forKey:@"vids"];
@@ -880,13 +720,7 @@
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
-            if ([_payTypeStr integerValue] == 1) {//支付宝
-                _alipayStr = [[dict dictionaryValueForKey:@"alipay"] stringValueForKey:@"ios"];
-                [self addWebView];
-            } else if ([_payTypeStr integerValue] == 2){//微信
-                _wxPayDict = [[dict dictionaryValueForKey:@"wxpay"] dictionaryValueForKey:@"ios"];
-                [self WXPay:_wxPayDict];
-            } else if ([_payTypeStr integerValue] == 3) {//余额
+            if ([_payTypeStr integerValue] == 3) {//余额
                 [_allWindowView removeFromSuperview];
                 [MBProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
                 [self netWorkOrderGetList:1];
@@ -908,12 +742,7 @@
     NSString *allUrlStr = [YunKeTang_Api_Tool YunKeTang_GetFullUrl:endUrlStr];
     
     NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
-    
-    if ([_payTypeStr integerValue] == 1) {
-        [mutabDict setValue:@"alipay" forKey:@"pay_for"];
-    } else if ([_payTypeStr integerValue] == 2) {
-        [mutabDict setValue:@"wxpay" forKey:@"pay_for"];
-    } else if ([_payTypeStr integerValue] == 3) {
+    if ([_payTypeStr integerValue] == 3) {
         [mutabDict setValue:@"lcnpay" forKey:@"pay_for"];
     }
     [mutabDict setValue:[_orderDict stringValueForKey:@"course_hour_id"] forKey:@"sid"];
@@ -943,13 +772,7 @@
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
-            if ([_payTypeStr integerValue] == 1) {//支付宝
-                _alipayStr = [[dict dictionaryValueForKey:@"alipay"] stringValueForKey:@"ios"];
-                [self addWebView];
-            } else if ([_payTypeStr integerValue] == 2){//微信
-                _wxPayDict = [[dict dictionaryValueForKey:@"wxpay"] dictionaryValueForKey:@"ios"];
-                [self WXPay:_wxPayDict];
-            } else if ([_payTypeStr integerValue] == 3) {//余额
+            if ([_payTypeStr integerValue] == 3) {//余额
                 [MBProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
             }
         } else {
@@ -971,11 +794,7 @@
     
     NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
     
-    if ([_payTypeStr integerValue] == 1) {
-        [mutabDict setValue:@"alipay" forKey:@"pay_for"];
-    } else if ([_payTypeStr integerValue] == 2) {
-        [mutabDict setValue:@"wxpay" forKey:@"pay_for"];
-    } else if ([_payTypeStr integerValue] == 3) {
+    if ([_payTypeStr integerValue] == 3) {
         [mutabDict setValue:@"lcnpay" forKey:@"pay_for"];
     }
     [mutabDict setValue:[_orderDict stringValueForKey:@"live_id"] forKey:@"live_id"];
@@ -1001,13 +820,7 @@
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             NSDictionary *balanceDict = dict;
             dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
-            if ([_payTypeStr integerValue] == 1) {//支付宝
-                _alipayStr = [[dict dictionaryValueForKey:@"alipay"] stringValueForKey:@"ios"];
-                [self addWebView];
-            } else if ([_payTypeStr integerValue] == 2){//微信
-                _wxPayDict = [[dict dictionaryValueForKey:@"wxpay"] dictionaryValueForKey:@"ios"];
-                [self WXPay:_wxPayDict];
-            } else if ([_payTypeStr integerValue] == 3) {//余额
+            if ([_payTypeStr integerValue] == 3) {//余额
                 [_allWindowView removeFromSuperview];
                 [MBProgressHUD showError:[balanceDict stringValueForKey:@"msg"] toView:[UIApplication sharedApplication].keyWindow];
                 [self netWorkOrderGetList:_number];
@@ -1030,11 +843,7 @@
     
     NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
     
-    if ([_payTypeStr integerValue] == 1) {
-        [mutabDict setValue:@"alipay" forKey:@"pay_for"];
-    } else if ([_payTypeStr integerValue] == 2) {
-        [mutabDict setValue:@"wxpay" forKey:@"pay_for"];
-    } else if ([_payTypeStr integerValue] == 3) {
+    if ([_payTypeStr integerValue] == 3) {
         [mutabDict setValue:@"lcnpay" forKey:@"pay_for"];
     }
     [mutabDict setValue:[_orderDict stringValueForKey:@"video_id"] forKey:@"vids"];
@@ -1058,19 +867,7 @@
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
-            if ([_payTypeStr integerValue] == 1) {//支付宝
-                _alipayStr = [[dict dictionaryValueForKey:@"alipay"] stringValueForKey:@"ios"];
-                BOOL ali = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:_alipayStr]];
-                if (ali) {
-                    [self addWebView];
-                } else {
-                    [MBProgressHUD showError:@"未检测到支付宝" toView:self.view];
-                    return ;
-                }
-            } else if ([_payTypeStr integerValue] == 2){//微信
-                _wxPayDict = [[dict dictionaryValueForKey:@"wxpay"] dictionaryValueForKey:@"ios"];
-                [self WXPay:_wxPayDict];
-            } else if ([_payTypeStr integerValue] == 3) {//余额
+            if ([_payTypeStr integerValue] == 3) {//余额
                 [_allWindowView removeFromSuperview];
                 [MBProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
                 [self netWorkOrderGetList:_number];
@@ -1162,22 +959,6 @@
     [op start];
 }
 
-#pragma mark --- 微信支付
-
-- (void)WXPay:(NSDictionary *)dict {
-    NSString * timeString = [NSString stringWithFormat:@"%.0f", [[NSDate date] timeIntervalSince1970]];
-    NSLog(@"=====%@",timeString);
-    PayReq *request = [[PayReq alloc] init];
-    request.partnerId = [_wxPayDict stringValueForKey:@"partnerid"];
-    request.prepayId= [_wxPayDict stringValueForKey:@"prepayid"];
-    request.package = [_wxPayDict stringValueForKey:@"package"];
-    request.nonceStr= [_wxPayDict stringValueForKey:@"noncestr"];
-    request.timeStamp= timeString.intValue;
-    request.timeStamp= [_wxPayDict stringValueForKey:@"timestamp"].intValue;
-    request.sign= [_wxPayDict stringValueForKey:@"sign"];
-    [WXApi sendReq:request];
-}
-
 //获取余额各种数据以及配置
 - (void)netWorkUserBalanceConfig {
     
@@ -1219,11 +1000,7 @@
     
     NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
     [mutabDict setObject:[_orderDict stringValueForKey:@"paper_id"] forKey:@"paper_id"];
-    if ([_payTypeStr integerValue] == 1) {//支付宝
-        [mutabDict setObject:@"alipay" forKey:@"pay"];
-    } else if ([_payTypeStr integerValue] == 2) {//微信
-        [mutabDict setObject:@"wxpay" forKey:@"pay"];
-    } else if ([_payTypeStr integerValue] == 3) {//微信
+    if ([_payTypeStr integerValue] == 3) {
         [mutabDict setObject:@"lcnpay" forKey:@"pay"];
     }
     
@@ -1242,13 +1019,7 @@
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
-            if ([_payTypeStr integerValue] == 1) {//支付宝
-                _alipayStr = [[dict dictionaryValueForKey:@"alipay"] stringValueForKey:@"ios"];
-                [self addWebView];
-            } else if ([_payTypeStr integerValue] == 2){//微信
-                _wxPayDict = [[dict dictionaryValueForKey:@"wxpay"] dictionaryValueForKey:@"ios"];
-                [self WXPay:_wxPayDict];
-            } else if ([_payTypeStr integerValue] == 3) {
+            if ([_payTypeStr integerValue] == 3) {
                 [MBProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
             }
         } else {
@@ -1277,11 +1048,7 @@
     
     NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
     
-    if ([_payTypeStr integerValue] == 1) {
-        [mutabDict setValue:@"alipay" forKey:@"pay_for"];
-    } else if ([_payTypeStr integerValue] == 2) {
-        [mutabDict setValue:@"wxpay" forKey:@"pay_for"];
-    } else if ([_payTypeStr integerValue] == 3) {
+    if ([_payTypeStr integerValue] == 3) {
         [mutabDict setValue:@"lcnpay" forKey:@"pay_for"];
     }
     [mutabDict setValue:[_orderDict stringValueForKey:@"album_id"] forKey:@"album_id"];
@@ -1304,13 +1071,7 @@
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
-            if ([_payTypeStr integerValue] == 1) {//支付宝
-                _alipayStr = [[dict dictionaryValueForKey:@"alipay"] stringValueForKey:@"ios"];
-                [self addWebView];
-            } else if ([_payTypeStr integerValue] == 2){//微信
-                _wxPayDict = [[dict dictionaryValueForKey:@"wxpay"] dictionaryValueForKey:@"ios"];
-                [self WXPay:_wxPayDict];
-            } else if ([_payTypeStr integerValue] == 3) {//余额
+            if ([_payTypeStr integerValue] == 3) {//余额
                 [MBProgressHUD showError:@"解锁成功" toView:[UIApplication sharedApplication].keyWindow];
             }
         } else {

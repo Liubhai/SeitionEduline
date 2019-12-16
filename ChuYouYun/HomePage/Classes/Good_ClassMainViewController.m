@@ -2051,9 +2051,9 @@
         } else {
             [self.playerView pause];
             //弹题处理
-            ClassNeedTestViewController *vc = [[ClassNeedTestViewController alloc] initWithDict:_seleCurrentDict];
-            [self.view addSubview:vc.view];
+            ClassNeedTestViewController *vc = [[ClassNeedTestViewController alloc] init];
             vc.dict = _seleCurrentDict;
+            [self.view addSubview:vc.view];
             [self addChildViewController:vc];
             isExitTestView = YES;
         }

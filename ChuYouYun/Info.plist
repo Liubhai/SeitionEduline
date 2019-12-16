@@ -154,9 +154,7 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>App会在使用修改用户头像、保存图片到本地功能时,访问您的相机权限</string>
 	<key>UIBackgroundModes</key>
-	<array>
-		<string>audio</string>
-	</array>
+	<array/>
 	<key>UIStatusBarHidden</key>
 	<false/>
 	<key>UISupportedInterfaceOrientations</key>

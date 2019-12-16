@@ -472,7 +472,7 @@
     moreClassButton.imageEdgeInsets =  UIEdgeInsetsMake(0,70,0,0);
     moreClassButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10);
     [moreClassButton addTarget:self action:@selector(discountMoreButtonClick) forControlEvents:UIControlEventTouchUpInside];
-    if ([HASALIPAY isEqualToString:@"0"]) {
+    if ([HASEDULINE isEqualToString:@"0"]) {
         [_discountView setHeight:0];
         _discountView.hidden = YES;
     }

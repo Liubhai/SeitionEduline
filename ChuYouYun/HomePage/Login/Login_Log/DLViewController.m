@@ -734,7 +734,6 @@
         [[NSUserDefaults standardUserDefaults]setObject:[_loginSyncDataSource stringValueForKey:@"oauth_token_secret"] forKey:@"oauthTokenSecret"];
 //        [[NSUserDefaults standardUserDefaults]setObject:[_loginSyncDataSource stringValueForKey:@"uid"] forKey:@"User_id"];
         [[NSUserDefaults standardUserDefaults]setObject:[_loginSyncDataSource stringValueForKey:@"userface"] forKey:@"userface"];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"getPayMethodConfig" object:nil];
         rootViewController *blum = [[rootViewController alloc]init];
         self.view.window.rootViewController = blum;
         
@@ -793,7 +792,6 @@
         [[NSUserDefaults standardUserDefaults]setObject:[_dataSource stringValueForKey:@"uid"] forKey:@"User_id"];
         [[NSUserDefaults standardUserDefaults]setObject:[_dataSource stringValueForKey:@"userface"] forKey:@"userface"];
         [[NSUserDefaults standardUserDefaults]setObject:[_dataSource stringValueForKey:@"only_login_key"] forKey:@"only_login_key"];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"getPayMethodConfig" object:nil];
         if (base.code == 0) {
             dispatch_async(dispatch_get_global_queue(0, 0), ^{
                 [Passport userDataWithSavelocality:base.data];

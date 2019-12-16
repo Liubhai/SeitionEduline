@@ -33,8 +33,6 @@
 
 @property (strong ,nonatomic)NSString *pay_status;//标示符
 
-@property (strong ,nonatomic)NSString *alipayStr;
-@property (strong ,nonatomic)NSString *wxpayStr;
 @property (strong ,nonatomic)NSString *classTypeStr;
 
 @property (assign ,nonatomic)NSInteger number;
@@ -210,9 +208,9 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [_tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if ([HASALIPAY isEqualToString:@"0"]) {
+    if ([HASEDULINE isEqualToString:@"0"]) {
         if (!UserOathToken) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"查看详情需要登录,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"登录后查看详情能获取更多优质内容,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
             alert.tag = 100;
             [alert show];
             return;

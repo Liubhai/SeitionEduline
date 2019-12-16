@@ -19,24 +19,4 @@
     return [predicate evaluateWithObject:self];
 }
 
-- (NSString *)interceptionAliPayString {
-    NSParameterAssert(self);
-    NSString *pattern = @"(?<=out_trade_no=)([^&]+)";
-    
-    NSError *error = nil;
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:&error];
-    
-    NSArray<NSTextCheckingResult *> *result = [regex matchesInString:self options:0 range:NSMakeRange(0, self.length)];
-    if (result) {
-        for (int i = 0; i<result.count; i++) {
-            NSTextCheckingResult *res = result[i];
-            NSRange range = res.range;
-            return [self substringWithRange:range];
-        }
-    } else {
-        return @"";
-    }
-    return @"";
-}
-
 @end

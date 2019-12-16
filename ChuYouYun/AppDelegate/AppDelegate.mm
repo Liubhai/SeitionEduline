@@ -354,23 +354,10 @@
 }
 
 
-//- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options {
-//    return YES;
-//    return [UMSocialSnsService handleOpenURL:url];
-//}
-
 //使用第三方登录需要重写下面两个方法
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     
     BOOL result = [UMSocialSnsService handleOpenURL:url];
-    if (result == FALSE) {
-        //如果极简 SDK 不可用,会跳转支付宝钱包进行支付,需要将支付宝钱包的支付结果回传给 SDK
-        if ([url.host isEqualToString:@"safepay"]) {
-            return YES;
-        }else if ([url.host isEqualToString:@"platformapi"]){//支付宝钱包快登授权返回 authCode
-            return YES;
-        }
-    }
     return result;
  }
 
@@ -383,8 +370,6 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-
-//    [self NetWorkGetAd];
     
 }
 

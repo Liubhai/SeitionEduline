@@ -345,9 +345,9 @@
         
         isHave = NO;
     } else {
-        if ([HASALIPAY isEqualToString:@"0"]) {
+        if ([HASEDULINE isEqualToString:@"0"]) {
             if (!UserOathToken) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"查看详情需要登录,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"登录后查看详情能获取更多优质内容,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
                 alert.tag = 100;
                 [alert show];
                 return;

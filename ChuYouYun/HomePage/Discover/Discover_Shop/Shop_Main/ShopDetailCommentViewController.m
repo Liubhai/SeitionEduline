@@ -24,7 +24,6 @@
 @property (strong ,nonatomic)UIView      *moreView;
 @property (strong ,nonatomic)UITextView  *textView;
 
-@property (strong ,nonatomic)NSDictionary *dict;
 
 @end
 

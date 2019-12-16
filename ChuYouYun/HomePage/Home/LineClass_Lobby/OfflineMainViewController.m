@@ -45,10 +45,6 @@
 @property (strong ,nonatomic)NSString         *timeStr;
 @property (assign ,nonatomic)NSInteger        typeNum;
 
-@property (strong ,nonatomic)NSString         *alipayStr;
-@property (strong ,nonatomic)NSString         *wxpayStr;
-@property (strong ,nonatomic)UIWebView        *webView;
-
 @property (strong ,nonatomic)NSString         *ID;
 
 @end
@@ -541,8 +537,8 @@
 //是否 真要删除小组
 - (void)whichPay {
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"请选择支付方式" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *aliAction = [UIAlertAction actionWithTitle:@"支付宝" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"支付方式" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *aliAction = [UIAlertAction actionWithTitle:@"某宝" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
         _typeNum = 1;
     }];
     [alertController addAction:aliAction];
@@ -556,39 +552,6 @@
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil];
     [alertController addAction:cancelAction];
     [self presentViewController:alertController animated:YES completion:nil];
-}
-
-#pragma mark --- 添加跳转识图
-- (void)addWebView {
-    
-    _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, MainScreenWidth * 2, MainScreenWidth,MainScreenHeight / 2)];
-    _webView.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:_webView];
-    
-    
-    [_webView setUserInteractionEnabled:YES];//是否支持交互
-    _webView.delegate = self;
-    [_webView setOpaque:YES];//opaque是不透明的意思
-    [_webView setScalesPageToFit:YES];//自适应
-    
-    NSURL *url = nil;
-    if (_typeNum == 1) {
-        if (_alipayStr == nil) {
-            [MBProgressHUD showError:@"支付失败" toView:self.view];
-        } else {
-            url = [NSURL URLWithString:_alipayStr];
-        }
-        
-    } else if (_typeNum == 2) {
-        if (_wxpayStr == nil) {
-            [MBProgressHUD showError:@"支付失败" toView:self.view];
-        } else {
-            url = [NSURL URLWithString:_wxpayStr];
-        }
-    }
-    
-    [_webView loadRequest:[NSURLRequest requestWithURL:url]];
-    
 }
 
 - (void)dealButtonImageAndTitleUI:(UIButton *)sender {
