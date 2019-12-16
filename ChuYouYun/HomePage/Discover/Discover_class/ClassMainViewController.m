@@ -223,7 +223,7 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if ([HASALIPAY isEqualToString:@"0"]) {
+    if ([HASMODIAN isEqualToString:@"0"]) {
         if (!UserOathToken) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"查看详情需要登录,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
             alert.tag = 100;

@@ -93,7 +93,6 @@ static NSString *cellID = @"cell";
     if (_choicenessArray.count == 0) {
         [self getHomeAllData];
     }
-    [self getPayMethodConfig];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -948,7 +947,7 @@ static NSString *cellID = @"cell";
                             getSearchVc.typeStr = @"1";
                             [self.navigationController pushViewController:getSearchVc animated:YES];
                         } else {
-                            if ([HASALIPAY isEqualToString:@"0"]) {
+                            if ([HASMODIAN isEqualToString:@"0"]) {
                                 if (!UserOathToken) {
                                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"查看详情需要登录,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
                                     alert.tag = 100;
@@ -966,7 +965,7 @@ static NSString *cellID = @"cell";
                             getSearchVc.typeStr = @"1";
                             [self.navigationController pushViewController:getSearchVc animated:YES];
                         } else {
-                            if ([HASALIPAY isEqualToString:@"0"]) {
+                            if ([HASMODIAN isEqualToString:@"0"]) {
                                 if (!UserOathToken) {
                                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"查看详情需要登录,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
                                     alert.tag = 100;
@@ -1076,7 +1075,7 @@ static NSString *cellID = @"cell";
 }
 
 - (void)liveButtonClick:(UIButton *)button {
-    if ([HASALIPAY isEqualToString:@"0"]) {
+    if ([HASMODIAN isEqualToString:@"0"]) {
         if (!UserOathToken) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"查看详情需要登录,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
             alert.tag = 100;
@@ -1129,7 +1128,7 @@ static NSString *cellID = @"cell";
 
 //精选课程的手势
 - (void)chooseViewClick:(UIGestureRecognizer *)not {
-    if ([HASALIPAY isEqualToString:@"0"]) {
+    if ([HASMODIAN isEqualToString:@"0"]) {
         if (!UserOathToken) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"查看详情需要登录,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
             alert.tag = 100;
@@ -1162,7 +1161,7 @@ static NSString *cellID = @"cell";
 }
 
 - (void)newsViewClick:(UIGestureRecognizer *)not {
-    if ([HASALIPAY isEqualToString:@"0"]) {
+    if ([HASMODIAN isEqualToString:@"0"]) {
         if (!UserOathToken) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"查看详情需要登录,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
             alert.tag = 100;
@@ -1196,7 +1195,7 @@ static NSString *cellID = @"cell";
 }
 
 - (void)lineClassViewClick:(UIGestureRecognizer *)not {
-    if ([HASALIPAY isEqualToString:@"0"]) {
+    if ([HASMODIAN isEqualToString:@"0"]) {
         if (!UserOathToken) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"查看详情需要登录,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
             alert.tag = 100;
@@ -1710,79 +1709,6 @@ static NSString *cellID = @"cell";
             [_tableView reloadData];
         }
     }
-}
-
-- (void)getPayMethodConfig {
-    NSString *endUrlStr = YunKeTang_Goods_goods_credpayConf;
-    NSString *allUrlStr = [YunKeTang_Api_Tool YunKeTang_GetFullUrl:endUrlStr];
-    
-    NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
-    //获取当前的时间戳
-    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[[NSDate  date] timeIntervalSince1970]];
-    NSString *ggg = [Passport getHexByDecimal:[timeSp integerValue]];
-    
-    NSString *tokenStr =  [Passport md5:[NSString stringWithFormat:@"%@%@",timeSp,ggg]];
-    [mutabDict setObject:ggg forKey:@"hextime"];
-    [mutabDict setObject:tokenStr forKey:@"token"];
-    [mutabDict setObject:@"1" forKey:@"is_ios"];
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:allUrlStr]];
-    [request setHTTPMethod:NetWay];
-    NSString *encryptStr = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetEncryptStr:mutabDict];
-    [request setValue:encryptStr forHTTPHeaderField:HeaderKey];
-    
-    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
-        if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            NSArray *payMethod = [[YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject] arrayValueForKey:@"pay_type"];
-            if ([payMethod containsObject:@"alipay"]) {
-                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"hasAlipay"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-            } else {
-                [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"hasAlipay"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-            }
-        }
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-    }];
-    [op start];
-}
-
-- (void)netWorkGoodsCredpayConf {
-    NSString *endUrlStr = YunKeTang_User_user_balanceConfig;
-    NSString *allUrlStr = [YunKeTang_Api_Tool YunKeTang_GetFullUrl:endUrlStr];
-    
-    NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
-    [mutabDict setObject:@"1"forKey:@"tab"];
-    [mutabDict setObject:@"50"forKey:@"limit"];
-    [mutabDict setObject:@"1" forKey:@"is_ios"];
-    
-    NSString *oath_token_Str = nil;
-    if (UserOathToken) {
-        oath_token_Str = [NSString stringWithFormat:@"%@:%@",UserOathToken,UserOathTokenSecret];
-    }
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:allUrlStr]];
-    [request setHTTPMethod:NetWay];
-    NSString *encryptStr = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetEncryptStr:mutabDict];
-    [request setValue:encryptStr forHTTPHeaderField:HeaderKey];
-    [request setValue:oath_token_Str forHTTPHeaderField:OAUTH_TOKEN];
-    
-    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        
-        NSArray *payMethod = [[YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject] arrayValueForKey:@"pay"];
-        if ([payMethod containsObject:@"alipay"]) {
-            [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"hasAlipay"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-        } else {
-            [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"hasAlipay"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-        }
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-    }];
-    [op start];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {

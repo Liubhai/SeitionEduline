@@ -119,7 +119,7 @@
     if (section == 1 || section == 0) {
         return 2;
     } else if (section == 2) {
-        if ([HASALIPAY isEqualToString:@"0"]) {
+        if ([HASMODIAN isEqualToString:@"0"]) {
             return 1;
         } else {
             return 2;

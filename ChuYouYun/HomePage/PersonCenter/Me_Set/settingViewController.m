@@ -517,7 +517,7 @@
     [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"follow"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"schoolID"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"Video_Face"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"hasAlipay"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"HASMODIAN"];
     [Passport removeFile];
     
     DLViewController *DLVC = [[DLViewController alloc] init];

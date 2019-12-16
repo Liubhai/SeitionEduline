@@ -22,7 +22,6 @@
 #import "TeacherCommentViewController.h"
 #import "TeacherClassViewController.h"
 #import "MessageSendViewController.h"
-#import "YYViewController.h"
 
 #import "DLViewController.h"
 
@@ -143,13 +142,6 @@
     [_tableView addHeaderWithTarget:self action:@selector(netWorkTeacherGetInfo)];
     
     [self interFace];
-    
-
-//    [self addAllScrollView];
-//    [self addInfoView];
-//    [self addWZView];
-//    [self addDownView];
-//    [self addControllerSrcollView];
     [self netWorkTeacherGetInfo];
     
 }
@@ -478,15 +470,6 @@
     [_allScrollView addSubview:WZView];
     _segleMentView = WZView;
     
-    
-//    NSArray *titleArray = @[@"简介",@"课程",@"点评"];
-//    _mainSegment = [[UISegmentedControl alloc] initWithItems:titleArray];
-//    _mainSegment.frame = CGRectMake(2 * SpaceBaside * WideEachUnit,SpaceBaside * WideEachUnit,MainScreenWidth - 4 * SpaceBaside * WideEachUnit, 30 * WideEachUnit);
-//    _mainSegment.selectedSegmentIndex = 0;
-//    [_mainSegment setTintColor:[UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1]];
-//    [_mainSegment addTarget:self action:@selector(mainChange:) forControlEvents:UIControlEventValueChanged];
-//    [WZView addSubview:_mainSegment];
-    
     NSArray *segmentedArray = @[@"简介",@"课程",@"点评"];
     _mainSegment = [[UISegmentedControl alloc] initWithItems:segmentedArray];
     _mainSegment.frame = CGRectMake(0,SpaceBaside,MainScreenWidth, 30 * WideEachUnit);
@@ -507,91 +490,11 @@
     _mainSegment.tintColor = [UIColor whiteColor];
     _mainSegment.momentary = NO;
     [_mainSegment addTarget:self action:@selector(mainChange:) forControlEvents:UIControlEventValueChanged];
-//    basidFrame = CGRectGetMaxY(_mainSegment.frame);
-    
-//    basidFrame = CGRectGetMaxY(_mainSegment.frame);
-    
-}
-
-- (void)addDownView {
-    
-    _downView = [[UIView alloc] initWithFrame:CGRectMake(0, MainScreenHeight - 50 * WideEachUnit , MainScreenWidth, 50 * WideEachUnit)];
-    _downView.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:_downView];
-    
-    //添加线
-    UIButton *lineButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, MainScreenWidth, 1)];
-    lineButton.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    [_downView addSubview:lineButton];
-    
-    
-    CGFloat ButtonW = MainScreenWidth / 2;
-//    buttonW = ButtonW;
-    CGFloat ButtonH = 30 * WideEachUnit;
-    
-    NSArray *title = @[@"关注",@"私信"];
-    NSArray *image = @[@"机构关注@2x",@"机构信息@2x"];
-    if ([_teacherDic[@"follow_state"][@"following"] integerValue] == 0) {
-        image = @[@"icon_focus@3x",@"icon_message@3x"];
-        title = @[@"关注",@"私信"];
-    } else {
-        image = @[@"机构关注@2x",@"icon_message@3x"];
-        title = @[@"已关注",@"私信"];
-    }
-    
-    for (int i = 0 ; i < title.count ; i ++) {
-        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(i * ButtonW, SpaceBaside, ButtonW, ButtonH)];
-        [button setTitle:title[i] forState:UIControlStateNormal];
-        [button setTitleColor:BlackNotColor forState:UIControlStateNormal];
-        [button setImage:Image(image[i]) forState:UIControlStateNormal];
-        button.titleLabel.font = Font(14 * WideEachUnit);
-        button.tag = i * 1000;
-        [button addTarget:self action:@selector(downButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [_downView addSubview:button];
-        
-        if (i == 0) {
-            _attentionButton = button;
-        } else if (i == 2) {
-            button.backgroundColor = BasidColor;
-            button.frame = CGRectMake(2 * ButtonW, 0, ButtonW, 50 * WideEachUnit);
-            [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            button.titleLabel.font = Font(16 * WideEachUnit);
-        }
-        
-    }
-    
-    //添加横线
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth / 2 - 0.5, 17, 1, 16)];
-    button.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    [_downView addSubview:button];
     
 }
 
 
 #pragma mark --- 滚动试图
-
-//-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//
-//    CGFloat contentCrorX = _controllerSrcollView.contentOffset.x;
-//    CGFloat contentCrorY = _controllerSrcollView.contentOffset.y;
-//
-//
-//    if (contentCrorX < MainScreenWidth) {
-//        _mainSegment.selectedSegmentIndex = 0;
-//        _allScrollView.contentSize = CGSizeMake(0 , [_oneHightStr floatValue] + CGRectGetMaxY(_infoView.frame) + 50 * WideEachUnit);
-//    }
-//    else if (contentCrorX < 2 * MainScreenWidth) {
-//        _mainSegment.selectedSegmentIndex = 1;
-//        _allScrollView.contentSize = CGSizeMake(0 , [_twoHightStr floatValue] + CGRectGetMaxY(_infoView.frame) + 50 * WideEachUnit);
-//
-//
-//
-//    }  else if (contentCrorX < 3 * MainScreenWidth) {
-//        _mainSegment.selectedSegmentIndex = 2;
-//        _allScrollView.contentSize = CGSizeMake(0 , [_fourHightStr floatValue] + 270 * WideEachUnit);
-//    }
-//
-//}
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (scrollView == self.mainScroll) {
         if (scrollView.contentOffset.x <= 0) {
@@ -738,34 +641,6 @@
     _allScrollView.contentOffset = CGPointMake(0, 0);
 }
 
-#pragma mark ---- 时间监听
-
-- (void)downButtonClick:(UIButton *)button {
-    switch (button.tag) {
-        case 0:
-            if (UserOathToken == nil) {
-                DLViewController *DLVC = [[DLViewController alloc] init];
-                UINavigationController *Nav = [[UINavigationController alloc] initWithRootViewController:DLVC];
-                [self.navigationController presentViewController:Nav animated:YES completion:nil];
-                return;
-            }
-            if ([button.titleLabel.text isEqualToString:@"关注"]) {
-                [self netWorkUseFollow];
-            } else {
-                [self netWorkUseUnFollow];
-            }
-            break;
-        case 1000:
-            [self gotoSendMessage];
-            break;
-        case 2000:
-            [self gotoSubscribe];
-            break;
-        default:
-            break;
-    }
-}
-
 - (void)attentionButtonButtonCilck {
     if (UserOathToken == nil) {
         DLViewController *DLVC = [[DLViewController alloc] init];
@@ -794,24 +669,6 @@
     [self.navigationController pushViewController:MSVC animated:YES];
     
 }
-
-- (void)gotoSubscribe {
-    
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"oauthToken"] == nil) {//没有登录的情况下
-        DLViewController *DLVC = [[DLViewController alloc] init];
-        UINavigationController *Nav = [[UINavigationController alloc] initWithRootViewController:DLVC];
-        [self.navigationController presentViewController:Nav animated:YES completion:nil];
-        return;
-    }
-    YYViewController *YY = [[YYViewController alloc]init];
-    YY.TID = _ID;
-    YY.name = _nameStr;
-    YY.lineonPrice = [NSString stringWithFormat:@"%@",[_teacherDic stringValueForKey:@"online_price"]];
-    YY.lineoffprice = [NSString stringWithFormat:@"%@",[_teacherDic stringValueForKey:@"offline_price"]];
-    [self.navigationController pushViewController:YY animated:YES];
-    
-}
-
 
 #pragma mark ---网络请求
 //获取讲师详情

@@ -69,7 +69,7 @@
 #define NetKey [[NSUserDefaults standardUserDefaults] objectForKey:@"App_Key"] == nil ? @"2506957b1ea89b71" : [[NSUserDefaults standardUserDefaults] objectForKey:@"App_Key"]
 #define HeaderKey @"En-Params"
 
-#define HASALIPAY [[NSUserDefaults standardUserDefaults] objectForKey:@"hasAlipay"] == nil ? @"0" : [[NSUserDefaults standardUserDefaults] objectForKey:@"hasAlipay"]
+#define HASMODIAN @"0"
 
 
 
@@ -207,9 +207,6 @@ alpha:1.0]
 // 新浪分享
 #define SinaAppId @"3997129963"
 #define SinaAppSecret @"da07bcf6c9f30281e684f8abfd0b4fca"
-
-// 支付宝h5支付之后需要回到app
-#define AlipayBundleId @"com.xinxinbook.modianketang"
 
 // TKYUN
 #import "TKHelperUtil.h"
