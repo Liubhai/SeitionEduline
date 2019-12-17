@@ -4272,7 +4272,7 @@
 		504C759D1AA4395E00DF3018 /* Top2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Top2.png; sourceTree = "<group>"; };
 		504C759E1AA4395E00DF3018 /* Top3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Top3.png; sourceTree = "<group>"; };
 		5051459D1AE49F4E00CCCAE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		50566DFC1A6F44A400F093DE /* Eduline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Eduline.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		50566DFC1A6F44A400F093DE /* 潇洒网校.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "潇洒网校.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		50566E001A6F44A400F093DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50566E011A6F44A400F093DE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		50566E0C1A6F44A400F093DE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -10171,7 +10171,7 @@
 		50566DFD1A6F44A400F093DE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				50566DFC1A6F44A400F093DE /* Eduline.app */,
+				50566DFC1A6F44A400F093DE /* 潇洒网校.app */,
 				50566E151A6F44A400F093DE /* YunKeTang.xctest */,
 			);
 			name = Products;
@@ -24025,7 +24025,7 @@
 			);
 			name = YunKeTang;
 			productName = ChuYouYun;
-			productReference = 50566DFC1A6F44A400F093DE /* Eduline.app */;
+			productReference = 50566DFC1A6F44A400F093DE /* 潇洒网校.app */;
 			productType = "com.apple.product-type.application";
 		};
 		50566E141A6F44A400F093DE /* YunKeTangTests */ = {
@@ -28088,8 +28088,8 @@
 					"\"$(SRCROOT)/ChuYouYun/Library/umeng_ios_social_sdk_5.2-2.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/SinaSSO/libWeiboSDK.a\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.saixin.eduline;
-				PRODUCT_NAME = Eduline;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xiaosa.wangxiao;
+				PRODUCT_NAME = "潇洒网校";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
@@ -28109,7 +28109,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2VGCGZZ87Y;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -28194,10 +28194,10 @@
 					"\"$(SRCROOT)/ChuYouYun/Library/umeng_ios_social_sdk_5.2-2.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/SinaSSO/libWeiboSDK.a\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.saixin.eduline;
-				PRODUCT_NAME = Eduline;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xiaosa.wangxiao;
+				PRODUCT_NAME = "潇洒网校";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = appTongYongDis;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7s armv7 arm64";

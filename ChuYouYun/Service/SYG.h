@@ -108,10 +108,10 @@
 //#define EncryptHeaderUrl @"https://t.v4.51eduline.com"
 
 /// 测试服(d单机构和多机构)
-#define EncryptUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://single.51eduline.com/service/" : @"https://t.v4.51eduline.com/service/"
-#define EncryptHeaderUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://single.51eduline.com" : @"https://t.v4.51eduline.com"
+#define EncryptUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://single.51eduline.com/service/" : @"https://www.xs1616.com/service/"
+#define EncryptHeaderUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://single.51eduline.com" : @"https://www.xs1616.com"
 
-#define basidUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://single.51eduline.com/service" : @"https://t.v4.51eduline.com/service"
+#define basidUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://single.51eduline.com/service" : @"https://www.xs1616.com/service"
 
 /// 正式服(单机构和多机构)
 //#define EncryptUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://demo.51eduline.com/service/" : @"https://v4.51eduline.com/service/"
@@ -204,17 +204,17 @@ alpha:1.0]
 #define MACRO_UI_SAFEAREA [YunKeTang_Api_Tool safeAreaWithIPhoneX]
 
 // 微信分享
-#define WXAppId @"wxbbb961a0b0bf577a"
-#define WXAppSecret @"7ea0101aeabd53bc32859370cde278cc"
+#define WXAppId @"wxde87a3c6a8a99450"
+#define WXAppSecret @"950ad6fd5af6eab9d9b089fae5ab0fa5"
 // QQ分享
-#define QQAppId @"101400042"
-#define QQAppSecret @"a85c2fcd67839693d5c0bf13bec84779"
+#define QQAppId @"101806023"
+#define QQAppSecret @"49a13f584ed7f69d58fc52ae80f25cd5"
 // 新浪分享
-#define SinaAppId @"3997129963"
-#define SinaAppSecret @"da07bcf6c9f30281e684f8abfd0b4fca"
+#define SinaAppId @"1119368779"
+#define SinaAppSecret @"7ae11cf279000243383acb98693aee91"
 
 // 支付宝h5支付之后需要回到app
-#define AlipayBundleId @"com.saixin.eduline"
+#define AlipayBundleId @"com.xiaosa.wangxiao"
 
 // TKYUN
 #import "TKHelperUtil.h"

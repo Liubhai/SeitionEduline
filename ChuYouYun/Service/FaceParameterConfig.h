@@ -16,7 +16,7 @@
 #define FACE_LICENSE_SUFFIX  @"face-ios"
 
 // （您申请的应用名称(appname)+「-face-ios」后缀，如申请的应用名称(appname)为test123，则此处填写test123-face-ios）
-#define FACE_LICENSE_ID        @"el4-face-ios"
+#define FACE_LICENSE_ID        @"xiaosa-face-ios"
 
 // OCR license文件名
 #define OCR_LICENSE_NAME     @"aip"
@@ -25,9 +25,9 @@
 #define OCR_LICENSE_SUFFIX   @"license"
 
 // 您的API Key
-#define FACE_API_KEY         @"rRO6ZkdEbFZQei6gorADwT7S"
+#define FACE_API_KEY         @"KK8pO3G9QBcKCibTcooZ2mjN"
 
 // 您的Secret Key
-#define FACE_SECRET_KEY      @"FCQ1Cdtplw5GFRxUu8q1mjdby4YAhGQU"
+#define FACE_SECRET_KEY      @"z68TC2bleVQUtKptM1ipDnuxMRpyeeAc"
 
 #endif /* FaceParameterConfig_h */
