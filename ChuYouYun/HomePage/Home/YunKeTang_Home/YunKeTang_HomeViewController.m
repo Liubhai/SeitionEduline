@@ -108,7 +108,6 @@ static NSString *cellID = @"cell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadHomeData) name:@"reloadEdulineHomeData" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getPayMethodConfig) name:@"getPayMethodConfig" object:nil];
     [self interFace];
     [self addNav];
     [self addTableHeaderView];
