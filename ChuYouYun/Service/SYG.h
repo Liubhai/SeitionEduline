@@ -204,14 +204,14 @@ alpha:1.0]
 #define MACRO_UI_SAFEAREA [YunKeTang_Api_Tool safeAreaWithIPhoneX]
 
 // 微信分享
-#define WXAppId @"wxbbb961a0b0bf577a"
-#define WXAppSecret @"7ea0101aeabd53bc32859370cde278cc"
+#define WXAppId @"wxeb4856501f552637"
+#define WXAppSecret @"c15b1a45f593fafcad170f83113fe9d3"
 // QQ分享
-#define QQAppId @"101400042"
-#define QQAppSecret @"a85c2fcd67839693d5c0bf13bec84779"
+#define QQAppId @"101830418"
+#define QQAppSecret @"695ccda1737e84385dfbb9f94df30a81"
 // 新浪分享
-#define SinaAppId @"3997129963"
-#define SinaAppSecret @"da07bcf6c9f30281e684f8abfd0b4fca"
+#define SinaAppId @"2303321936"
+#define SinaAppSecret @"03f85becb3544cdda5e114506adff07d"
 
 // 支付宝h5支付之后需要回到app
 #define AlipayBundleId @"com.jianke.jiaoyu"
