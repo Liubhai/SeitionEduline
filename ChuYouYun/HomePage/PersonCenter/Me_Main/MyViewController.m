@@ -688,16 +688,16 @@
     allDD.hidden = YES;
     
     
-    CGFloat ButtonW = MainScreenWidth / 5;
+    CGFloat ButtonW = MainScreenWidth / 3;
     CGFloat ButtonH = ButtonW + 20;
-    NSArray *titleArray = @[@"待支付",@"已取消",@"已完成",@"申请退款",@"已退款"];
-    NSArray *image = @[@"order_pay@3x",@"order_cancel@3x",@"order_finish@3x",@"order_apply@3x",@"order_refund@2x"];
+    NSArray *titleArray = @[@"待支付",@"已取消",@"已完成"];
+    NSArray *image = @[@"order_pay@3x",@"order_cancel@3x",@"order_finish@3x"];
     
     //确定View 的大小
     _orderView.frame = CGRectMake(0, CGRectGetMaxY(_headerView.frame) + 10 * WideEachUnit, MainScreenWidth,50 + ButtonH + SpaceBaside - SpaceBaside);
 
     
-    for (int i = 0 ; i < 5 ; i ++) {
+    for (int i = 0 ; i < 3 ; i ++) {
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(ButtonW * i, 40, ButtonW, ButtonH)];
 
         [button setImage:Image(image[i]) forState:UIControlStateNormal];
