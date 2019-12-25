@@ -2178,7 +2178,8 @@
 
 - (void)detectionMarquee {
     if ([_marqueeOpenStr integerValue] == 1) {
-        VideoMarqueeViewController *vc = [[VideoMarqueeViewController alloc] initWithDict:_marqueeDict];
+        VideoMarqueeViewController *vc = [[VideoMarqueeViewController alloc] init];
+        vc.dict = _marqueeDict;
         [_playerView addSubview:vc.view];
         [self addChildViewController:vc];
         return;
