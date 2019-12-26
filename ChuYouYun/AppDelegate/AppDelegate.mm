@@ -254,9 +254,9 @@
     
     [httpServer setType:@"_http._tcp."];
     
-    [httpServer setPort:12345];
+    [httpServer setPort:8080];
     
-    NSString *webPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Library/Private Documents/Temp"];
+    NSString *webPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES) objectAtIndex:0] stringByAppendingPathComponent:@"m3u8files"];//[NSHomeDirectory() stringByAppendingPathComponent:@"Library/Private Documents/Temp"];
     NSFileManager *fileManager=[NSFileManager defaultManager];
     if(![fileManager fileExistsAtPath:webPath])
     {
