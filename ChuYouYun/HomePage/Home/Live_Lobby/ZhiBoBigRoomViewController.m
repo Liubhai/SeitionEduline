@@ -229,14 +229,14 @@ static NSString *cellID = @"cell";
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if ([HASEDULINE isEqualToString:@"0"]) {
-        if (!UserOathToken) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"登录后查看详情能获取更多优质内容,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
-            alert.tag = 100;
-            [alert show];
-            return;
-        }
-    }
+//    if ([HASEDULINE isEqualToString:@"0"]) {
+//        if (!UserOathToken) {
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"登录后查看详情能获取更多优质内容,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
+//            alert.tag = 100;
+//            [alert show];
+//            return;
+//        }
+//    }
     NSLog(@"%ld",(long)indexPath.item);
     NSString *Cid = nil;
     Cid = [[_dataArray objectAtIndex:indexPath.row] stringValueForKey:@"live_id"];

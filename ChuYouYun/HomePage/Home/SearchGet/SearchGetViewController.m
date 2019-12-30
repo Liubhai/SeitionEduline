@@ -496,14 +496,14 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if ([_typeStr isEqualToString:@"1"]) {//课程
-        if ([HASEDULINE isEqualToString:@"0"]) {
-            if (!UserOathToken) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"登录后查看详情能获取更多优质内容,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
-                alert.tag = 100;
-                [alert show];
-                return;
-            }
-        }
+//        if ([HASEDULINE isEqualToString:@"0"]) {
+//            if (!UserOathToken) {
+//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"登录后查看详情能获取更多优质内容,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
+//                alert.tag = 100;
+//                [alert show];
+//                return;
+//            }
+//        }
         NSString *ID = [[_classArray objectAtIndex:indexPath.row] stringValueForKey:@"id"];
         NSString *price = [[_classArray objectAtIndex:indexPath.row] stringValueForKey:@"price"];
         NSString *title = [[_classArray objectAtIndex:indexPath.row] stringValueForKey:@"video_title"];
@@ -519,14 +519,14 @@
         [self.navigationController pushViewController:vc animated:YES];
         
     }else if ([_typeStr isEqualToString:@"2"]) {
-        if ([HASEDULINE isEqualToString:@"0"]) {
-            if (!UserOathToken) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"登录后查看详情能获取更多优质内容,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
-                alert.tag = 100;
-                [alert show];
-                return;
-            }
-        }
+//        if ([HASEDULINE isEqualToString:@"0"]) {
+//            if (!UserOathToken) {
+//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"登录后查看详情能获取更多优质内容,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
+//                alert.tag = 100;
+//                [alert show];
+//                return;
+//            }
+//        }
         NSString *Cid = [NSString stringWithFormat:@"%@",[[_classArray objectAtIndex:indexPath.row] stringValueForKey:@"live_id"]];
         NSString *Price = [[_classArray objectAtIndex:indexPath.row] stringValueForKey:@"price"];
         NSString *Title = [[_classArray objectAtIndex:indexPath.row] stringValueForKey:@"video_title"];

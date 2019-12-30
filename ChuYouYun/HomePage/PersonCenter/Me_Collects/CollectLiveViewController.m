@@ -183,14 +183,14 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [_tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if ([HASEDULINE isEqualToString:@"0"]) {
-        if (!UserOathToken) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"登录后查看详情能获取更多优质内容,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
-            alert.tag = 100;
-            [alert show];
-            return;
-        }
-    }
+//    if ([HASEDULINE isEqualToString:@"0"]) {
+//        if (!UserOathToken) {
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"登录后查看详情能获取更多优质内容,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
+//            alert.tag = 100;
+//            [alert show];
+//            return;
+//        }
+//    }
     NSString *Cid = nil;
     Cid = _dataArray[indexPath.row][@"id"];
     NSString *Price = _dataArray[indexPath.row][@"price"];

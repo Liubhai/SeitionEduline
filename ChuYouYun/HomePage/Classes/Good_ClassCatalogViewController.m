@@ -324,7 +324,10 @@
             return;
         }
     }
-    
+    if (!UserOathToken) {
+        [MBProgressHUD showError:@"请先解锁该课程!" toView:[UIApplication sharedApplication].keyWindow];
+        return;
+    }
     //点击了
     //    self.didSele(@"didSele");
     
@@ -1344,6 +1347,11 @@
             [self.navigationController presentViewController:Nav animated:YES completion:nil];
             return;
         }
+    }
+    
+    if (!UserOathToken) {
+        [MBProgressHUD showError:@"请先解锁该课程!" toView:[UIApplication sharedApplication].keyWindow];
+        return;
     }
     
     //点击了
