@@ -70,7 +70,6 @@
 - (void)interFace {
     self.view.backgroundColor = [UIColor whiteColor];
     isHaveAli = NO;
-//    _titleArray = @[@"银行卡",@"支付宝",@"第三方绑定"];
     [_titleArray addObjectsFromArray:@[@"第三方绑定"]];
 }
 
