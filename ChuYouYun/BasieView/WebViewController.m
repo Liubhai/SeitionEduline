@@ -48,7 +48,9 @@
     [_webView setScalesPageToFit:YES];//自适应
     _webView.scrollView.scrollEnabled = NO;
     
-    NSURL *url = [NSURL URLWithString:_urlString];
+    NSString *encodedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)_urlString, (CFStringRef)@"!NULL,'()*+,-./:;=?@_~%#[]", NULL, kCFStringEncodingUTF8));
+    
+    NSURL *url = [NSURL URLWithString:encodedString];
     [_webView loadRequest:[NSURLRequest requestWithURL:url]];
     [self.view addSubview:_webView];
 }
