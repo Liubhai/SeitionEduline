@@ -1230,13 +1230,44 @@
     
 }
 
-//注册的配置接口
+//获取qq授权token
 - (void)getTencentId:(NSString *)tencentToken {
     
-    NSString *allUrlStr = @"https://graph.qq.com/oauth2.0/me";
+    NSString *allUrlStr = [NSString
+                           stringWithFormat:@"https://graph.qq.com/oauth2.0/me?access_token=%@",tencentToken];
     
     NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
     [mutabDict setObject:tencentToken forKey:@"access_token"];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:allUrlStr]];
+    [request setHTTPMethod:@"GET"];
+    
+    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
+        NSString *receiveStr1 = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSRange rang1 = [receiveStr1 rangeOfString:@"{"];
+        NSRange rang2 = [receiveStr1 rangeOfString:@"}"];
+        NSString *receiveStr = [receiveStr1 substringWithRange:NSMakeRange(rang1.location, rang2.location - rang1.location + 1)];
+        NSData *jsonData = [receiveStr dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                            options:NSJSONReadingMutableContainers
+                                                              error:nil];
+        [self loginWithTencent:[dic objectForKey:@"openid"] loginType:@"qzone"];
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+    }];
+    [op start];
+}
+
+- (void)loginWithTencent:(NSString *)snsAccount loginType:(NSString *)type
+{
+    NSString *endUrlStr = YunKeTang_passport_loginSync;
+    NSString *allUrlStr = [YunKeTang_Api_Tool YunKeTang_GetFullUrl:endUrlStr];
+    
+    NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
+    [mutabDict setValue:snsAccount forKey:@"app_token"];
+    [mutabDict setValue:type forKey:@"app_login_type"];
+    [[NSUserDefaults standardUserDefaults]setObject:type forKey:@"loginType"];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:allUrlStr]];
     [request setHTTPMethod:NetWay];
@@ -1245,16 +1276,24 @@
     
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
-//        _UID = snsAccount.openId;
-//        _appToken = snsAccount.unionId;
-//        
-//        [self loginWithSNSAccount:snsAccount loginType:@"qzone"];
-        if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-           dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
-            _registerConfStr = [dict stringValueForKey:@"account_type"];
+        NSLog(@"%@", responseObject);
+        _loginType = type;
+        _loginSyncDataSource = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
+        if ([[_loginSyncDataSource stringValueForKey:@"code"] integerValue] == 0) {//未绑定
+            [self type_regis];
+            return ;
+        } else if ([[_loginSyncDataSource stringValueForKey:@"code"] integerValue] == 1) {
+            _loginSyncDataSource = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
         }
-        NSLog(@"----%@",dict);
+        
+        [[NSUserDefaults standardUserDefaults]setObject:[_loginSyncDataSource stringValueForKey:@"oauth_token"] forKey:@"oauthToken"];
+        [[NSUserDefaults standardUserDefaults]setObject:[_loginSyncDataSource stringValueForKey:@"oauth_token_secret"] forKey:@"oauthTokenSecret"];
+//        [[NSUserDefaults standardUserDefaults]setObject:[_loginSyncDataSource stringValueForKey:@"uid"] forKey:@"User_id"];
+        [[NSUserDefaults standardUserDefaults]setObject:[_loginSyncDataSource stringValueForKey:@"userface"] forKey:@"userface"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"getPayMethodConfig" object:nil];
+        rootViewController *blum = [[rootViewController alloc]init];
+        self.view.window.rootViewController = blum;
+        
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];
     [op start];

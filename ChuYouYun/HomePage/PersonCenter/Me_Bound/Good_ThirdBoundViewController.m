@@ -174,12 +174,7 @@
     snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
         if (response.responseCode == UMSResponseCodeSuccess) {
             UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:snsPlatform.platformName];
-            _uid = snsAccount.usid;
-            if ([_typeStr integerValue] == 0) {
-                [self NetWorkUserBindWithType:@"qzone"];
-            } else if ([_typeStr integerValue] == 1) {
-                [self NetWorkUserBindDelWithType:@"qzone"];
-            }
+            [self getTencentId:snsAccount.accessToken];
         }});
 }
 
@@ -384,7 +379,39 @@
     [op start];
 }
 
-
+//获取qq授权token
+- (void)getTencentId:(NSString *)tencentToken {
+    
+    NSString *allUrlStr = [NSString
+                           stringWithFormat:@"https://graph.qq.com/oauth2.0/me?access_token=%@",tencentToken];
+    
+    NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
+    [mutabDict setObject:tencentToken forKey:@"access_token"];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:allUrlStr]];
+    [request setHTTPMethod:@"GET"];
+    
+    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
+        NSString *receiveStr1 = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSRange rang1 = [receiveStr1 rangeOfString:@"{"];
+        NSRange rang2 = [receiveStr1 rangeOfString:@"}"];
+        NSString *receiveStr = [receiveStr1 substringWithRange:NSMakeRange(rang1.location, rang2.location - rang1.location + 1)];
+        NSData *jsonData = [receiveStr dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                            options:NSJSONReadingMutableContainers
+                                                              error:nil];
+        _uid = [NSString stringWithFormat:@"%@",[dic objectForKey:@"openid"]];
+        if ([_typeStr integerValue] == 0) {
+            [self NetWorkUserBindWithType:@"qzone"];
+        } else if ([_typeStr integerValue] == 1) {
+            [self NetWorkUserBindDelWithType:@"qzone"];
+        }
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+    }];
+    [op start];
+}
 
 
 @end
