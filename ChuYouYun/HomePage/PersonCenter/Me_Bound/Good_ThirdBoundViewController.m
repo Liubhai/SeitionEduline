@@ -213,38 +213,6 @@
 }
 
 
-#pragma mark --- 网络请求
-- (void)netWorkUserGetAlipayInfo {
-    
-    NSString *endUrlStr = YunKeTang_User_user_getAlipayInfo;
-    NSString *allUrlStr = [YunKeTang_Api_Tool YunKeTang_GetFullUrl:endUrlStr];
-    
-    NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
-    [mutabDict setObject:@"20" forKey:@"count"];
-    
-    NSString *oath_token_Str = nil;
-    if (UserOathToken) {
-        oath_token_Str = [NSString stringWithFormat:@"%@:%@",UserOathToken,UserOathTokenSecret];
-    }
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:allUrlStr]];
-    [request setHTTPMethod:NetWay];
-    NSString *encryptStr = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetEncryptStr:mutabDict];
-    [request setValue:encryptStr forHTTPHeaderField:HeaderKey];
-    [request setValue:oath_token_Str forHTTPHeaderField:OAUTH_TOKEN];
-    
-    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        _aliDict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
-        _aliDict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
-        
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        
-    }];
-    [op start];
-}
-
-
 //获取绑定状态
 - (void)NetWorkUserBindData {
     

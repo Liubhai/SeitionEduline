@@ -13,8 +13,6 @@
 #import "BigWindCar.h"
 
 #import "Good_BankViewController.h"
-#import "Good_AlipayViewController.h"
-#import "Good_AliBoundViewController.h"
 #import "Good_PersonFaceBoundViewController.h"
 #import "Good_ThirdBoundViewController.h"
 
@@ -72,7 +70,6 @@
 - (void)interFace {
     self.view.backgroundColor = [UIColor whiteColor];
     isHaveAli = NO;
-//    _titleArray = @[@"银行卡",@"支付宝",@"第三方绑定"];
     [_titleArray addObjectsFromArray:@[@"第三方绑定"]];
 }
 
@@ -150,12 +147,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([_titleArray[indexPath.row] isEqualToString:@"银行卡"]) {
-        Good_BankViewController *vc = [[Good_BankViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-    } else if ([_titleArray[indexPath.row] isEqualToString:@"支付宝"]) {
-        [self netWorkUserGetAlipayInfo];
-    } else if ([_titleArray[indexPath.row] isEqualToString:@"第三方绑定"]) {
+    if ([_titleArray[indexPath.row] isEqualToString:@"第三方绑定"]) {
         Good_ThirdBoundViewController *vc = [[Good_ThirdBoundViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     } else if ([_titleArray[indexPath.row] isEqualToString:@"刷脸绑定"]) {
@@ -167,50 +159,6 @@
 #pragma mark --- 事件处理
 - (void)backPressed {
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-#pragma mark --- 网络请求
-- (void)netWorkUserGetAlipayInfo {
-    
-    NSString *endUrlStr = YunKeTang_User_user_getAlipayInfo;
-    NSString *allUrlStr = [YunKeTang_Api_Tool YunKeTang_GetFullUrl:endUrlStr];
-    
-    NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
-    [mutabDict setObject:@"20" forKey:@"count"];
-    
-    NSString *oath_token_Str = nil;
-    if (UserOathToken) {
-        oath_token_Str = [NSString stringWithFormat:@"%@:%@",UserOathToken,UserOathTokenSecret];
-    }
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:allUrlStr]];
-    [request setHTTPMethod:NetWay];
-    NSString *encryptStr = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetEncryptStr:mutabDict];
-    [request setValue:encryptStr forHTTPHeaderField:HeaderKey];
-    [request setValue:oath_token_Str forHTTPHeaderField:OAUTH_TOKEN];
-    
-    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        _aliDict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
-        _aliDict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
-        if ([_aliDict stringValueForKey:@"account"] != nil) {
-            isHaveAli = YES;
-        } else {
-            isHaveAli = NO;
-        }
-        //跳转
-        if (isHaveAli) {
-            Good_AlipayViewController *vc = [[Good_AlipayViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-        } else {
-            Good_AliBoundViewController *vc = [[Good_AliBoundViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-        
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        
-    }];
-    [op start];
 }
 
 //人脸识别的配置接口
@@ -251,17 +199,11 @@
 
         if ([[_faceStatusDataSource stringValueForKey:@"is_open"] integerValue] == 0) {//不存在
             _faceOpen = @"0";
-//            _titleArray = @[@"银行卡",@"支付宝",@"第三方绑定"];
-//            _titleArray = @[@"银行卡",@"第三方绑定"];
         } else if ([[_faceStatusDataSource stringValueForKey:@"is_open"] integerValue] == 1) {//正常使用
             _faceOpen = @"1";
-//            _titleArray = @[@"银行卡",@"支付宝",@"第三方绑定",@"刷脸绑定"];
-//            _titleArray = @[@"银行卡",@"第三方绑定",@"刷脸绑定"];
             [_titleArray addObject:@"刷脸绑定"];
         } else if ([[_faceStatusDataSource stringValueForKey:@"is_open"] integerValue] == 2) {//需要上传更多的照片
             _faceOpen = @"2";
-//            _titleArray = @[@"银行卡",@"支付宝",@"第三方绑定",@"刷脸绑定"];
-//            _titleArray = @[@"银行卡",@"第三方绑定",@"刷脸绑定"];
             [_titleArray addObject:@"刷脸绑定"];
         }
         [_tableView reloadData];
@@ -297,11 +239,6 @@
         if ([[[YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject] objectForKey:@"code"] integerValue] == 1) {
             if (SWNOTEmptyDictionary([YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStrFromData:responseObject])) {
                 [_payTypeArray addObjectsFromArray:[[YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStrFromData:responseObject] arrayValueForKey:@"pay"]];
-            }
-            /// 这里优化处理  由于后台强制会有银行卡 这里根据是不是只有余额方式来显示
-            if ([_payTypeArray containsObject:@"alipay"]) {
-                [_titleArray insertObject:@"支付宝" atIndex:0];
-                [_titleArray insertObject:@"银行卡" atIndex:0];
             }
         }
         [_tableView reloadData];

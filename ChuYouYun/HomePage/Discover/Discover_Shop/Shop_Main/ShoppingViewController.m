@@ -13,7 +13,6 @@
 #import "SDCycleScrollView.h"
 #import "BigWindCar.h"
 
-#import "ShopDetailViewController.h"
 #import "AdViewController.h"
 #import "ShopDetailMainViewController.h"
 
@@ -971,7 +970,7 @@
                             getSearchVc.typeStr = @"1";
                             [self.navigationController pushViewController:getSearchVc animated:YES];
                         } else {
-                            if ([HASALIPAY isEqualToString:@"0"]) {
+                            if ([HASJIANGREN isEqualToString:@"0"]) {
                                 if (!UserOathToken) {
                                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"查看详情需要登录,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
                                     alert.tag = 100;
@@ -989,7 +988,7 @@
                             getSearchVc.typeStr = @"1";
                             [self.navigationController pushViewController:getSearchVc animated:YES];
                         } else {
-                            if ([HASALIPAY isEqualToString:@"0"]) {
+                            if ([HASJIANGREN isEqualToString:@"0"]) {
                                 if (!UserOathToken) {
                                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"查看详情需要登录,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
                                     alert.tag = 100;
@@ -1052,15 +1051,6 @@
     vc.percentage = percentage;
     vc.payTypeArray = _payTypeArray;
     [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (void)indexButtonCilck:(UIButton *)button {
-    NSString *ID = [NSString stringWithFormat:@"%ld",(long)button.tag];
-    ShopDetailViewController *shopDetail = [[ShopDetailViewController alloc]initWithID:ID];
-    shopDetail.percentage = percentage;
-    shopDetail.scoreStaus = _scoreStaus;
-    shopDetail.payTypeArray = _payTypeArray;
-    [self.navigationController pushViewController:shopDetail animated:YES];
 }
 
 - (void)changeUp:(UIButton *)button {
@@ -1196,13 +1186,6 @@
 }
 
 - (void)viewButtonCilck:(UIButton *)button {
-//    NSString *ID = [NSString stringWithFormat:@"%ld",(long)button.tag];
-//    ShopDetailViewController *shopDetail = [[ShopDetailViewController alloc]initWithID:ID];
-//    shopDetail.dict = [_dataArray objectAtIndex:button.tag];
-//    shopDetail.scoreStaus = _scoreStaus;
-//    shopDetail.percentage = percentage;
-//    shopDetail.payTypeArray = _payTypeArray;
-//    [self.navigationController pushViewController:shopDetail animated:YES];
     
     ShopDetailMainViewController *vc = [[ShopDetailMainViewController alloc] init];
     vc.dict = [_dataArray objectAtIndex:button.tag];

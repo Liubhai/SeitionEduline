@@ -70,7 +70,7 @@
 #define NetKey [[NSUserDefaults standardUserDefaults] objectForKey:@"App_Key"] == nil ? @"2506957b1ea89b71" : [[NSUserDefaults standardUserDefaults] objectForKey:@"App_Key"]
 #define HeaderKey @"En-Params"
 
-#define HASALIPAY [[NSUserDefaults standardUserDefaults] objectForKey:@"hasAlipay"] == nil ? @"0" : [[NSUserDefaults standardUserDefaults] objectForKey:@"hasAlipay"]
+#define HASJIANGREN [[NSUserDefaults standardUserDefaults] objectForKey:@"HASJIANGREN"] == nil ? @"0" : [[NSUserDefaults standardUserDefaults] objectForKey:@"HASJIANGREN"]
 
 #define Show_Config [[NSUserDefaults standardUserDefaults] objectForKey:@"show_config"] == nil ? @"0" : [[NSUserDefaults standardUserDefaults] objectForKey:@"show_config"]
 
@@ -213,8 +213,6 @@ alpha:1.0]
 #define SinaAppId @"3951167810"
 #define SinaAppSecret @"55bde87d5c36f21f64204736afc6b19c"
 
-// 支付宝h5支付之后需要回到app
-#define AlipayBundleId @"com.jiangrenonline.com"
 
 // TKYUN
 #import "TKHelperUtil.h"

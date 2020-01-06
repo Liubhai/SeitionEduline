@@ -14,11 +14,4 @@
 
 @interface NSString (Valid)
 -(BOOL)isChinese;
-
-/**
- 截取支付宝支付需要的支付订单号
-
- @return 支付订单号
- */
-- (NSString *)interceptionAliPayString;
 @end

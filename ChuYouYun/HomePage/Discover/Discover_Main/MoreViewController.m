@@ -120,7 +120,7 @@
     if (section == 0) {
         return 1;
     } else if (section == 3) {
-        if ([HASALIPAY isEqualToString:@"0"]) {
+        if ([HASJIANGREN isEqualToString:@"0"]) {
             return 1;
         } else {
             return 2;

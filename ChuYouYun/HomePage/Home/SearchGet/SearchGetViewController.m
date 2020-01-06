@@ -496,7 +496,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if ([_typeStr isEqualToString:@"1"]) {//课程
-        if ([HASALIPAY isEqualToString:@"0"]) {
+        if ([HASJIANGREN isEqualToString:@"0"]) {
             if (!UserOathToken) {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"查看详情需要登录,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
                 alert.tag = 100;
@@ -519,7 +519,7 @@
         [self.navigationController pushViewController:vc animated:YES];
         
     }else if ([_typeStr isEqualToString:@"2"]) {
-        if ([HASALIPAY isEqualToString:@"0"]) {
+        if ([HASJIANGREN isEqualToString:@"0"]) {
             if (!UserOathToken) {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"查看详情需要登录,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
                 alert.tag = 100;

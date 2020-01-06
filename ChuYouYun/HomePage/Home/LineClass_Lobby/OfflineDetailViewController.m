@@ -77,9 +77,6 @@
 @property (assign ,nonatomic)CGFloat      commentHight;
 @property (assign ,nonatomic)NSInteger    typeNum;
 
-@property (strong ,nonatomic)NSString     *alipayStr;
-@property (strong ,nonatomic)NSString     *wxpayStr;
-@property (strong ,nonatomic)UIWebView    *webView;
 @property (strong ,nonatomic)UIButton     *buyButton;
 @property (strong ,nonatomic)NSString     *schoolID;//分享链接的时候要用到
 @property (strong ,nonatomic)NSString     *line_switch;
@@ -1234,44 +1231,5 @@
     _cellHight = [not.object floatValue];
     [_tableView reloadData];
 }
-
-#pragma mark --- 支付
-
-#pragma mark --- 添加跳转识图
-- (void)addWebView {
-    
-    _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, MainScreenWidth * 2, MainScreenWidth,MainScreenHeight / 2)];
-    _webView.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:_webView];
-    
-    
-    [_webView setUserInteractionEnabled:YES];//是否支持交互
-    _webView.delegate=self;
-    [_webView setOpaque:YES];//opaque是不透明的意思
-    [_webView setScalesPageToFit:YES];//自适应
-    
-    NSURL *url = nil;
-    if (_typeNum == 1) {
-        if (_alipayStr == nil) {
-            [TKProgressHUD showError:@"支付失败" toView:self.view];
-        } else {
-            url = [NSURL URLWithString:_alipayStr];
-        }
-        
-    } else if (_typeNum == 2) {
-        if (_wxpayStr == nil) {
-            [TKProgressHUD showError:@"支付失败" toView:self.view];
-        } else {
-            url = [NSURL URLWithString:_wxpayStr];
-        }
-    }
-    
-    [_webView loadRequest:[NSURLRequest requestWithURL:url]];
-    
-}
-
-
-
-
 
 @end

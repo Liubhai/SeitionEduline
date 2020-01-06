@@ -54,7 +54,6 @@
 #import "Good_MyBalanceViewController.h"
 #import "Good_CommissionViewController.h"
 #import "Good_ IntegralViewController.h"
-#import "MemberCenterViewController.h"
 
 //优化 （优惠券）
 #import "Good_MyCardStockMainViewController.h"
@@ -535,10 +534,7 @@
 }
 
 - (void)memberButtonCilck {
-    MemberCenterViewController *vc = [[MemberCenterViewController alloc] init];
-    vc.userName =  [_allInformation stringValueForKey:@"uname" defaultValue:@""];
-    vc.vipDict = _vipDict;
-    [self.navigationController pushViewController:vc animated:YES];
+    return;
 }
 
 - (void)buttonLabelClick:(UITapGestureRecognizer *)tap {
@@ -766,7 +762,7 @@
     
     if ([MoreOrSingle integerValue] == 1) {//单机构
 
-        if ([HASALIPAY isEqualToString:@"0"]) {
+        if ([HASJIANGREN isEqualToString:@"0"]) {
             if ([_isTeacher integerValue] == 1) {
                 SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"学习记录",@"兑换记录",@"我的推荐",@"我的授课"];
                 TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"study@3x",@"record@3x",@"downLine",@"me_is_teacher"];
@@ -786,7 +782,7 @@
         
     } else if ([MoreOrSingle integerValue] == 2) {
 
-        if ([HASALIPAY isEqualToString:@"0"]) {
+        if ([HASJIANGREN isEqualToString:@"0"]) {
             if ([_isTeacher integerValue] == 1) {
                 SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"学习记录",@"兑换记录",@"我的机构",@"我的推荐",@"我的授课",@"我的分享",@"我的线下课",@"线下课管理"];
                 TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"study@3x",@"record@3x",@"org@3x",@"downLine",@"me_is_teacher",@"icon-share",@"me_is_teacher",@"me_is_teacher"];
@@ -967,7 +963,7 @@
 
 - (void)manyButtonSet:(UIButton *)button {
     if ([MoreOrSingle integerValue] == 1) {
-        if ([HASALIPAY isEqualToString:@"0"]) {
+        if ([HASJIANGREN isEqualToString:@"0"]) {
             if (button.tag == 0) {//说明是课程
                 MyClassMainViewController *myClassVc = [[MyClassMainViewController alloc] init];
                 [self.navigationController pushViewController:myClassVc animated:YES];
@@ -1068,7 +1064,7 @@
         }
         
     } else {
-        if ([HASALIPAY isEqualToString:@"0"]) {
+        if ([HASJIANGREN isEqualToString:@"0"]) {
             if (button.tag == 0) {//说明是课程
                 MyClassMainViewController *myClassVc = [[MyClassMainViewController alloc] init];
                 [self.navigationController pushViewController:myClassVc animated:YES];
@@ -1422,7 +1418,7 @@
         CGFloat memberButtonWidth = [_memberButton.titleLabel.text sizeWithFont:_memberButton.titleLabel.font].width + 4;
         _memberButton.frame = CGRectMake(_memberImageView.right + (isVip ? 5 : 0), 3 * WideEachUnit, memberButtonWidth, 24 * WideEachUnit);
         _memberView.frame = CGRectMake(MainScreenWidth - (20 + _memberButton.right + 10) * WideEachUnit, iPhoneX ? 85 * WideEachUnit + 30 : 85 * WideEachUnit, (20 + memberButtonWidth + _memberImageView.width + (isVip ? 5 : 0)) * WideEachUnit, 30 * WideEachUnit);
-        if ([HASALIPAY isEqualToString:@"0"]) {
+        if ([HASJIANGREN isEqualToString:@"0"]) {
             _memberView.hidden = YES;
         } else {
             _memberView.hidden = NO;
