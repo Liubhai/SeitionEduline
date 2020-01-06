@@ -664,10 +664,7 @@
             UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:snsPlatform.platformName];
             
             NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
-            _UID = snsAccount.openId;
-            _appToken = snsAccount.unionId;
-            
-            [self loginWithSNSAccount:snsAccount loginType:@"qzone"];
+            [self getTencentId:snsAccount.accessToken];
         }});
 }
 
@@ -1231,6 +1228,36 @@
     NSLog(@"%@",_appToken);
     [self.navigationController pushViewController:phoneVc animated:YES];
     
+}
+
+//注册的配置接口
+- (void)getTencentId:(NSString *)tencentToken {
+    
+    NSString *allUrlStr = @"https://graph.qq.com/oauth2.0/me";
+    
+    NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
+    [mutabDict setObject:tencentToken forKey:@"access_token"];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:allUrlStr]];
+    [request setHTTPMethod:NetWay];
+    NSString *encryptStr = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetEncryptStr:mutabDict];
+    [request setValue:encryptStr forHTTPHeaderField:HeaderKey];
+    
+    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
+//        _UID = snsAccount.openId;
+//        _appToken = snsAccount.unionId;
+//        
+//        [self loginWithSNSAccount:snsAccount loginType:@"qzone"];
+        if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
+           dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
+            _registerConfStr = [dict stringValueForKey:@"account_type"];
+        }
+        NSLog(@"----%@",dict);
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+    }];
+    [op start];
 }
 
 @end
