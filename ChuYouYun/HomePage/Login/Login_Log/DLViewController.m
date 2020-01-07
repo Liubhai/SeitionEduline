@@ -1234,7 +1234,7 @@
 - (void)getTencentId:(NSString *)tencentToken {
     
     NSString *allUrlStr = [NSString
-                           stringWithFormat:@"https://graph.qq.com/oauth2.0/me?access_token=%@",tencentToken];
+                           stringWithFormat:@"https://graph.qq.com/oauth2.0/me?unionid=1&access_token=%@",tencentToken];
     
     NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
     [mutabDict setObject:tencentToken forKey:@"access_token"];
@@ -1253,7 +1253,7 @@
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
                                                             options:NSJSONReadingMutableContainers
                                                               error:nil];
-        [self loginWithTencent:[dic objectForKey:@"openid"] loginType:@"qzone"];
+        [self loginWithTencent:[dic objectForKey:@"unionid"] loginType:@"qzone"];
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];
     [op start];

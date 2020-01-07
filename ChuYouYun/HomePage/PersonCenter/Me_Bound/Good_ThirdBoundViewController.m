@@ -383,7 +383,7 @@
 - (void)getTencentId:(NSString *)tencentToken {
     
     NSString *allUrlStr = [NSString
-                           stringWithFormat:@"https://graph.qq.com/oauth2.0/me?access_token=%@",tencentToken];
+                           stringWithFormat:@"https://graph.qq.com/oauth2.0/me?unionid=1&access_token=%@",tencentToken];
     
     NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
     [mutabDict setObject:tencentToken forKey:@"access_token"];
@@ -402,7 +402,7 @@
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
                                                             options:NSJSONReadingMutableContainers
                                                               error:nil];
-        _uid = [NSString stringWithFormat:@"%@",[dic objectForKey:@"openid"]];
+        _uid = [NSString stringWithFormat:@"%@",[dic objectForKey:@"unionid"]];
         if ([_typeStr integerValue] == 0) {
             [self NetWorkUserBindWithType:@"qzone"];
         } else if ([_typeStr integerValue] == 1) {
