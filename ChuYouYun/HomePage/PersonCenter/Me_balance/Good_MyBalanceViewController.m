@@ -281,12 +281,12 @@
 
     if ((_netWorkBalanceArray.count + 1) % 2 == 0) {//能整除的时候
         _rechargeView.frame = CGRectMake(0, CGRectGetMaxY(_moneyView.frame), MainScreenWidth, ((_netWorkBalanceArray.count + 1) / 2) * (buttonH + 15 * WideEachUnit) + 60 * WideEachUnit);
-        if (_applepayArray.count>0 && _appleButton.selected) {
+        if (_applepayArray.count>0) {
             _rechargeView.frame = CGRectMake(0, CGRectGetMaxY(_moneyView.frame), MainScreenWidth, ((_netWorkBalanceArray.count + 1) / 2) * (buttonH + 15 * WideEachUnit) + 30);
         }
     } else {//不能整除的时候
         _rechargeView.frame = CGRectMake(0, CGRectGetMaxY(_moneyView.frame), MainScreenWidth, ((_netWorkBalanceArray.count + 1) / 2 + 1) * (buttonH + 15 * WideEachUnit) + 60 * WideEachUnit);
-        if (_applepayArray.count>0 && _appleButton.selected) {
+        if (_applepayArray.count>0) {
             _rechargeView.frame = CGRectMake(0, CGRectGetMaxY(_moneyView.frame), MainScreenWidth, ((_netWorkBalanceArray.count + 1) / 2) * (buttonH + 15 * WideEachUnit) + 30);
         }
     }
@@ -507,27 +507,44 @@
     }
     
     _fourButton.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
-    if (_appleButton.selected) {
-        NSString *price = [NSString stringWithFormat:@"%@",[[_netWorkBalanceArray objectAtIndex:button.tag] stringValueForKey:@"rechange"]];
-        if ([price isEqualToString:@"4.2"]) {
-            _realMoney.text = @"¥6";
-        } else if ([price isEqualToString:@"8.4"]) {
-            _realMoney.text = @"¥12";
-        } else if ([price isEqualToString:@"21"]) {
-            _realMoney.text = @"¥30";
-        } else if ([price isEqualToString:@"35"]) {
-            _realMoney.text = @"¥50";
-        } else if ([price isEqualToString:@"131.6"]) {
-            _realMoney.text = @"¥188";
-        } else if ([price isEqualToString:@"432.6"]) {
-            _realMoney.text = @"¥618";
-        }
-        if (_applepayArray.count) {
-            _productID = [[_applepayArray objectAtIndex:button.tag] stringValueForKey:@"product_id"];
-        }
-    } else {
-        _realMoney.text = [NSString stringWithFormat:@"¥%@",[[_netWorkBalanceArray objectAtIndex:button.tag] stringValueForKey:@"rechange"]];
+    NSString *price = [NSString stringWithFormat:@"%@",[[_netWorkBalanceArray objectAtIndex:button.tag] stringValueForKey:@"rechange"]];
+    if ([price isEqualToString:@"4.2"]) {
+        _realMoney.text = @"¥6";
+    } else if ([price isEqualToString:@"8.4"]) {
+        _realMoney.text = @"¥12";
+    } else if ([price isEqualToString:@"21"]) {
+        _realMoney.text = @"¥30";
+    } else if ([price isEqualToString:@"35"]) {
+        _realMoney.text = @"¥50";
+    } else if ([price isEqualToString:@"131.6"]) {
+        _realMoney.text = @"¥188";
+    } else if ([price isEqualToString:@"432.6"]) {
+        _realMoney.text = @"¥618";
     }
+    if (_applepayArray.count) {
+        _productID = [[_applepayArray objectAtIndex:button.tag] stringValueForKey:@"product_id"];
+    }
+//    if (_appleButton.selected) {
+//        NSString *price = [NSString stringWithFormat:@"%@",[[_netWorkBalanceArray objectAtIndex:button.tag] stringValueForKey:@"rechange"]];
+//        if ([price isEqualToString:@"4.2"]) {
+//            _realMoney.text = @"¥6";
+//        } else if ([price isEqualToString:@"8.4"]) {
+//            _realMoney.text = @"¥12";
+//        } else if ([price isEqualToString:@"21"]) {
+//            _realMoney.text = @"¥30";
+//        } else if ([price isEqualToString:@"35"]) {
+//            _realMoney.text = @"¥50";
+//        } else if ([price isEqualToString:@"131.6"]) {
+//            _realMoney.text = @"¥188";
+//        } else if ([price isEqualToString:@"432.6"]) {
+//            _realMoney.text = @"¥618";
+//        }
+//        if (_applepayArray.count) {
+//            _productID = [[_applepayArray objectAtIndex:button.tag] stringValueForKey:@"product_id"];
+//        }
+//    } else {
+//        _realMoney.text = [NSString stringWithFormat:@"¥%@",[[_netWorkBalanceArray objectAtIndex:button.tag] stringValueForKey:@"rechange"]];
+//    }
     //配置充值是否充值赠送
     isGiveMoney = YES;
     isSeleMoneyButtonNumber = button.tag;

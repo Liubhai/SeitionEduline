@@ -22,7 +22,6 @@
 #import "TeacherCommentViewController.h"
 #import "TeacherClassViewController.h"
 #import "MessageSendViewController.h"
-#import "YYViewController.h"
 
 #import "DLViewController.h"
 
@@ -144,12 +143,6 @@
     
     [self interFace];
     
-
-//    [self addAllScrollView];
-//    [self addInfoView];
-//    [self addWZView];
-//    [self addDownView];
-//    [self addControllerSrcollView];
     [self netWorkTeacherGetInfo];
     
 }
@@ -738,34 +731,6 @@
     _allScrollView.contentOffset = CGPointMake(0, 0);
 }
 
-#pragma mark ---- 时间监听
-
-- (void)downButtonClick:(UIButton *)button {
-    switch (button.tag) {
-        case 0:
-            if (UserOathToken == nil) {
-                DLViewController *DLVC = [[DLViewController alloc] init];
-                UINavigationController *Nav = [[UINavigationController alloc] initWithRootViewController:DLVC];
-                [self.navigationController presentViewController:Nav animated:YES completion:nil];
-                return;
-            }
-            if ([button.titleLabel.text isEqualToString:@"关注"]) {
-                [self netWorkUseFollow];
-            } else {
-                [self netWorkUseUnFollow];
-            }
-            break;
-        case 1000:
-            [self gotoSendMessage];
-            break;
-        case 2000:
-            [self gotoSubscribe];
-            break;
-        default:
-            break;
-    }
-}
-
 - (void)attentionButtonButtonCilck {
     if (UserOathToken == nil) {
         DLViewController *DLVC = [[DLViewController alloc] init];
@@ -779,39 +744,6 @@
         [self netWorkUseUnFollow];
     }
 }
-
-- (void)gotoSendMessage {
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"oauthToken"] == nil) {//没有登录的情况下
-        DLViewController *DLVC = [[DLViewController alloc] init];
-        UINavigationController *Nav = [[UINavigationController alloc] initWithRootViewController:DLVC];
-        [self.navigationController presentViewController:Nav animated:YES completion:nil];
-        return;
-    }
-    MessageSendViewController *MSVC = [[MessageSendViewController alloc] init];
-    MSVC.TID = _uID;
-    MSVC.name = _nameStr;
-    NSLog(@"--%@",_nameStr);
-    [self.navigationController pushViewController:MSVC animated:YES];
-    
-}
-
-- (void)gotoSubscribe {
-    
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"oauthToken"] == nil) {//没有登录的情况下
-        DLViewController *DLVC = [[DLViewController alloc] init];
-        UINavigationController *Nav = [[UINavigationController alloc] initWithRootViewController:DLVC];
-        [self.navigationController presentViewController:Nav animated:YES completion:nil];
-        return;
-    }
-    YYViewController *YY = [[YYViewController alloc]init];
-    YY.TID = _ID;
-    YY.name = _nameStr;
-    YY.lineonPrice = [NSString stringWithFormat:@"%@",[_teacherDic stringValueForKey:@"online_price"]];
-    YY.lineoffprice = [NSString stringWithFormat:@"%@",[_teacherDic stringValueForKey:@"offline_price"]];
-    [self.navigationController pushViewController:YY animated:YES];
-    
-}
-
 
 #pragma mark ---网络请求
 //获取讲师详情
