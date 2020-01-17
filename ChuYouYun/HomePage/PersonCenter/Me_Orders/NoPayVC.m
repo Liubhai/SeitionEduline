@@ -1004,7 +1004,7 @@
     
     NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
     [mutabDict setObject:[_orderDict stringValueForKey:@"paper_id"] forKey:@"paper_id"];
-    if ([_payTypeStr integerValue] == 3) {//微信
+    if ([_payTypeStr integerValue] == 3) {
         [mutabDict setObject:@"lcnpay" forKey:@"pay"];
     }
     

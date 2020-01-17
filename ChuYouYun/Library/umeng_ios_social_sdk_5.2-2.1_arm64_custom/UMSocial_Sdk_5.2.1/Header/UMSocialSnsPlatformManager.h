@@ -60,9 +60,9 @@ extern NSString *const UMShareToWechatTimeline;
 extern NSString *const UMShareToWechatFavorite;
 
 /**
- 支付宝好友
+ 某宝好友
  */
-extern NSString *const UMShareToAlipaySession;
+extern NSString *const UMShareTomoubaoSession;
 
 /**
  手机QQ
@@ -165,7 +165,7 @@ typedef enum {
     UMSocialSnsTypeKakaoTalk,
     UMSocialSnsTypeFlickr,
     UMSocialSnsTypePinterest,
-    UMSocialSnsTypeAlipaySession,
+    UMSocialSnsTypemoubaoSession,
     UMSocialSnsTypeNew
 } UMSocialSnsType;
 
