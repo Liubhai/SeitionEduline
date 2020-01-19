@@ -103,10 +103,10 @@
 //#define EncryptHeaderUrl @"https://t.v4.51eduline.com"
 
 /// 测试服(d单机构和多机构)
-#define EncryptUrl [MoreOrSingle integerValue] == 1 ? @"https://www.modianketang.com/service/" : @"https://t.v4.51eduline.com/service/"
-#define EncryptHeaderUrl [MoreOrSingle integerValue] == 1 ? @"https://www.modianketang.com" : @"https://t.v4.51eduline.com"
+#define EncryptUrl [MoreOrSingle integerValue] == 1 ? @"http://www.zysjwx.com/service/" : @"https://t.v4.51eduline.com/service/"
+#define EncryptHeaderUrl [MoreOrSingle integerValue] == 1 ? @"http://www.zysjwx.com" : @"https://t.v4.51eduline.com"
 
-#define basidUrl [MoreOrSingle integerValue] == 1 ? @"https://www.modianketang.com/service" : @"https://t.v4.51eduline.com/service"
+#define basidUrl [MoreOrSingle integerValue] == 1 ? @"http://www.zysjwx.com/service" : @"https://t.v4.51eduline.com/service"
 
 /// 正式服(单机构和多机构)
 //#define EncryptUrl [MoreOrSingle integerValue] == 1 ? @"https://demo.51eduline.com/service/" : @"https://v4.51eduline.com/service/"
@@ -209,7 +209,7 @@ alpha:1.0]
 #define SinaAppSecret @"da07bcf6c9f30281e684f8abfd0b4fca"
 
 // 支付宝h5支付之后需要回到app
-#define AlipayBundleId @"com.xinxinbook.modianketang"
+#define AlipayBundleId @"com.zysj.zysjwx"
 
 // TKYUN
 #import "TKHelperUtil.h"
