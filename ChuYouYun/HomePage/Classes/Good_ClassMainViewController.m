@@ -57,7 +57,7 @@
 
 
 @import MediaPlayer;
-@interface Good_ClassMainViewController ()<UIScrollViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UIScrollViewDelegate,UIWebViewDelegate,UIGestureRecognizerDelegate,UMSocialUIDelegate,AliyunVodPlayerViewDelegate,BCEDocumentReaderDelegate, UITableViewDelegate, UITableViewDataSource> {
+@interface Good_ClassMainViewController ()<UIScrollViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UIScrollViewDelegate,UIWebViewDelegate,UIGestureRecognizerDelegate,UMSocialUIDelegate,AliyunVodPlayerViewDelegate,BCEDocumentReaderDelegate, UITableViewDelegate, UITableViewDataSource,UIAlertViewDelegate> {
     CGRect   playerFrame;
     WMPlayer *wmPlayer;
     BOOL     isShouleVedio;//是否应该缓存视频
@@ -220,6 +220,7 @@
 //@property (strong, nonatomic) UILabel *activityEndLabel;
 /** 点播课程活动详情信息 */
 @property (strong, nonatomic) NSDictionary *activityInfo;
+
 @end
 
 @implementation Good_ClassMainViewController
@@ -293,6 +294,8 @@
     
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    
+    _free_course_opt = @"1";
     
     /// 新增内容
     self.canScroll = YES;
@@ -960,22 +963,48 @@
 }
 
 - (void)downButtonClick:(UIButton *)button {
-    if (!UserOathToken) {
-        DLViewController *DLVC = [[DLViewController alloc] init];
-        UINavigationController *Nav = [[UINavigationController alloc] initWithRootViewController:DLVC];
-        [self.navigationController presentViewController:Nav animated:YES completion:nil];
-        return;
-    }
     if (button.tag == 1) {//解锁
-        if ([_buyButton.titleLabel.text isEqualToString:@"已解锁"]) {
+        if ([_buyButton.titleLabel.text isEqualToString:@"已解锁"] || [_buyButton.titleLabel.text isEqualToString:@"免费可看"]) {
         } else {
-            ClassAndLivePayViewController *vc = [[ClassAndLivePayViewController alloc] init];
-            vc.dict = _videoDataSource;
-            vc.typeStr = @"1";
-            vc.cid = [_videoDataSource stringValueForKey:@"id"];
-            vc.activityInfo = [NSDictionary dictionaryWithDictionary:_activityInfo];
-            [self.navigationController pushViewController:vc animated:YES];
+            
+            if ([_free_course_opt isEqualToString:@"1"]) {
+                if (!UserOathToken) {
+                    DLViewController *DLVC = [[DLViewController alloc] init];
+                    UINavigationController *Nav = [[UINavigationController alloc] initWithRootViewController:DLVC];
+                    [self.navigationController presentViewController:Nav animated:YES completion:nil];
+                    return;
+                }
+                ClassAndLivePayViewController *vc = [[ClassAndLivePayViewController alloc] init];
+                vc.dict = _videoDataSource;
+                vc.typeStr = @"1";
+                vc.cid = [_videoDataSource stringValueForKey:@"id"];
+                vc.activityInfo = [NSDictionary dictionaryWithDictionary:_activityInfo];
+                [self.navigationController pushViewController:vc animated:YES];
+            } else {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"课程不用解锁可试看,解锁需登录,是否解锁再观看?" delegate:self cancelButtonTitle:@"试看" otherButtonTitles:@"去登录", nil];
+                alert.tag = 2;
+                [alert show];
+            }
         }
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        
+    } else {
+        if (!UserOathToken) {
+            DLViewController *DLVC = [[DLViewController alloc] init];
+            UINavigationController *Nav = [[UINavigationController alloc] initWithRootViewController:DLVC];
+            [self.navigationController presentViewController:Nav animated:YES completion:nil];
+            return;
+        }
+        ClassAndLivePayViewController *vc = [[ClassAndLivePayViewController alloc] init];
+        vc.dict = _videoDataSource;
+        vc.typeStr = @"1";
+        vc.cid = [_videoDataSource stringValueForKey:@"id"];
+        vc.activityInfo = [NSDictionary dictionaryWithDictionary:_activityInfo];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
@@ -2243,7 +2272,11 @@
         if ([[_videoDataSource stringValueForKey:@"is_buy"] integerValue] == 1) {//已经解锁
             [_buyButton setTitle:@"已解锁" forState:UIControlStateNormal];
         } else {
-            [_buyButton setTitle:@"立即解锁" forState:UIControlStateNormal];
+            if ([[_videoDataSource stringValueForKey:@"price"] floatValue] == 0) {
+                [_buyButton setTitle:@"免费可看" forState:UIControlStateNormal];
+            } else {
+                [_buyButton setTitle:@"立即解锁" forState:UIControlStateNormal];
+            }
         }
 //        [self ordPriceDeal];//处理原价
         sectionHeight = MainScreenHeight - MACRO_UI_SAFEAREA - 50 * HigtEachUnit - MACRO_UI_UPHEIGHT;
@@ -2294,7 +2327,11 @@
             if ([[_videoDataSource stringValueForKey:@"is_buy"] integerValue] == 1) {//已经解锁
                 [_buyButton setTitle:@"已解锁" forState:UIControlStateNormal];
             } else {
-                [_buyButton setTitle:@"立即解锁" forState:UIControlStateNormal];
+                if ([[_videoDataSource stringValueForKey:@"price"] floatValue] == 0) {
+                    [_buyButton setTitle:@"免费可看" forState:UIControlStateNormal];
+                } else {
+                    [_buyButton setTitle:@"立即解锁" forState:UIControlStateNormal];
+                }
             }
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
