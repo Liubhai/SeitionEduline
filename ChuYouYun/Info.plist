@@ -86,7 +86,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>Calendars Usage Description</key>
 	<string>可以的</string>
 	<key>LSApplicationCategoryType</key>
