@@ -193,6 +193,10 @@
         blueView.layer.cornerRadius = 2;
         [tableHeadView addSubview:blueView];
         UILabel *price = [[UILabel alloc] initWithFrame:CGRectMake(MainScreenWidth - 50 * WideEachUnit - 55 * WideEachUnit, 10 * WideEachUnit, 50 * WideEachUnit, 30 * HigtEachUnit)];
+        //给整个View添加手势
+        price.tag = section;
+        price.userInteractionEnabled = YES;
+        [price addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(priceLabelTap:)]];
         price.font = SYSTEMFONT(14);
         [tableHeadView addSubview:price];
         NSString *buyString = [_videoInfoDict stringValueForKey:@"is_buy"];
@@ -293,6 +297,11 @@
     [tableHeadView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tableHeadViewClick:)]];
     
     return tableHeadView;
+}
+
+- (void)priceLabelTap:(UITapGestureRecognizer *)tap {
+    _cellDict = _dataArray[tap.view.tag];
+    [self isPromptBuy];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
