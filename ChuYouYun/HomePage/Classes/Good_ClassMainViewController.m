@@ -3835,6 +3835,14 @@
                 eventTimer = nil;
             } else {
                 [_buyButton setTitle:@"去分享" forState:0];
+                activityType = @"已开团";
+                NSString *leftPrice1 = [NSString stringWithFormat:@"%@%@%@",activityType,priceCount,discount];
+                NSRange priceRange1 = [leftPrice1 rangeOfString:priceCount];
+                NSRange discountRange1 = [leftPrice1 rangeOfString:discount];
+                NSMutableAttributedString *muta = [[NSMutableAttributedString alloc] initWithString:leftPrice1];
+                [muta addAttributes:@{NSFontAttributeName: SYSTEMFONT(19)} range:priceRange1];
+                [muta addAttributes:@{NSFontAttributeName: SYSTEMFONT(10),NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle],NSStrikethroughColorAttributeName: [UIColor whiteColor]} range:discountRange1];
+                _otherLeftPriceLabel.attributedText = [[NSAttributedString alloc] initWithAttributedString:muta];
             }
         } else {
             [_otherRightTimeLabel setTop:0];
