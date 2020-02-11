@@ -243,6 +243,9 @@
                 }
             }
         }
+        if ([[_dataArray[section] stringValueForKey:@"allow_buy"] integerValue] != 1) {
+            price.hidden = YES;
+        }
         CGFloat priceWidth = [price.text sizeWithFont:price.font].width + 4;
         price.frame = CGRectMake(MainScreenWidth - 50 * WideEachUnit - 5 * WideEachUnit - priceWidth * WideEachUnit, 10 * WideEachUnit, priceWidth * WideEachUnit, 30 * HigtEachUnit);
     }
