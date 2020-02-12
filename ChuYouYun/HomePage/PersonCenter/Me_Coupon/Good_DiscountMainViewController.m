@@ -188,6 +188,7 @@
     Good__UseDiscountViewController * discountCardVc= [[Good__UseDiscountViewController alloc] initWithID:_ID withDict:_dict];
     discountCardVc.showYouhui = _showYouhui;
     discountCardVc.isCombo = _isCombo;
+    discountCardVc.isBuyAlone = _isBuyAlone;
     discountCardVc.view.frame = CGRectMake(0, 0, MainScreenWidth, MainScreenHeight - MACRO_UI_UPHEIGHT - 34);
     [_controllerSrcollView addSubview:discountCardVc.view];
     [self addChildViewController:discountCardVc];

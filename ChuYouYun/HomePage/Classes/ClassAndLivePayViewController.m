@@ -795,6 +795,9 @@
             }
         }
     }
+    if (!_isBuyAlone) {
+        vc.showYouhui = YES;
+    }
     vc.ID = _cid;
     vc.dict = _dict;
     vc.isCombo = [_typeStr isEqualToString:@"4"] ? YES : NO;

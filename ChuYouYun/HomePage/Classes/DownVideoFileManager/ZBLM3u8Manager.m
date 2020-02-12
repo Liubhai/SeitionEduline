@@ -52,6 +52,13 @@
     fullPath = [NSString stringWithFormat:@"%@/%@/%@",[ZBLM3u8Setting commonDirPrefix] ,[ZBLM3u8Setting uuidWithUrl:urlStr],[ZBLM3u8Setting m3u8InfoFileName]];
     return [ZBLM3u8FileManager exitItemWithPath:fullPath];
 }
+
+- (void)removeDownLoadFileUrlPath:(NSString *)urlStr {
+    NSString *fullPath = [[ZBLM3u8Setting commonDirPrefix] stringByAppendingPathComponent:[[ZBLM3u8Setting uuidWithUrl:urlStr] stringByAppendingString:[ZBLM3u8Setting m3u8InfoFileName]]];
+    fullPath = [NSString stringWithFormat:@"%@/%@/%@",[ZBLM3u8Setting commonDirPrefix] ,[ZBLM3u8Setting uuidWithUrl:urlStr],[ZBLM3u8Setting m3u8InfoFileName]];
+    [[ZBLM3u8FileManager shareInstance] removeFileWithPath:fullPath];
+}
+
 - (NSString *)getDownRootPathUrl:(NSString *)urlString{
     NSString *fullPath = [NSString stringWithFormat:@"%@/%@",[ZBLM3u8Setting commonDirPrefix] ,[ZBLM3u8Setting uuidWithUrl:urlString]];
     return fullPath;

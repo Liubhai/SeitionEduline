@@ -18,6 +18,8 @@ typedef void (^ZBLM3u8ManagerDownloadProgressHandler)(float progress,NSString *o
 
 - (NSURL *)localPlayUrlWithOriUrlUrl:(NSString *)urlString;
 
+- (void)removeDownLoadFileUrlPath:(NSString *)urlStr;
+
 /**
  根据url 获取下载根路径
 

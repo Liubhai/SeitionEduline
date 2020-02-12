@@ -121,7 +121,7 @@
     _organizationIcon.image = Image(@"右箭头");
     [_organizationBg addSubview:_organizationIcon];
     _organizationLabel = [[UILabel alloc] initWithFrame:CGRectMake(_organizationIcon.left - 200, 0, 200, ApplyHeight)];
-    _organizationLabel.text = @"不选择则为平台讲师";
+    _organizationLabel.text = @"请选择";
     _organizationLabel.textAlignment = NSTextAlignmentRight;
     _organizationLabel.textColor = RGBHex(0xB5B5B5);
     _organizationLabel.font = SYSTEMFONT(13);

@@ -34,7 +34,6 @@
     //头像
     _palyImage = [[UIImageView alloc] initWithFrame:CGRectMake(12 * WideEachUnit, 18.5 * WideEachUnit, 24 * WideEachUnit, 13 * WideEachUnit)];
     _palyImage.backgroundColor = [UIColor whiteColor];
-    _palyImage.image = Image(@"icon_class");
     [self addSubview:_palyImage];
     
     //标题
@@ -139,7 +138,11 @@
     } else if ([[dict stringValueForKey:@"type"] integerValue] == 4) {
         _palyImage.image = Image(@"文档");
     } else if ([[dict stringValueForKey:@"type"] integerValue] == 5) {
-        _palyImage.image = Image(@"icon_Test");
+        _palyImage.image = Image(@"视频");
+    } else if ([[dict stringValueForKey:@"type"] integerValue] == 6) {
+        _palyImage.image = Image(@"ic_test");
+    } else {
+        _palyImage.image = Image(@"视频");
     }
     
     [_lockImageView setLeft:_palyImage.right + 2];

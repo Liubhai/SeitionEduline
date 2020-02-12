@@ -174,8 +174,10 @@
     NSInteger type = [_downLoadMutableDict[id_str] integerValue];
     if (type == 3) {
         [cell br_updateProgress:-1];
-        cell.mStatusLabel.text = @"已下载";
+        cell.mStatusLabel.text = @"删除";
         
+    } else if (type == 1) {
+        cell.mStatusLabel.text = @"下载";
     }
     cell.br_selectedBlock = ^(BRAVideoDownShowNotXibTableViewCell * _Nonnull cell1) {
         NSIndexPath *selectedIndex = [tableView indexPathForCell:cell1];

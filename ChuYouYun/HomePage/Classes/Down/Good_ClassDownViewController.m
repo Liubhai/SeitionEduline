@@ -420,8 +420,7 @@ typedef enum : NSUInteger {
             NSIndexPath *selectedIndex = [tableView indexPathForCell:cell1];
             NSArray *temp_array = ws.newsDataArray[selectedIndex.section];
             NSDictionary *a_info_dict = temp_array[selectedIndex.row];
-            //            NSString *video_address = a_info_dict[@"video_address"];
-            [ws br_selectedDownInfo:a_info_dict];
+            [ws br_selectedDownInfo:a_info_dict deleteOrNot:NO];
         };
         
         cell.nNameLabel.text = dict[@"title"];
@@ -444,15 +443,19 @@ typedef enum : NSUInteger {
         NSInteger type = [self.progressDict[id_str] integerValue];
         if (type == kDownFinish) {
             [cell br_updateProgress:-1];
-            cell.mStatusLabel.text = @"已下载";
-            
+            cell.mStatusLabel.text = @"删除";
+        } else if (type == kNotDown) {
+            cell.mStatusLabel.text = @"下载";
         }
         cell.br_selectedBlock = ^(BRAVideoDownShowNotXibTableViewCell * _Nonnull cell1) {
             NSIndexPath *selectedIndex = [tableView indexPathForCell:cell1];
             NSArray *temp_array = ws.newsDataArray[selectedIndex.section];
             NSDictionary *a_info_dict = temp_array[selectedIndex.row];
-            //            NSString *video_address = a_info_dict[@"video_address"];
-            [ws br_selectedDownInfo:a_info_dict];
+            if ([cell1.mStatusLabel.text isEqualToString:@"删除"]) {
+                [ws br_selectedDownInfo:a_info_dict deleteOrNot:YES];
+            } else {
+                [ws br_selectedDownInfo:a_info_dict deleteOrNot:NO];
+            }
         };
         
         cell.nNameLabel.text = dict[@"title"];
@@ -504,7 +507,7 @@ typedef enum : NSUInteger {
     if (_isClassCourse) {
         _classCourseCurrentCell = currentCell;
     }
-    [self br_selectedDownInfo:dict];
+    [self br_selectedDownInfo:dict deleteOrNot:[currentCell.mStatusLabel.text isEqualToString:@"删除"] ? YES : NO];
 }
 
 - (void)BRAVideoDownShowNotXibTableViewCellSelected:(NSDictionary *)classCourseCellDict cellSection:(NSInteger)cellSection cellRow:(NSInteger)cellRow classCellRow:(NSInteger)classCellRow {
@@ -621,7 +624,7 @@ typedef enum : NSUInteger {
                         
                         if (_classCourseCurrentCell) {
                             if (isFinish) {
-                                _classCourseCurrentCell.mStatusLabel.text = @"已下载";
+                                _classCourseCurrentCell.mStatusLabel.text = @"删除";
                                 [_classCourseCurrentCell br_updateProgress:-1];
                                 [ws.progressDict setObject:@(kDownFinish) forKey:id_str];
                                 [ws br_updateHadDownFile];
@@ -657,7 +660,7 @@ typedef enum : NSUInteger {
                             if ([obj isKindOfClass:[BRAVideoDownShowNotXibTableViewCell class]]) {
                                 BRAVideoDownShowNotXibTableViewCell *tempCell = obj;
                                 if (isFinish) {
-                                    tempCell.mStatusLabel.text = @"已下载";
+                                    tempCell.mStatusLabel.text = @"删除";
                                     [tempCell br_updateProgress:-1];
                                     [ws.progressDict setObject:@(kDownFinish) forKey:id_str];
                                     [ws br_updateHadDownFile];
@@ -695,7 +698,7 @@ typedef enum : NSUInteger {
     }
 }
 //MARK:新的下载方法
-- (void)br_selectedDownInfo:(NSDictionary *)downDict{
+- (void)br_selectedDownInfo:(NSDictionary *)downDict deleteOrNot:(BOOL)delete{
     
     // 这里要先去请求下载地址 然后再去下载
     NSString *endUrlStr = course_getSectionHour;
@@ -721,7 +724,11 @@ typedef enum : NSUInteger {
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
             NSDictionary *pass = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
             NSString *url = pass[@"video_address"];
-            
+            if (delete) {
+                [[ZBLM3u8Manager shareInstance] removeDownLoadFileUrlPath:url];
+                [self deleteVideoReloadData];
+                return;
+            }
             NSInteger first = 0;
             NSInteger second = 0;
             NSInteger third = 0;
@@ -1199,5 +1206,67 @@ typedef enum : NSUInteger {
     }
 }
 
+- (void)deleteVideoReloadData {
+    WS(ws);
+    id responseObject = [[BRDownHelpManager manager] br_getCourseInfoWithListCourseInfo:_videoDataSource];
+    _dataSource = responseObject;
+    [_newsDataArray removeAllObjects];
+    [_sectionArray removeAllObjects];
+    [_boolArray removeAllObjects];
+    if ([_dataSource isKindOfClass:[NSArray class]]) {
+        _dataArray = (NSArray *)_dataSource;
+        if (_dataArray.count == 0) {
+            self.imageView.hidden = NO;
+        } else {
+            self.imageView.hidden = YES;
+        }
+        
+        for (int i = 0 ; i < _dataArray.count; i ++ ) {
+            NSArray *classArray = [[_dataArray objectAtIndex:i] arrayValueForKey:@"child"];
+            if (classArray.count == 0) {
+                [_newsDataArray addObject:@[]];
+            } else {
+                [_newsDataArray addObject:classArray];
+                [classArray enumerateObjectsUsingBlock:^(NSDictionary *a_course, NSUInteger idx, BOOL * _Nonnull stop) {
+                    if (_isClassCourse) {
+                        NSArray *lastClassArray = [a_course arrayValueForKey:@"child"];
+                        [lastClassArray enumerateObjectsUsingBlock:^(NSDictionary *last_course, NSUInteger lastidx, BOOL * _Nonnull stop) {
+                            NSString *last_course_id = [last_course stringValueForKey:@"id"];
+                            NSString *last_video_address = [last_course stringValueForKey:@"video_address"];
+                            if ([[ZBLM3u8Manager shareInstance] exitLocalVideoWithUrlString:last_video_address]) {
+                                ws.progressDict[last_course_id] = @(kDownFinish);
+                            } else {
+                                ws.progressDict[last_course_id] = @(kNotDown);
+                            }
+                        }];
+                    } else {
+                        NSString *course_id = [a_course stringValueForKey:@"id"];
+                        NSString *video_address = [a_course stringValueForKey:@"video_address"];
+                        if ([[ZBLM3u8Manager shareInstance] exitLocalVideoWithUrlString:video_address]) {
+                            ws.progressDict[course_id] = @(kDownFinish);
+                        } else {
+                            ws.progressDict[course_id] = @(kNotDown);
+                        }
+                    }
+                }];
+            }
+            [self br_updateHadDownFile];
+            NSString *title = [[_dataArray objectAtIndex:i] stringValueForKey:@"title"];
+            [_sectionArray addObject:title];
+            
+            NSMutableArray *boolArray = [NSMutableArray array];
+            for (int k = 0 ; k < classArray.count ; k ++) {
+                
+                if (i == 0 && k == 0) {
+                    [boolArray addObject:[NSNumber numberWithBool:YES]];
+                } else {
+                    [boolArray addObject:[NSNumber numberWithBool:NO]];
+                }
+            }
+            [_boolArray addObject:boolArray];
+        }
+    }
+    [_tableView reloadData];
+}
 
 @end

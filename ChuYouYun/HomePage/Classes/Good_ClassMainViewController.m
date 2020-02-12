@@ -3933,6 +3933,7 @@
     GroupListPopViewController *vc = [[GroupListPopViewController alloc] init];
     vc.activityInfo = [NSDictionary dictionaryWithDictionary:_activityInfo];
     vc.courseType = _isClassNew ? @"5" : @"1";
+    vc.videoDataSource = _videoDataSource;
     if (SWNOTEmptyDictionary(_activityInfo)) {
         if (SWNOTEmptyArr([_activityInfo objectForKey:@"asb"])) {
             vc.dataSource = [NSMutableArray arrayWithArray:[_activityInfo objectForKey:@"asb"]];

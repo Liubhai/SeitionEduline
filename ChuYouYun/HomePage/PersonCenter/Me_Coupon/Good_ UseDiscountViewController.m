@@ -233,10 +233,12 @@
             [_dataArray removeAllObjects];
             [_dataArray addObjectsFromArray:(NSArray *)[YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject]];
             if (SWNOTEmptyArr(_dataArray)) {
-                if (_showYouhui) {
-                    for (int i = (int)(_dataArray.count - 1); i>=0; i--) {
-                        if ([[_dataArray[i] stringValueForKey:@"type"] integerValue] != 5) {
-                            [_dataArray removeObjectAtIndex:i];
+                if (_isBuyAlone) {
+                    if (_showYouhui) {
+                        for (int i = (int)(_dataArray.count - 1); i>=0; i--) {
+                            if ([[_dataArray[i] stringValueForKey:@"type"] integerValue] != 5) {
+                                [_dataArray removeObjectAtIndex:i];
+                            }
                         }
                     }
                 }

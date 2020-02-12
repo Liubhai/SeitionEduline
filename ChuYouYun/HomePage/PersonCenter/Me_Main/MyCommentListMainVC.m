@@ -54,7 +54,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     _titleImage.backgroundColor = BasidColor;
     _titleLabel.text = @"我的点评";
-    _topClassArray = @[@"点播/直播评论",@"套餐评论",@"下线课评论",@"讲师评论",@"班级评论"];
+    _topClassArray = @[@"点播/直播评论",@"套餐评论",@"线下课评论",@"讲师评论",@"班级评论"];
     _typeClassArray = @[@"1",@"2",@"3",@"4",@"6"];
     [self makeTopScrollViewUI];
     [self makeMainScrollView];
