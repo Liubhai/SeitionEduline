@@ -2618,6 +2618,7 @@
 		78D5B8E723F634F5007FCA46 /* WatchLiveSurveyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78D5B83723F634F4007FCA46 /* WatchLiveSurveyTableViewCell.m */; };
 		78D5B8E823F634F5007FCA46 /* VHWatchBackOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 78D5B83923F634F4007FCA46 /* VHWatchBackOne.m */; };
 		78DF190622AF5AB500DF10FB /* ShopOrderDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DF190522AF5AB500DF10FB /* ShopOrderDetailVC.m */; };
+		78E40F4823F63F6400B53039 /* IJKMediaFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78E40F4723F63F6400B53039 /* IJKMediaFramework.framework */; };
 		78F108F322B7471A00288DEB /* LanchAnimationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F108F022B7471900288DEB /* LanchAnimationVC.m */; };
 		78F108F422B7471A00288DEB /* LanchAnimationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78F108F222B7471A00288DEB /* LanchAnimationVC.xib */; };
 		78F1099722B770AA00288DEB /* ZBLM3u8FileDownloadInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F1091122B770A900288DEB /* ZBLM3u8FileDownloadInfo.m */; };
@@ -6814,6 +6815,7 @@
 		78D5B83923F634F4007FCA46 /* VHWatchBackOne.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VHWatchBackOne.m; sourceTree = "<group>"; };
 		78DF190422AF5AB500DF10FB /* ShopOrderDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopOrderDetailVC.h; sourceTree = "<group>"; };
 		78DF190522AF5AB500DF10FB /* ShopOrderDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopOrderDetailVC.m; sourceTree = "<group>"; };
+		78E40F4723F63F6400B53039 /* IJKMediaFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IJKMediaFramework.framework; sourceTree = "<group>"; };
 		78F108F022B7471900288DEB /* LanchAnimationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanchAnimationVC.m; sourceTree = "<group>"; };
 		78F108F122B7471900288DEB /* LanchAnimationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanchAnimationVC.h; sourceTree = "<group>"; };
 		78F108F222B7471A00288DEB /* LanchAnimationVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LanchAnimationVC.xib; sourceTree = "<group>"; };
@@ -8298,6 +8300,7 @@
 				944FD5761A84B0A100109CC4 /* MediaPlayer.framework in Frameworks */,
 				506C714C1AA9902600427A76 /* Security.framework in Frameworks */,
 				780F89AB230F85F400B67CEF /* TKWhiteBoard.framework in Frameworks */,
+				78E40F4823F63F6400B53039 /* IJKMediaFramework.framework in Frameworks */,
 				09EB95601F555B5100F3AE76 /* JavaScriptCore.framework in Frameworks */,
 				09EB95571F555AEA00F3AE76 /* VideoToolbox.framework in Frameworks */,
 				09EB955D1F555B3E00F3AE76 /* AssetsLibrary.framework in Frameworks */,
@@ -9496,6 +9499,7 @@
 		09F0B44921D61A14006C7D53 /* Live_SDK */ = {
 			isa = PBXGroup;
 			children = (
+				78E40F4723F63F6400B53039 /* IJKMediaFramework.framework */,
 			);
 			path = Live_SDK;
 			sourceTree = "<group>";
@@ -25874,6 +25878,8 @@
 					"$(SRCROOT)/ChuYouYun/GenSee",
 					"$(SRCROOT)/ChuYouYun/GenSee/PlayerSDK.framework",
 					"$(PROJECT_DIR)/ChuYouYun/TKSDK/eduVideoSDK/libs",
+					"$(PROJECT_DIR)/ChuYouYun/Live_SDK",
+					"\"$(SRCROOT)/ChuYouYun/Live_SDK/IJKMediaFramework.framework\"",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_INPUT_FILETYPE = automatic;
@@ -25887,6 +25893,7 @@
 					"\"$(SRCROOT)/ChuYouYun/Live_SDK/New_CC/CC资源/SDK/DWDrmServer.framework\"",
 					"\"$(SRCROOT)/ChuYouYun/Live_SDK/New_CC/CC资源/SDK\"",
 					"\"$(SRCROOT)/ChuYouYun/Live_SDK/New_CC/CC资源/SDK/CCSDK.framework\"",
+					"\"$(SRCROOT)/ChuYouYun/Live_SDK/IJKMediaFramework.framework\"",
 				);
 				INFOPLIST_FILE = ChuYouYun/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -25925,6 +25932,7 @@
 					"\"$(SRCROOT)/../../组合课堂/VH/微吼直播资源/微吼 资源\"",
 					"\"$(SRCROOT)/../../组合课堂/VH\"",
 					"\"$(SRCROOT)/../../组合课堂/VH/微吼直播资源/微吼 资源/VHallSDK的副本1/VHallFilterSDK\"",
+					"\"$(SRCROOT)/ChuYouYun/Live_SDK/IJKMediaFramework.framework\"",
 				);
 				MACH_O_TYPE = mh_execute;
 				MARKETING_VERSION = 1.0;
@@ -25985,6 +25993,8 @@
 					"$(SRCROOT)/ChuYouYun/GenSee",
 					"$(SRCROOT)/ChuYouYun/GenSee/PlayerSDK.framework",
 					"$(PROJECT_DIR)/ChuYouYun/TKSDK/eduVideoSDK/libs",
+					"$(PROJECT_DIR)/ChuYouYun/Live_SDK",
+					"\"$(SRCROOT)/ChuYouYun/Live_SDK/IJKMediaFramework.framework\"",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_INPUT_FILETYPE = automatic;
@@ -25998,6 +26008,7 @@
 					"\"$(SRCROOT)/ChuYouYun/Live_SDK/New_CC/CC资源/SDK/DWDrmServer.framework\"",
 					"\"$(SRCROOT)/ChuYouYun/Live_SDK/New_CC/CC资源/SDK\"",
 					"\"$(SRCROOT)/ChuYouYun/Live_SDK/New_CC/CC资源/SDK/CCSDK.framework\"",
+					"\"$(SRCROOT)/ChuYouYun/Live_SDK/IJKMediaFramework.framework\"",
 				);
 				INFOPLIST_FILE = ChuYouYun/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -26036,6 +26047,7 @@
 					"\"$(SRCROOT)/../../组合课堂/VH/微吼直播资源/微吼 资源\"",
 					"\"$(SRCROOT)/../../组合课堂/VH\"",
 					"\"$(SRCROOT)/../../组合课堂/VH/微吼直播资源/微吼 资源/VHallSDK的副本1/VHallFilterSDK\"",
+					"\"$(SRCROOT)/ChuYouYun/Live_SDK/IJKMediaFramework.framework\"",
 				);
 				MACH_O_TYPE = mh_execute;
 				MARKETING_VERSION = 1.0;
