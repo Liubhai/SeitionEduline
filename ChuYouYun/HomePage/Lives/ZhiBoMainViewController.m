@@ -753,7 +753,6 @@
 
 
 - (void)downButtonClick:(UIButton *)button {
-    
     if (button.tag == 0) {//价格
     } else if (button.tag == 1) {//解锁
         if ([_buyButton.titleLabel.text isEqualToString:@"立即解锁"]) {
@@ -922,6 +921,8 @@
     [_priceButton setAttributedTitle:[[NSAttributedString alloc] initWithAttributedString:priceAtt] forState:0];
     _ordPrice.centerX = _priceButton.centerX;
     NSString *numstr = [NSString stringWithFormat:@"%@",[_zhiBoDic stringValueForKey:@"is_buy"]];
+    _buyButton.enabled = YES;
+    [_buyButton setBackgroundColor:BasidColor];
     if ([numstr isEqualToString:@"1"]) {
         [_buyButton setTitle:@"已解锁" forState:UIControlStateNormal];
     }
@@ -932,7 +933,8 @@
         }
         if (SWNOTEmptyDictionary(myActivityInfo)) {
             if ([[myActivityInfo objectForKey:@"faild"] integerValue] == 1) {
-                
+                _buyButton.enabled = NO;
+                [_buyButton setBackgroundColor:RGBHex(0xC0C0C0)];
             } else {
                 [_buyButton setTitle:@"去分享" forState:0];
             }

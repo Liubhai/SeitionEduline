@@ -2275,6 +2275,8 @@
         }
         _ordPrice.centerX = _attentionButton.centerX;
         _collectStr = [_videoDataSource stringValueForKey:@"iscollect"];
+        _buyButton.enabled = YES;
+        [_buyButton setBackgroundColor:BasidColor];
         if ([[_videoDataSource stringValueForKey:@"is_buy"] integerValue] == 1) {//已经解锁
             [_buyButton setTitle:@"已解锁" forState:UIControlStateNormal];
         } else {
@@ -2326,6 +2328,8 @@
         }
         _schoolInfo = [NSDictionary dictionaryWithDictionary:[_videoDataSource objectForKey:@"school_info"]];
         if (_buyButton) {
+            _buyButton.enabled = YES;
+            [_buyButton setBackgroundColor:BasidColor];
             if ([[_videoDataSource stringValueForKey:@"is_buy"] integerValue] == 1) {//已经解锁
                 [_buyButton setTitle:@"已解锁" forState:UIControlStateNormal];
             } else {
@@ -2338,7 +2342,8 @@
                 }
                 if (SWNOTEmptyDictionary(myActivityInfo)) {
                     if ([[myActivityInfo objectForKey:@"faild"] integerValue] == 1) {
-                        
+                        _buyButton.enabled = NO;
+                        [_buyButton setBackgroundColor:RGBHex(0xC0C0C0)];
                     } else {
                         [_buyButton setTitle:@"去分享" forState:0];
                     }
