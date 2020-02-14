@@ -2619,6 +2619,7 @@
 		78D5B8E823F634F5007FCA46 /* VHWatchBackOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 78D5B83923F634F4007FCA46 /* VHWatchBackOne.m */; };
 		78DF190622AF5AB500DF10FB /* ShopOrderDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DF190522AF5AB500DF10FB /* ShopOrderDetailVC.m */; };
 		78E40F4823F63F6400B53039 /* IJKMediaFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78E40F4723F63F6400B53039 /* IJKMediaFramework.framework */; };
+		78E40F4923F642BE00B53039 /* IJKMediaFramework.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 78E40F4723F63F6400B53039 /* IJKMediaFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		78F108F322B7471A00288DEB /* LanchAnimationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F108F022B7471900288DEB /* LanchAnimationVC.m */; };
 		78F108F422B7471A00288DEB /* LanchAnimationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78F108F222B7471A00288DEB /* LanchAnimationVC.xib */; };
 		78F1099722B770AA00288DEB /* ZBLM3u8FileDownloadInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F1091122B770A900288DEB /* ZBLM3u8FileDownloadInfo.m */; };
@@ -3533,6 +3534,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				78E40F4923F642BE00B53039 /* IJKMediaFramework.framework in CopyFiles */,
 				780F8A65230F871400B67CEF /* TKRoomSDK.framework in CopyFiles */,
 				0927F4B921D6369600BFBD91 /* AliyunVodPlayerSDK.framework in CopyFiles */,
 				0927F4B721D6369600BFBD91 /* AliThirdparty.framework in CopyFiles */,

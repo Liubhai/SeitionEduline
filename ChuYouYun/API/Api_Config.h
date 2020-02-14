@@ -73,6 +73,7 @@
 #define YunKeTang_Live_live_getCatalog @"live.getCatalog"
 #define YunKeTang_Live_live_getCanUseCouponList @"live.getCanUseCouponList"
 #define YunKeTang_Live_live_getTeacherList @"live.getTeacherList"
+#define YunKeTang_Live_live_getWhUserId @"live.getWhUserId"
 
 
 

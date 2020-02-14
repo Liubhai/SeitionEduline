@@ -175,6 +175,7 @@
     [self interFace];
     [self addTableView];
     [self netWorkLiveGetInfo];
+    [self VHUser];
 }
 
 - (void)interFace {
@@ -620,5 +621,41 @@
     [self presentViewController:watchVC animated:YES completion:nil];
 }
 
+- (void)VHUser {
+    
+    NSString *endUrlStr = YunKeTang_Live_live_getWhUserId;
+    NSString *allUrlStr = [YunKeTang_Api_Tool YunKeTang_GetFullUrl:endUrlStr];
+    
+    NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
+    [mutabDict setObject:_ID forKey:@"live_id"];
+    
+    NSString *oath_token_Str = nil;
+    if (UserOathToken) {
+        oath_token_Str = [NSString stringWithFormat:@"%@:%@",UserOathToken,UserOathTokenSecret];
+    }
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:allUrlStr]];
+    [request setHTTPMethod:NetWay];
+    NSString *encryptStr = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetEncryptStr:mutabDict];
+    [request setValue:encryptStr forHTTPHeaderField:HeaderKey];
+    [request setValue:oath_token_Str forHTTPHeaderField:OAUTH_TOKEN];
+    
+    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
+        if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
+            if ([[dict dictionaryValueForKey:@"data"] isKindOfClass:[NSDictionary class]]) {
+                _VHUserDict = [dict dictionaryValueForKey:@"data"];
+            } else {
+               _VHUserDict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
+            }
+        } else {
+            return ;
+        }
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+    }];
+    [op start];
+    
+}
 
 @end
