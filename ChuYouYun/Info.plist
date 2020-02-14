@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Eduline</string>
+	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Eduline</string>
+	<string>易明波罗蜜</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -26,10 +26,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.saixin.eduline</string>
+			<string>com.fanaizhong.ymkt</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.saixin.eduline</string>
+				<string>com.fanaizhong.ymkt</string>
 			</array>
 		</dict>
 		<dict>
@@ -41,7 +41,7 @@
 			<string></string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>wb3997129963</string>
+				<string>wb1676253087</string>
 			</array>
 		</dict>
 		<dict>
@@ -49,7 +49,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>QQ60B3DEA</string>
+				<string>QQ61223F4</string>
 			</array>
 		</dict>
 		<dict>
@@ -57,7 +57,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>tencent101400042</string>
+				<string>tencent101852148</string>
 			</array>
 		</dict>
 		<dict>
@@ -65,7 +65,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>wxbbb961a0b0bf577a</string>
+				<string>wxb6f721f98ee08d3c</string>
 			</array>
 		</dict>
 		<dict>
@@ -159,9 +159,9 @@
 	<string>LaunchScreen</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>可以的</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>App会在使用修改用户头像、保存图片到本地功能时,访问您的相机权限</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>App会在使用修改用户头像、保存图片到本地功能时,访问您的相机权限</string>
+	<key>NSPhotoLibraryUsageDescription</key>
 	<string>App会在使用修改用户头像、保存图片到本地功能时,访问您的相机权限</string>
 	<key>UIBackgroundModes</key>
 	<array>

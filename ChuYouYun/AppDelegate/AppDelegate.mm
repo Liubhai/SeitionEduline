@@ -227,7 +227,7 @@
     [self getCurrentVersion];
     [self getCurrentAPPName];
     
-    [UMSocialData setAppKey:@"574e8829e0f55a12f8001790"];
+    [UMSocialData setAppKey:@"5e44bc420feb474e621fb20d"];
 
     //QQ
     [UMSocialQQHandler setQQWithAppId:QQAppId appKey:QQAppSecret url:@"http://www.umeng.com/social"];
@@ -289,9 +289,9 @@
         
         NSMutableArray *images = [NSMutableArray new];
         
-        [images addObject:[UIImage imageNamed:@"new_ lead1.png"]];
-        [images addObject:[UIImage imageNamed:@"new_ lead2.png"]];
-        [images addObject:[UIImage imageNamed:@"new_ lead3.png"]];
+        [images addObject:[UIImage imageNamed:@"mykt1.png"]];
+        [images addObject:[UIImage imageNamed:@"mykt2.png"]];
+        [images addObject:[UIImage imageNamed:@"mykt3.png"]];
         
         HcdGuideView *guideView = [HcdGuideView sharedInstance];
         guideView.window = self.window;
