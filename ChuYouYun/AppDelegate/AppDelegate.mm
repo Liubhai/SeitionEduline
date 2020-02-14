@@ -27,6 +27,7 @@
 #import "HTTPServer.h"
 #import "DDLog.h"
 #import "DDTTYLogger.h"
+#import "VHallApi.h"
 
 
 //人脸识别
@@ -309,6 +310,9 @@
     NSLog(@"canWork = %d",[[FaceSDKManager sharedInstance] canWork]);
     [SVProgressHUD appearance].defaultStyle = SVProgressHUDStyleDark;
     [[NetAccessModel sharedInstance] getAccessTokenWithAK:FACE_API_KEY SK:FACE_SECRET_KEY];
+    //微吼直播
+    [VHallApi registerApp:@"d8283196baf956863793a27a4cf12cea" SecretKey:@"89d30769e198688a326e07d2d8dca3b0"];
+    [VHallApi setLogType:VHLogType_ON];
     // 注册状态栏位置消息监听
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusBarFrameDidChange:) name:UIApplicationDidChangeStatusBarFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusBarFrameWillChange:) name:UIApplicationWillChangeStatusBarFrameNotification object:nil];

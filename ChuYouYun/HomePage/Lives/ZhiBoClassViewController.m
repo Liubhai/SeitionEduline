@@ -42,27 +42,27 @@
 
 
 //CC直播
-#import "CCSDK/CCLiveUtil.h"
-#import "CCSDK/RequestData.h"
-#import "CCSDK/RequestDataPlayBack.h"
+//#import "CCSDK/CCLiveUtil.h"
+//#import "CCSDK/RequestData.h"
+//#import "CCSDK/RequestDataPlayBack.h"
 //#import "CCHHPlayViewController.h"
 //#import "CCHHPlayBackViewController.h"
 
-#import "PlayForPCVC.h"
-#import "PlayBackVC.h"
-#import "InformationShowView.h"
+//#import "PlayForPCVC.h"
+//#import "PlayBackVC.h"
+//#import "InformationShowView.h"
 #import "Masonry.h"
 
 
-#import <QuartzCore/QuartzCore.h>
-#import "QRCodeReaderViewController.h"
-#import "QRCodeReader.h"
-#import "QRCodeReaderDelegate.h"
+//#import <QuartzCore/QuartzCore.h>
+//#import "QRCodeReaderViewController.h"
+//#import "QRCodeReader.h"
+//#import "QRCodeReaderDelegate.h"
 
 // 微吼直播
-//#import "VHallApi.h"
-//#import "WatchLiveViewController.h"
-//#import "WatchPlayBackViewController.h"
+#import "VHallApi.h"
+#import "WatchLiveViewController.h"
+#import "WatchPlayBackViewController.h"
 
 
 //CC 小班课
@@ -84,7 +84,7 @@
 
 
 
-@interface ZhiBoClassViewController ()<UITableViewDataSource,UITableViewDelegate,QRCodeReaderDelegate,RequestDataDelegate,RequestDataPlayBackDelegate,UIScrollViewDelegate>
+@interface ZhiBoClassViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 {
     BOOL islivePlay;
     NSInteger _indexPathRow;
@@ -109,10 +109,12 @@
 @property (strong ,nonatomic) NSDictionary *CCDict;
 
 //CC
-@property (strong ,nonatomic)PlayParameter  *playParameter;
-@property (strong ,nonatomic)RequestData    *requestData;
+//@property (strong ,nonatomic)PlayParameter  *playParameter;
+//@property (strong ,nonatomic)RequestData    *requestData;
 
 @property (strong ,nonatomic)NSDictionary *VHDict;
+
+@property (strong ,nonatomic)NSDictionary *VHUserDict;
 
 //小班课
 //@property (strong ,nonatomic)CC_LoadingView  *loadingView;
@@ -420,12 +422,22 @@
                     //                    [_voddownloader addItem:result number:livePlaybackDict[@"number"] loginName:_HDnickName vodPassword:livePlaybackDict[@"token"] loginPassword:livePlaybackDict[@"number"] downFlag:0 serType:@"training" oldVersion:NO kToken:nil customUserID:0];
                 }
             } else if ([[dict stringValueForKey:@"type"] integerValue] == 4) {//CC
-                if ([dict[@"body"][@"is_live"] integerValue] == 1) {//直播
-                    [self useCCLive:dict[@"body"]];
-                } else if ([dict[@"body"][@"is_live"] integerValue] == 0){//回放
-                    _CCDict = dict[@"body"];
-                    [self CCPlayBack];
+//                if ([dict[@"body"][@"is_live"] integerValue] == 1) {//直播
+//                    [self useCCLive:dict[@"body"]];
+//                } else if ([dict[@"body"][@"is_live"] integerValue] == 0){//回放
+//                    _CCDict = dict[@"body"];
+//                    [self CCPlayBack];
+//                }
+            } else if ([[dict stringValueForKey:@"type"] integerValue] == 5) {//VH
+                
+                _VHDict = dict[@"body"];
+                
+                if ([_VHDict[@"is_live"] integerValue] == 1) {//在直播
+                    [self VHLogin];
+                } else {//回放
+                    [self watchBackVHPlayer];
                 }
+                
             } else {
                 [TKProgressHUD showError:@"不支持直播类型" toView: [UIApplication sharedApplication].keyWindow];
                 return ;
@@ -485,15 +497,15 @@
             //            requestDataPlayBack.delegate = self;
         }
         
-        PlayParameter *parameter = [[PlayParameter alloc] init];
-        parameter.userId = strUserId;
-        parameter.roomId = strRoomId;
-        parameter.viewerName = strViewName;
-        parameter.token = strToken;
-        parameter.security = YES;
-        parameter.viewerCustomua = @"viewercustomua";
-        _requestData = [[RequestData alloc] initLoginWithParameter:parameter];
-        _requestData.delegate = self;
+//        PlayParameter *parameter = [[PlayParameter alloc] init];
+//        parameter.userId = strUserId;
+//        parameter.roomId = strRoomId;
+//        parameter.viewerName = strViewName;
+//        parameter.token = strToken;
+//        parameter.security = YES;
+//        parameter.viewerCustomua = @"viewercustomua";
+//        _requestData = [[RequestData alloc] initLoginWithParameter:parameter];
+//        _requestData.delegate = self;
         
     }
 }
@@ -513,8 +525,8 @@
     NSString *strViewName = _HDnickName;
     NSString *strToken = [_CCDict stringValueForKey:@"join_pwd"];
     
-    PlayForPCVC *playVc = [[PlayForPCVC alloc] initWithRoomId:strRoomId WithUserId:strUserId WithViewerName:strViewName WithToken:strToken];
-    [self presentViewController:playVc animated:YES completion:nil];
+//    PlayForPCVC *playVc = [[PlayForPCVC alloc] initWithRoomId:strRoomId WithUserId:strUserId WithViewerName:strViewName WithToken:strToken];
+//    [self presentViewController:playVc animated:YES completion:nil];
 }
 
 -(void)loginFailed:(NSError *)error reason:(NSString *)reason {
@@ -529,27 +541,27 @@
 }
 
 #pragma mark -- CC 回放
-- (void)CCPlayBack {
-    NSLog(@"%@",_CCDict);
-    PlayParameter *parameter = [[PlayParameter alloc] init];
-    parameter.userId = [_CCDict stringValueForKey:@"userid"];
-    parameter.roomId = [_CCDict stringValueForKey:@"roomid"];
-    parameter.liveId = [_CCDict stringValueForKey:@"livePlayback"];
-    
-    
-    parameter.viewerName = _HDnickName;
-    parameter.token = [_CCDict stringValueForKey:@"join_pwd"];
-    parameter.security = YES;
-    
-    NSLog(@"%@",parameter.viewerName);
-    NSLog(@"%@",parameter.userId);
-    NSLog(@"%@",parameter.roomId);
-    NSLog(@"%@",parameter.liveId);
-    NSLog(@"%@",parameter.token);
-    
-    RequestDataPlayBack *requestDataPlayBack = [[RequestDataPlayBack alloc] initLoginWithParameter:parameter];
-    requestDataPlayBack.delegate = self;
-}
+//- (void)CCPlayBack {
+//    NSLog(@"%@",_CCDict);
+//    PlayParameter *parameter = [[PlayParameter alloc] init];
+//    parameter.userId = [_CCDict stringValueForKey:@"userid"];
+//    parameter.roomId = [_CCDict stringValueForKey:@"roomid"];
+//    parameter.liveId = [_CCDict stringValueForKey:@"livePlayback"];
+//
+//
+//    parameter.viewerName = _HDnickName;
+//    parameter.token = [_CCDict stringValueForKey:@"join_pwd"];
+//    parameter.security = YES;
+//
+//    NSLog(@"%@",parameter.viewerName);
+//    NSLog(@"%@",parameter.userId);
+//    NSLog(@"%@",parameter.roomId);
+//    NSLog(@"%@",parameter.liveId);
+//    NSLog(@"%@",parameter.token);
+//
+//    RequestDataPlayBack *requestDataPlayBack = [[RequestDataPlayBack alloc] initLoginWithParameter:parameter];
+//    requestDataPlayBack.delegate = self;
+//}
 
 #pragma mark -- CC回放的代理方法
 //@optional
@@ -564,16 +576,8 @@
     NSString *name = _HDnickName;
     NSString *token = [_CCDict stringValueForKey:@"join_pwd"];
     
-    PlayBackVC *playBackVC = [[PlayBackVC alloc] initWithRoomId:roomID WithUserId:userID WithViewerName:name WithToken:token withLiveID:liveID];
-    [self presentViewController:playBackVC animated:YES completion:nil];
-}
-
-
-
-#pragma mark --- 微吼直播
-
-- (void)VHPlayer {
-    
+//    PlayBackVC *playBackVC = [[PlayBackVC alloc] initWithRoomId:roomID WithUserId:userID WithViewerName:name WithToken:token withLiveID:liveID];
+//    [self presentViewController:playBackVC animated:YES completion:nil];
 }
 
 #pragma mark --- CC  小班课
@@ -586,8 +590,35 @@
     promptAlert =NULL;
 }
 
+#pragma mark --- 微吼直播
 
+- (void)VHLogin {
+    
+    [VHallApi loginWithAccount:_VHUserDict[@"user_id"] password:_VHUserDict[@"rund_encry_pwdstr"] success:^{
+        NSLog(@"19999");
+        [self watchVHPlayer];
+        
+    } failure:^(NSError * error) {
+        
+    }];
+}
 
+- (void)watchVHPlayer {
+    WatchLiveViewController * watchVC  =[[WatchLiveViewController alloc]init];
+    watchVC.roomId      = _VHDict[@"number"];
+    watchVC.VHDict      = _VHDict;
+    watchVC.kValue      = _VHDict[@"k"];
+    watchVC.VHUserDict  = _VHUserDict;
+    [self presentViewController:watchVC animated:YES completion:nil];
+    
+}
+
+- (void)watchBackVHPlayer {
+    WatchPlayBackViewController * watchVC  =[[WatchPlayBackViewController alloc]init];
+    watchVC.roomId = _VHDict[@"number"];
+    watchVC.kValue = _VHDict[@"k"];
+    [self presentViewController:watchVC animated:YES completion:nil];
+}
 
 
 @end
