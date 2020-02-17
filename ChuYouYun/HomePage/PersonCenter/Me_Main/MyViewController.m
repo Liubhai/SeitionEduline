@@ -572,6 +572,7 @@
     
     DLViewController *DLVC = [[DLViewController alloc] init];
     UINavigationController *Nav = [[UINavigationController alloc] initWithRootViewController:DLVC];
+    Nav.modalPresentationStyle = UIModalPresentationFullScreen;
     [self.navigationController presentViewController:Nav animated:YES completion:nil];
     
 }
@@ -722,6 +723,7 @@
         
         DLViewController *DLVC = [[DLViewController alloc] init];
         UINavigationController *Nav = [[UINavigationController alloc] initWithRootViewController:DLVC];
+        Nav.modalPresentationStyle = UIModalPresentationFullScreen;
         [self.navigationController presentViewController:Nav animated:YES completion:nil];
         return;
     }
@@ -898,6 +900,7 @@
         //提示去登录
         DLViewController *DLVC = [[DLViewController alloc] init];
         UINavigationController *Nav = [[UINavigationController alloc] initWithRootViewController:DLVC];
+        Nav.modalPresentationStyle = UIModalPresentationFullScreen;
         [self.navigationController presentViewController:Nav animated:YES completion:nil];
     }else {//已经登录
         Good_MessageMainViewController *vc = [[Good_MessageMainViewController alloc] init];
@@ -911,6 +914,7 @@
         //去登录
         DLViewController *DLVC = [[DLViewController alloc] init];
         UINavigationController *Nav = [[UINavigationController alloc] initWithRootViewController:DLVC];
+        Nav.modalPresentationStyle = UIModalPresentationFullScreen;
         [self.navigationController presentViewController:Nav animated:YES completion:nil];
     }else {//已经登录
         settingViewController *set = [[settingViewController alloc]initWithUserFace:_imageView.image userName:[userDic objectForKey:@"uname"]];
@@ -945,6 +949,7 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"oauthToken"] == nil) {//没有登录的情况下
         DLViewController *DLVC = [[DLViewController alloc] init];
         UINavigationController *Nav = [[UINavigationController alloc] initWithRootViewController:DLVC];
+        Nav.modalPresentationStyle = UIModalPresentationFullScreen;
         [self.navigationController presentViewController:Nav animated:YES completion:nil];
     }else {//已经登录
         [self manyButtonSet:button];
@@ -1261,6 +1266,7 @@
         [ps goOutLogin];
         DLViewController *DLVC = [[DLViewController alloc] init];
         UINavigationController *Nav = [[UINavigationController alloc] initWithRootViewController:DLVC];
+        Nav.modalPresentationStyle = UIModalPresentationFullScreen;
         [self.navigationController presentViewController:Nav animated:YES completion:nil];
     });
 }
