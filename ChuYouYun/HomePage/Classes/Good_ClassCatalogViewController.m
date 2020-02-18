@@ -1247,7 +1247,9 @@
     NSString *durationStr = [_cellDict stringValueForKey:@"duration"];
     NSArray *durationArray = [durationStr componentsSeparatedByString:@":"];
     NSInteger totalTime = 0;
-    totalTime = [durationArray[0] integerValue] * 3600 + [durationArray[1] integerValue] * 60 + [durationArray[1] integerValue];
+    if (SWNOTEmptyStr(durationStr)) {
+        totalTime = [durationArray[0] integerValue] * 3600 + [durationArray[1] integerValue] * 60 + [durationArray[1] integerValue];
+    }
     [mutabDict setValue:[NSString stringWithFormat:@"%ld",totalTime] forKey:@"totaltime"];
     [mutabDict setValue:[_cellDict stringValueForKey:@"video_type"] forKey:@"type"];
     
