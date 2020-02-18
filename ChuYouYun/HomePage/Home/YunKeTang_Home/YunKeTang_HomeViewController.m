@@ -132,7 +132,8 @@ static NSString *cellID = @"cell";
     if ([MoreOrSingle integerValue] == 1) {//单机构
         _tableTitleArray = @[@"最近直播",@"精选课程",@"最新课程",@"预约课程",@"名师推荐"];
     } else if ([MoreOrSingle integerValue] == 2) {//多机构
-        _tableTitleArray = @[@"最近直播",@"精选课程",@"最新课程",@"预约课程",@"名师推荐",@"机构推荐"];
+        _tableTitleArray = @[@"最近直播",@"精选课程",@"最新课程",@"预约课程",@"名师推荐"];
+//        _tableTitleArray = @[@"最近直播",@"精选课程",@"最新课程",@"预约课程",@"名师推荐",@"机构推荐"];
     }
     //定时器
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(NetWorkAgain) userInfo:nil repeats:YES];
@@ -317,7 +318,7 @@ static NSString *cellID = @"cell";
 
 - (void)addLiveScrollView {
     if (_liveHeaderView == nil) {
-        _liveHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_cateScrollView.frame) + (_cateScrollView.frame.size.height > 0 ? 10 : 0), MainScreenWidth, 40)];
+        _liveHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_imageScrollView.frame) + (_imageScrollView.frame.size.height > 0 ? 10 : 0), MainScreenWidth, 40)];
         _liveHeaderView.backgroundColor = [UIColor whiteColor];
         [_tableViewHeaderView addSubview:_liveHeaderView];
         _liveHeaderView.userInteractionEnabled = YES;
@@ -491,11 +492,11 @@ static NSString *cellID = @"cell";
     
     //直播数据为空的时候 就隐藏
     if (_liveArray.count == 0) {
-        _liveHeaderView.frame = CGRectMake(0, CGRectGetMaxY(_cateScrollView.frame), MainScreenWidth, 0);
+        _liveHeaderView.frame = CGRectMake(0, CGRectGetMaxY(_imageScrollView.frame), MainScreenWidth, 0);
         _liveHeaderView.hidden = YES;
         _liveScrollView.frame = CGRectMake(0, CGRectGetMaxY(_liveHeaderView.frame), MainScreenWidth, 0);
     } else {
-        _liveHeaderView.frame = CGRectMake(0, CGRectGetMaxY(_cateScrollView.frame) + (_cateScrollView.frame.size.height > 0 ? 10 : 0), MainScreenWidth, 40);
+        _liveHeaderView.frame = CGRectMake(0, CGRectGetMaxY(_imageScrollView.frame) + (_imageScrollView.frame.size.height > 0 ? 10 : 0), MainScreenWidth, 40);
         _liveHeaderView.hidden = NO;
         _liveScrollView.frame = CGRectMake(0, CGRectGetMaxY(_liveHeaderView.frame), MainScreenWidth , 180);
     }

@@ -2365,6 +2365,8 @@
 		780F8A68231764B500B67CEF /* ComboTypeChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 780F8A67231764B500B67CEF /* ComboTypeChooseViewController.m */; };
 		78117DC822F3D41D00E47A8D /* TestPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78117DC722F3D41D00E47A8D /* TestPayViewController.m */; };
 		78156BA7230A873300A3122B /* ActivityGroupListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78156BA6230A873300A3122B /* ActivityGroupListViewController.m */; };
+		7819A66423FBC28F00306EFF /* tab3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7819A66223FBC28E00306EFF /* tab3@2x.png */; };
+		7819A66523FBC28F00306EFF /* tab31@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7819A66323FBC28E00306EFF /* tab31@2x.png */; };
 		781A651A22BBA77A0012F9EF /* BRDownFileCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 781A64C222BBA7790012F9EF /* BRDownFileCacheManager.m */; };
 		781A651B22BBA77A0012F9EF /* Good_ClassDownViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 781A64C322BBA7790012F9EF /* Good_ClassDownViewController.m */; };
 		781A651C22BBA77A0012F9EF /* ZFPlayerGestureControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 781A64C822BBA7790012F9EF /* ZFPlayerGestureControl.m */; };
@@ -4273,7 +4275,7 @@
 		504C759D1AA4395E00DF3018 /* Top2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Top2.png; sourceTree = "<group>"; };
 		504C759E1AA4395E00DF3018 /* Top3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Top3.png; sourceTree = "<group>"; };
 		5051459D1AE49F4E00CCCAE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		50566DFC1A6F44A400F093DE /* Eduline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Eduline.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		50566DFC1A6F44A400F093DE /* 精图学院.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "精图学院.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		50566E001A6F44A400F093DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50566E011A6F44A400F093DE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		50566E0C1A6F44A400F093DE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -6597,6 +6599,8 @@
 		78117DC722F3D41D00E47A8D /* TestPayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestPayViewController.m; sourceTree = "<group>"; };
 		78156BA5230A873300A3122B /* ActivityGroupListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActivityGroupListViewController.h; sourceTree = "<group>"; };
 		78156BA6230A873300A3122B /* ActivityGroupListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActivityGroupListViewController.m; sourceTree = "<group>"; };
+		7819A66223FBC28E00306EFF /* tab3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab3@2x.png"; sourceTree = "<group>"; };
+		7819A66323FBC28E00306EFF /* tab31@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab31@2x.png"; sourceTree = "<group>"; };
 		781A64C122BBA7790012F9EF /* BRDownFileCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRDownFileCacheManager.h; sourceTree = "<group>"; };
 		781A64C222BBA7790012F9EF /* BRDownFileCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRDownFileCacheManager.m; sourceTree = "<group>"; };
 		781A64C322BBA7790012F9EF /* Good_ClassDownViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Good_ClassDownViewController.m; sourceTree = "<group>"; };
@@ -9042,6 +9046,8 @@
 				091FDAF91FF4ED230074A481 /* tab_course@2x.png */,
 				09309FE41F2B2A6F00349840 /* tab_home_pre@2x.png */,
 				09309FE51F2B2A6F00349840 /* tab_home'@2x.png */,
+				7819A66223FBC28E00306EFF /* tab3@2x.png */,
+				7819A66323FBC28E00306EFF /* tab31@2x.png */,
 				09309FE81F2B2B1500349840 /* tab_classify_pre@2x.png */,
 				09309FE91F2B2B1500349840 /* tab_classify@2x.png */,
 				09237D1B1F2B3ABE00FC1746 /* tab_classify_pre1@2x.png */,
@@ -10174,7 +10180,7 @@
 		50566DFD1A6F44A400F093DE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				50566DFC1A6F44A400F093DE /* Eduline.app */,
+				50566DFC1A6F44A400F093DE /* 精图学院.app */,
 				50566E151A6F44A400F093DE /* YunKeTang.xctest */,
 			);
 			name = Products;
@@ -24028,7 +24034,7 @@
 			);
 			name = YunKeTang;
 			productName = ChuYouYun;
-			productReference = 50566DFC1A6F44A400F093DE /* Eduline.app */;
+			productReference = 50566DFC1A6F44A400F093DE /* 精图学院.app */;
 			productType = "com.apple.product-type.application";
 		};
 		50566E141A6F44A400F093DE /* YunKeTangTests */ = {
@@ -24212,6 +24218,7 @@
 				780F8979230F85F400B67CEF /* tk_control_black@2x.png in Resources */,
 				097DC28E21D632850060C974 /* avcPause@3x.png in Resources */,
 				F19EC0F01C8D14270094C2A4 /* haqian.png in Resources */,
+				7819A66523FBC28F00306EFF /* tab31@2x.png in Resources */,
 				8126ED4F21D63A42008C8547 /* chat_em_face1@2X.png in Resources */,
 				81C4DE5C21B1246500A7CAD6 /* biaoqing_54.png in Resources */,
 				09F49B3B1F20939800845E65 /* faxian_article.png in Resources */,
@@ -25191,6 +25198,7 @@
 				780F877E230F85F100B67CEF /* tk_icon_open_audio_black@3x.png in Resources */,
 				780F8671230F85F000B67CEF /* tk_mp3player_tongyi_black_00035.png in Resources */,
 				780F876D230F85F100B67CEF /* tk_icon_video_voice_black@2x.png in Resources */,
+				7819A66423FBC28F00306EFF /* tab3@2x.png in Resources */,
 				8126EDFE21D63A42008C8547 /* chat_em_face2@3x.png in Resources */,
 				81C4DE6721B1246500A7CAD6 /* biaoqing_53.png in Resources */,
 				780F85F2230F85F000B67CEF /* tk_pen_default_cartoon@3x.png in Resources */,
@@ -28083,7 +28091,7 @@
 					"$(SRCROOT)/ChuYouYun/Live_SDK/New_CC/CC资源/SDK",
 				);
 				MACH_O_TYPE = mh_execute;
-				MARKETING_VERSION = 4.2.2;
+				MARKETING_VERSION = 1.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-force_load",
@@ -28092,8 +28100,8 @@
 					"\"$(SRCROOT)/ChuYouYun/Library/umeng_ios_social_sdk_5.2-2.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/SinaSSO/libWeiboSDK.a\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.saixin.eduline;
-				PRODUCT_NAME = Eduline;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jtjy.jtxy;
+				PRODUCT_NAME = "精图学院";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
@@ -28110,10 +28118,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2VGCGZZ87Y;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -28189,7 +28197,7 @@
 					"$(SRCROOT)/ChuYouYun/Live_SDK/New_CC/CC资源/SDK",
 				);
 				MACH_O_TYPE = mh_execute;
-				MARKETING_VERSION = 4.2.2;
+				MARKETING_VERSION = 1.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-force_load",
@@ -28198,10 +28206,10 @@
 					"\"$(SRCROOT)/ChuYouYun/Library/umeng_ios_social_sdk_5.2-2.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/SinaSSO/libWeiboSDK.a\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.saixin.eduline;
-				PRODUCT_NAME = Eduline;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jtjy.jtxy;
+				PRODUCT_NAME = "精图学院";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = appTongYongDis;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7s armv7 arm64";

@@ -289,9 +289,9 @@
         
         NSMutableArray *images = [NSMutableArray new];
         
-        [images addObject:[UIImage imageNamed:@"new_ lead1.png"]];
-        [images addObject:[UIImage imageNamed:@"new_ lead2.png"]];
-        [images addObject:[UIImage imageNamed:@"new_ lead3.png"]];
+        [images addObject:[UIImage imageNamed:@"JingTuLeader_1.png"]];
+        [images addObject:[UIImage imageNamed:@"JingTuLeader_2.png"]];
+        [images addObject:[UIImage imageNamed:@"JingTuLeader_3.png"]];
         
         HcdGuideView *guideView = [HcdGuideView sharedInstance];
         guideView.window = self.window;

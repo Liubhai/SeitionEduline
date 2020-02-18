@@ -61,8 +61,8 @@ static rootViewController *sharedBaseTabBar;
 //    NSArray *imageArray = @[@"home_no_press@2x",@"class_no_press@2x",@"tab_discover_nopress@2x",@"me_no_press@2x"];
 //    NSArray *selectedArray = @[@"home_press@2x",@"class_press@2x",@"tab_discover_press@2x",@"me_press@2x"];
     
-    NSArray *imageArray = @[@"tab_home'@2x",@"tab_course@2x",@"tab_found@2x",@"tab_my@2x"];
-    NSArray *selectedArray = @[@"tab_home_pre@2x",@"tab_course_pre@2x",@"tab_found_pre@2x",@"tab_my_pre@2x"];
+    NSArray *imageArray = @[@"tab_home'@2x",@"tab_course@2x",@"tab31@2x",@"tab_my@2x"];
+    NSArray *selectedArray = @[@"tab_home_pre@2x",@"tab_course_pre@2x",@"tab3@2x",@"tab_my_pre@2x"];
     
     //添加按钮
     CGFloat space = (self.view.frame.size.width-40*4)/5;

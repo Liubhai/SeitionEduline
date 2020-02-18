@@ -28,7 +28,7 @@
 #import "UIView+HUD.h"
 
 //配置单机构或者多机构 (1,单机构、2,多机构)
-#define MoreOrSingle ([Institution_Id isEqualToString:@"0"] || [[NSUserDefaults standardUserDefaults] objectForKey:@"institutionId"] == nil) ? @"2" : @"1"
+#define MoreOrSingle @"2"//([Institution_Id isEqualToString:@"0"] || [[NSUserDefaults standardUserDefaults] objectForKey:@"institutionId"] == nil) ? @"2" : @"1"
 #define MoreOrSingle_HeaderUrl @"2"
 
 #ifndef ChuYouYun_SYG_h
@@ -108,10 +108,10 @@
 //#define EncryptHeaderUrl @"https://t.v4.51eduline.com"
 
 /// 测试服(d单机构和多机构)
-#define EncryptUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://single.51eduline.com/service/" : @"https://t.v4.51eduline.com/service/"
-#define EncryptHeaderUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://single.51eduline.com" : @"https://t.v4.51eduline.com"
+#define EncryptUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://single.51eduline.com/service/" : @"http://www.jingtuxueyuan.com/service/"
+#define EncryptHeaderUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://single.51eduline.com" : @"http://www.jingtuxueyuan.com"
 
-#define basidUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://single.51eduline.com/service" : @"https://t.v4.51eduline.com/service"
+#define basidUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://single.51eduline.com/service" : @"http://www.jingtuxueyuan.com/service"
 
 /// 正式服(单机构和多机构)
 //#define EncryptUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://demo.51eduline.com/service/" : @"https://v4.51eduline.com/service/"
@@ -204,17 +204,17 @@ alpha:1.0]
 #define MACRO_UI_SAFEAREA [YunKeTang_Api_Tool safeAreaWithIPhoneX]
 
 // 微信分享
-#define WXAppId @"wxbbb961a0b0bf577a"
-#define WXAppSecret @"7ea0101aeabd53bc32859370cde278cc"
+#define WXAppId @"wx059562472b73b5d9"
+#define WXAppSecret @"8923ef7e0aab228821f47599eb343f12"
 // QQ分享
-#define QQAppId @"101400042"
-#define QQAppSecret @"a85c2fcd67839693d5c0bf13bec84779"
+#define QQAppId @"101491822"
+#define QQAppSecret @"63497e1782ffad4908ad63b908156d69"
 // 新浪分享
 #define SinaAppId @"3997129963"
 #define SinaAppSecret @"da07bcf6c9f30281e684f8abfd0b4fca"
 
 // 支付宝h5支付之后需要回到app
-#define AlipayBundleId @"com.saixin.eduline"
+#define AlipayBundleId @"com.jtjy.jtxy"
 
 // TKYUN
 #import "TKHelperUtil.h"
