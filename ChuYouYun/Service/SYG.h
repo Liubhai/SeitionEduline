@@ -214,7 +214,7 @@ alpha:1.0]
 #define SinaAppSecret @"55bde87d5c36f21f64204736afc6b19c"
 
 // 支付宝h5支付之后需要回到app
-#define AlipayBundleId @"com.jiangrenonline.app"
+#define AlipayBundleId @"com.jiangrenonline.com"
 
 // TKYUN
 #import "TKHelperUtil.h"
