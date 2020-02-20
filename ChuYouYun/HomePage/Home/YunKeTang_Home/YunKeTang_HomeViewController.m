@@ -192,6 +192,11 @@ static NSString *cellID = @"cell";
         _imageScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, MainScreenWidth, 2 * MainScreenWidth / 5)];
         [_tableViewHeaderView addSubview:_imageScrollView];
     }
+    if (SWNOTEmptyArr(_imageArray)) {
+        _imageScrollView.frame = CGRectMake(0, 0, MainScreenWidth, 2 * MainScreenWidth / 5);
+    } else {
+        _imageScrollView.frame = CGRectMake(0, 0, MainScreenWidth, 0);
+    }
     [_imageScrollView removeAllSubviews];
     _imageScrollView.backgroundColor = [UIColor whiteColor];
     _imageScrollView.pagingEnabled = YES;
