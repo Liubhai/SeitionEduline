@@ -557,9 +557,13 @@ NSString * const ID = @"cycleCell";
             if (SWNOTEmptyStr(imagePath)) {
                 UIImage *image = [UIImage imageNamed:imagePath];
                 if (!image) {
-                    [UIImage imageWithContentsOfFile:imagePath];
+                    image = [UIImage imageWithContentsOfFile:imagePath];
                 }
-                cell.imageView.image = image;
+                if (image) {
+                    cell.imageView.image = image;
+                } else {
+                    cell.imageView.image = self.placeholderImage;
+                }
             } else {
                 cell.imageView.image = self.placeholderImage;
             }
