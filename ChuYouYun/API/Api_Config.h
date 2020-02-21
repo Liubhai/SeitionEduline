@@ -427,4 +427,9 @@
 #define teacher_cancelAuth @"teacher.cancelAuth"
 // 讲师认证多张图片一起上传
 #define attach_multipleUploads @"attach.multipleUploads"
+
+// 游客模式
+#define touriseLogin @"ios.createAccount"
+// 绑定同步用户购买记录
+#define syncuUserInfo @"ios.syncOrder"
 #endif /* Header_h */
