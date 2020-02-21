@@ -2076,6 +2076,8 @@
     
     if (videoDurationSeconds  > _popupTime) {//此时应该弹题
         if (isExitTestView) {
+            [_popupTimer invalidate];
+            _popupTimer = nil;
             return;
         } else {
             [self.playerView pause];
