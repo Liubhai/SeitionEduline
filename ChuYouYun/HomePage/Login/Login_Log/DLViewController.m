@@ -795,8 +795,12 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"getPayMethodConfig" object:nil];
         // 检测是否有设备账号存储在本地
         NSString *deviceUUID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-        if (SWNOTEmptyDictionary([[NSUserDefaults standardUserDefaults] objectForKey:deviceUUID])) {
-            NSDictionary *localDeviceInfo = [NSDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:deviceUUID]];
+        NSDictionary *pass;
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:deviceUUID] isKindOfClass:[NSData class]]) {
+            pass = [NSDictionary dictionaryWithDictionary:[NSJSONSerialization JSONObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:deviceUUID] options:NSJSONReadingMutableLeaves error:nil]];
+        }
+        if (SWNOTEmptyDictionary(pass)) {
+            NSDictionary *localDeviceInfo = [NSDictionary dictionaryWithDictionary:pass];
             if (![[localDeviceInfo stringValueForKey:@"uid"] isEqualToString:[_dataSource stringValueForKey:@"uid"]]) {
                 // 提示是否同步到当前账号
                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"检测到当前设备已有课程解锁信息,是否同步当前设备账号解锁信息到已登录账号?" preferredStyle:(UIAlertControllerStyleAlert)];

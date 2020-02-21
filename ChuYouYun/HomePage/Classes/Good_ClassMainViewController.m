@@ -4355,7 +4355,8 @@
             [[NSUserDefaults standardUserDefaults]setObject:[dataSource stringValueForKey:@"only_login_key"] forKey:@"only_login_key"];
             //在登录成功的地方将数据保存下来
             [[NSUserDefaults standardUserDefaults]setObject:[dataSource stringValueForKey:@"uname"] forKey:@"uname"];
-            [[NSUserDefaults standardUserDefaults] setObject:dataSource forKey:deviceUUID];
+            NSData *resultData = [NSJSONSerialization dataWithJSONObject:dataSource options:NSJSONWritingPrettyPrinted error:nil];
+            [[NSUserDefaults standardUserDefaults] setObject:resultData forKey:deviceUUID];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"getPayMethodConfig" object:nil];
             Good_MyBalanceViewController *vc = [[Good_MyBalanceViewController alloc] init];
