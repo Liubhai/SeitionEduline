@@ -1336,6 +1336,8 @@
         if ([[[YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject] objectForKey:@"code"] integerValue] == 1) {
             NSDictionary *dataSource = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStrFromData:responseObject];
             NSLog(@"%@",dataSource);
+            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:deviceUUID];
+            [[NSUserDefaults standardUserDefaults] synchronize];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
         NSLog(@"%@",error);
