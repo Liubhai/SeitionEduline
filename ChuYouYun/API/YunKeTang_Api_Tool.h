@@ -49,4 +49,12 @@
 + (NSString*)timeChangeWithSeconds:(NSInteger)seconds;
 
 + (NSString *)getLocalTime;
+
+// 获取udid
++ (NSString *)getUUIDInKeychain;
++ (void)deleteKeyChain;
++ (NSMutableDictionary *)getKeyChainQuery:(NSString *)service;
++ (id)load:(NSString *)service;
++ (void)delete:(NSString *)service;
++ (void)save:(NSString *)service data:(id)data;
 @end

@@ -791,29 +791,101 @@
         [[NSUserDefaults standardUserDefaults]setObject:[_dataSource stringValueForKey:@"oauth_token_secret"] forKey:@"oauthTokenSecret"];
         [[NSUserDefaults standardUserDefaults]setObject:[_dataSource stringValueForKey:@"uid"] forKey:@"User_id"];
         [[NSUserDefaults standardUserDefaults]setObject:[_dataSource stringValueForKey:@"userface"] forKey:@"userface"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         [[NSUserDefaults standardUserDefaults]setObject:[_dataSource stringValueForKey:@"only_login_key"] forKey:@"only_login_key"];
-        if (base.code == 0) {
-            dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                [Passport userDataWithSavelocality:base.data];
-            });
-            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-            if ([self.typeStr isEqualToString:@"123"]) {//从设置页面过来
-                MyViewController *myVC = [[MyViewController alloc] init];
-                [self.navigationController pushViewController:myVC animated:YES];
+        // 检测是否有设备账号存储在本地
+        NSString *deviceUUID = [YunKeTang_Api_Tool getUUIDInKeychain];//[[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        NSDictionary *pass;
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:deviceUUID] isKindOfClass:[NSData class]]) {
+            pass = [NSDictionary dictionaryWithDictionary:[NSJSONSerialization JSONObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:deviceUUID] options:NSJSONReadingMutableLeaves error:nil]];
+        }
+        if (SWNOTEmptyDictionary(pass)) {
+            NSDictionary *localDeviceInfo = [NSDictionary dictionaryWithDictionary:pass];
+            if (![[localDeviceInfo stringValueForKey:@"uid"] isEqualToString:[_dataSource stringValueForKey:@"uid"]]) {
+                // 提示是否同步到当前账号
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"检测到当前设备已有课程解锁信息,是否同步当前设备账号解锁信息到已登录账号?" preferredStyle:(UIAlertControllerStyleAlert)];
+                UIAlertAction *loginAction = [UIAlertAction actionWithTitle:@"不同步" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    if (base.code == 0) {
+                        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                            [Passport userDataWithSavelocality:base.data];
+                        });
+                        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                        if ([self.typeStr isEqualToString:@"123"]) {//从设置页面过来
+                            MyViewController *myVC = [[MyViewController alloc] init];
+                            [self.navigationController pushViewController:myVC animated:YES];
+
+                        } else {
+                            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                        }
+
+                        //在登录成功的地方将数据保存下来
+                        [[NSUserDefaults standardUserDefaults]setObject:self.NameField.text forKey:@"uname"];
+                        [[NSUserDefaults standardUserDefaults]setObject:self.PassField.text forKey:@"upwd"];
+                        [[NSUserDefaults standardUserDefaults] synchronize];
+                        
+                        NSLog(@"保存----%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"oauthToken"]);
+
+                    } else {
+                        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"账号或密码不正确" message:base.msg delegate:nil cancelButtonTitle:@"返回" otherButtonTitles:nil, nil];
+                        [alert show];
+                    }
+                }];
+                UIAlertAction *TouristsAction = [UIAlertAction actionWithTitle:@"同步" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    if (base.code == 0) {
+                        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                            [Passport userDataWithSavelocality:base.data];
+                        });
+                        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                        if ([self.typeStr isEqualToString:@"123"]) {//从设置页面过来
+                            MyViewController *myVC = [[MyViewController alloc] init];
+                            [self.navigationController pushViewController:myVC animated:YES];
+
+                        } else {
+                            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                        }
+
+                        //在登录成功的地方将数据保存下来
+                        [[NSUserDefaults standardUserDefaults]setObject:self.NameField.text forKey:@"uname"];
+                        [[NSUserDefaults standardUserDefaults]setObject:self.PassField.text forKey:@"upwd"];
+                        [[NSUserDefaults standardUserDefaults] synchronize];
+                        
+                        NSLog(@"保存----%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"oauthToken"]);
+
+                    } else {
+                        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"账号或密码不正确" message:base.msg delegate:nil cancelButtonTitle:@"返回" otherButtonTitles:nil, nil];
+                        [alert show];
+                    }
+                    [self deviceSyncCurrentAccount];
+                }];
+                [alertController addAction:loginAction];
+                [alertController addAction:TouristsAction];
+                [self presentViewController:alertController animated:YES completion:nil];
+            }
+        } else {
+            if (base.code == 0) {
+                dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                    [Passport userDataWithSavelocality:base.data];
+                });
+                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                if ([self.typeStr isEqualToString:@"123"]) {//从设置页面过来
+                    MyViewController *myVC = [[MyViewController alloc] init];
+                    [self.navigationController pushViewController:myVC animated:YES];
+
+                } else {
+                    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                }
+
+                //在登录成功的地方将数据保存下来
+                [[NSUserDefaults standardUserDefaults]setObject:self.NameField.text forKey:@"uname"];
+                [[NSUserDefaults standardUserDefaults]setObject:self.PassField.text forKey:@"upwd"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                
+                NSLog(@"保存----%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"oauthToken"]);
 
             } else {
-                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"账号或密码不正确" message:base.msg delegate:nil cancelButtonTitle:@"返回" otherButtonTitles:nil, nil];
+                [alert show];
             }
-
-            //在登录成功的地方将数据保存下来
-            [[NSUserDefaults standardUserDefaults]setObject:self.NameField.text forKey:@"uname"];
-            [[NSUserDefaults standardUserDefaults]setObject:self.PassField.text forKey:@"upwd"];
-            
-            NSLog(@"保存----%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"oauthToken"]);
-
-        } else {
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"账号或密码不正确" message:base.msg delegate:nil cancelButtonTitle:@"返回" otherButtonTitles:nil, nil];
-            [alert show];
         }
      
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -1231,6 +1303,46 @@
     NSLog(@"%@",_appToken);
     [self.navigationController pushViewController:phoneVc animated:YES];
     
+}
+
+// 同步设备到当前账号
+- (void)deviceSyncCurrentAccount {
+    NSString *deviceUUID = [YunKeTang_Api_Tool getUUIDInKeychain];//[[[UIDevice currentDevice] identifierForVendor] UUIDString]; //获取设备唯一标识符 例如：FBF2306E-A0D8-4F4B-BDED-9333B627D3E6
+    if (!SWNOTEmptyStr(deviceUUID)) {
+        [MBProgressHUD showMessag:@"获取当前设备号失败" toView:self.view];
+        return;
+    }
+    NSString *endUrlStr = syncuUserInfo;
+    NSString *allUrlStr = [YunKeTang_Api_Tool YunKeTang_GetFullUrl:endUrlStr];
+    
+    NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
+    [mutabDict setObject:deviceUUID forKey:@"device"];
+    
+    NSString *oath_token_Str = nil;
+    if (UserOathToken) {
+        oath_token_Str = [NSString stringWithFormat:@"%@:%@",UserOathToken,UserOathTokenSecret];
+    }
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:allUrlStr]];
+    [request setHTTPMethod:NetWay];
+    NSString *encryptStr = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetEncryptStr:mutabDict];
+    [request setValue:encryptStr forHTTPHeaderField:HeaderKey];
+    if (UserOathToken) {
+        [request setValue:oath_token_Str forHTTPHeaderField:OAUTH_TOKEN];
+    }
+    
+    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        if ([[[YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject] objectForKey:@"code"] integerValue] == 1) {
+            NSDictionary *dataSource = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStrFromData:responseObject];
+            NSLog(@"%@",dataSource);
+            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:deviceUUID];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+    [op start];
 }
 
 @end

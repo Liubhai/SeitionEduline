@@ -55,6 +55,8 @@
 #import "TeacherMainViewController.h"
 #import "InstitutionMainViewController.h"
 
+#import "Good_MyBalanceViewController.h"
+#import "BaseClass.h"
 
 @import MediaPlayer;
 @interface Good_ClassMainViewController ()<UIScrollViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UIScrollViewDelegate,UIWebViewDelegate,UIGestureRecognizerDelegate,UMSocialUIDelegate,AliyunVodPlayerViewDelegate,BCEDocumentReaderDelegate, UITableViewDelegate, UITableViewDataSource,UIAlertViewDelegate> {
@@ -77,6 +79,8 @@
     // 活动倒计时
     NSInteger eventTime;
     NSTimer *eventTimer;
+    
+    BaseClass *base;
 }
 
 @property (strong ,nonatomic)UIView   *navigationView;
@@ -969,9 +973,19 @@
             
             if ([_free_course_opt isEqualToString:@"1"]) {
                 if (!UserOathToken) {
-                    DLViewController *DLVC = [[DLViewController alloc] init];
-                    UINavigationController *Nav = [[UINavigationController alloc] initWithRootViewController:DLVC];
-                    [self.navigationController presentViewController:Nav animated:YES completion:nil];
+                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"解锁课程" message:@"登录解锁,可跨平台享受解锁权益,直接解锁,会为当前设备解锁课程" preferredStyle:(UIAlertControllerStyleAlert)];
+                    UIAlertAction *loginAction = [UIAlertAction actionWithTitle:@"登录账号解锁(推荐)" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        DLViewController *DLVC = [[DLViewController alloc] init];
+                        UINavigationController *Nav = [[UINavigationController alloc] initWithRootViewController:DLVC];
+                        [self.navigationController presentViewController:Nav animated:YES completion:nil];
+                        return;
+                    }];
+                    UIAlertAction *TouristsAction = [UIAlertAction actionWithTitle:@"游客身份解锁" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        [self touristLogin];
+                    }];
+                    [alertController addAction:loginAction];
+                    [alertController addAction:TouristsAction];
+                    [self presentViewController:alertController animated:YES completion:nil];
                     return;
                 }
                 ClassAndLivePayViewController *vc = [[ClassAndLivePayViewController alloc] init];
@@ -2076,6 +2090,8 @@
     
     if (videoDurationSeconds  > _popupTime) {//此时应该弹题
         if (isExitTestView) {
+            [_popupTimer invalidate];
+            _popupTimer = nil;
             return;
         } else {
             [self.playerView pause];
@@ -3784,6 +3800,57 @@
         vc.schoolID = [NSString stringWithFormat:@"%@",[_schoolInfo objectForKey:@"school_id"]];
         [self.navigationController pushViewController:vc animated:YES];
     }
+}
+
+// 设备号快速注册登录
+- (void)touristLogin {
+    NSString *deviceUUID = [YunKeTang_Api_Tool getUUIDInKeychain];//[[[UIDevice currentDevice] identifierForVendor] UUIDString]; //获取设备唯一标识符 例如：FBF2306E-A0D8-4F4B-BDED-9333B627D3E6
+    if (!SWNOTEmptyStr(deviceUUID)) {
+        [MBProgressHUD showMessag:@"获取当前设备号失败" toView:self.view];
+        return;
+    }
+    NSString *endUrlStr = touriseLogin;
+    NSString *allUrlStr = [YunKeTang_Api_Tool YunKeTang_GetFullUrl:endUrlStr];
+    
+    NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
+    [mutabDict setObject:deviceUUID forKey:@"device"];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:allUrlStr]];
+    [request setHTTPMethod:NetWay];
+    NSString *encryptStr = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetEncryptStr:mutabDict];
+    [request setValue:encryptStr forHTTPHeaderField:HeaderKey];
+    
+    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        if ([[[YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject] objectForKey:@"code"] integerValue] == 1) {
+            NSDictionary *dataSource = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStrFromData:responseObject];
+            
+            
+            NSLog(@"%@",operation);
+//            base = [BaseClass modelObjectWithDictionary:dataSource];
+            [[NSUserDefaults standardUserDefaults]setObject:[dataSource stringValueForKey:@"oauth_token"] forKey:@"oauthToken"];
+            [[NSUserDefaults standardUserDefaults]setObject:[dataSource stringValueForKey:@"oauth_token_secret"] forKey:@"oauthTokenSecret"];
+            [[NSUserDefaults standardUserDefaults]setObject:[dataSource stringValueForKey:@"uid"] forKey:@"User_id"];
+            [[NSUserDefaults standardUserDefaults]setObject:[dataSource stringValueForKey:@"userface"] forKey:@"userface"];
+            [[NSUserDefaults standardUserDefaults]setObject:[dataSource stringValueForKey:@"only_login_key"] forKey:@"only_login_key"];
+            //在登录成功的地方将数据保存下来
+            [[NSUserDefaults standardUserDefaults]setObject:[dataSource stringValueForKey:@"uname"] forKey:@"uname"];
+            NSData *resultData = [NSJSONSerialization dataWithJSONObject:dataSource options:NSJSONWritingPrettyPrinted error:nil];
+            [[NSUserDefaults standardUserDefaults] setObject:resultData forKey:deviceUUID];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"getPayMethodConfig" object:nil];
+            Good_MyBalanceViewController *vc = [[Good_MyBalanceViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+//            if (base.code == 0) {
+//                dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//                    [Passport userDataWithSavelocality:base.data];
+//                });
+//            }
+        }
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+    [op start];
 }
 
 @end
