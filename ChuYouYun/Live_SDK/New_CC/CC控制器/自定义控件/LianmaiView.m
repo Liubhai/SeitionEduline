@@ -383,16 +383,20 @@
 -(void)cameraBgViewClicked {
     if(self.videoPermission == AVAuthorizationStatusAuthorized) return;
     
-    if ([UIDevice currentDevice].systemVersion.floatValue <= 10.0) {
+    [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ([UIDevice currentDevice].systemVersion.floatValue <= 10.0) {
 
-    }else{
-        // iOS10 之后, 比较特殊, 只能跳转到设置界面 , UIApplicationOpenSettingsURLString这个只支持iOS8之后.
-        NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-        [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:^(BOOL success) {
-            // 还可以跳过success这个bool值进行更加精确的判断.
-            NSLog(@"跳转成功回调");
-        }];
-    }
+            }else{
+                // iOS10 之后, 比较特殊, 只能跳转到设置界面 , UIApplicationOpenSettingsURLString这个只支持iOS8之后.
+                NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:^(BOOL success) {
+                    // 还可以跳过success这个bool值进行更加精确的判断.
+                    NSLog(@"跳转成功回调");
+                }];
+            }
+        });
+    }];
 }
 
 -(UIButton *)micBgView {
