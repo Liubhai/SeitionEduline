@@ -16,6 +16,7 @@
 
 #import "ClassSearchGoodViewController.h"
 #import "YunKeTang_HomeViewController.h"
+#import "NewsMainViewController.h"
 
 
 @interface rootViewController ()
@@ -39,7 +40,7 @@ static rootViewController *sharedBaseTabBar;
     goodVc.typeTagStr = @"1";
     UINavigationController *goodNav = [[UINavigationController alloc] initWithRootViewController:goodVc];
     
-    MoreViewController *moreVC = [[MoreViewController alloc] init];
+    NewsMainViewController *moreVC = [[NewsMainViewController alloc] init];
     UINavigationController *navi6 = [[UINavigationController alloc] initWithRootViewController:moreVC];
     
     MyViewController * more = [[MyViewController alloc]init];

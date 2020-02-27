@@ -61,7 +61,7 @@
 
 -(UIImageView *)imageView {
     if (!_imageView) {
-        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, MACRO_UI_UPHEIGHT, MainScreenWidth, MainScreenHeight - MACRO_UI_UPHEIGHT)];
+        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, MACRO_UI_UPHEIGHT, MainScreenWidth, MainScreenHeight - MACRO_UI_UPHEIGHT - MACRO_UI_TABBAR_HEIGHT)];
         _imageView.image = Image(@"云课堂_空数据.png");
         [self.view addSubview:_imageView];
     }
@@ -72,7 +72,7 @@
 {
     AppDelegate *app = [AppDelegate delegate];
     rootViewController * nv = (rootViewController *)app.window.rootViewController;
-    [nv isHiddenCustomTabBarByBoolean:YES];
+    [nv isHiddenCustomTabBarByBoolean:NO];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
@@ -119,14 +119,14 @@
     titleLab.textColor = [UIColor whiteColor];
     titleLab.textAlignment = NSTextAlignmentCenter;
     
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 20, 40, 40)];
-    [backButton setImage:[UIImage imageNamed:@"ic_back@2x"] forState:UIControlStateNormal];
-    [backButton addTarget:self action:@selector(backPressed) forControlEvents:UIControlEventTouchUpInside];
-    [SYGView addSubview:backButton];
+//    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 20, 40, 40)];
+//    [backButton setImage:[UIImage imageNamed:@"ic_back@2x"] forState:UIControlStateNormal];
+//    [backButton addTarget:self action:@selector(backPressed) forControlEvents:UIControlEventTouchUpInside];
+//    [SYGView addSubview:backButton];
     
     //设置button上字体的偏移量
 //    [backButton setTitleEdgeInsets:UIEdgeInsetsMake(0,-10.0 , 0.0, 0)];
-    [SYGView addSubview:backButton];
+//    [SYGView addSubview:backButton];
     
     
     //添加线
@@ -135,7 +135,7 @@
     [SYGView addSubview:lineLab];
     
     if (iPhoneX) {
-        backButton.frame = CGRectMake(15, 40, 40, 40);
+//        backButton.frame = CGRectMake(15, 40, 40, 40);
         titleLab.frame = CGRectMake(50, 45, MainScreenWidth - 100, 30);
         lineLab.frame = CGRectMake(0, 87, MainScreenWidth, 1);
     }
@@ -256,7 +256,7 @@
 - (void)addControllerSrcollView {
     
     NSLog(@"%ld",_dataArray.count);
-    _controllerSrcollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, MACRO_UI_UPHEIGHT + 40 *HigtEachUnit,  MainScreenWidth, MainScreenHeight - MACRO_UI_UPHEIGHT - 40 * HigtEachUnit)];
+    _controllerSrcollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, MACRO_UI_UPHEIGHT + 40 *HigtEachUnit,  MainScreenWidth, MainScreenHeight - MACRO_UI_UPHEIGHT - 40 * HigtEachUnit - MACRO_UI_TABBAR_HEIGHT)];
     _controllerSrcollView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     _controllerSrcollView.pagingEnabled = YES;
     _controllerSrcollView.scrollEnabled = YES;
@@ -270,7 +270,7 @@
     //添加控制器
     for (int i = 0 ; i < _dataArray.count ; i ++) {
         NewsViewController *newsVc= [[NewsViewController alloc] initWithIDString:_dataArray[i][@"zy_topic_category_id"] schoolId:[NSString stringWithFormat:@"%@",_dataArray[i][@"mhm_id"]]];
-        newsVc.view.frame = CGRectMake(MainScreenWidth * i, 0, MainScreenWidth, MainScreenHeight - MACRO_UI_UPHEIGHT - 40 * HigtEachUnit);
+        newsVc.view.frame = CGRectMake(MainScreenWidth * i, 0, MainScreenWidth, MainScreenHeight - MACRO_UI_UPHEIGHT - 40 * HigtEachUnit - MACRO_UI_TABBAR_HEIGHT);
         [_controllerSrcollView addSubview:newsVc.view];
         [self addChildViewController:newsVc];
     }
