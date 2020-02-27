@@ -108,10 +108,10 @@
 //#define EncryptHeaderUrl @"https://t.v4.51eduline.com"
 
 /// 测试服(d单机构和多机构)
-#define EncryptUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"http://kt.yimcx.com/service/" : @"https://t.v4.51eduline.com/service/"
-#define EncryptHeaderUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"http://kt.yimcx.com" : @"https://t.v4.51eduline.com"
+#define EncryptUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://kt.yimcx.com/service/" : @"https://t.v4.51eduline.com/service/"
+#define EncryptHeaderUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://kt.yimcx.com" : @"https://t.v4.51eduline.com"
 
-#define basidUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"http://kt.yimcx.com/service" : @"https://t.v4.51eduline.com/service"
+#define basidUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://kt.yimcx.com/service" : @"https://t.v4.51eduline.com/service"
 
 /// 正式服(单机构和多机构)
 //#define EncryptUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://demo.51eduline.com/service/" : @"https://v4.51eduline.com/service/"
