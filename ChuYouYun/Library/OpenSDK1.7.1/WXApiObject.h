@@ -114,24 +114,24 @@ typedef NS_ENUM(UInt64, enAppSupportContentFlag)
 #pragma mark - WXMediaMessage
 @class WXMediaMessage;
 
-/*! @brief 第三方向微信终端发起支付的消息结构体
+/*! @brief 第三方向微信终端发起的消息结构体
  *
- *  第三方向微信终端发起支付的消息结构体，微信终端处理后会向第三方返回处理结果
+ *  第三方向微信终端发起的消息结构体，微信终端处理后会向第三方返回处理结果
  * @see PayResp
  */
 @interface PayReq : BaseReq
 
-/** 商家向财付通申请的商家id */
+/** 申请id */
 @property (nonatomic, retain) NSString *partnerId;
-/** 预支付订单 */
+/** 订单 */
 @property (nonatomic, retain) NSString *prepayId;
 /** 随机串，防重发 */
 @property (nonatomic, retain) NSString *nonceStr;
 /** 时间戳，防重发 */
 @property (nonatomic, assign) UInt32 timeStamp;
-/** 商家根据财付通文档填写的数据和签名 */
+/** 根据文档填写的数据和签名 */
 @property (nonatomic, retain) NSString *package;
-/** 商家根据微信开放平台文档对数据做的签名 */
+/** 根据微信开放平台文档对数据做的签名 */
 @property (nonatomic, retain) NSString *sign;
 
 @end
@@ -139,9 +139,9 @@ typedef NS_ENUM(UInt64, enAppSupportContentFlag)
 
 
 #pragma mark - PayResp
-/*! @brief 微信终端返回给第三方的关于支付结果的结构体
+/*! @brief 微信终端返回给第三方的关于结果的结构体
  *
- *  微信终端返回给第三方的关于支付结果的结构体
+ *  微信终端返回给第三方的关于结果的结构体
  */
 @interface PayResp : BaseResp
 
@@ -152,9 +152,9 @@ typedef NS_ENUM(UInt64, enAppSupportContentFlag)
 
 
 
-/*! @brief 第三方向微信终端发起拆企业红包的消息结构体
+/*! @brief 第三方向微信终端发起拆企业hb的消息结构体
  *
- *  第三方向微信终端发起拆企业红包的消息结构体，微信终端处理后会向第三方返回处理结果
+ *  第三方向微信终端发起拆企业hb的消息结构体，微信终端处理后会向第三方返回处理结果
  * @see HBReq
  */
 @interface HBReq : BaseReq
@@ -163,9 +163,9 @@ typedef NS_ENUM(UInt64, enAppSupportContentFlag)
 @property (nonatomic, retain) NSString *nonceStr;
 /** 时间戳，防重发 */
 @property (nonatomic, assign) UInt32 timeStamp;
-/** 商家根据微信企业红包开发文档填写的数据和签名 */
+/** sj根据微信企业hb开发文档填写的数据和签名 */
 @property (nonatomic, retain) NSString *package;
-/** 商家根据微信企业红包开发文档对数据做的签名 */
+/** sj根据微信企业hb开发文档对数据做的签名 */
 @property (nonatomic, retain) NSString *sign;
 
 @end
@@ -173,9 +173,9 @@ typedef NS_ENUM(UInt64, enAppSupportContentFlag)
 
 
 #pragma mark - HBResp
-/*! @brief 微信终端返回给第三方的关于拆企业红包结果的结构体
+/*! @brief 微信终端返回给第三方的关于拆企业hb结果的结构体
  *
- *  微信终端返回给第三方的关于拆企业红包结果的结构体
+ *  微信终端返回给第三方的关于拆企业hb结果的结构体
  */
 @interface HBResp : BaseResp
 
@@ -470,7 +470,7 @@ typedef NS_ENUM(UInt64, enAppSupportContentFlag)
 @end;
 
 #pragma mark - AddCardToWXCardPackageReq
-/* ! @brief 请求添加卡券至微信卡包
+/* ! @brief 请求添加kq至微信kb
  *
  */
 
@@ -484,7 +484,7 @@ typedef NS_ENUM(UInt64, enAppSupportContentFlag)
 
 
 #pragma mark - AddCardToWXCardPackageResp
-/** ! @brief 微信返回第三方添加卡券结果
+/** ! @brief 微信返回第三方添加kq结果
  *
  */
 
@@ -496,7 +496,7 @@ typedef NS_ENUM(UInt64, enAppSupportContentFlag)
 @end
 
 #pragma mark - WXChooseCardReq
-/* ! @brief 请求从微信选取卡券
+/* ! @brief 请求从微信选取kq
  *
  */
 
@@ -514,7 +514,7 @@ typedef NS_ENUM(UInt64, enAppSupportContentFlag)
 
 
 #pragma mark - WXChooseCardResp
-/** ! @brief 微信返回第三方请求选择卡券结果
+/** ! @brief 微信返回第三方请求选择kq结果
  *
  */
 

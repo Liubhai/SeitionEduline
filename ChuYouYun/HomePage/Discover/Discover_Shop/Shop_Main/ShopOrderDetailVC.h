@@ -34,14 +34,14 @@
 /** 商品简介 */
 @property (strong, nonatomic) UILabel *shopIntroLabel;
 
-/** 支付方式背景 */
+/** 方式背景 */
 @property (strong, nonatomic) UIView *payMethodBackView;
 @property (strong, nonatomic) UILabel *payTitleLabel;
 @property (strong, nonatomic) UIView *line1;
 @property (strong, nonatomic) UIView *line5;
 @property (strong, nonatomic) UILabel *tipLabel;
 
-// 积分支付
+// 积分
 @property (strong, nonatomic) UIView *integralBackView;
 @property (strong, nonatomic) UIView *line4;
 @property (strong, nonatomic) UIImageView *integralIcon;
@@ -62,14 +62,14 @@
 @property (strong, nonatomic) UIButton *addressButton;
 
 
-/** 支付金额背景 */
+/** 金额背景 */
 @property (strong, nonatomic) UIView *payCountBackView;
 @property (strong, nonatomic) UIView *payCountLine;
 @property (strong, nonatomic) UILabel *payCountTitle;
 @property (strong, nonatomic) UILabel *payCountLabel;
 
 
-/** 支付协议背景 */
+/** 协议背景 */
 @property (strong, nonatomic) UIView *agreementBackView;
 @property (strong, nonatomic) UIView *agreementLine;
 @property (strong, nonatomic) UIButton *agreeButton;

@@ -388,7 +388,7 @@
     [_fourView addSubview:reason];
     
     UILabel *payType = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(reason.frame), 10 * WideEachUnit,MainScreenWidth / 3 * 2 - CGRectGetMaxX(reason.frame) , 22 * WideEachUnit)];
-    payType.text = @"某宝";
+    payType.text = @"xxx";
     payType.font = Font(14 * WideEachUnit);
     payType.textColor = BasidColor;
     payType.backgroundColor = [UIColor whiteColor];

@@ -60,7 +60,7 @@
 @property (strong ,nonatomic)UILabel   *realMoney;
 @property (strong ,nonatomic)NSDictionary *userBalanceDict;
 
-@property (strong ,nonatomic)NSString  *payTypeStr;//用于区分支付类型
+@property (strong ,nonatomic)NSString  *payTypeStr;//用于区分类型
 @property (strong ,nonatomic)NSArray   *payTypeArray;
 @property (strong ,nonatomic)NSString  *balbanStr;//余额的字符串
 
@@ -123,7 +123,7 @@
 - (void)interFace {
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     NSLog(@"---%@",_dict);
-    _payTypeStr = @"3";//默认余额支付
+    _payTypeStr = @"3";
     NSLog(@"---%@",_typeStr);
     isGoOut = NO;
     
@@ -133,7 +133,7 @@
     //添加通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getEntityCardUse:) name:@"NSNotificationEntityCardUse" object:nil];
     
-    //从第三方支付回来的通知
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(APPWillEnterForeground:) name:@"APPWillEnterForeground" object:nil];
     
     
@@ -258,7 +258,7 @@
     _balanceView.backgroundColor = [UIColor whiteColor];
     [_scrollView addSubview:_balanceView];
     
-    //判断是否应该有此支付方式
+    //判断是否应该有此方式
     BOOL isAddBanlancepayView = NO;
     for (NSString *payStr in _payTypeArray) {
         if ([payStr isEqualToString:@"lcnpay"]) {

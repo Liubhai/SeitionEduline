@@ -367,7 +367,7 @@
     _banlancepayView.backgroundColor = [UIColor whiteColor];
     [_scrollView addSubview:_banlancepayView];
     
-    //判断是否应该有此支付方式
+    //判断是否应该有此方式
     BOOL isAddModianView = NO;
     for (NSString *payStr in _payTypeArray) {
         if ([payStr isEqualToString:@"lcnpay"]) {
@@ -434,7 +434,7 @@
     _bankpayView.backgroundColor = [UIColor whiteColor];
     [_scrollView addSubview:_bankpayView];
     
-    //判断是否应该有此支付方式
+    //判断是否应该有此方式
     BOOL isAddModianView = NO;
     for (NSString *payStr in _payTypeArray) {
         if ([payStr isEqualToString:@"unionpay"]) {
@@ -693,7 +693,7 @@
         _bankSeleButton.selected = NO;
         _payTypeStr = @"0";
         
-        if (_balanNumber != 100) {//说明有余额这个支付方式
+        if (_balanNumber != 100) {//说明有余额这个方式
             
         } else if (_balanNumber == 100){//没有这个方式
             
@@ -715,7 +715,6 @@
             _payTypeStr = @"2";
         }
     } else if (button.tag == 3) {
-        /// 微信提现
         _balanceSeleButton.selected = NO;
         _bankSeleButton.selected = NO;
         _payTypeStr = @"3";
@@ -914,7 +913,7 @@
 
 
 
-//是否 真要支付
+//是否 真要
 - (void)isSurePay {
     return;
 }

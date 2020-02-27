@@ -45,7 +45,7 @@
 
 @property (strong ,nonatomic)UIView     *allWindowView;
 @property (strong ,nonatomic)UIButton   *balanceSeleButton;
-@property (strong ,nonatomic)NSString   *payTypeStr;//支付类型的字段
+@property (strong ,nonatomic)NSString   *payTypeStr;
 
 //营销数据
 @property (strong ,nonatomic)NSString   *order_switch;
@@ -442,7 +442,7 @@
     
     
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(10 * WideEachUnit, 0, MainScreenWidth - 10 * WideEachUnit, 50 * WideEachUnit)];
-    title.text = @"支付方式";
+    title.text = @"方式";
     title.textColor = BlackNotColor;
     title.backgroundColor = [UIColor whiteColor];
     title.font = Font(16);

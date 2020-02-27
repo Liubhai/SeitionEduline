@@ -88,14 +88,14 @@
     }
     [_shopIntroBackView addSubview:_shopIntroLabel];
 
-    // 支付方式视图
+    // 方式视图
     _payMethodBackView = [[UIView alloc] initWithFrame:CGRectMake(0, _shopIntroBackView.bottom, MainScreenWidth, 1)];
     [_mainScrollView addSubview:_payMethodBackView];
     _line1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MainScreenWidth, 5 * HigtEachUnit)];
     _line1.backgroundColor = RGBHex(0xE5E5E5);
     [_payMethodBackView addSubview:_line1];
     _payTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20 * WideEachUnit, _line1.bottom, MainScreenWidth - 20 * WideEachUnit, 34 * HigtEachUnit)];
-    _payTitleLabel.text = @"支付方式";
+    _payTitleLabel.text = @"方式";
     _payTitleLabel.textColor = RGBHex(0x1E2133);
     _payTitleLabel.font = Font(14);
     [_payMethodBackView addSubview:_payTitleLabel];
@@ -113,9 +113,9 @@
     _integralLabel = [[UILabel alloc] initWithFrame:CGRectMake(_integralIcon.right + 12 * WideEachUnit, 0, MainScreenWidth - _integralIcon.right - 12 * WideEachUnit - 44 * WideEachUnit, 42 * HigtEachUnit)];
     _integralLabel.textColor = RGBHex(0x1E2133);
     _integralLabel.font = Font(13);
-    _integralLabel.text = @"积分支付";
+    _integralLabel.text = @"积分";
     if (SWNOTEmptyDictionary(_userAccountDict)) {
-        _integralLabel.text = [NSString stringWithFormat:@"积分支付(当前积分%@)",[_userAccountDict stringValueForKey:@"score" defaultValue:@"0"]];
+        _integralLabel.text = [NSString stringWithFormat:@"积分(当前积分%@)",[_userAccountDict stringValueForKey:@"score" defaultValue:@"0"]];
         NSMutableAttributedString *pass = [[NSMutableAttributedString alloc] initWithString:_integralLabel.text];
         [pass addAttributes:@{NSForegroundColorAttributeName: RGBHex(0x888888)} range:NSMakeRange(4, _integralLabel.text.length - 4)];
         _integralLabel.attributedText = [[NSAttributedString alloc] initWithAttributedString:pass];
@@ -307,7 +307,7 @@
         [TKProgressHUD showError:@"请先阅读并同意《墨点课堂解锁协议》" toView:self.view];
         return;
     }
-    if ([_payMethodString integerValue] == 2) {//积分支付
+    if ([_payMethodString integerValue] == 2) {//积分
         [self netWorkGoodsExchange];
     }
 }

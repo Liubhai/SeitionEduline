@@ -21,7 +21,7 @@
 @property (strong, nonatomic) NSDictionary *balanceInfo;
 
 @property (strong ,nonatomic)UIButton  *balanceButton;
-@property (strong ,nonatomic)NSString  *payTypeStr;//用于区分支付类型
+@property (strong ,nonatomic)NSString  *payTypeStr;//用于区分类型
 
 @property (strong ,nonatomic)UIView    *balanceView;
 @property (strong ,nonatomic)UIScrollView *mainScrollView;
@@ -116,7 +116,7 @@
     [_mainScrollView addSubview:line4];
     
     UILabel *payMethod = [[UILabel alloc] initWithFrame:CGRectMake(15, line4.bottom, MainScreenWidth - 30, 40)];
-    payMethod.text = @"支付方式";
+    payMethod.text = @"方式";
     payMethod.textColor = RGBHex(0x3C4654);
     payMethod.font = SYSTEMFONT(16);
     [_mainScrollView addSubview:payMethod];
@@ -186,7 +186,7 @@
     _balanceView.backgroundColor = [UIColor whiteColor];
     [_mainScrollView addSubview:_balanceView];
     
-    //判断是否应该有此支付方式
+    
     BOOL isAddBanlancepayView = NO;
     for (NSString *payStr in _payTypeArray) {
         if ([payStr isEqualToString:@"lcnpay"]) {

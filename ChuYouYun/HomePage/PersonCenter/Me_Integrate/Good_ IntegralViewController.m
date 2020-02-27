@@ -255,7 +255,7 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-//是否 真要支付
+//是否 真要
 - (void)isSurePay {
     return;
 }

@@ -114,16 +114,16 @@ typedef NS_ENUM(UInt64, enAppSupportContentFlag)
 #pragma mark - WXMediaMessage
 @class WXMediaMessage;
 
-/*! @brief 第三方向微信终端发起支付的消息结构体
+/*! @brief 第三方向微信终端发起的消息结构体
  *
- *  第三方向微信终端发起支付的消息结构体，微信终端处理后会向第三方返回处理结果
+ *  第三方向微信终端发起的消息结构体，微信终端处理后会向第三方返回处理结果
  * @see PayResp
  */
 @interface PayReq : BaseReq
 
 /** 商家向财付通申请的商家id */
 @property (nonatomic, retain) NSString *partnerId;
-/** 预支付订单 */
+/** 预订单 */
 @property (nonatomic, retain) NSString *prepayId;
 /** 随机串，防重发 */
 @property (nonatomic, retain) NSString *nonceStr;
@@ -139,9 +139,9 @@ typedef NS_ENUM(UInt64, enAppSupportContentFlag)
 
 
 #pragma mark - PayResp
-/*! @brief 微信终端返回给第三方的关于支付结果的结构体
+/*! @brief 微信终端返回给第三方的关于结果的结构体
  *
- *  微信终端返回给第三方的关于支付结果的结构体
+ *  微信终端返回给第三方的关于结果的结构体
  */
 @interface PayResp : BaseResp
 
@@ -470,7 +470,7 @@ typedef NS_ENUM(UInt64, enAppSupportContentFlag)
 @end;
 
 #pragma mark - AddCardToWXCardPackageReq
-/* ! @brief 请求添加卡券至微信卡包
+/* ! @brief 请求添加kq至微信
  *
  */
 
@@ -484,7 +484,7 @@ typedef NS_ENUM(UInt64, enAppSupportContentFlag)
 
 
 #pragma mark - AddCardToWXCardPackageResp
-/** ! @brief 微信返回第三方添加卡券结果
+/** ! @brief 微信返回第三方添加kq结果
  *
  */
 
@@ -496,7 +496,7 @@ typedef NS_ENUM(UInt64, enAppSupportContentFlag)
 @end
 
 #pragma mark - WXChooseCardReq
-/* ! @brief 请求从微信选取卡券
+/* ! @brief 请求从微信选取kq
  *
  */
 
@@ -514,7 +514,7 @@ typedef NS_ENUM(UInt64, enAppSupportContentFlag)
 
 
 #pragma mark - WXChooseCardResp
-/** ! @brief 微信返回第三方请求选择卡券结果
+/** ! @brief 微信返回第三方请求选择kq结果
  *
  */
 

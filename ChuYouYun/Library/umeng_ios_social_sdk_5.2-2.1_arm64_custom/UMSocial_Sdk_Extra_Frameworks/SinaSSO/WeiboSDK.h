@@ -25,7 +25,7 @@ typedef NS_ENUM(NSInteger, WeiboSDKResponseStatusCode)
     WeiboSDKResponseStatusCodeSentFail              = -2,//发送失败
     WeiboSDKResponseStatusCodeAuthDeny              = -3,//授权失败
     WeiboSDKResponseStatusCodeUserCancelInstall     = -4,//用户取消安装微博客户端
-    WeiboSDKResponseStatusCodePayFail               = -5,//支付失败
+    WeiboSDKResponseStatusCodePayFail               = -5,//失败
     WeiboSDKResponseStatusCodeShareInSDKFailed      = -8,//分享失败 详情见response UserInfo
     WeiboSDKResponseStatusCodeUnsupport             = -99,//不支持的请求
     WeiboSDKResponseStatusCodeUnknown               = -100,
@@ -546,12 +546,12 @@ extern NSString * const WeiboSDKGetAidFailNotification;
 @interface WBPaymentResponse : WBBaseResponse
 
 /**
- 支付返回状态码
+ 返回状态码
  */
 @property (nonatomic, strong) NSString *payStatusCode;
 
 /**
- 支付返回状态信息
+ 返回状态信息
  */
 @property (nonatomic, strong) NSString *payStatusMessage;
 
