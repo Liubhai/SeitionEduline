@@ -39,7 +39,6 @@
 		091234521F7E23EB00CF5519 /* ic_share@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 091234501F7E23EB00CF5519 /* ic_share@3x.png */; };
 		0915CF661F8B740B00B11929 /* star1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0915CF651F8B740B00B11929 /* star1@3x.png */; };
 		091CACE61F8B76F600298D08 /* star2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 091CACE51F8B76F600298D08 /* star2@3x.png */; };
-		091F56CD1F0E44D500CD8742 /* 站位图.png in Resources */ = {isa = PBXBuildFile; fileRef = 091F56CC1F0E44D500CD8742 /* 站位图.png */; };
 		091FDAFB1FF4ED230074A481 /* tab_course@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 091FDAF91FF4ED230074A481 /* tab_course@2x.png */; };
 		091FDAFC1FF4ED230074A481 /* tab_course_pre@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 091FDAFA1FF4ED230074A481 /* tab_course_pre@2x.png */; };
 		092032E51FEA429D00DE370A /* IDLFaceSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 092032E01FEA429D00DE370A /* IDLFaceSDK.framework */; };
@@ -491,6 +490,7 @@
 		7803144022ADE62E0007EBBC /* TeacherMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7803143822ADE62C0007EBBC /* TeacherMainViewController.m */; };
 		7803144122ADE62E0007EBBC /* TeacherCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7803143922ADE62C0007EBBC /* TeacherCommentViewController.m */; };
 		7803144222ADE62E0007EBBC /* TeacherHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7803143D22ADE62E0007EBBC /* TeacherHomeViewController.m */; };
+		7805CC96240902D4003D6119 /* 站位图.png in Resources */ = {isa = PBXBuildFile; fileRef = 7805CC95240902D3003D6119 /* 站位图.png */; };
 		780F651C230E9FC400B67CEF /* TKZhiBoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 780F651B230E9FC400B67CEF /* TKZhiBoViewController.m */; };
 		780F8318230F85EC00B67CEF /* TKAPPSetConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 780F77D4230F85D300B67CEF /* TKAPPSetConfig.m */; };
 		780F8319230F85EC00B67CEF /* answer_page_down_cartoon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 780F77D9230F85D300B67CEF /* answer_page_down_cartoon@3x.png */; };
@@ -3831,7 +3831,6 @@
 		091234501F7E23EB00CF5519 /* ic_share@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_share@3x.png"; sourceTree = "<group>"; };
 		0915CF651F8B740B00B11929 /* star1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star1@3x.png"; sourceTree = "<group>"; };
 		091CACE51F8B76F600298D08 /* star2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star2@3x.png"; sourceTree = "<group>"; };
-		091F56CC1F0E44D500CD8742 /* 站位图.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "站位图.png"; sourceTree = "<group>"; };
 		091FDAF91FF4ED230074A481 /* tab_course@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_course@2x.png"; sourceTree = "<group>"; };
 		091FDAFA1FF4ED230074A481 /* tab_course_pre@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_course_pre@2x.png"; sourceTree = "<group>"; };
 		092032E01FEA429D00DE370A /* IDLFaceSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IDLFaceSDK.framework; sourceTree = "<group>"; };
@@ -4273,7 +4272,7 @@
 		504C759D1AA4395E00DF3018 /* Top2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Top2.png; sourceTree = "<group>"; };
 		504C759E1AA4395E00DF3018 /* Top3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Top3.png; sourceTree = "<group>"; };
 		5051459D1AE49F4E00CCCAE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		50566DFC1A6F44A400F093DE /* Eduline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Eduline.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		50566DFC1A6F44A400F093DE /* 美乐云课堂.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "美乐云课堂.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		50566E001A6F44A400F093DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50566E011A6F44A400F093DE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		50566E0C1A6F44A400F093DE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -4491,6 +4490,7 @@
 		7803143D22ADE62E0007EBBC /* TeacherHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeacherHomeViewController.m; sourceTree = "<group>"; };
 		7803143E22ADE62E0007EBBC /* TeacherMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeacherMainViewController.h; sourceTree = "<group>"; };
 		7803144322ADE7FA0007EBBC /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		7805CC95240902D3003D6119 /* 站位图.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "站位图.png"; sourceTree = "<group>"; };
 		780F651A230E9FC400B67CEF /* TKZhiBoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TKZhiBoViewController.h; sourceTree = "<group>"; };
 		780F651B230E9FC400B67CEF /* TKZhiBoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TKZhiBoViewController.m; sourceTree = "<group>"; };
 		780F77D4230F85D300B67CEF /* TKAPPSetConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAPPSetConfig.m; sourceTree = "<group>"; };
@@ -10174,7 +10174,7 @@
 		50566DFD1A6F44A400F093DE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				50566DFC1A6F44A400F093DE /* Eduline.app */,
+				50566DFC1A6F44A400F093DE /* 美乐云课堂.app */,
 				50566E151A6F44A400F093DE /* YunKeTang.xctest */,
 			);
 			name = Products;
@@ -23870,7 +23870,7 @@
 		F1B2E4BE1C5870DF00A3FBBE /* 发现 */ = {
 			isa = PBXGroup;
 			children = (
-				091F56CC1F0E44D500CD8742 /* 站位图.png */,
+				7805CC95240902D3003D6119 /* 站位图.png */,
 				F1B3C22D1D0EA5E100EB780D /* 考试系统开心@2x.png */,
 				F1CCCDDE1CD3106300E9FDA3 /* 考试系统选择正确答案@2x.png */,
 				F1CCCDDC1CD3041D00E9FDA3 /* 考试系统难过@2x.png */,
@@ -24028,7 +24028,7 @@
 			);
 			name = YunKeTang;
 			productName = ChuYouYun;
-			productReference = 50566DFC1A6F44A400F093DE /* Eduline.app */;
+			productReference = 50566DFC1A6F44A400F093DE /* 美乐云课堂.app */;
 			productType = "com.apple.product-type.application";
 		};
 		50566E141A6F44A400F093DE /* YunKeTangTests */ = {
@@ -24143,6 +24143,7 @@
 				780F84CD230F85EE00B67CEF /* tk_icon_play_cartoon.png in Resources */,
 				F19EC13A1C8D14270094C2A4 /* zuohengheng.png in Resources */,
 				095805B71F53B4C80022F964 /* 空心五角星@2x.png in Resources */,
+				7805CC96240902D4003D6119 /* 站位图.png in Resources */,
 				780F851E230F85EF00B67CEF /* tk_button_message_onview_yijinyan_carton.png in Resources */,
 				780F84A3230F85EE00B67CEF /* tk_icon_mp3_cartoon.png in Resources */,
 				8126EDE321D63A42008C8547 /* chat_btn_sendfalse@3x.png in Resources */,
@@ -25669,7 +25670,6 @@
 				780F87D0230F85F200B67CEF /* tk_icon_tv_white_black@3x.png in Resources */,
 				780F8430230F85EE00B67CEF /* tk_ipad_hd_red_cartoon.png in Resources */,
 				0911FBA21F9452A300AA0956 /* unchoose_s@3x.png in Resources */,
-				091F56CD1F0E44D500CD8742 /* 站位图.png in Resources */,
 				780F86A7230F85F000B67CEF /* tk_mp4_loading_black_00030.png in Resources */,
 				F19EC0D61C8D14270094C2A4 /* chajin.png in Resources */,
 				780F845B230F85EE00B67CEF /* tk_button_editor_disabled_cartoon.png in Resources */,
@@ -28092,8 +28092,8 @@
 					"\"$(SRCROOT)/ChuYouYun/Library/umeng_ios_social_sdk_5.2-2.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/SinaSSO/libWeiboSDK.a\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.saixin.eduline;
-				PRODUCT_NAME = Eduline;
+				PRODUCT_BUNDLE_IDENTIFIER = com.niendorf.meiyueyunketang;
+				PRODUCT_NAME = "美乐云课堂";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
@@ -28113,7 +28113,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2VGCGZZ87Y;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -28198,10 +28198,10 @@
 					"\"$(SRCROOT)/ChuYouYun/Library/umeng_ios_social_sdk_5.2-2.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/SinaSSO/libWeiboSDK.a\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.saixin.eduline;
-				PRODUCT_NAME = Eduline;
+				PRODUCT_BUNDLE_IDENTIFIER = com.niendorf.meiyueyunketang;
+				PRODUCT_NAME = "美乐云课堂";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = appTongYongDis;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7s armv7 arm64";

@@ -1771,6 +1771,9 @@ static NSString *cellID = @"cell";
             for (int i = 0; i < _imageDataArray.count; i ++) {
                 NSString * imageName = [[_imageDataArray objectAtIndex:i] stringValueForKey:@"banner"];
                 NSURL *url = [NSURL URLWithString:imageName];
+                if ([imageName isEqualToString:@"0"]) {
+                    url = [NSURL URLWithString:@""];
+                }
                 
                 NSString *bannerurl = [[_imageDataArray objectAtIndex:i] stringValueForKey:@"bannerurl"];
                 [_bannerurlArray addObject:bannerurl];
