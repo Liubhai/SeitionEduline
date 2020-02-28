@@ -108,10 +108,10 @@
 //#define EncryptHeaderUrl @"https://t.v4.51eduline.com"
 
 /// 测试服(d单机构和多机构)
-#define EncryptUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"http://www.chuangyuanjineng.top/service/" : @"https://t.v4.51eduline.com/service/"
-#define EncryptHeaderUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"http://www.chuangyuanjineng.top" : @"https://t.v4.51eduline.com"
+#define EncryptUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://www.chuangyuanjineng.top/service/" : @"https://t.v4.51eduline.com/service/"
+#define EncryptHeaderUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://www.chuangyuanjineng.top" : @"https://t.v4.51eduline.com"
 
-#define basidUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"http://www.chuangyuanjineng.top/service" : @"https://t.v4.51eduline.com/service"
+#define basidUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://www.chuangyuanjineng.top/service" : @"https://t.v4.51eduline.com/service"
 
 /// 正式服(单机构和多机构)
 //#define EncryptUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://demo.51eduline.com/service/" : @"https://v4.51eduline.com/service/"
@@ -204,8 +204,8 @@ alpha:1.0]
 #define MACRO_UI_SAFEAREA [YunKeTang_Api_Tool safeAreaWithIPhoneX]
 
 // 微信分享
-#define WXAppId @"wxbbb961a0b0bf577a"
-#define WXAppSecret @"7ea0101aeabd53bc32859370cde278cc"
+#define WXAppId @"wx78e8dcd84bbff4c2"
+#define WXAppSecret @"3b38413d85e0f91dd409741a49c32c18"
 // QQ分享
 #define QQAppId @"101400042"
 #define QQAppSecret @"a85c2fcd67839693d5c0bf13bec84779"
