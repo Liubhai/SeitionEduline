@@ -28083,7 +28083,7 @@
 					"$(SRCROOT)/ChuYouYun/Live_SDK/New_CC/CC资源/SDK",
 				);
 				MACH_O_TYPE = mh_execute;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-force_load",
@@ -28189,7 +28189,7 @@
 					"$(SRCROOT)/ChuYouYun/Live_SDK/New_CC/CC资源/SDK",
 				);
 				MACH_O_TYPE = mh_execute;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-force_load",
