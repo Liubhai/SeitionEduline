@@ -97,7 +97,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChange:) name:UITextFieldTextDidChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBroadShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBroadHide:) name:UIKeyboardWillHideNotification object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadBalanceData) name:@"reloadBalanceData" object:nil];
     
     _payTypeStr = @"3";
     isGiveMoney = NO;
@@ -611,6 +611,10 @@
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];
     [op start];
+}
+
+- (void)reloadBalanceData {
+    [self netWorkUserBalanceConfig];
 }
 
 @end

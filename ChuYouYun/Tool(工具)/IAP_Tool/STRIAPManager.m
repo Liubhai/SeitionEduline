@@ -332,6 +332,7 @@ static bool hasAddObersver = NO;
     
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadBalanceData" object:nil];
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
         
         NSLog(@"%@",dict);
