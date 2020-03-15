@@ -55,9 +55,11 @@
 #import "TeacherMainViewController.h"
 #import "InstitutionMainViewController.h"
 
+#import "Good_MyBalanceViewController.h"
+#import "BaseClass.h"
 
 @import MediaPlayer;
-@interface Good_ClassMainViewController ()<UIScrollViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UIScrollViewDelegate,UIWebViewDelegate,UIGestureRecognizerDelegate,UMSocialUIDelegate,AliyunVodPlayerViewDelegate,BCEDocumentReaderDelegate, UITableViewDelegate, UITableViewDataSource> {
+@interface Good_ClassMainViewController ()<UIScrollViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UIScrollViewDelegate,UIWebViewDelegate,UIGestureRecognizerDelegate,UMSocialUIDelegate,AliyunVodPlayerViewDelegate,BCEDocumentReaderDelegate, UITableViewDelegate, UITableViewDataSource,UIAlertViewDelegate> {
     CGRect   playerFrame;
     WMPlayer *wmPlayer;
     BOOL     isShouleVedio;//是否应该缓存视频
@@ -77,6 +79,8 @@
     // 活动倒计时
     NSInteger eventTime;
     NSTimer *eventTimer;
+    
+    BaseClass *base;
 }
 
 @property (strong ,nonatomic)UIView   *navigationView;
@@ -294,6 +298,7 @@
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     
+    _free_course_opt = @"1";
     /// 新增内容
     self.canScroll = YES;
     self.canScrollAfterVideoPlay = YES;
@@ -960,24 +965,61 @@
 }
 
 - (void)downButtonClick:(UIButton *)button {
-    if (!UserOathToken) {
-        DLViewController *DLVC = [[DLViewController alloc] init];
-        UINavigationController *Nav = [[UINavigationController alloc] initWithRootViewController:DLVC];
-        [self.navigationController presentViewController:Nav animated:YES completion:nil];
-        return;
-    }
     if (button.tag == 1) {//解锁
-        if ([_buyButton.titleLabel.text isEqualToString:@"已解锁"]) {
+        if ([_buyButton.titleLabel.text isEqualToString:@"已解锁"] || [_buyButton.titleLabel.text isEqualToString:@"免费可看"]) {
         } else {
-            ClassAndLivePayViewController *vc = [[ClassAndLivePayViewController alloc] init];
-            vc.dict = _videoDataSource;
-            vc.typeStr = @"1";
-            vc.cid = [_videoDataSource stringValueForKey:@"id"];
-            vc.activityInfo = [NSDictionary dictionaryWithDictionary:_activityInfo];
-            [self.navigationController pushViewController:vc animated:YES];
+            
+            if ([_free_course_opt isEqualToString:@"1"]) {
+                if (!UserOathToken) {
+                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"解锁课程" message:@"登录解锁,可跨平台享受解锁权益,直接解锁,会为当前设备解锁课程" preferredStyle:(UIAlertControllerStyleAlert)];
+                    UIAlertAction *loginAction = [UIAlertAction actionWithTitle:@"登录账号解锁(推荐)" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        DLViewController *DLVC = [[DLViewController alloc] init];
+                        UINavigationController *Nav = [[UINavigationController alloc] initWithRootViewController:DLVC];
+                        [self.navigationController presentViewController:Nav animated:YES completion:nil];
+                        return;
+                    }];
+                    UIAlertAction *TouristsAction = [UIAlertAction actionWithTitle:@"游客身份解锁" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        [self touristLogin];
+                    }];
+                    [alertController addAction:loginAction];
+                    [alertController addAction:TouristsAction];
+                    [self presentViewController:alertController animated:YES completion:nil];
+                    return;
+                }
+                ClassAndLivePayViewController *vc = [[ClassAndLivePayViewController alloc] init];
+                vc.dict = _videoDataSource;
+                vc.typeStr = @"1";
+                vc.cid = [_videoDataSource stringValueForKey:@"id"];
+                vc.activityInfo = [NSDictionary dictionaryWithDictionary:_activityInfo];
+                [self.navigationController pushViewController:vc animated:YES];
+            } else {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"课程不用解锁可试看,解锁需登录,是否解锁再观看?" delegate:self cancelButtonTitle:@"试看" otherButtonTitles:@"去登录", nil];
+                alert.tag = 2;
+                [alert show];
+            }
         }
     }
 }
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        
+    } else {
+        if (!UserOathToken) {
+            DLViewController *DLVC = [[DLViewController alloc] init];
+            UINavigationController *Nav = [[UINavigationController alloc] initWithRootViewController:DLVC];
+            [self.navigationController presentViewController:Nav animated:YES completion:nil];
+            return;
+        }
+        ClassAndLivePayViewController *vc = [[ClassAndLivePayViewController alloc] init];
+        vc.dict = _videoDataSource;
+        vc.typeStr = @"1";
+        vc.cid = [_videoDataSource stringValueForKey:@"id"];
+        vc.activityInfo = [NSDictionary dictionaryWithDictionary:_activityInfo];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
 
 #pragma mark --- 分享相关
 - (void)VideoShare {
@@ -2047,13 +2089,15 @@
     
     if (videoDurationSeconds  > _popupTime) {//此时应该弹题
         if (isExitTestView) {
+            [_popupTimer invalidate];
+            _popupTimer = nil;
             return;
         } else {
             [self.playerView pause];
             //弹题处理
-            ClassNeedTestViewController *vc = [[ClassNeedTestViewController alloc] initWithDict:_seleCurrentDict];
-            [self.view addSubview:vc.view];
+            ClassNeedTestViewController *vc = [[ClassNeedTestViewController alloc] init];
             vc.dict = _seleCurrentDict;
+            [self.view addSubview:vc.view];
             [self addChildViewController:vc];
             isExitTestView = YES;
         }
@@ -3747,4 +3791,54 @@
     }
 }
 
+// 设备号快速注册登录
+- (void)touristLogin {
+    NSString *deviceUUID = [YunKeTang_Api_Tool getUUIDInKeychain];//[[[UIDevice currentDevice] identifierForVendor] UUIDString]; //获取设备唯一标识符 例如：FBF2306E-A0D8-4F4B-BDED-9333B627D3E6
+    if (!SWNOTEmptyStr(deviceUUID)) {
+        [TKProgressHUD showMessag:@"获取当前设备号失败" toView:self.view];
+        return;
+    }
+    NSString *endUrlStr = touriseLogin;
+    NSString *allUrlStr = [YunKeTang_Api_Tool YunKeTang_GetFullUrl:endUrlStr];
+    
+    NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
+    [mutabDict setObject:deviceUUID forKey:@"device"];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:allUrlStr]];
+    [request setHTTPMethod:NetWay];
+    NSString *encryptStr = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetEncryptStr:mutabDict];
+    [request setValue:encryptStr forHTTPHeaderField:HeaderKey];
+    
+    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        if ([[[YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject] objectForKey:@"code"] integerValue] == 1) {
+            NSDictionary *dataSource = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStrFromData:responseObject];
+            
+            
+            NSLog(@"%@",operation);
+//            base = [BaseClass modelObjectWithDictionary:dataSource];
+            [[NSUserDefaults standardUserDefaults]setObject:[dataSource stringValueForKey:@"oauth_token"] forKey:@"oauthToken"];
+            [[NSUserDefaults standardUserDefaults]setObject:[dataSource stringValueForKey:@"oauth_token_secret"] forKey:@"oauthTokenSecret"];
+            [[NSUserDefaults standardUserDefaults]setObject:[dataSource stringValueForKey:@"uid"] forKey:@"User_id"];
+            [[NSUserDefaults standardUserDefaults]setObject:[dataSource stringValueForKey:@"userface"] forKey:@"userface"];
+            [[NSUserDefaults standardUserDefaults]setObject:[dataSource stringValueForKey:@"only_login_key"] forKey:@"only_login_key"];
+            //在登录成功的地方将数据保存下来
+            [[NSUserDefaults standardUserDefaults]setObject:[dataSource stringValueForKey:@"uname"] forKey:@"uname"];
+            NSData *resultData = [NSJSONSerialization dataWithJSONObject:dataSource options:NSJSONWritingPrettyPrinted error:nil];
+            [[NSUserDefaults standardUserDefaults] setObject:resultData forKey:deviceUUID];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"getPayMethodConfig" object:nil];
+            Good_MyBalanceViewController *vc = [[Good_MyBalanceViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+//            if (base.code == 0) {
+//                dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//                    [Passport userDataWithSavelocality:base.data];
+//                });
+//            }
+        }
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+    [op start];
+}
 @end
