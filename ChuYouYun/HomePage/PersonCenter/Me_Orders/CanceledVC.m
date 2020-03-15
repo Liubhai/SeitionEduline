@@ -190,14 +190,14 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [_tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if ([HASMODIAN isEqualToString:@"0"]) {
-        if (!UserOathToken) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"查看详情需要登录,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
-            alert.tag = 100;
-            [alert show];
-            return;
-        }
-    }
+//    if ([HASMODIAN isEqualToString:@"0"]) {
+//        if (!UserOathToken) {
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"查看详情需要登录,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
+//            alert.tag = 100;
+//            [alert show];
+//            return;
+//        }
+//    }
     NSLog(@"%@",_dataArray);
     if ([_dataArray[indexPath.row][@"order_type"] integerValue] == 4) {//点播
         

@@ -220,14 +220,14 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"---%@",_dataArray[indexPath.row]);
     [_tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if ([HASMODIAN isEqualToString:@"0"]) {
-        if (!UserOathToken) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"查看详情需要登录,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
-            alert.tag = 100;
-            [alert show];
-            return;
-        }
-    }
+//    if ([HASMODIAN isEqualToString:@"0"]) {
+//        if (!UserOathToken) {
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"查看详情需要登录,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
+//            alert.tag = 100;
+//            [alert show];
+//            return;
+//        }
+//    }
     if ([_dataArray[indexPath.row][@"order_type"] integerValue] == 4) {//点播
         
         NSString *ID = [NSString stringWithFormat:@"%@",_dataArray[indexPath.row][@"video_id"]];

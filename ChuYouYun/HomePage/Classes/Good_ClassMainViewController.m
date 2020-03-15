@@ -353,7 +353,7 @@
     [self getCourceActivityInfo];
     [self netWorkVideoGetFreeTime];
     [self netWorkConfigGetVideoKey];
-    [self netWorkConfigFreeCourseLoginSwitch];
+//    [self netWorkConfigFreeCourseLoginSwitch];
     [self netWorkGetThirdServiceUrl];
     [self netWorkVideoGetMarquee];
 }

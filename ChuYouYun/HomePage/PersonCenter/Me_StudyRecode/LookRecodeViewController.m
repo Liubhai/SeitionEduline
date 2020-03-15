@@ -345,14 +345,14 @@
         
         isHave = NO;
     } else {
-        if ([HASMODIAN isEqualToString:@"0"]) {
-            if (!UserOathToken) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"查看详情需要登录,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
-                alert.tag = 100;
-                [alert show];
-                return;
-            }
-        }
+//        if ([HASMODIAN isEqualToString:@"0"]) {
+//            if (!UserOathToken) {
+//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"查看详情需要登录,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
+//                alert.tag = 100;
+//                [alert show];
+//                return;
+//            }
+//        }
         Good_ClassMainViewController *vc = [[Good_ClassMainViewController alloc] init];
         NSDictionary *dict = _allDateArray[indexPath.section][indexPath.row];
         vc.ID = [NSString stringWithFormat:@"%@",[dict objectForKey:@"vid"]];
