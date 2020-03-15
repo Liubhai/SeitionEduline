@@ -351,12 +351,14 @@
     [self.view addSubview:_controllerSrcollView];
     _controllerSrcollView.backgroundColor = [UIColor redColor];
     
-    ShopDetailInfoViewController * infoVc= [[ShopDetailInfoViewController alloc] initWithDict:_dict];
+    ShopDetailInfoViewController * infoVc= [[ShopDetailInfoViewController alloc] init];
+    infoVc.dict = _dict;
     infoVc.view.frame = CGRectMake(0, 0, MainScreenWidth, MainScreenHeight);
     [_controllerSrcollView addSubview:infoVc.view];
     [self addChildViewController:infoVc];
 
-    ShopDetailCommentViewController * commentVc = [[ShopDetailCommentViewController alloc] initWithDict:_dict];
+    ShopDetailCommentViewController * commentVc = [[ShopDetailCommentViewController alloc] init];
+    commentVc.dict = _dict;
     commentVc.view.frame = CGRectMake(MainScreenWidth, -98, MainScreenWidth, MainScreenHeight * 2 + 500);
     [_controllerSrcollView addSubview:commentVc.view];
     [self addChildViewController:commentVc];

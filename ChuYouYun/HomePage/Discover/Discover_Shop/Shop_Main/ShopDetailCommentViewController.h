@@ -11,6 +11,7 @@
 @interface ShopDetailCommentViewController : UIViewController
 
 -(instancetype)initWithDict:(NSDictionary *)dict;
+@property (strong ,nonatomic)NSDictionary *dict;
 @property (strong ,nonatomic)void (^vcHight)(CGFloat hight);
 
 @end

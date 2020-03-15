@@ -198,13 +198,13 @@
     [self.view addSubview:_controllerSrcollView];
     _controllerSrcollView.backgroundColor = [UIColor redColor];
     
-    MyLineDownClassReservationViewController * resevationrVc= [[MyLineDownClassReservationViewController alloc] initWithID:_allMyDict];
+    MyLineDownClassReservationViewController * resevationrVc= [[MyLineDownClassReservationViewController alloc] init];
+    resevationrVc.dict = _allMyDict;
     resevationrVc.view.frame = CGRectMake(0, -98, MainScreenWidth, MainScreenHeight);
     [self addChildViewController:resevationrVc];
-    resevationrVc.dict = _allMyDict;
     [_controllerSrcollView addSubview:resevationrVc.view];
     
-    MyLineDownCompleteViewController * completeVc = [[MyLineDownCompleteViewController alloc] initWithID:_allMyDict];
+    MyLineDownCompleteViewController * completeVc = [[MyLineDownCompleteViewController alloc] init];
     completeVc.dict = _allMyDict;
     completeVc.view.frame = CGRectMake(MainScreenWidth, -98, MainScreenWidth, MainScreenHeight * 2 + 500);
     [self addChildViewController:completeVc];

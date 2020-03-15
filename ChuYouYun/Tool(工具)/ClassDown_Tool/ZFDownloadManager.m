@@ -281,7 +281,9 @@ static ZFDownloadManager *sharedDownloadManager = nil;
             {
                 [tempRequest setUserInfo:[NSDictionary dictionaryWithObject:fileInfo forKey:@"File"]];
                 [tempRequest cancel];
-                [self.downloadDelegate updateCellProgress:tempRequest];
+                if([self.downloadDelegate respondsToSelector:@selector(updateCellProgress:)]) {
+                    [self.downloadDelegate updateCellProgress:tempRequest];
+                }
                 return;
             }
         }
@@ -315,7 +317,9 @@ static ZFDownloadManager *sharedDownloadManager = nil;
     if (!exit) {
         [self.downinglist addObject:midRequest];
     }
-    [self.downloadDelegate updateCellProgress:midRequest];
+    if (_downloadDelegate && [_downloadDelegate respondsToSelector:@selector(updateCellProgress:)]) {
+        [self.downloadDelegate updateCellProgress:midRequest];
+    }
 }
 
 #pragma mark - 存储下载信息到一个plist文件
@@ -674,7 +678,9 @@ static ZFDownloadManager *sharedDownloadManager = nil;
             file.error = YES;
         }
     }
-    [self.downloadDelegate updateCellProgress:request];
+    if([self.downloadDelegate respondsToSelector:@selector(updateCellProgress:)]) {
+        [self.downloadDelegate updateCellProgress:request];
+    }
 }
 
 - (void)requestStarted:(ZFHttpRequest *)request

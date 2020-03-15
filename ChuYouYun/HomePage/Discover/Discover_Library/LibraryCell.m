@@ -78,6 +78,7 @@
     _downButton.layer.borderWidth = 1;
     _downButton.layer.cornerRadius = 3;
     _downButton.layer.borderColor = [UIColor colorWithHexString:@"#e5e5e5"].CGColor;
+//    [_downButton addTarget:self action:@selector(libraryDownLoad:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_downButton];
     
 }
@@ -169,7 +170,12 @@
     } else if ([state integerValue] == 2) {//下载未完成
         [_downButton setImage:Image(@"libDownDele") forState:UIControlStateNormal];
     }
-    
+}
+
+- (void)libraryDownLoad:(UIButton *)sender {
+    if (_delegate && [_delegate respondsToSelector:@selector(downLoadLabrary)]) {
+        [_delegate downLoadLabrary];
+    }
 }
 
 

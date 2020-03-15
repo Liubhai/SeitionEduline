@@ -9,9 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "ZFFileModel.h"
 
+@protocol LibraryCellDelegate <NSObject>
+
+- (void)downLoadLabrary;
+
+@end
+
 @interface LibraryCell : UITableViewCell
 
-
+@property (assign, nonatomic) id<LibraryCellDelegate> delegate;
 @property (strong ,nonatomic)UIImageView *headImageView;
 
 @property (strong ,nonatomic)UILabel *titleLabel;

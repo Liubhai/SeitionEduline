@@ -28,7 +28,7 @@
 #import "Good_LibraryScreenViewController.h"
 
 
-@interface Good_LibraryViewController ()<UITableViewDataSource,UITableViewDelegate> {
+@interface Good_LibraryViewController ()<UITableViewDataSource,UITableViewDelegate,ZFDownloadDelegate> {
     BOOL isRank;
     BOOL isClass;
     BOOL isScreen;
@@ -666,6 +666,7 @@
     
     [[ZFDownloadManager sharedDownloadManager] downFileUrl:_downUrl filename:libriyName fileimage:image];
     //设置最多同时下载个数（默认是3）
+    [ZFDownloadManager sharedDownloadManager].downloadDelegate = self;
     [ZFDownloadManager sharedDownloadManager].maxCount = 1;
     
 }
@@ -677,6 +678,8 @@
         return;
 }
 
-
+- (void)finishedDownload:(ZFHttpRequest *)request {
+    [TKProgressHUD showError:@"下载已完成,请在我的文库查看" toView:self.view];
+}
 
 @end

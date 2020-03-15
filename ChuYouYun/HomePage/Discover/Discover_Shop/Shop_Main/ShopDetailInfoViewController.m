@@ -15,8 +15,6 @@
 
 @property (strong ,nonatomic)UILabel      *detail;
 
-@property (strong ,nonatomic)NSDictionary *dict;
-
 @end
 
 @implementation ShopDetailInfoViewController
