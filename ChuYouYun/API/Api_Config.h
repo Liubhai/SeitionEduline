@@ -391,5 +391,9 @@
 #define album_addReview @"album.addReview"
 #define album_getCommentList @"album.getCommentList"
 
+// 游客模式
+#define touriseLogin @"ios.createAccount"
+// 绑定同步用户购买记录
+#define syncuUserInfo @"ios.syncOrder"
 
 #endif /* Header_h */
