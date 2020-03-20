@@ -728,7 +728,7 @@ static NSString *cellID = @"cell";
                 NSString *eoprice = [NSString stringWithFormat:@"%@",[[_choicenessArray[i] objectForKey:@"mz_price"] objectForKey:@"eoPrice"]];
                 if (SWNOTEmptyStr(eoprice)) {
                     if ([eoprice integerValue]>0) {
-                        price.text = [[_choicenessArray[i] objectForKey:@"mz_price"] objectForKey:@"selPrice"];
+                        price.text = [NSString stringWithFormat:@"%@",[[_choicenessArray[i] objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
                         if ([[[_choicenessArray[i] objectForKey:@"mz_price"] objectForKey:@"selPrice"] floatValue] == 0) {
                             price.text = @"免费";
                             price.textColor = [UIColor colorWithHexString:@"#47b37d"];
@@ -737,7 +737,7 @@ static NSString *cellID = @"cell";
                             price.textColor = PriceColor;
                         }
                     } else {
-                        price.text = [[_choicenessArray objectAtIndex:i] stringValueForKey:@"price"];
+                        price.text = [NSString stringWithFormat:@"%@",[[_choicenessArray objectAtIndex:i] stringValueForKey:@"price"]];
                         if ([[[_choicenessArray objectAtIndex:i] stringValueForKey:@"price"] floatValue] == 0) {
                             price.text = @"免费";
                             price.textColor = [UIColor colorWithHexString:@"#47b37d"];
@@ -747,7 +747,7 @@ static NSString *cellID = @"cell";
                         }
                     }
                 } else {
-                    price.text = [[_choicenessArray objectAtIndex:i] stringValueForKey:@"price"];
+                    price.text = [NSString stringWithFormat:@"%@",[[_choicenessArray objectAtIndex:i] stringValueForKey:@"price"]];
                     if ([[[_choicenessArray objectAtIndex:i] stringValueForKey:@"price"] floatValue] == 0) {
                         price.text = @"免费";
                         price.textColor = [UIColor colorWithHexString:@"#47b37d"];
