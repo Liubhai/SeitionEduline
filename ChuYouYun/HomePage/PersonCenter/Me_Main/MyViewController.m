@@ -165,7 +165,7 @@
 
 -(UIView *)noLoginView {
     if (!_noLoginView) {
-        _noLoginView = [[UIView alloc] initWithFrame:CGRectMake(0, -20 * WideEachUnit, MainScreenWidth, 280 * WideEachUnit)];
+        _noLoginView = [[UIView alloc] initWithFrame:CGRectMake(0, -(20 + 60) * WideEachUnit, MainScreenWidth, 280 * WideEachUnit)];
         _noLoginView.backgroundColor = [UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1];
         [_noLoginView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"默认背景-2@2x"]]];
     }
@@ -288,7 +288,7 @@
 }
 
 - (void)addHeaderView {
-    _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MainScreenWidth, 210 * WideEachUnit)];
+    _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MainScreenWidth, (210 - 60) * WideEachUnit)];
     _headerView.backgroundColor = [UIColor whiteColor];
     [self.scrollView addSubview:_headerView];
     
@@ -498,19 +498,21 @@
         
         NSArray *GZArray = @[@"余额",@"收入",@"积分"];
         UILabel *label = [[UILabel alloc] init];
-        label.frame = CGRectMake(viewW * i, 160 * WideEachUnit, viewW, 20 * WideEachUnit);
+        label.frame = CGRectMake(viewW * i, 160 * WideEachUnit, viewW, 0);
         label.text = GZArray[i];
         label.textAlignment = NSTextAlignmentCenter;
         label.font = [UIFont systemFontOfSize:12 * WideEachUnit];
         label.textColor = [UIColor colorWithHexString:@"#888"];
+        label.hidden = YES;
         [_headerView addSubview:label];
         
         //添加数字
-        UILabel *SZLabel = [[UILabel alloc] initWithFrame:CGRectMake(viewW * i, 180 * WideEachUnit, viewW, 20 * WideEachUnit)];
+        UILabel *SZLabel = [[UILabel alloc] initWithFrame:CGRectMake(viewW * i, 180 * WideEachUnit, viewW, 0)];
         SZLabel.font = [UIFont systemFontOfSize:16 * WideEachUnit];
         SZLabel.text = SYG[i];
         [SZLabel setTextColor:[UIColor colorWithHexString:@"#333"]];
         SZLabel.textAlignment = NSTextAlignmentCenter;
+        SZLabel.hidden = YES;
         [_headerView addSubview:SZLabel];
         if (i == 0) {
             _bancleLabel = SZLabel;
@@ -524,18 +526,20 @@
         }
         
         //添加透明的按钮
-        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(viewW * i, 150 * WideEachUnit, viewW,viewH)];
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(viewW * i, 150 * WideEachUnit, viewW,0)];
         button.backgroundColor = [UIColor clearColor];
         [button addTarget:self action:@selector(GZFSButton:) forControlEvents:UIControlEventTouchUpInside];
         button.tag = 100 + 100 * i;
+        button.hidden = YES;
         [_headerView addSubview:button];
         
     }
     
     //添加分割线
     for (int i = 0; i < Num - 1; i ++) {
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(30 + (MainScreenWidth - 60) / Num + (MainScreenWidth - 60) / Num * i, 150 * WideEachUnit, 1, 60 * WideEachUnit)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(30 + (MainScreenWidth - 60) / Num + (MainScreenWidth - 60) / Num * i, 150 * WideEachUnit, 1, 0)];
         label.backgroundColor = [UIColor colorWithHexString:@"#e5e5e5"];
+        label.hidden = YES;
         [_headerView addSubview:label];
     }
 
@@ -558,9 +562,13 @@
     //添加试图
     [_scrollView addSubview:self.noLoginView];
 
+    if (_headerView) {
+        [_noLoginView setBottom:_headerView.bottom + 20];
+    }
+    
     //添加头像
     UIButton *SYGButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    SYGButton.frame = CGRectMake(MainScreenWidth / 2 - 40 * WideEachUnit, 90 * WideEachUnit, 80 * WideEachUnit, 80 * WideEachUnit);
+    SYGButton.frame = CGRectMake(MainScreenWidth / 2 - 40 * WideEachUnit, 120 * WideEachUnit, 80 * WideEachUnit, 80 * WideEachUnit);
     SYGButton.backgroundColor = [UIColor whiteColor];
     [SYGButton setBackgroundImage:[UIImage imageNamed:@"未登录头像.jpg"] forState:UIControlStateNormal];
     SYGButton.layer.cornerRadius = 40 * WideEachUnit;
@@ -569,7 +577,7 @@
     
     //添加登录按钮
     UIButton *LoginButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    LoginButton.frame = CGRectMake(MainScreenWidth / 2 - 60 * WideEachUnit, 200 * WideEachUnit, 120 * WideEachUnit, 40 * WideEachUnit);
+    LoginButton.frame = CGRectMake(MainScreenWidth / 2 - 60 * WideEachUnit, 230 * WideEachUnit, 120 * WideEachUnit, 40 * WideEachUnit);
     LoginButton.backgroundColor = [UIColor whiteColor];
     LoginButton.layer.cornerRadius = 5 * WideEachUnit;
     [LoginButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
@@ -673,7 +681,8 @@
 
 - (void)addOrderView {//添加订单试图
     
-    _orderView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_headerView.frame) - 10 * WideEachUnit, MainScreenWidth, 110)];
+    _orderView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_headerView.frame) - 10 * WideEachUnit, MainScreenWidth, 0)];
+    _orderView.hidden = YES;
     _orderView.backgroundColor = [UIColor whiteColor];
     [_scrollView addSubview:_orderView];
     
@@ -702,7 +711,8 @@
     NSArray *image = @[@"order_pay@3x",@"order_cancel@3x",@"order_finish@3x",@"order_apply@3x",@"order_refund@2x"];
     
     //确定View 的大小
-    _orderView.frame = CGRectMake(0, CGRectGetMaxY(_headerView.frame) + 10 * WideEachUnit, MainScreenWidth,50 + ButtonH + SpaceBaside - SpaceBaside);
+    _orderView.frame = CGRectMake(0, CGRectGetMaxY(_headerView.frame), MainScreenWidth,50 + ButtonH + SpaceBaside - SpaceBaside);
+    [_orderView setHeight:0];
 
     
     for (int i = 0 ; i < 5 ; i ++) {
@@ -758,7 +768,7 @@
 - (void)addMYView {
     
     //添加整个View
-    UIView *SYGView = [[UIView alloc] initWithFrame:CGRectMake(0,CGRectGetMaxY(_orderView.frame) + SpaceBaside, MainScreenWidth, MainScreenHeight - 60 + 100)];
+    UIView *SYGView = [[UIView alloc] initWithFrame:CGRectMake(0,CGRectGetMaxY(_orderView.frame), MainScreenWidth, MainScreenHeight - 60 + 100)];
     SYGView.backgroundColor = [UIColor colorWithRed:245.f / 255 green:246.f / 255 blue:247.f / 255 alpha:1];
     SYGView.backgroundColor = [UIColor whiteColor];
     [_scrollView addSubview:SYGView];
@@ -795,22 +805,12 @@
         
     } else if ([MoreOrSingle integerValue] == 2) {
 
-        if ([HASALIPAY isEqualToString:@"0"]) {
-            if ([_isTeacher integerValue] == 1) {
-                SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"学习记录",@"兑换记录",@"我的机构",@"我的推荐",@"我的授课",@"我的分享",@"我的线下课",@"线下课管理",@"我的提问",@"我的点评",@"讲师认证"];
-                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"study@3x",@"record@3x",@"org@3x",@"downLine",@"me_is_teacher",@"icon-share",@"me_is_teacher",@"me_is_teacher",@"question",@"comment",@"teacher"];
-            } else {
-                SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"学习记录",@"兑换记录",@"我的机构",@"我的推荐",@"我的分享",@"我的线下课",@"我的提问",@"我的点评",@"讲师认证"];
-                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"study@3x",@"record@3x",@"org@3x",@"downLine",@"icon-share",@"me_is_teacher",@"question",@"comment",@"teacher"];
-            }
+        if ([_isTeacher integerValue] == 1) {
+            SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"学习记录",@"我的机构",@"我的授课",@"我的分享",@"我的线下课",@"线下课管理",@"我的提问",@"我的点评",@"讲师认证"];
+            TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"study@3x",@"org@3x",@"me_is_teacher",@"icon-share",@"me_is_teacher",@"me_is_teacher",@"question",@"comment",@"teacher"];
         } else {
-            if ([_isTeacher integerValue] == 1) {
-                SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"我的卡券",@"学习记录",@"兑换记录",@"我的机构",@"我的推荐",@"我的授课",@"我的分享",@"我的线下课",@"线下课管理",@"我的提问",@"我的点评",@"讲师认证"];
-                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"conpons@3x",@"study@3x",@"record@3x",@"org@3x",@"downLine",@"me_is_teacher",@"icon-share",@"me_is_teacher",@"me_is_teacher",@"question",@"comment",@"teacher"];
-            } else {
-                SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"我的卡券",@"学习记录",@"兑换记录",@"我的机构",@"我的推荐",@"我的分享",@"我的线下课",@"我的提问",@"我的点评",@"讲师认证"];
-                TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"conpons@3x",@"study@3x",@"record@3x",@"org@3x",@"downLine",@"icon-share",@"me_is_teacher",@"question",@"comment",@"teacher"];
-            }
+            SYGArray = @[@"我的课程",@"我的笔记",@"我的收藏",@"我的问答",@"我的考试",@"我的文库",@"我的下载",@"学习记录",@"我的机构",@"我的分享",@"我的线下课",@"我的提问",@"我的点评",@"讲师认证"];
+            TBArray = @[@"live@3x",@"notes@3x",@"collect@3x",@"q&a@3x",@"ic_exam@3x",@"library@3x",@"download@3x",@"study@3x",@"org@3x",@"icon-share",@"me_is_teacher",@"question",@"comment",@"teacher"];
         }
     }
     for (int i = 0 ; i < SYGArray.count ; i ++) {
@@ -1507,6 +1507,7 @@
         } else {
             _memberView.hidden = NO;
         }
+        _memberView.hidden = YES;
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
     }];
     [op start];

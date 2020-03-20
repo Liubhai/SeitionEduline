@@ -15,6 +15,6 @@
 @property (strong ,nonatomic)NSString     *ID;
 @property (assign, nonatomic) BOOL showYouhui;
 @property (assign, nonatomic) BOOL isCombo;// 是不是套餐
-@property (assign, nonatomic) BOOL isBuyAlone;// 立即购买(单独购买) yes 不是单独购买 NO 是单独购买
+@property (assign, nonatomic) BOOL isBuyAlone;// 立即观看(单独购买) yes 不是单独购买 NO 是单独购买
 
 @end

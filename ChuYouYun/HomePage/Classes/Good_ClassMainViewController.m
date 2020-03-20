@@ -4095,7 +4095,7 @@
     }
     NSString *bargain_info_status = [NSString stringWithFormat:@"%@",[[[_activityInfo objectForKey:@"bargain_info"] objectForKey:@"mine"] objectForKey:@"status"]];
     if ([bargain_info_status integerValue] == 2) {
-        [inviteButton setTitle:@"立即购买" forState:0];
+        [inviteButton setTitle:@"立即观看" forState:0];
         detailLabel.text = @"砍价成功,快去购买吧";
     }
     [self makeMenBerUI:menberScrollView menberArr:pass];
