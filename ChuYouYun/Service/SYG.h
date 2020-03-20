@@ -204,8 +204,8 @@ alpha:1.0]
 #define MACRO_UI_SAFEAREA [YunKeTang_Api_Tool safeAreaWithIPhoneX]
 
 // 微信分享
-#define WXAppId @"wxbbb961a0b0bf577a"
-#define WXAppSecret @"7ea0101aeabd53bc32859370cde278cc"
+#define WXAppId @"wxa4e189d74066943f"
+#define WXAppSecret @"e91ee3000b21c214a4c16ae4fbafbdc4"
 // QQ分享
 #define QQAppId @"101400042"
 #define QQAppSecret @"a85c2fcd67839693d5c0bf13bec84779"
