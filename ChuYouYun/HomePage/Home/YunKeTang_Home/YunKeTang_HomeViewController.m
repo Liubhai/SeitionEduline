@@ -992,8 +992,8 @@ static NSString *cellID = @"cell";
                 // 判断机构名称和机构简介控件的长度 取最长的去决定整个 view 的宽度 但是有个最大宽度 TeaViewWidthMax
                 CGFloat nameWidth = [name.text sizeWithFont:name.font].width + 4;
                 CGFloat schoolWidth = [schoolIntro.text sizeWithFont:schoolIntro.font].width + 4;
-                [name setWidth:MAX(nameWidth, schoolWidth)];
-                [schoolIntro setWidth:MAX(nameWidth, schoolWidth)];
+                [name setWidth:nameWidth + 20];
+                [schoolIntro setWidth:nameWidth + 20];
                 
                 [view setWidth:name.right + 15];
                 
