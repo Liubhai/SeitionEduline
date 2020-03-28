@@ -108,10 +108,10 @@
 //#define EncryptHeaderUrl @"https://t.v4.51eduline.com"
 
 /// 测试服(d单机构和多机构)
-#define EncryptUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://single.51eduline.com/service/" : @"https://t.v4.51eduline.com/service/"
-#define EncryptHeaderUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://single.51eduline.com" : @"https://t.v4.51eduline.com"
+#define EncryptUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://single.51eduline.com/service/" : @"http://app.lyhappyenglish.com/service/"
+#define EncryptHeaderUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://single.51eduline.com" : @"http://app.lyhappyenglish.com"
 
-#define basidUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://single.51eduline.com/service" : @"https://t.v4.51eduline.com/service"
+#define basidUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://single.51eduline.com/service" : @"http://app.lyhappyenglish.com/service"
 
 /// 正式服(单机构和多机构)
 //#define EncryptUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://demo.51eduline.com/service/" : @"https://v4.51eduline.com/service/"
@@ -214,7 +214,7 @@ alpha:1.0]
 #define SinaAppSecret @"da07bcf6c9f30281e684f8abfd0b4fca"
 
 // 支付宝h5支付之后需要回到app
-#define AlipayBundleId @"com.saixin.eduline"
+#define AlipayBundleId @"com.leying.leyingyun"
 
 // TKYUN
 #import "TKHelperUtil.h"
