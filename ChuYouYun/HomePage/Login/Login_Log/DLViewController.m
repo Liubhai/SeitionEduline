@@ -137,7 +137,7 @@
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     isFaceLogin = NO;
     isNameFaceLogin = NO;
-    _loginTypeStr = @"0";//1 是用户名登录  // 2 为直接扫脸登录  // 0 为初始化的值
+    _loginTypeStr = @"0";
 }
 
 - (void)NavButton {
@@ -330,7 +330,7 @@
     
     
     UIButton *YKButton = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(DLButton.frame) + 30, MainScreenWidth / 3, 20)];
-    [YKButton setTitle:@"游客登录" forState:UIControlStateNormal];
+    [YKButton setTitle:@"游客" forState:UIControlStateNormal];
     YKButton.titleLabel.font = [UIFont systemFontOfSize:16];
     [YKButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [YKButton addTarget:self action:@selector(SYGButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -352,7 +352,7 @@
     
     //添加人脸识别的按钮
     UIButton *faceButton = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth / 3, CGRectGetMaxY(DLButton.frame) + 30, MainScreenWidth / 3, 20)];
-    [faceButton setTitle:@"刷脸登录" forState:UIControlStateNormal];
+    [faceButton setTitle:@"刷脸" forState:UIControlStateNormal];
     faceButton.titleLabel.font = [UIFont systemFontOfSize:16];
     [faceButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [faceButton addTarget:self action:@selector(SYGButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -366,85 +366,13 @@
     
 
     if (self.typeStr) {//说明是从退出账号过来的
-//        UIButton *YKButton = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth / 3 * 2, CGRectGetMaxY(DLButton.frame) + 30, MainScreenWidth / 3, 20)];
-//        [YKButton setTitle:@"游客登录" forState:UIControlStateNormal];
-//        YKButton.titleLabel.font = [UIFont systemFontOfSize:16];
-//        [YKButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//        [YKButton addTarget:self action:@selector(SYGButton:) forControlEvents:UIControlEventTouchUpInside];
-//        YKButton.tag = 30;
-//        _YKButton = YKButton;
-//        [self.view addSubview:YKButton];
-
         //设置忘记密码的位置
         WJButton.frame = CGRectMake(0, CGRectGetMaxY(DLButton.frame) + 30, MainScreenWidth / 3, 20);
         
         //设置人脸识别的位置
         faceButton.frame =  CGRectMake(MainScreenWidth / 3 , CGRectGetMaxY(DLButton.frame) + 30, MainScreenWidth / 3, 20);
-        
-        
     }
-    /**
-    if (iPhone4SOriPhone4) {
-        
-        //添加横线
-        UIButton *ZButton = [[UIButton alloc] initWithFrame:CGRectMake(0,MainScreenHeight / 5 * 3 + 50, MainScreenWidth / 2 - 60, 1)];
-        ZButton.backgroundColor = [UIColor colorWithRed:223.f / 255 green:223.f / 255 blue:223.f / 255 alpha:1];
-        [self.view addSubview:ZButton];
-        
-        UIButton *YButton = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth / 2 + 60,MainScreenHeight / 5 * 3 + 50, MainScreenWidth / 2 - 60, 1)];
-        YButton.backgroundColor = [UIColor colorWithRed:223.f / 255 green:223.f / 255 blue:223.f / 255 alpha:1];
-        [self.view addSubview:YButton];
-        
-        //添加第三方登录
-        UILabel *SFLabel = [[UILabel alloc] initWithFrame:CGRectMake(MainScreenWidth / 2 - 60, MainScreenHeight / 5 * 3 - 15 + 50, 120, 30)];
-        SFLabel.text = @"第三方登录";
-        SFLabel.textColor = [UIColor colorWithRed:200.f / 255 green:200.f / 255 blue:200.f / 255 alpha:1];
-        SFLabel.font = [UIFont systemFontOfSize:14];
-        SFLabel.textAlignment = NSTextAlignmentCenter;
-        [self.view addSubview:SFLabel];
-        
-        //添加三方登录按钮
-        NSArray *SFArray = @[@"微博.png",@"QQ.png",@"微信.png"];
-        for (int i = 0 ; i < 3; i ++) {
-            UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth / 7 + MainScreenWidth / 7  * 2 * i, MainScreenHeight / 5 * 3 + 100, MainScreenWidth / 7, MainScreenWidth / 7)];
-            [button setBackgroundImage:[UIImage imageNamed:SFArray[i]] forState:UIControlStateNormal];
-            button.tag = i;
-            button.layer.cornerRadius = MainScreenWidth / 7 / 2;
-            [button addTarget:self action:@selector(SYGButton:) forControlEvents:UIControlEventTouchUpInside];
-            [self.view addSubview:button];
-        }
-        
-    }else {
-        
-        //添加横线
-        UIButton *ZButton = [[UIButton alloc] initWithFrame:CGRectMake(0,MainScreenHeight / 5 * 3 + 50, MainScreenWidth / 2 - 60, 1)];
-        ZButton.backgroundColor = [UIColor colorWithRed:223.f / 255 green:223.f / 255 blue:223.f / 255 alpha:1];
-        [self.view addSubview:ZButton];
-        
-        UIButton *YButton = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth / 2 + 60,MainScreenHeight / 5 * 3 + 50, MainScreenWidth / 2 - 60, 1)];
-        YButton.backgroundColor = [UIColor colorWithRed:223.f / 255 green:223.f / 255 blue:223.f / 255 alpha:1];
-        [self.view addSubview:YButton];
-        
-        //添加第三方登录
-        UILabel *SFLabel = [[UILabel alloc] initWithFrame:CGRectMake(MainScreenWidth / 2 - 60, MainScreenHeight / 5 * 3 - 15 + 50, 120, 30)];
-        SFLabel.text = @"第三方登录";
-        SFLabel.textColor = [UIColor colorWithRed:200.f / 255 green:200.f / 255 blue:200.f / 255 alpha:1];
-        SFLabel.font = [UIFont systemFontOfSize:14];
-        SFLabel.textAlignment = NSTextAlignmentCenter;
-        [self.view addSubview:SFLabel];
-
-        //添加三方登录按钮
-        NSArray *SFArray = @[@"微博.png",@"QQ.png",@"微信.png"];
-        for (int i = 0 ; i < 3; i ++) {
-            UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth / 7 + MainScreenWidth / 7  * 2 * i, MainScreenHeight / 5 * 3 + 100, MainScreenWidth / 7, MainScreenWidth / 7)];
-            [button setBackgroundImage:[UIImage imageNamed:SFArray[i]] forState:UIControlStateNormal];
-            button.tag = i;
-            button.layer.cornerRadius = MainScreenWidth / 7 / 2;
-            [button addTarget:self action:@selector(SYGButton:) forControlEvents:UIControlEventTouchUpInside];
-            [self.view addSubview:button];
-        }
-    }
-    */
+    
     if (iPhoneX) {//iphoneX 所有的适配都在这里
         _NameField.frame = CGRectMake(0, 94, MainScreenWidth, 50);
         nameButton.frame = CGRectMake(17, 110, 13, 18);

@@ -371,7 +371,7 @@
 //    return [UMSocialSnsService handleOpenURL:url];
 //}
 
-//使用第三方登录需要重写下面两个方法
+
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     
     BOOL result = [UMSocialSnsService handleOpenURL:url];

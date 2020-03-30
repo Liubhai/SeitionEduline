@@ -472,7 +472,7 @@
     [op start];
 }
 
-#pragma mark --- 第三方登录
+#pragma mark ---
 
 - (void)loginWithType {
     NSString *endUrlStr = YunKeTang_passport_regist;
@@ -539,7 +539,7 @@
     
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-        if (_loginType) {//正在第三方登录
+        if (_loginType) {//正在
             [[NSUserDefaults standardUserDefaults]setObject:[_codeDict stringValueForKey:@"oauth_token"] forKey:@"oauthToken"];
             [[NSUserDefaults standardUserDefaults]setObject:[_codeDict stringValueForKey:@"oauth_token_secret"] forKey:@"oauthTokenSecret"];
             [[NSUserDefaults standardUserDefaults]setObject:[_codeDict stringValueForKey:@"uid"] forKey:@"User_id"];
@@ -626,7 +626,6 @@
     [op start];
 }
 
-//第三方登录
 
 
 
