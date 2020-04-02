@@ -28,7 +28,7 @@
 #import "UIView+HUD.h"
 
 //配置单机构或者多机构 (1,单机构、2,多机构)
-#define MoreOrSingle ([Institution_Id isEqualToString:@"0"] || [[NSUserDefaults standardUserDefaults] objectForKey:@"institutionId"] == nil) ? @"2" : @"1"
+#define MoreOrSingle @"2"//([Institution_Id isEqualToString:@"0"] || [[NSUserDefaults standardUserDefaults] objectForKey:@"institutionId"] == nil) ? @"2" : @"1"
 #define MoreOrSingle_HeaderUrl @"2"
 
 #ifndef ChuYouYun_SYG_h
