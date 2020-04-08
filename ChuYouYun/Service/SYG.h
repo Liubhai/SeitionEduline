@@ -28,8 +28,8 @@
 #import "UIView+HUD.h"
 
 //配置单机构或者多机构 (1,单机构、2,多机构)
-#define MoreOrSingle @"2"//([Institution_Id isEqualToString:@"0"] || [[NSUserDefaults standardUserDefaults] objectForKey:@"institutionId"] == nil) ? @"2" : @"1"
-#define MoreOrSingle_HeaderUrl @"2"
+#define MoreOrSingle @"1"//([Institution_Id isEqualToString:@"0"] || [[NSUserDefaults standardUserDefaults] objectForKey:@"institutionId"] == nil) ? @"2" : @"1"
+#define MoreOrSingle_HeaderUrl @"1"
 
 #ifndef ChuYouYun_SYG_h
 #define ChuYouYun_SYG_h
@@ -108,10 +108,10 @@
 //#define EncryptHeaderUrl @"https://t.v4.51eduline.com"
 
 /// 测试服(d单机构和多机构)
-#define EncryptUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://single.51eduline.com/service/" : @"http://app.lyhappyenglish.com/service/"
-#define EncryptHeaderUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://single.51eduline.com" : @"http://app.lyhappyenglish.com"
+#define EncryptUrl @"http://app.lyhappyenglish.com/service/"
+#define EncryptHeaderUrl @"http://app.lyhappyenglish.com"
 
-#define basidUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://single.51eduline.com/service" : @"http://app.lyhappyenglish.com/service"
+#define basidUrl @"http://app.lyhappyenglish.com/service"
 
 /// 正式服(单机构和多机构)
 //#define EncryptUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://demo.51eduline.com/service/" : @"https://v4.51eduline.com/service/"
@@ -204,11 +204,11 @@ alpha:1.0]
 #define MACRO_UI_SAFEAREA [YunKeTang_Api_Tool safeAreaWithIPhoneX]
 
 // 微信分享
-#define WXAppId @"wxbbb961a0b0bf577a"
-#define WXAppSecret @"7ea0101aeabd53bc32859370cde278cc"
+#define WXAppId @"wx12adc3349a1c232f"
+#define WXAppSecret @"c83af9e3b994854c45fc35d0e5273d2a"
 // QQ分享
-#define QQAppId @"101400042"
-#define QQAppSecret @"a85c2fcd67839693d5c0bf13bec84779"
+#define QQAppId @"101857933"
+#define QQAppSecret @"213861aae860381d7068fc96d82896e8"
 // 新浪分享
 #define SinaAppId @"3997129963"
 #define SinaAppSecret @"da07bcf6c9f30281e684f8abfd0b4fca"
