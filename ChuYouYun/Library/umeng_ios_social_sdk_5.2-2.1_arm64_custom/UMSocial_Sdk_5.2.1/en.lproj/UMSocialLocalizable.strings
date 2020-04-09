@@ -68,12 +68,12 @@
 "share_facebook_no_osSupport" = "iOS doesn't support";
 "share_facebook_no_osSupport_message" = "The version of your iOS device doesn't support share the that media";
 
-"share_alipay" = "Share to AlipayShare";
-"share_alipay_friend" = "Share to AlipayShare friends";
-"share_alipay_moments" = "Share to AlipayShare Timeline";
-"share_alipay_no_title" = "No Alipay";
-"share_alipay_no_message" = "Alipay not installed in device";
-"share_alipay_version_not_supported" = "The version of Alipay not supported.";
+"share_moubao" = "Share to moubaoShare";
+"share_moubao_friend" = "Share to moubaoShare friends";
+"share_moubao_moments" = "Share to moubaoShare Timeline";
+"share_moubao_no_title" = "No moubao";
+"share_moubao_no_message" = "moubao not installed in device";
+"share_moubao_version_not_supported" = "The version of moubao not supported.";
 
 "share_sms_no_osSupport" = "No SMS";
 "share_sms_no_osSupport_message" = "The device doesn't support SMS";
@@ -132,7 +132,7 @@
 "sms" = "SMS";
 "wechat_session" = "Wechat";
 "wechat_timeline" = "Moments";
-"alipay_session" = "Alipay";
+"moubao_session" = "moubao";
 "aliay_circle" = "LifeCircle";
 "wechat_favorite" = "Wechat Favorite";
 "facebook" = "Facebook";

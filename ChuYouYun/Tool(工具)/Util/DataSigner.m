@@ -3,7 +3,6 @@
 //  AlixPayDemo
 //
 //  Created by Jing Wen on 8/2/11.
-//  Copyright 2011 alipay.com. All rights reserved.
 //
 
 #import "DataSigner.h"

@@ -368,14 +368,14 @@
     [_scrollView addSubview:_banlancepayView];
     
     //判断是否应该有此支付方式
-    BOOL isAddAilpayView = NO;
+    BOOL isAddpayView = NO;
     for (NSString *payStr in _payTypeArray) {
         if ([payStr isEqualToString:@"lcnpay"]) {
-            isAddAilpayView = YES;
+            isAddpayView = YES;
         }
     }
     
-    if (isAddAilpayView) {//有支付宝
+    if (isAddpayView) {
         CGFloat viewW = MainScreenWidth;
         CGFloat viewH = 50 * WideEachUnit;
         
@@ -483,7 +483,7 @@
         [seleButton addTarget:self action:@selector(seleButtonCilck:) forControlEvents:UIControlEventTouchUpInside];
         seleButton.tag = 2;
         _bankSeleButton = seleButton;
-        if (_banlancepayView.bounds.size.height == 0) {//说明支付宝也没有
+        if (_banlancepayView.bounds.size.height == 0) {//说明也没有
             _bankSeleButton.selected = YES;
         } else {
             _bankSeleButton.selected = NO;
@@ -698,7 +698,7 @@
         } else if (_balanNumber == 100){//没有这个方式
             
         }
-    } else if (button.tag == 1) {//支付宝
+    } else if (button.tag == 1) {//
         _balanceSeleButton.selected = NO;
         _bankSeleButton.selected = NO;
         _payTypeStr = @"1";

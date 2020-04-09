@@ -79,13 +79,13 @@ typedef enum{
 }UMSocialWXMessageType;
 
 /**
- 支付宝消息类型
+ 某宝消息类型
  */
-typedef NS_ENUM(NSInteger, UMSocialAlipayMessageType) {
-    UMSocialAlipayMessageTypeNone,
-    UMSocialAlipayMessageTypeText,      //支付宝消息文本类型
-    UMSocialAlipayMessageTypeImage,     //支付宝消息图片类型
-    UMSocialAlipayMessageTypeWeb,       //支付宝消息网页类型
+typedef NS_ENUM(NSInteger, UMSocialmoubaoMessageType) {
+    UMSocialmoubaoMessageTypeNone,
+    UMSocialmoubaoMessageTypeText,      //某宝消息文本类型
+    UMSocialmoubaoMessageTypeImage,     //某宝消息图片类型
+    UMSocialmoubaoMessageTypeWeb,       //某宝消息网页类型
 };
 
 /**
@@ -336,10 +336,10 @@ typedef enum {
 
 
 /**
- 分享到支付宝好友
+ 分享到某宝好友
  
  */
-@interface UMSocialAlipaySessionData : UMSocialSnsData
+@interface UMSocialmoubaoSessionData : UMSocialSnsData
 
 /**
  图文分享标题
@@ -348,13 +348,13 @@ typedef enum {
 @property (nonatomic, copy) NSString * title;
 
 /**
- 支付宝消息类型
+ 某宝消息类型
  
  */
-@property (nonatomic, assign) UMSocialAlipayMessageType alipayMessageType;
+@property (nonatomic, assign) UMSocialmoubaoMessageType moubaoMessageType;
 
 /**
- 支付宝网页消息url
+ 某宝网页消息url
  
  */
 @property (nonatomic, copy) NSString * url;
@@ -579,9 +579,9 @@ typedef enum {
 @property (nonatomic, retain) UMSocialWechatFavorite * wechatFavoriteData;
 
 /**
- 分享到支付宝好友内容
+ 分享到某宝好友内容
  */
-@property (nonatomic, retain) UMSocialAlipaySessionData * alipaySessionData;
+@property (nonatomic, retain) UMSocialmoubaoSessionData * moubaoSessionData;
 
 /**
  分享到QQ内容
