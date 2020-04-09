@@ -1018,14 +1018,6 @@ static NSString *cellID = @"cell";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0) {
-        if ([HASEduline isEqualToString:@"0"]) {
-            if (!UserOathToken) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"查看详情需要登录,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
-                alert.tag = 100;
-                [alert show];
-                return;
-            }
-        }
         NSString *Cid = [[_liveArray objectAtIndex:indexPath.row] stringValueForKey:@"id"];
         NSString *Price = [[_liveArray objectAtIndex:indexPath.row] stringValueForKey:@"t_price"];
         NSString *Title = [[_liveArray objectAtIndex:indexPath.row] stringValueForKey:@"video_title"];
@@ -1035,14 +1027,6 @@ static NSString *cellID = @"cell";
         zhiBoMainVc.order_switch = _order_switch;
         [self.navigationController pushViewController:zhiBoMainVc animated:YES];
     } else if (indexPath.section == 3) {
-        if ([HASEduline isEqualToString:@"0"]) {
-            if (!UserOathToken) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"查看详情需要登录,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
-                alert.tag = 100;
-                [alert show];
-                return;
-            }
-        }
         NSDictionary *dict = [_lineClassArray objectAtIndex:indexPath.row];
         
         OfflineDetailViewController *vc = [[OfflineDetailViewController alloc] init];
@@ -1076,14 +1060,6 @@ static NSString *cellID = @"cell";
                             getSearchVc.typeStr = @"1";
                             [self.navigationController pushViewController:getSearchVc animated:YES];
                         } else {
-                            if ([HASEduline isEqualToString:@"0"]) {
-                                if (!UserOathToken) {
-                                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"查看详情需要登录,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
-                                    alert.tag = 100;
-                                    [alert show];
-                                    return;
-                                }
-                            }
                             ZhiBoMainViewController *zhiBoMainVc = [[ZhiBoMainViewController alloc]initWithMemberId:typeId andImage:nil andTitle:nil andNum:nil andprice:nil];
                             zhiBoMainVc.order_switch = _order_switch;
                             [self.navigationController pushViewController:zhiBoMainVc animated:YES];
@@ -1094,14 +1070,6 @@ static NSString *cellID = @"cell";
                             getSearchVc.typeStr = @"1";
                             [self.navigationController pushViewController:getSearchVc animated:YES];
                         } else {
-                            if ([HASEduline isEqualToString:@"0"]) {
-                                if (!UserOathToken) {
-                                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"查看详情需要登录,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
-                                    alert.tag = 100;
-                                    [alert show];
-                                    return;
-                                }
-                            }
                             Good_ClassMainViewController *vc = [[Good_ClassMainViewController alloc] init];
                             vc.ID = typeId;
                             vc.orderSwitch = _order_switch;
@@ -1204,14 +1172,6 @@ static NSString *cellID = @"cell";
 }
 
 - (void)liveButtonClick:(UIButton *)button {
-    if ([HASEduline isEqualToString:@"0"]) {
-        if (!UserOathToken) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"查看详情需要登录,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
-            alert.tag = 100;
-            [alert show];
-            return;
-        }
-    }
     NSLog(@"%ld",button.tag);
     NSInteger Tag = button.tag;
     NSString *Cid = nil;
@@ -1259,14 +1219,6 @@ static NSString *cellID = @"cell";
 
 //精选课程的手势
 - (void)chooseViewClick:(UIGestureRecognizer *)not {
-    if ([HASEduline isEqualToString:@"0"]) {
-        if (!UserOathToken) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"查看详情需要登录,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
-            alert.tag = 100;
-            [alert show];
-            return;
-        }
-    }
     NSInteger temp = not.view.tag;
     NSDictionary *dict = [_choicenessArray objectAtIndex:temp];
     if ([[dict stringValueForKey:@"type"] integerValue] == 1) {//点播
@@ -1303,14 +1255,6 @@ static NSString *cellID = @"cell";
 }
 
 - (void)newsViewClick:(UIGestureRecognizer *)not {
-    if ([HASEduline isEqualToString:@"0"]) {
-        if (!UserOathToken) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"查看详情需要登录,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
-            alert.tag = 100;
-            [alert show];
-            return;
-        }
-    }
     NSInteger temp = not.view.tag;
     NSDictionary *dict = [_newsArray objectAtIndex:temp];
     
@@ -1347,14 +1291,6 @@ static NSString *cellID = @"cell";
 }
 
 - (void)lineClassViewClick:(UIGestureRecognizer *)not {
-    if ([HASEduline isEqualToString:@"0"]) {
-        if (!UserOathToken) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"查看详情需要登录,是否前往登录?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去登录", nil];
-            alert.tag = 100;
-            [alert show];
-            return;
-        }
-    }
     NSInteger temp = not.view.tag;
     NSDictionary *dict = [_lineClassArray objectAtIndex:temp];
     
