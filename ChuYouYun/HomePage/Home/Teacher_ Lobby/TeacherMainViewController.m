@@ -483,7 +483,7 @@
 //    _mainSegment = [[UISegmentedControl alloc] initWithItems:titleArray];
 //    _mainSegment.frame = CGRectMake(2 * SpaceBaside * WideEachUnit,SpaceBaside * WideEachUnit,MainScreenWidth - 4 * SpaceBaside * WideEachUnit, 30 * WideEachUnit);
 //    _mainSegment.selectedSegmentIndex = 0;
-//    [_mainSegment setTintColor:[UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1]];
+//    [_mainSegment setTintColor:BasidColor];
 //    [_mainSegment addTarget:self action:@selector(mainChange:) forControlEvents:UIControlEventValueChanged];
 //    [WZView addSubview:_mainSegment];
     

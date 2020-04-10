@@ -79,7 +79,7 @@
     //题的类型
     UILabel *type = [[UILabel alloc] initWithFrame:CGRectMake(15 * WideEachUnit, 60 * WideEachUnit, 100 * WideEachUnit, 15 * WideEachUnit)];
     type.text = [[_testDict dictionaryValueForKey:@"type_info"] stringValueForKey:@"question_type_title"];
-    type.textColor = [UIColor colorWithHexString:@"#2069CF"];
+    type.textColor = BasidColor;//[UIColor colorWithHexString:@"#2069CF"];
     type.font = Font(12);
     [_testView addSubview:type];
     

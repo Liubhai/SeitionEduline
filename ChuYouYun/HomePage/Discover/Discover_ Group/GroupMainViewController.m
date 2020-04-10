@@ -155,7 +155,7 @@
     titleScrollView.contentOffset = CGPointMake(0, 0);
     
     NSMutableArray *marr = [NSMutableArray array];
-    UIColor *ffbbcolor = [UIColor colorWithRed:33.f / 255 green:81.f / 255 blue:196.f / 255 alpha:1];
+    UIColor *ffbbcolor = BasidColor;
 
     for (int i = 0; i < _titleArray.count ; i ++) {
         _titleButton = [[UIButton alloc] init];

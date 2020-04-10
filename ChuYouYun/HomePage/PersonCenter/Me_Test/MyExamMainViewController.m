@@ -137,7 +137,7 @@
         button.frame = CGRectMake(ButtonW * i, 0, ButtonW, ButtonH);
         button.tag = i;
         [button setTitle:titleArray[i] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1] forState:UIControlStateSelected];
+        [button setTitleColor:BasidColor forState:UIControlStateSelected];
         [button setTitleColor:[UIColor colorWithHexString:@"#333"] forState:UIControlStateNormal];
         [button setTitleColor:BlackNotColor forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:16 * WideEachUnit];
@@ -172,7 +172,7 @@
     //    NSString *title = titleArray[[_typeStr integerValue]];
     //    _HDButton = [[UIButton alloc] initWithFrame:CGRectMake(ButtonW * [_typeStr integerValue], 27 + 3, title.length * 14, 1)];
     
-    _HDButton.backgroundColor = [UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1];
+    _HDButton.backgroundColor = BasidColor;
     [WZView addSubview:_HDButton];
     _HDButton.hidden = YES;
     

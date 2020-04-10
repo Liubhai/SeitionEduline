@@ -363,7 +363,7 @@
     //新增收货地址
     UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, MainScreenHeight - 40 - MACRO_UI_SAFEAREA, MainScreenWidth, 40)];
     [self.view addSubview:btn];
-    btn.backgroundColor = [UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1];
+    btn.backgroundColor = BasidColor;
     [btn setTitleColor:[UIColor colorWithHexString:@"#ffffff"] forState:UIControlStateNormal];
     [btn setTitle:@"新增收货地址" forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(addAddress) forControlEvents:UIControlEventTouchUpInside];

@@ -314,7 +314,7 @@
     
     
     UIButton *sendButton = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth - 70, 5, 60, 40)];
-    sendButton.backgroundColor = [UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1];
+    sendButton.backgroundColor = BasidColor;
     sendButton.layer.cornerRadius = 3;
     [sendButton setTitle:@"发送" forState:UIControlStateNormal];
     [sendButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

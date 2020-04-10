@@ -70,7 +70,7 @@
 - (void)addNav {
     //添加View
     UIView *NavView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MainScreenWidth, 64)];
-    NavView.backgroundColor = [UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1];
+    NavView.backgroundColor = BasidColor;
     [self.view addSubview:NavView];
     
     //添加按钮
@@ -98,7 +98,7 @@
     //添加成功
     UILabel *CGLabel = [[UILabel alloc] initWithFrame:CGRectMake(MainScreenWidth / 2 - 80, MainScreenHeight / 5 * 2, 160, 30)];
     CGLabel.text = @"成功";
-    CGLabel.textColor = [UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1];
+    CGLabel.textColor = BasidColor;
     CGLabel.textAlignment = NSTextAlignmentCenter;
     CGLabel.font = [UIFont systemFontOfSize:20];
     [self.view addSubview:CGLabel];
@@ -106,7 +106,7 @@
     //提示成功
     UILabel *TSLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, MainScreenHeight / 9 * 4, MainScreenWidth - 60, 60)];
     TSLabel.numberOfLines = 2;
-    TSLabel.textColor = [UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1];
+    TSLabel.textColor = BasidColor;
     TSLabel.text = @"我们已将找回密码的邮件发送到你的邮箱，请尽快查阅邮箱并重设密码";
     TSLabel.textAlignment = NSTextAlignmentCenter;
     TSLabel.font = [UIFont systemFontOfSize:16];
@@ -116,7 +116,7 @@
     UIButton *YXButton = [[UIButton alloc] initWithFrame:CGRectMake(25, MainScreenHeight / 7 * 4, MainScreenWidth - 50, 40)];
     [YXButton setTitle:@"查看邮箱" forState:UIControlStateNormal];
     [YXButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    YXButton.backgroundColor = [UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1];
+    YXButton.backgroundColor = BasidColor;
     YXButton.layer.cornerRadius = 3;
     [YXButton addTarget:self action:@selector(YXButton) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:YXButton];

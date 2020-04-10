@@ -450,7 +450,7 @@
     _exchangViewUp.contentOffset = CGPointMake(0, 0);
     
     NSMutableArray *marr = [NSMutableArray array];
-    UIColor *ffbbcolor = [UIColor colorWithRed:33.f / 255 green:81.f / 255 blue:196.f / 255 alpha:1];
+    UIColor *ffbbcolor = BasidColor;
     
     buttonXUp = 0;
     allButtonXUp = 0;
@@ -701,7 +701,7 @@
 
     
     NSMutableArray *marr = [NSMutableArray array];
-    UIColor *ffbbcolor = [UIColor colorWithRed:33.f / 255 green:81.f / 255 blue:196.f / 255 alpha:1];
+    UIColor *ffbbcolor = BasidColor;
     
     NSArray *childArray = _exchangDownArray;
     for (int i = 0; i < childArray.count ; i ++) {

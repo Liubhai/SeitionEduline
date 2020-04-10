@@ -44,7 +44,7 @@
     //删除
     _SCButton = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth - 90, 5, 80, 20)];
     [_SCButton setTitle:@"滑动删除" forState:UIControlStateNormal];
-    [_SCButton setTitleColor:[UIColor colorWithRed:36.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1] forState:UIControlStateNormal];
+    [_SCButton setTitleColor:BasidColor forState:UIControlStateNormal];
     _SCButton.titleLabel.font = [UIFont systemFontOfSize:16];
     [self addSubview:_SCButton];
     

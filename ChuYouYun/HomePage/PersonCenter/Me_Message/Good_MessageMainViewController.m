@@ -118,7 +118,7 @@
         button.frame = CGRectMake(ButtonW * i, 10 * WideEachUnit, ButtonW, ButtonH);
         button.tag = i;
         [button setTitle:titleArray[i] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1] forState:UIControlStateSelected];
+        [button setTitleColor:BasidColor forState:UIControlStateSelected];
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:14 * WideEachUnit];
         //        button.titleLabel.font = [UIFont boldSystemFontOfSize:14];

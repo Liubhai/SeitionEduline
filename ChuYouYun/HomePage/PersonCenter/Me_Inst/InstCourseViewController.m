@@ -293,7 +293,7 @@
     
     _menuarr = _dayArray;
     
-    UIColor *ffbbcolor = [UIColor colorWithRed:33.f / 255 green:81.f / 255 blue:196.f / 255 alpha:1];
+    UIColor *ffbbcolor = BasidColor;
     for (int i=0; i<_menuarr.count; i++) {
         menubtn = [[UIButton alloc]init];
         menubtn.frame = CGRectMake(65*horizontalrate*i+(i+1)*(MainScreenWidth- (65*horizontalrate * 4))/(4 + 1), 0, 65*horizontalrate, 40*MainScreenWidth/375);
@@ -331,26 +331,26 @@
                 
                 [UIView animateWithDuration:0.2 animations:^{
                     _headScrollow.contentOffset = CGPointMake(65*horizontalrate*1+(0+1)*(MainScreenWidth- (65*horizontalrate * 4))/(4 + 1), 0);
-                    [button setTitleColor:[UIColor colorWithRed:33.f / 255 green:81.f / 255 blue:196.f / 255 alpha:1] forState:UIControlStateNormal];
+                    [button setTitleColor:BasidColor forState:UIControlStateNormal];
                 }];
                 
             }else if (numsender < tempNumber){
                 [UIView animateWithDuration:0.2 animations:^{
                     _headScrollow.contentOffset = CGPointMake(0, 0);
-                    [button setTitleColor:[UIColor colorWithRed:33.f / 255 green:81.f / 255 blue:196.f / 255 alpha:1] forState:UIControlStateNormal];
+                    [button setTitleColor:BasidColor forState:UIControlStateNormal];
                 }];
             }
         }
         
         [UIView animateWithDuration:0.2 animations:^{
-            [button setTitleColor:[UIColor colorWithRed:33.f / 255 green:81.f / 255 blue:196.f / 255 alpha:1] forState:UIControlStateNormal];
+            [button setTitleColor:BasidColor forState:UIControlStateNormal];
             //_headScrollow.contentOffset = CGPointMake(65*horizontalrate*1+(0+1)*(MainScreenWidth- (65*horizontalrate * 4))/(4 + 1), 0);
         }];
         
     }else{
         
         [UIView animateWithDuration:0.2 animations:^{
-            [button setTitleColor:[UIColor colorWithRed:33.f / 255 green:81.f / 255 blue:196.f / 255 alpha:1] forState:UIControlStateNormal];
+            [button setTitleColor:BasidColor forState:UIControlStateNormal];
             _headScrollow.contentOffset = CGPointMake(0, 0);
             
         }];

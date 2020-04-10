@@ -212,7 +212,7 @@
     segment.selectedSegmentIndex = 0;
     _type = @"online";
     _price = _lineonPrice;
-    [segment setTintColor:[UIColor colorWithRed:33.f / 255 green:81.f / 255 blue:196.f / 255 alpha:1]];
+    [segment setTintColor:BasidColor];
     [segment addTarget:self action:@selector(change:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:segment];
     

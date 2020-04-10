@@ -398,7 +398,7 @@
         if (!cell) {
             cell = [[UITableViewCell alloc]initWithStyle:0 reuseIdentifier:identifier];
             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-            cell.backgroundColor = [UIColor colorWithRed:32.f/255.0 green:105.f/255.0 blue:207.f/255.0 alpha:1];
+            cell.backgroundColor = BasidColor;
             UILabel *numberLbl = [[UILabel alloc]initWithFrame:CGRectMake((self.view.frame.size.width-100)/2+20, (60-21)/2, 100, 21)];
             numberLbl.textColor = [UIColor whiteColor];
             numberLbl.text = @"退出账号";

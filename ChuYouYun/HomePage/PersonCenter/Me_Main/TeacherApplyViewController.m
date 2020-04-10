@@ -263,10 +263,10 @@
     _agreeBackButton.center = _agreeButton.center;
     [_agreementBackView addSubview:_agreeBackButton];
     _agreeTitle = [[UILabel alloc] initWithFrame:CGRectMake(_agreeButton.right + 3, _agreeButton.top, MainScreenWidth - _agreeButton.right - 3, 16)];
-    _agreeTitle.text = @"我已阅读并同意《Eduline认证条款》";
+    _agreeTitle.text = [NSString stringWithFormat:@"我已阅读并同意《%@认证条款》",AppName];
     _agreeTitle.textColor = RGBHex(0x8B8888);
     _agreeTitle.font = SYSTEMFONT(14);
-    NSMutableAttributedString *mutal = [[NSMutableAttributedString alloc] initWithString:@"我已阅读并同意《Eduline认证条款》"];
+    NSMutableAttributedString *mutal = [[NSMutableAttributedString alloc] initWithString:_agreeTitle.text];
     [mutal addAttributes:@{NSForegroundColorAttributeName: BasidColor} range:NSMakeRange(7, _agreeTitle.text.length - 7)];
     _agreeTitle.attributedText = [[NSAttributedString alloc] initWithAttributedString:mutal];
     _agreeTitle.centerY = _agreeButton.centerY;
@@ -279,7 +279,7 @@
     [_agreementBackView addSubview:agreeDetailVCButton];
 
     _submitButton = [[UIButton alloc] initWithFrame:CGRectMake(20, _agreementBackView.bottom + 40, MainScreenWidth - 40, 40)];
-    _submitButton.backgroundColor = RGBHex(0x2069CF);
+    _submitButton.backgroundColor = BasidColor;
     [_submitButton setTitle:@"提交申请" forState:0];
     [_submitButton setTitleColor:[UIColor whiteColor] forState:0];
     _submitButton.layer.masksToBounds = YES;

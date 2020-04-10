@@ -99,7 +99,7 @@
     
     //添加View
     UIView *NavView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MainScreenWidth, NavigationBarHeight)];
-    NavView.backgroundColor = [UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1];
+    NavView.backgroundColor = BasidColor;//BasidColor;
     [self.view addSubview:NavView];
     
     //添加按钮
@@ -162,7 +162,7 @@
     UIButton *TJButton = [[UIButton alloc] initWithFrame:CGRectMake(20, 300, MainScreenWidth - 40, 45)];
     [TJButton setTitle:@"提交" forState:UIControlStateNormal];
     [TJButton addTarget:self action:@selector(TJButton:) forControlEvents:UIControlEventTouchUpInside];
-    TJButton.backgroundColor = [UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1];
+    TJButton.backgroundColor = BasidColor;//BasidColor;
     TJButton.layer.cornerRadius = 4;
     [self.view addSubview:TJButton];
     
@@ -196,7 +196,7 @@
     //添加手机注册
     UIButton *SJButton = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth - 100, 260, 100, 30)];
     [SJButton setTitle:@"手机注册" forState:UIControlStateNormal];
-    [SJButton setTitleColor:[UIColor colorWithRed:33.f / 255 green:87.f / 255 blue:198.f / 255 alpha:1] forState:UIControlStateNormal];
+    [SJButton setTitleColor:BasidColor forState:UIControlStateNormal];
     SJButton.titleLabel.font = [UIFont systemFontOfSize:16];
     [SJButton addTarget:self action:@selector(SJButton:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:SJButton];

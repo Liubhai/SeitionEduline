@@ -155,7 +155,7 @@
     //添加按钮
     UIButton *sendBtn = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth - 60, 9, 50, 30)];
     [sendBtn setTitle:@"发送" forState:UIControlStateNormal];
-    sendBtn.backgroundColor = [UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1];
+    sendBtn.backgroundColor = BasidColor;
     sendBtn.layer.cornerRadius = 3;
     [sendBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [sendBtn addTarget:self action:@selector(sendClick:) forControlEvents:UIControlEventTouchUpInside];

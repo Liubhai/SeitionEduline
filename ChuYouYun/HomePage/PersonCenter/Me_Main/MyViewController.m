@@ -80,6 +80,7 @@
 // 讲师认证
 #import "TeacherApplyViewController.h"
 
+
 @interface MyViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 {
     NSInteger _number;
@@ -166,8 +167,8 @@
 -(UIView *)noLoginView {
     if (!_noLoginView) {
         _noLoginView = [[UIView alloc] initWithFrame:CGRectMake(0, -20 * WideEachUnit, MainScreenWidth, 280 * WideEachUnit)];
-        _noLoginView.backgroundColor = [UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1];
-        [_noLoginView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"默认背景-2@2x"]]];
+        _noLoginView.backgroundColor = BasidColor;
+        [_noLoginView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"my_bg100"]]];//默认背景-2@2x
     }
     return _noLoginView;
 }
@@ -708,7 +709,7 @@
     for (int i = 0 ; i < 5 ; i ++) {
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(ButtonW * i, 40, ButtonW, ButtonH)];
 
-        [button setImage:Image(image[i]) forState:UIControlStateNormal];
+        [button setImage:[Image(image[i]) converToMainColor] forState:UIControlStateNormal];
         
         button.imageEdgeInsets =  UIEdgeInsetsMake(0,0,20,0);
         

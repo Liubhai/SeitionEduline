@@ -26,10 +26,11 @@
 #import "SDImageCache.h"
 #import "UIViewController+HUD.h"
 #import "UIView+HUD.h"
+#import "UIImage+Util.h"
 
 //配置单机构或者多机构 (1,单机构、2,多机构)
-#define MoreOrSingle ([Institution_Id isEqualToString:@"0"] || [[NSUserDefaults standardUserDefaults] objectForKey:@"institutionId"] == nil) ? @"2" : @"1"
-#define MoreOrSingle_HeaderUrl @"2"
+#define MoreOrSingle @"1"//([Institution_Id isEqualToString:@"0"] || [[NSUserDefaults standardUserDefaults] objectForKey:@"institutionId"] == nil) ? @"2" : @"1"
+#define MoreOrSingle_HeaderUrl @"1"
 
 #ifndef ChuYouYun_SYG_h
 #define ChuYouYun_SYG_h
@@ -108,10 +109,10 @@
 //#define EncryptHeaderUrl @"https://t.v4.51eduline.com"
 
 /// 测试服(d单机构和多机构)
-#define EncryptUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://single.51eduline.com/service/" : @"https://t.v4.51eduline.com/service/"
-#define EncryptHeaderUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://single.51eduline.com" : @"https://t.v4.51eduline.com"
+#define EncryptUrl @"http://class.hsuanhuai.com/service/"
+#define EncryptHeaderUrl @"http://class.hsuanhuai.com"
 
-#define basidUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://single.51eduline.com/service" : @"https://t.v4.51eduline.com/service"
+#define basidUrl @"http://class.hsuanhuai.com/service"
 
 /// 正式服(单机构和多机构)
 //#define EncryptUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://demo.51eduline.com/service/" : @"https://v4.51eduline.com/service/"
@@ -124,7 +125,7 @@
 
 #define Image(name) [UIImage imageNamed:name]
 #define PriceColor [UIColor redColor]
-#define BasidColor [UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1]
+#define BasidColor [UIColor colorWithRed:136.f / 255 green:41.f / 255 blue:41.f / 255 alpha:1]//[UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1]blue:207.f / 255
 #define PartitionColor [UIColor colorWithRed:225.f / 255 green:225.f / 255 blue:225.f / 255 alpha:1]
 #define BackColor [UIColor colorWithRed:240.f / 255 green:240.f / 255 blue:240.f / 255 alpha:1]
 #define XXColor [UIColor colorWithRed:153.f / 255 green:153.f / 255 blue:153.f / 255 alpha:1]
@@ -214,7 +215,7 @@ alpha:1.0]
 #define SinaAppSecret @"da07bcf6c9f30281e684f8abfd0b4fca"
 
 // 支付宝h5支付之后需要回到app
-#define AlipayBundleId @"com.saixin.eduline"
+#define AlipayBundleId @"com.hsuanhuai.hhonline"
 
 // TKYUN
 #import "TKHelperUtil.h"

@@ -76,7 +76,7 @@
     
     //添加View
     UIView *NavView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MainScreenWidth, NavigationBarHeight)];
-    NavView.backgroundColor = [UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1];
+    NavView.backgroundColor = BasidColor;
     [self.view addSubview:NavView];
     
     //添加按钮
@@ -114,7 +114,7 @@
     UIButton *YZMButton = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth - 100, 7 + 100, 80, 36)];
     [YZMButton setTitle:@"发送验证码" forState:UIControlStateNormal];
     [YZMButton addTarget:self action:@selector(YZMButton) forControlEvents:UIControlEventTouchUpInside];
-    YZMButton.backgroundColor = [UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1];
+    YZMButton.backgroundColor = BasidColor;
     [YZMButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     YZMButton.layer.cornerRadius = 3;
     YZMButton.titleLabel.font = [UIFont systemFontOfSize:13];
@@ -152,7 +152,7 @@
     UIButton *TJButton = [[UIButton alloc] initWithFrame:CGRectMake(20, 300, MainScreenWidth - 40, 45)];
     [TJButton setTitle:@"提交" forState:UIControlStateNormal];
     [TJButton addTarget:self action:@selector(TJButton) forControlEvents:UIControlEventTouchUpInside];
-    TJButton.backgroundColor = [UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1];
+    TJButton.backgroundColor = BasidColor;
     TJButton.layer.cornerRadius = 4;
     [self.view addSubview:TJButton];
 

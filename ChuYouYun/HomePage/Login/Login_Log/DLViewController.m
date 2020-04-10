@@ -144,7 +144,7 @@
     
     //添加view
     UIView *NavView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MainScreenWidth, NavigationBarHeight)];
-    NavView.backgroundColor = [UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1];
+    NavView.backgroundColor = BasidColor;//BasidColor;
     [self.view addSubview:NavView];
     
     //添加登录
@@ -323,7 +323,7 @@
     DLButton.tag = 10;
     DLButton.titleLabel.font = [UIFont systemFontOfSize:18];
     [DLButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    DLButton.backgroundColor = [UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1];
+    DLButton.backgroundColor = BasidColor;//BasidColor;
     DLButton.layer.cornerRadius = 4;
     _DLButton = DLButton;
     [self.view addSubview:DLButton];
@@ -384,66 +384,66 @@
         
     }
     
-    if (iPhone4SOriPhone4) {
-        
-        //添加横线
-        UIButton *ZButton = [[UIButton alloc] initWithFrame:CGRectMake(0,MainScreenHeight / 5 * 3 + 50, MainScreenWidth / 2 - 60, 1)];
-        ZButton.backgroundColor = [UIColor colorWithRed:223.f / 255 green:223.f / 255 blue:223.f / 255 alpha:1];
-        [self.view addSubview:ZButton];
-        
-        UIButton *YButton = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth / 2 + 60,MainScreenHeight / 5 * 3 + 50, MainScreenWidth / 2 - 60, 1)];
-        YButton.backgroundColor = [UIColor colorWithRed:223.f / 255 green:223.f / 255 blue:223.f / 255 alpha:1];
-        [self.view addSubview:YButton];
-        
-        //添加第三方登录
-        UILabel *SFLabel = [[UILabel alloc] initWithFrame:CGRectMake(MainScreenWidth / 2 - 60, MainScreenHeight / 5 * 3 - 15 + 50, 120, 30)];
-        SFLabel.text = @"第三方登录";
-        SFLabel.textColor = [UIColor colorWithRed:200.f / 255 green:200.f / 255 blue:200.f / 255 alpha:1];
-        SFLabel.font = [UIFont systemFontOfSize:14];
-        SFLabel.textAlignment = NSTextAlignmentCenter;
-        [self.view addSubview:SFLabel];
-        
-        //添加三方登录按钮
-        NSArray *SFArray = @[@"微博.png",@"QQ.png",@"微信.png"];
-        for (int i = 0 ; i < 3; i ++) {
-            UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth / 7 + MainScreenWidth / 7  * 2 * i, MainScreenHeight / 5 * 3 + 100, MainScreenWidth / 7, MainScreenWidth / 7)];
-            [button setBackgroundImage:[UIImage imageNamed:SFArray[i]] forState:UIControlStateNormal];
-            button.tag = i;
-            button.layer.cornerRadius = MainScreenWidth / 7 / 2;
-            [button addTarget:self action:@selector(SYGButton:) forControlEvents:UIControlEventTouchUpInside];
-            [self.view addSubview:button];
-        }
-        
-    }else {
-        
-        //添加横线
-        UIButton *ZButton = [[UIButton alloc] initWithFrame:CGRectMake(0,MainScreenHeight / 5 * 3 + 50, MainScreenWidth / 2 - 60, 1)];
-        ZButton.backgroundColor = [UIColor colorWithRed:223.f / 255 green:223.f / 255 blue:223.f / 255 alpha:1];
-        [self.view addSubview:ZButton];
-        
-        UIButton *YButton = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth / 2 + 60,MainScreenHeight / 5 * 3 + 50, MainScreenWidth / 2 - 60, 1)];
-        YButton.backgroundColor = [UIColor colorWithRed:223.f / 255 green:223.f / 255 blue:223.f / 255 alpha:1];
-        [self.view addSubview:YButton];
-        
-        //添加第三方登录
-        UILabel *SFLabel = [[UILabel alloc] initWithFrame:CGRectMake(MainScreenWidth / 2 - 60, MainScreenHeight / 5 * 3 - 15 + 50, 120, 30)];
-        SFLabel.text = @"第三方登录";
-        SFLabel.textColor = [UIColor colorWithRed:200.f / 255 green:200.f / 255 blue:200.f / 255 alpha:1];
-        SFLabel.font = [UIFont systemFontOfSize:14];
-        SFLabel.textAlignment = NSTextAlignmentCenter;
-        [self.view addSubview:SFLabel];
-
-        //添加三方登录按钮
-        NSArray *SFArray = @[@"微博.png",@"QQ.png",@"微信.png"];
-        for (int i = 0 ; i < 3; i ++) {
-            UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth / 7 + MainScreenWidth / 7  * 2 * i, MainScreenHeight / 5 * 3 + 100, MainScreenWidth / 7, MainScreenWidth / 7)];
-            [button setBackgroundImage:[UIImage imageNamed:SFArray[i]] forState:UIControlStateNormal];
-            button.tag = i;
-            button.layer.cornerRadius = MainScreenWidth / 7 / 2;
-            [button addTarget:self action:@selector(SYGButton:) forControlEvents:UIControlEventTouchUpInside];
-            [self.view addSubview:button];
-        }
-    }
+//    if (iPhone4SOriPhone4) {
+//
+//        //添加横线
+//        UIButton *ZButton = [[UIButton alloc] initWithFrame:CGRectMake(0,MainScreenHeight / 5 * 3 + 50, MainScreenWidth / 2 - 60, 1)];
+//        ZButton.backgroundColor = [UIColor colorWithRed:223.f / 255 green:223.f / 255 blue:223.f / 255 alpha:1];
+//        [self.view addSubview:ZButton];
+//
+//        UIButton *YButton = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth / 2 + 60,MainScreenHeight / 5 * 3 + 50, MainScreenWidth / 2 - 60, 1)];
+//        YButton.backgroundColor = [UIColor colorWithRed:223.f / 255 green:223.f / 255 blue:223.f / 255 alpha:1];
+//        [self.view addSubview:YButton];
+//
+//        //添加第三方登录
+//        UILabel *SFLabel = [[UILabel alloc] initWithFrame:CGRectMake(MainScreenWidth / 2 - 60, MainScreenHeight / 5 * 3 - 15 + 50, 120, 30)];
+//        SFLabel.text = @"第三方登录";
+//        SFLabel.textColor = [UIColor colorWithRed:200.f / 255 green:200.f / 255 blue:200.f / 255 alpha:1];
+//        SFLabel.font = [UIFont systemFontOfSize:14];
+//        SFLabel.textAlignment = NSTextAlignmentCenter;
+//        [self.view addSubview:SFLabel];
+//
+//        //添加三方登录按钮
+//        NSArray *SFArray = @[@"微博.png",@"QQ.png",@"微信.png"];
+//        for (int i = 0 ; i < 3; i ++) {
+//            UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth / 7 + MainScreenWidth / 7  * 2 * i, MainScreenHeight / 5 * 3 + 100, MainScreenWidth / 7, MainScreenWidth / 7)];
+//            [button setBackgroundImage:[UIImage imageNamed:SFArray[i]] forState:UIControlStateNormal];
+//            button.tag = i;
+//            button.layer.cornerRadius = MainScreenWidth / 7 / 2;
+//            [button addTarget:self action:@selector(SYGButton:) forControlEvents:UIControlEventTouchUpInside];
+//            [self.view addSubview:button];
+//        }
+//
+//    }else {
+//
+//        //添加横线
+//        UIButton *ZButton = [[UIButton alloc] initWithFrame:CGRectMake(0,MainScreenHeight / 5 * 3 + 50, MainScreenWidth / 2 - 60, 1)];
+//        ZButton.backgroundColor = [UIColor colorWithRed:223.f / 255 green:223.f / 255 blue:223.f / 255 alpha:1];
+//        [self.view addSubview:ZButton];
+//
+//        UIButton *YButton = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth / 2 + 60,MainScreenHeight / 5 * 3 + 50, MainScreenWidth / 2 - 60, 1)];
+//        YButton.backgroundColor = [UIColor colorWithRed:223.f / 255 green:223.f / 255 blue:223.f / 255 alpha:1];
+//        [self.view addSubview:YButton];
+//
+//        //添加第三方登录
+//        UILabel *SFLabel = [[UILabel alloc] initWithFrame:CGRectMake(MainScreenWidth / 2 - 60, MainScreenHeight / 5 * 3 - 15 + 50, 120, 30)];
+//        SFLabel.text = @"第三方登录";
+//        SFLabel.textColor = [UIColor colorWithRed:200.f / 255 green:200.f / 255 blue:200.f / 255 alpha:1];
+//        SFLabel.font = [UIFont systemFontOfSize:14];
+//        SFLabel.textAlignment = NSTextAlignmentCenter;
+//        [self.view addSubview:SFLabel];
+//
+//        //添加三方登录按钮
+//        NSArray *SFArray = @[@"微博.png",@"QQ.png",@"微信.png"];
+//        for (int i = 0 ; i < 3; i ++) {
+//            UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth / 7 + MainScreenWidth / 7  * 2 * i, MainScreenHeight / 5 * 3 + 100, MainScreenWidth / 7, MainScreenWidth / 7)];
+//            [button setBackgroundImage:[UIImage imageNamed:SFArray[i]] forState:UIControlStateNormal];
+//            button.tag = i;
+//            button.layer.cornerRadius = MainScreenWidth / 7 / 2;
+//            [button addTarget:self action:@selector(SYGButton:) forControlEvents:UIControlEventTouchUpInside];
+//            [self.view addSubview:button];
+//        }
+//    }
     
     if (iPhoneX) {//iphoneX 所有的适配都在这里
         _NameField.frame = CGRectMake(0, 94, MainScreenWidth, 50);

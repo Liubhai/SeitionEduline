@@ -149,7 +149,7 @@
     
     //自定义segment区域
     NSMutableArray *marr = [NSMutableArray array];
-    UIColor *ffbbcolor = [UIColor colorWithRed:33.f / 255 green:81.f / 255 blue:196.f / 255 alpha:1];
+    UIColor *ffbbcolor = BasidColor;
     
     for (int i=0; i< _dataArray.count; i++) {
         menubtn = [[UIButton alloc]init];
@@ -226,7 +226,7 @@
     tempNum = (int)_dataArray.count;
     _headScrollow.contentSize = CGSizeMake(allButtonX + 2, 40);
 //    _colorLine = [[UILabel alloc]initWithFrame:CGRectMake(0, _headScrollow.frame.size.height - 2, MainScreenWidth/5, 2)];
-//    _colorLine.backgroundColor = [UIColor colorWithRed:33.f / 255 green:81.f / 255 blue:196.f / 255 alpha:1];
+//    _colorLine.backgroundColor = BasidColor;
 //    [_headScrollow addSubview:_colorLine];
 //    CGPoint center = _colorLine.center;
 //    center.x = MainScreenWidth / (2 * tempNum);

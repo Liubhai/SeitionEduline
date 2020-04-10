@@ -172,7 +172,7 @@
     [_agreementBackView addSubview:agreeDetailVCButton];
     
     _submitButton = [[UIButton alloc] initWithFrame:CGRectMake(50, _agreementBackView.bottom + 36, MainScreenWidth - 100, 44 * HigtEachUnit)];
-    _submitButton.backgroundColor = RGBHex(0x2069CF);
+    _submitButton.backgroundColor = BasidColor;
     [_submitButton setTitle:@"去支付" forState:0];
     [_submitButton setTitleColor:[UIColor whiteColor] forState:0];
     [_submitButton addTarget:self action:@selector(submitButtonClick) forControlEvents:UIControlEventTouchUpInside];

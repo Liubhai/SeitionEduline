@@ -59,6 +59,7 @@
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGColorRef colorref = CGColorCreate(colorSpace,(CGFloat[]){ 188.0/255.0, 188.0/255.0, 190.0/255.0, 1 });
     [self.SecureBtn.layer setBorderColor:colorref];//边框颜色
+    self.enterBtn.backgroundColor = BasidColor;
 }
 
 - (void)addNav {

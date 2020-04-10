@@ -73,7 +73,7 @@
     
     //添加View
     UIView *NavView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MainScreenWidth, NavigationBarHeight)];
-    NavView.backgroundColor = [UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1];
+    NavView.backgroundColor = BasidColor;
     [self.view addSubview:NavView];
     
     //添加按钮
@@ -119,7 +119,7 @@
     UIButton *TJButton = [[UIButton alloc] initWithFrame:CGRectMake(20, 190, MainScreenWidth - 40, 45)];
     [TJButton setTitle:@"提交" forState:UIControlStateNormal];
     [TJButton addTarget:self action:@selector(TJButton) forControlEvents:UIControlEventTouchUpInside];
-    TJButton.backgroundColor = [UIColor colorWithRed:32.f / 255 green:105.f / 255 blue:207.f / 255 alpha:1];
+    TJButton.backgroundColor = BasidColor;
     TJButton.layer.cornerRadius = 4;
     [self.view addSubview:TJButton];
     

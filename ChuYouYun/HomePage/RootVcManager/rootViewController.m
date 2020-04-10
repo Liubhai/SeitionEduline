@@ -74,7 +74,7 @@ static rootViewController *sharedBaseTabBar;
         UIImage * imageNol = [UIImage imageNamed:imageArray[i]];
         [btn setImage:imageNol forState:UIControlStateNormal];
         //选中状态时的图片
-        UIImage * imageSelected = [UIImage imageNamed:selectedArray[i]];
+        UIImage * imageSelected = [[UIImage imageNamed:selectedArray[i]] converToMainColor];
         [btn setImage:imageSelected forState:UIControlStateSelected];
         
         [_imageView addSubview:btn];

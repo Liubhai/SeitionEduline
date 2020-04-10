@@ -410,7 +410,7 @@ static NSString *cellID = @"cell";
 
 - (void)classOrLiveButtonCilck:(UIButton *)button {
     [_classOrLiveButton setTitleColor:BasidColor forState:UIControlStateNormal];
-    [_classOrLiveButton setImage:Image(@"ic_packup@3x") forState:UIControlStateNormal];
+    [_classOrLiveButton setImage:[Image(@"ic_packup@3x") converToMainColor] forState:UIControlStateNormal];
 
     [_classTypeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [_moreButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -455,7 +455,7 @@ static NSString *cellID = @"cell";
 - (void)classTypeButtonCilck:(UIButton *)button {
 
         [_classTypeButton setTitleColor:BasidColor forState:UIControlStateNormal];
-        [_classTypeButton setImage:Image(@"ic_packup@3x") forState:UIControlStateNormal];
+        [_classTypeButton setImage:[Image(@"ic_packup@3x") converToMainColor] forState:UIControlStateNormal];
     
         [_classOrLiveButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_moreButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -494,7 +494,7 @@ static NSString *cellID = @"cell";
 
 - (void)moreButtonCilck:(UIButton *)button {
     [_moreButton setTitleColor:BasidColor forState:UIControlStateNormal];
-    [_moreButton setImage:Image(@"ic_packup@3x") forState:UIControlStateNormal];
+    [_moreButton setImage:[Image(@"ic_packup@3x") converToMainColor] forState:UIControlStateNormal];
     [_classTypeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [_classOrLiveButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [_screeningButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -534,7 +534,7 @@ static NSString *cellID = @"cell";
 - (void)screeningButtonCilck:(UIButton *)button {
     
     [_screeningButton setTitleColor:BasidColor forState:UIControlStateNormal];
-    [_screeningButton setImage:Image(@"ic_packup@3x") forState:UIControlStateNormal];
+    [_screeningButton setImage:[Image(@"ic_packup@3x") converToMainColor] forState:UIControlStateNormal];
     
     [_classTypeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [_classOrLiveButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];

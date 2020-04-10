@@ -34,7 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _titleLabel.text = @"确认订单";
-    _titleImage.backgroundColor = RGBHex(0x2069CF);
+    _titleImage.backgroundColor = BasidColor;
     if (SWNOTEmptyDictionary(_originDict)) {
         [self makeSubView];
     }
@@ -330,7 +330,7 @@
     [self.view addSubview:_allMoneyLabel];
 
     _submitButton = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth / 2.0, _allMoneyLabel.top, MainScreenWidth / 2.0, 50 * HigtEachUnit)];
-    _submitButton.backgroundColor = RGBHex(0x2069CF);
+    _submitButton.backgroundColor = BasidColor;
     [_submitButton setTitle:@"提交订单" forState:0];
     [_submitButton setTitleColor:[UIColor whiteColor] forState:0];
     [_submitButton addTarget:self action:@selector(submitButtonClick) forControlEvents:UIControlEventTouchUpInside];
