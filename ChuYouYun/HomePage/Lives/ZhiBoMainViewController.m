@@ -151,7 +151,7 @@
 
 @property (nonatomic, strong) UIView *bg;
 @property (nonatomic, strong) ZhiboDetailIntroVC *activityWeb;
-@property (nonatomic, strong) ZhiBoClassViewController *activityCommentList;
+@property (nonatomic, strong) TKZhiBoViewController *activityCommentList;
 @property (nonatomic, strong) LiveDetailCommentViewController *activityQuestionList;
 
 /** 机构和讲师移动到头部视图里面了 */
@@ -518,7 +518,7 @@
     [self addChildViewController:zhiBoDetailVc];
     [_controllerSrcollView addSubview:zhiBoDetailVc.view];
     
-    ZhiBoClassViewController * zhiBoClassVc = [[ZhiBoClassViewController alloc] initWithNumID:_ID];
+    TKZhiBoViewController * zhiBoClassVc = [[TKZhiBoViewController alloc] initWithNumID:_ID];
     zhiBoClassVc.view.frame = CGRectMake(MainScreenWidth, 0, MainScreenWidth, MainScreenHeight * 2 + 500);
     [self addChildViewController:zhiBoClassVc];
     [_controllerSrcollView addSubview:zhiBoClassVc.view];
@@ -549,7 +549,7 @@
 }
 
 - (void)addClassViewBlock {
-    ZhiBoClassViewController *vc = _subVcArray[1];
+    TKZhiBoViewController *vc = _subVcArray[1];
     vc.vcHight = ^(CGFloat hight) {
         _classScrollHight = hight;
     };
@@ -617,8 +617,8 @@
                 self.canScroll = NO;
                 for (UIViewController *vc in self.childViewControllers) {
                     if (self.courseButton.selected) {
-                        if ([vc isKindOfClass:[ZhiBoClassViewController class]]) {
-                            ZhiBoClassViewController *vccomment = (ZhiBoClassViewController *)vc;
+                        if ([vc isKindOfClass:[TKZhiBoViewController class]]) {
+                            TKZhiBoViewController *vccomment = (TKZhiBoViewController *)vc;
                             vccomment.cellTabelCanScroll = YES;
                         }
                     }
@@ -2138,7 +2138,7 @@
         }
         
         if (_activityCommentList == nil) {
-            _activityCommentList = [[ZhiBoClassViewController alloc] initWithNumID:_ID];
+            _activityCommentList = [[TKZhiBoViewController alloc] initWithNumID:_ID];
             _activityCommentList.tabelHeight = sectionHeight - 46.5 * HigtEachUnit;
             _activityCommentList.vc = self;
             _activityCommentList.view.frame = CGRectMake(MainScreenWidth,0, MainScreenWidth, sectionHeight - 46.5 * HigtEachUnit);

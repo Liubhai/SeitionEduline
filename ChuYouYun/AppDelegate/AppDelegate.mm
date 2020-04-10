@@ -287,20 +287,20 @@
             [self.window makeKeyAndVisible];
         }
         
-        NSMutableArray *images = [NSMutableArray new];
-        
-        [images addObject:[UIImage imageNamed:@"iO_引导_1.png"]];
-        [images addObject:[UIImage imageNamed:@"iO_引导_2.png"]];
-        [images addObject:[UIImage imageNamed:@"iO_引导_3.png"]];
-        [images addObject:[UIImage imageNamed:@"iO_引导_4.png"]];
-        
-        HcdGuideView *guideView = [HcdGuideView sharedInstance];
-        guideView.window = self.window;
-        [guideView showGuideViewWithImages:images
-                            andButtonTitle:@""
-                       andButtonTitleColor:[UIColor clearColor]
-                          andButtonBGColor:[UIColor clearColor]
-                      andButtonBorderColor:[UIColor clearColor]];
+//        NSMutableArray *images = [NSMutableArray new];
+//
+//        [images addObject:[UIImage imageNamed:@"iO_引导_1.png"]];
+//        [images addObject:[UIImage imageNamed:@"iO_引导_2.png"]];
+//        [images addObject:[UIImage imageNamed:@"iO_引导_3.png"]];
+//        [images addObject:[UIImage imageNamed:@"iO_引导_4.png"]];
+//
+//        HcdGuideView *guideView = [HcdGuideView sharedInstance];
+//        guideView.window = self.window;
+//        [guideView showGuideViewWithImages:images
+//                            andButtonTitle:@""
+//                       andButtonTitleColor:[UIColor clearColor]
+//                          andButtonBGColor:[UIColor clearColor]
+//                      andButtonBorderColor:[UIColor clearColor]];
     };
 
     //人脸识别
