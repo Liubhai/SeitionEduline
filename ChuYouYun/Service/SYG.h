@@ -108,10 +108,10 @@
 //#define EncryptHeaderUrl @"https://t.v4.51eduline.com"
 
 /// 测试服(d单机构和多机构)
-#define EncryptUrl @"http://app.lyhappyenglish.com/service/"
-#define EncryptHeaderUrl @"http://app.lyhappyenglish.com"
+#define EncryptUrl @"https://app.lyhappyenglish.com/service/"
+#define EncryptHeaderUrl @"https://app.lyhappyenglish.com"
 
-#define basidUrl @"http://app.lyhappyenglish.com/service"
+#define basidUrl @"https://app.lyhappyenglish.com/service"
 
 /// 正式服(单机构和多机构)
 //#define EncryptUrl [MoreOrSingle_HeaderUrl integerValue] == 1 ? @"https://demo.51eduline.com/service/" : @"https://v4.51eduline.com/service/"
@@ -205,7 +205,7 @@ alpha:1.0]
 
 // 微信分享
 #define WXAppId @"wx12adc3349a1c232f"
-#define WXAppSecret @"c83af9e3b994854c45fc35d0e5273d2a"
+#define WXAppSecret @"bbb665561f2aa6c79107f3133834eb99"
 // QQ分享
 #define QQAppId @"101857933"
 #define QQAppSecret @"213861aae860381d7068fc96d82896e8"
