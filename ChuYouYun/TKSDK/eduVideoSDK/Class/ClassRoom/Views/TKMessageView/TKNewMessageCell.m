@@ -30,16 +30,25 @@
     self.iMessageLabel.x = 5;
     
     
-    if (!_bubbleView) {
-        _bubbleView = [[UIView alloc] init];
-        _bubbleView.layer.cornerRadius = (self.iMessageLabel.height - 8) / 2;
-        _bubbleView.layer.masksToBounds = YES;
-        _bubbleView.sakura.backgroundColor(@"ClassRoom.TKChatViews.chat_bubble_system_color");
-        _bubbleView.sakura.alpha(@"ClassRoom.TKChatViews.chat_bubble_system_alpha");
-        [self.contentView addSubview:_bubbleView];
-        
-        [self.contentView sendSubviewToBack:_bubbleView];
-    }
+//    if (!_bubbleView) {
+//        _bubbleView = [[UIView alloc] init];
+//        _bubbleView.layer.cornerRadius = (self.iMessageLabel.height - 8) / 2;
+//        _bubbleView.layer.masksToBounds = YES;
+//        _bubbleView.sakura.backgroundColor(@"ClassRoom.TKChatViews.chat_bubble_system_color");
+//        _bubbleView.sakura.alpha(@"ClassRoom.TKChatViews.chat_bubble_system_alpha");
+//        [self.contentView addSubview:_bubbleView];
+//        
+//        [self.contentView sendSubviewToBack:_bubbleView];
+//    }
+    
+    _bubbleView = [[UIView alloc] init];
+    _bubbleView.layer.cornerRadius = (self.iMessageLabel.height - 8) / 2;
+    _bubbleView.layer.masksToBounds = YES;
+    _bubbleView.sakura.backgroundColor(@"ClassRoom.TKChatViews.chat_bubble_system_color");
+    _bubbleView.sakura.alpha(@"ClassRoom.TKChatViews.chat_bubble_system_alpha");
+    [self.contentView addSubview:_bubbleView];
+    
+    [self.contentView sendSubviewToBack:_bubbleView];
     
     _bubbleView.frame = self.iMessageLabel.frame;
     _bubbleView.height = self.iMessageLabel.height - 8;

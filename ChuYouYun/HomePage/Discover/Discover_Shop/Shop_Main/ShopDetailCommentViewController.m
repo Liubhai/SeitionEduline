@@ -31,11 +31,10 @@
 @implementation ShopDetailCommentViewController
 
 -(instancetype)initWithDict:(NSDictionary *)dict {
-    if (!self) {
-        self = [super init];
+    self = [super init];
+    if (self) {
         _dict = dict;
     }
-    _dict = dict;
     return self;
 }
 

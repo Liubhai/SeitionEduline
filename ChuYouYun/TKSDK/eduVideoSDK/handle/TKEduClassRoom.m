@@ -442,6 +442,7 @@ typedef NS_ENUM(NSInteger, EClassStatus) {
     
     /**内存泄漏*/
     _iEduNavigationController = [[TKNavigationController alloc] initWithRootViewController:viewController];
+    _iEduNavigationController.modalPresentationStyle = UIModalPresentationFullScreen;
     [_iController presentViewController:_iEduNavigationController animated:YES completion:^{
 
         _classStatus = EClassStatus_Finished;
@@ -478,6 +479,7 @@ typedef NS_ENUM(NSInteger, EClassStatus) {
     
     _iEduNavigationController = [[TKNavigationController alloc] initWithRootViewController:viewController];
     [TKHUD hideForView:_iController.view];
+    _iEduNavigationController.modalPresentationStyle = UIModalPresentationFullScreen;
     [_iController presentViewController:_iEduNavigationController animated:YES completion:^{
         
         _classStatus = EClassStatus_Finished;

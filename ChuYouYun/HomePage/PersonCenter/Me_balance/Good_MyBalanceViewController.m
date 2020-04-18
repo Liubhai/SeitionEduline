@@ -157,7 +157,7 @@
 #pragma mark --- 添加网络视图
 #pragma mark ---- 支付界面
 - (void)addWebView {
-    _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, MainScreenWidth * 2, MainScreenWidth,MainScreenHeight / 2)];
+    _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, MainScreenHeight * 2, MainScreenWidth,MainScreenHeight / 2)];
     _webView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_webView];
     
@@ -170,7 +170,6 @@
     
     url = [NSURL URLWithString:_alipayStr];
     [_webView loadRequest:[NSURLRequest requestWithURL:url]];
-    
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
