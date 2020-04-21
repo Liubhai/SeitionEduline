@@ -25,6 +25,7 @@
 @property (strong ,nonatomic)UILabel *downLabel;
 
 @property (strong ,nonatomic)UIButton *downButton;
+@property (strong, nonatomic) NSDictionary *info;
 
 
 

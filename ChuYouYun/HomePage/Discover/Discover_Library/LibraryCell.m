@@ -10,6 +10,7 @@
 #import "SYG.h"
 #import "UIImageView+WebCache.h"
 #import "Passport.h"
+#import "ZFDownloadManager.h"
 
 
 
@@ -84,6 +85,7 @@
 
 - (void)dataSourceWith:(NSDictionary *)dict {
     
+    _info = dict;
     NSLog(@"-----%@",dict);
     
     _titleLabel.text = [dict stringValueForKey:@"title"];
@@ -98,7 +100,20 @@
         
         _typeLabel.text = [NSString stringWithFormat:@"文件格式：%@",typeStr];
         [_downButton setTitle:@"下载" forState:UIControlStateNormal];
-        
+        NSString *name = [NSString stringWithFormat:@"%@.%@",dict[@"title"],dict[@"attach_info"][@"extension"]];
+        NSString *url = [NSString stringWithFormat:@"%@",dict[@"attach"]];
+        if (!name) {
+            name = [url lastPathComponent];
+        }
+        if ([ZFCommonHelper isExistFile:FILE_PATH(name)]) { // 已经下载过一次
+            [_downButton setTitle:@"已下载" forState:UIControlStateNormal];
+        } else {
+            // 存在于临时文件夹里
+            NSString *tempfilePath = [TEMP_PATH(name) stringByAppendingString:@".plist"];
+            if ([ZFCommonHelper isExistFile:tempfilePath]) {
+                [_downButton setTitle:@"下载中" forState:UIControlStateNormal];
+            }
+        }
     } else {
         [_downButton setTitle:@"兑换" forState:UIControlStateNormal];
         _typeLabel.text = [NSString stringWithFormat:@"需要积分：%@",[dict stringValueForKey:@"price"]];

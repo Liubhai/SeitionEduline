@@ -13,7 +13,7 @@
 
 @property (assign, nonatomic) BOOL isNewClass;
 @property (assign, nonatomic) CGFloat tabelHeight;
-@property (strong, nonatomic) Good_ClassMainViewController *vc;
+@property (weak, nonatomic) Good_ClassMainViewController *vc;
 @property (assign, nonatomic) BOOL cellTabelCanScroll;
 
 @property (strong ,nonatomic)UITableView   *tableView;

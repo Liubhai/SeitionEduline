@@ -14,7 +14,7 @@
 @property (assign, nonatomic) BOOL isClassCourse;// 是否是班级课列表
 
 @property (assign, nonatomic) CGFloat tabelHeight;
-@property (strong, nonatomic) Good_ClassMainViewController *vc;
+@property (weak, nonatomic) Good_ClassMainViewController *vc;
 @property (assign, nonatomic) BOOL cellTabelCanScroll;
 @property (strong ,nonatomic)NSDictionary    *videoInfoDict;//这个课程的详情
 

@@ -56,6 +56,7 @@
 #import "InstitutionMainViewController.h"
 #import "GroupListPopViewController.h"
 
+#define classMain(var)   __weak typeof(var) weakSelf = var
 
 @import MediaPlayer;
 @interface Good_ClassMainViewController ()<UIScrollViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UIScrollViewDelegate,UIWebViewDelegate,UIGestureRecognizerDelegate,UMSocialUIDelegate,AliyunVodPlayerViewDelegate,BCEDocumentReaderDelegate, UITableViewDelegate, UITableViewDataSource> {
@@ -65,7 +66,6 @@
     BOOL     isWebViewBig;//文档 是否放大
     BOOL     isTextViewBig;//文本视图放大
     BOOL     isVideoExit;
-    BOOL     isExitTestView;
     CGFloat  detailSrollHight;
     CGFloat  catalogScrollHight;
     CGFloat  commentScrollHight;
@@ -222,6 +222,9 @@
 //@property (strong, nonatomic) UILabel *activityEndLabel;
 /** 点播课程活动详情信息 */
 @property (strong, nonatomic) NSDictionary *activityInfo;
+
+@property (assign, nonatomic) BOOL     isExitTestView;
+
 @end
 
 @implementation Good_ClassMainViewController
@@ -355,6 +358,13 @@
     [self netWorkVideoGetMarquee];
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"AilYunPlayerStop" object:nil];
+    [self releaseWMPlayer];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    NSLog(@"player deallco");
+}
+
 - (void)leftButtonClick:(id)sender {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"AilYunPlayerStop" object:nil];
     [self.navigationController popViewControllerAnimated:YES];
@@ -401,7 +411,7 @@
     isWebViewBig = NO;
     isTextViewBig = NO;
     isVideoExit = NO;
-    isExitTestView = NO;
+    _isExitTestView = NO;
 }
 
 - (void)addShareImageView {
@@ -1086,7 +1096,7 @@
             }
         }
         //判断是否需要弹题出来
-        isExitTestView = NO;
+        wekself.isExitTestView = NO;
         [wekself judgeNeedTest];
         if ([[videoDataSource stringValueForKey:@"video_address"] rangeOfString:YunKeTang_EdulineOssCnShangHai].location != NSNotFound) {
             wekself.ailDownDict = videoDataSource;
@@ -1264,23 +1274,24 @@
 // 移除上一个播放的内容
 - (void)removePassView {
     //将之前的移除
+    classMain(self);
     if (wmPlayer != nil|| wmPlayer.superview !=nil){
-        [self releaseWMPlayer];
+        [weakSelf releaseWMPlayer];
         [wmPlayer removeFromSuperview];
     }
     
-    if (_playerView != nil) {
-        [_playerView stop];
-        [_playerView releasePlayer];
-        [_playerView removeFromSuperview];
-        _playerView = nil;
+    if (weakSelf.playerView != nil) {
+        [weakSelf.playerView stop];
+        [weakSelf.playerView releasePlayer];
+        [weakSelf.playerView removeFromSuperview];
+        weakSelf.playerView = nil;
     }
-    [_textView removeFromSuperview];
-    [_webView removeFromSuperview];
+    [weakSelf.textView removeFromSuperview];
+    [weakSelf.webView removeFromSuperview];
     
-    if (_reader != nil && _reader.superview != nil) {
-        [_reader removeFromSuperview];
-        _reader = nil;
+    if (weakSelf.reader != nil && weakSelf.reader.superview != nil) {
+        [weakSelf.reader removeFromSuperview];
+        weakSelf.reader = nil;
     }
 }
 
@@ -1557,13 +1568,6 @@
     
 }
 
--(void)dealloc{
-    [self releaseWMPlayer];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    NSLog(@"player deallco");
-}
-
-
 - (void)AliPlayerDealloc {
     if (_playerView != nil) {
         [_playerView stop];
@@ -1619,30 +1623,31 @@
 }
 
 - (void)addAliYunPlayer {
+    classMain(self);
     if (wmPlayer!=nil||wmPlayer.superview !=nil){
-        [self releaseWMPlayer];
+        [weakSelf releaseWMPlayer];
         [wmPlayer removeFromSuperview];
     }
     
-    if (_playerView != nil) {
-        [_playerView stop];
-        [_playerView releasePlayer];
-        [_playerView removeFromSuperview];
-        _playerView = nil;
+    if (weakSelf.playerView != nil) {
+        [weakSelf.playerView stop];
+        [weakSelf.playerView releasePlayer];
+        [weakSelf.playerView removeFromSuperview];
+        weakSelf.playerView = nil;
     }
     
     
     //    [self onFinishWithAliyunVodPlayerView:_playerView];
     
     //把之前的时间移除
-    [_timer invalidate];
-    self.timer = nil;
+    [weakSelf.timer invalidate];
+    weakSelf.timer = nil;
     
     //配置数据的处理
     if (UserOathToken) {//登录的时候
         
     } else {//未登录的时候
-        if ([_free_course_opt integerValue] == 1) {//即使免费的也需要登录
+        if ([weakSelf.free_course_opt integerValue] == 1) {//即使免费的也需要登录
             DLViewController *vc = [[DLViewController alloc] init];
             UINavigationController *Nav = [[UINavigationController alloc] initWithRootViewController:vc];
             [self.navigationController presentViewController:Nav animated:YES completion:nil];
@@ -1651,8 +1656,8 @@
     }
     
     //添加顺序播放
-    if ([[_videoDataSource stringValueForKey:@"is_order"] integerValue] == 1) {
-        if ([[_seleCurrentDict stringValueForKey:@"lock"] integerValue] == 1) {//可以播放
+    if ([[weakSelf.videoDataSource stringValueForKey:@"is_order"] integerValue] == 1) {
+        if ([[weakSelf.seleCurrentDict stringValueForKey:@"lock"] integerValue] == 1) {//可以播放
             
         } else {//不可以播放
             [TKProgressHUD showError:@"该课时暂时无法观看" toView:self.view];
@@ -1679,83 +1684,83 @@
     app._allowRotation = YES;
     
     /****************UI播放器集成内容**********************/
-    _playerView = [[AliyunVodPlayerView alloc] initWithFrame:CGRectMake(0,topHeight, width, height) andSkin:AliyunVodPlayerViewSkinRed];
-    _playerView.frame = CGRectMake(0, 0, _videoView.frame.size.width, _videoView.frame.size.height);
+    weakSelf.playerView = [[AliyunVodPlayerView alloc] initWithFrame:CGRectMake(0,topHeight, width, height) andSkin:AliyunVodPlayerViewSkinRed];
+    weakSelf.playerView.frame = CGRectMake(0, 0, weakSelf.videoView.frame.size.width, weakSelf.videoView.frame.size.height);
     
     //        _playerView.circlePlay = YES;
-    _playerView.delegate = self;
-    [_playerView setDelegate:self];
-    [_playerView setAutoPlay:YES];
+    weakSelf.playerView.delegate = weakSelf;
+    [weakSelf.playerView setDelegate:weakSelf];
+    [weakSelf.playerView setAutoPlay:YES];
     
-    [_playerView setPrintLog:YES];
+    [weakSelf.playerView setPrintLog:YES];
     
-    _playerView.isScreenLocked = false;
-    _playerView.fixedPortrait = false;
-    self.isLock = self.playerView.isScreenLocked||self.playerView.fixedPortrait?YES:NO;
+    weakSelf.playerView.isScreenLocked = false;
+    weakSelf.playerView.fixedPortrait = false;
+    weakSelf.isLock = weakSelf.playerView.isScreenLocked||weakSelf.playerView.fixedPortrait?YES:NO;
     
     
-    [_videoView addSubview:_playerView];
-    NSURL *url = [NSURL URLWithString:_ailDownDict[@"video_address"]];
-    [self.playerView playViewPrepareWithURL:url];
-    self.playerView.userInteractionEnabled = YES;
-    NSString *learn_record = [NSString stringWithFormat:@"%@",[_ailDownDict objectForKey:@"learn_record"]];
+    [weakSelf.videoView addSubview:weakSelf.playerView];
+    NSURL *url = [NSURL URLWithString:weakSelf.ailDownDict[@"video_address"]];
+    [weakSelf.playerView playViewPrepareWithURL:url];
+    weakSelf.playerView.userInteractionEnabled = YES;
+    NSString *learn_record = [NSString stringWithFormat:@"%@",[weakSelf.ailDownDict objectForKey:@"learn_record"]];
     if ([learn_record integerValue] > 0) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"recodeNumChange" object:nil userInfo:@{@"recodeNum":learn_record}];
-        [self.playerView edulineSeekToTime:[learn_record integerValue]];
+        [weakSelf.playerView edulineSeekToTime:[learn_record integerValue]];
     }
     
     
     //设置尺寸
-    [_allScrollView bringSubviewToFront:_videoView];
-    _videoView.frame = CGRectMake(0, scrollContentY, MainScreenWidth, 210 * WideEachUnit);
+    [weakSelf.allScrollView bringSubviewToFront:weakSelf.videoView];
+    weakSelf.videoView.frame = CGRectMake(0, scrollContentY, MainScreenWidth, 210 * WideEachUnit);
     isVideoExit = YES;
     //隐藏最上面的导航栏 (设置为透明色)
-    _navigationView.backgroundColor = [UIColor clearColor];
-    _videoTitleLabel.textColor = [UIColor clearColor];
-    [_allScrollView bringSubviewToFront:_navigationView];
+    weakSelf.navigationView.backgroundColor = [UIColor clearColor];
+    weakSelf.videoTitleLabel.textColor = [UIColor clearColor];
+    [weakSelf.allScrollView bringSubviewToFront:weakSelf.navigationView];
     
     //判断跑马灯
-    [self detectionMarquee];
+    [weakSelf detectionMarquee];
     
-    if ([[_ailDownDict stringValueForKey:@"type"] integerValue] == 1) {//视频
-        if ( [[_videoDataSource stringValueForKey:@"is_buy"] integerValue] != 0) {//解锁了的
-            [_timer invalidate];
-            self.timer = nil;
+    if ([[weakSelf.ailDownDict stringValueForKey:@"type"] integerValue] == 1) {//视频
+        if ( [[weakSelf.videoDataSource stringValueForKey:@"is_buy"] integerValue] != 0) {//解锁了的
+            [weakSelf.timer invalidate];
+            weakSelf.timer = nil;
         } else {
-            if ([[_ailDownDict stringValueForKey:@"is_buy"] integerValue] == 1) {//解锁了单课时
-                [_timer invalidate];
-                self.timer = nil;
+            if ([[weakSelf.ailDownDict stringValueForKey:@"is_buy"] integerValue] == 1) {//解锁了单课时
+                [weakSelf.timer invalidate];
+                weakSelf.timer = nil;
             } else {
-                if ([[_ailDownDict stringValueForKey:@"is_free"] integerValue] == 1) {//免费看
-                    [_timer invalidate];
-                    self.timer = nil;
+                if ([[weakSelf.ailDownDict stringValueForKey:@"is_free"] integerValue] == 1) {//免费看
+                    [weakSelf.timer invalidate];
+                    weakSelf.timer = nil;
                 } else {//试看。受限制
-                    if (_timeNum == 0) {
+                    if (weakSelf.timeNum == 0) {
                         [TKProgressHUD showError:@"需先解锁此课程" toView:[UIApplication sharedApplication].keyWindow];
                         return;
                     } else {
-                        self.timer = nil;
-                        self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(videoTimeMonitorAndAliPlayer) userInfo:nil repeats:YES];
+                        weakSelf.timer = nil;
+                        weakSelf.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(videoTimeMonitorAndAliPlayer) userInfo:nil repeats:YES];
                     }
                 }
             }
         }
-    } else if ([[_notifitonDic stringValueForKey:@"type"] integerValue] == 2) {//音频
-        if ([[_notifitonDic stringValueForKey:@"is_free"] integerValue] == 1 || [[_videoDataSource stringValueForKey:@"is_play_all"] integerValue] != 0 || [[_notifitonDic stringValueForKey:@"is_buy"] integerValue] == 1) {//解锁了的
+    } else if ([[weakSelf.notifitonDic stringValueForKey:@"type"] integerValue] == 2) {//音频
+        if ([[weakSelf.notifitonDic stringValueForKey:@"is_free"] integerValue] == 1 || [[weakSelf.videoDataSource stringValueForKey:@"is_play_all"] integerValue] != 0 || [[weakSelf.notifitonDic stringValueForKey:@"is_buy"] integerValue] == 1) {//解锁了的
         }else {//没有解锁
             [TKProgressHUD showError:@"解锁才能听此音频" toView:[UIApplication sharedApplication].keyWindow];
             return;
         }
         
-    } else if ([[_notifitonDic stringValueForKey:@"type"] integerValue] == 3) {//文本
-        if ([[_notifitonDic stringValueForKey:@"is_free"] integerValue] == 1 || [[_videoDataSource stringValueForKey:@"is_play_all"] integerValue] != 0 || [[_notifitonDic stringValueForKey:@"is_buy"] integerValue] == 1) {//解锁了的
+    } else if ([[weakSelf.notifitonDic stringValueForKey:@"type"] integerValue] == 3) {//文本
+        if ([[weakSelf.notifitonDic stringValueForKey:@"is_free"] integerValue] == 1 || [[weakSelf.videoDataSource stringValueForKey:@"is_play_all"] integerValue] != 0 || [[weakSelf.notifitonDic stringValueForKey:@"is_buy"] integerValue] == 1) {//解锁了的
         }else {//没有解锁
             [TKProgressHUD showError:@"解锁才能看此文本" toView:[UIApplication sharedApplication].keyWindow];
             return;
         }
-        [self addTextView];
-    } else if ([[_notifitonDic stringValueForKey:@"type"] integerValue] == 4) {//文档
-        if ([[_notifitonDic stringValueForKey:@"is_free"] integerValue] == 1 || [[_videoDataSource stringValueForKey:@"is_play_all"] integerValue] != 0 || [[_notifitonDic stringValueForKey:@"is_buy"] integerValue] == 1) {//解锁了的
+        [weakSelf addTextView];
+    } else if ([[weakSelf.notifitonDic stringValueForKey:@"type"] integerValue] == 4) {//文档
+        if ([[weakSelf.notifitonDic stringValueForKey:@"is_free"] integerValue] == 1 || [[weakSelf.videoDataSource stringValueForKey:@"is_play_all"] integerValue] != 0 || [[weakSelf.notifitonDic stringValueForKey:@"is_buy"] integerValue] == 1) {//解锁了的
         }else {//没有解锁
             [TKProgressHUD showError:@"解锁才能看此文档" toView:[UIApplication sharedApplication].keyWindow];
             return;
@@ -1765,25 +1770,27 @@
 }
 
 - (void)addTextView {//文本
+    classMain(self);
     isVideoExit = NO;
-    self.textView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    [_videoView addSubview:self.textView];
+    weakSelf.textView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    [weakSelf.videoView addSubview:weakSelf.textView];
     
-    NSString *textStr = [Passport filterHTML:_videoUrl];
-    self.textView.text = textStr;
-    self.textView.editable = NO;
-    self.textView.userInteractionEnabled = YES;
+    NSString *textStr = [Passport filterHTML:weakSelf.videoUrl];
+    weakSelf.textView.text = textStr;
+    weakSelf.textView.editable = NO;
+    weakSelf.textView.userInteractionEnabled = YES;
     isTextViewBig = NO;
     
     //添加手势
-    [self.textView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(textClick:)]];
+    [weakSelf.textView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(textClick:)]];
     isVideoExit = YES;
 }
 
 - (void)addWebView {//文档
+    classMain(self);
     isVideoExit = NO;
-    [_webView removeFromSuperview];
-    _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 64, MainScreenWidth,MainScreenHeight / 2)];
+    [weakSelf.webView removeFromSuperview];
+    weakSelf.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 64, MainScreenWidth,MainScreenHeight / 2)];
     //    if (iPhone4SOriPhone4) {
     //        _webView.frame = CGRectMake(0, 64, self.view.frame.size.width, (self.view.frame.size.width)*3/5);
     //    } else if (iPhone5o5Co5S) {
@@ -1795,26 +1802,26 @@
     //    } else if (iPhoneX) {
     //        _webView.frame = CGRectMake(0, 88, self.view.frame.size.width, (self.view.frame.size.width)*3/4);
     //    }
-    _webView.frame = CGRectMake(0, 0, MainScreenWidth, 210 * WideEachUnit);
-    _webView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    [_videoView addSubview:_webView];
+    weakSelf.webView.frame = CGRectMake(0, 0, MainScreenWidth, 210 * WideEachUnit);
+    weakSelf.webView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    [weakSelf.videoView addSubview:weakSelf.webView];
     
     
-    [_webView setUserInteractionEnabled:YES];//是否支持交互
-    _webView.delegate = self;
-    [_webView setOpaque:YES];//opaque是不透明的意思
-    [_webView setScalesPageToFit:YES];//自适应
+    [weakSelf.webView setUserInteractionEnabled:YES];//是否支持交互
+    weakSelf.webView.delegate = weakSelf;
+    [weakSelf.webView setOpaque:YES];//opaque是不透明的意思
+    [weakSelf.webView setScalesPageToFit:YES];//自适应
     
     NSURL *url = nil;
-    url = [NSURL URLWithString:_videoUrl];
-    [_webView loadRequest:[NSURLRequest requestWithURL:url]];
+    url = [NSURL URLWithString:weakSelf.videoUrl];
+    [weakSelf.webView loadRequest:[NSURLRequest requestWithURL:url]];
     
     isWebViewBig = NO;
     isVideoExit = YES;
     //添加手势
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fakeTapGestureHandler:)];
     [tapGestureRecognizer setDelegate:self];
-    [_webView.scrollView addGestureRecognizer:tapGestureRecognizer];
+    [weakSelf.webView.scrollView addGestureRecognizer:tapGestureRecognizer];
 }
 
 //百度文档
@@ -1962,52 +1969,53 @@
 }
 
 - (void)videoTimeMonitorAndAliPlayer {
-    if (_videoDataSource == nil) {
+    classMain(self);
+    if (weakSelf.videoDataSource == nil) {
         
     } else {
-        if ([[_videoDataSource stringValueForKey:@"is_play_all"] integerValue] != 0) {
+        if ([[weakSelf.videoDataSource stringValueForKey:@"is_play_all"] integerValue] != 0) {
             return;
         }
     }
-    if ([[_videoDataSource stringValueForKey:@"is_free"] integerValue] == 1) {//如果免费
+    if ([[weakSelf.videoDataSource stringValueForKey:@"is_free"] integerValue] == 1) {//如果免费
         return;
     }
     
     //监听播放时间
-    NSString *ailTimeStr = [NSString stringWithFormat:@"%f",self.playerView.currentTime];
+    NSString *ailTimeStr = [NSString stringWithFormat:@"%f",weakSelf.playerView.currentTime];
     float videoDurationSeconds = [ailTimeStr floatValue];
     
-    if (videoDurationSeconds  > _timeNum) {
-        [self.playerView pause];
+    if (videoDurationSeconds  > weakSelf.timeNum) {
+        [weakSelf.playerView pause];
         wmPlayer.playOrPauseBtn.selected = YES;//这句代码是暂停播放后播放按钮显示为暂停状态
         
-        if (_imageView == nil || _imageView.subviews == nil) {
+        if (weakSelf.imageView == nil || weakSelf.imageView.subviews == nil) {
             //判断当前的播放器是小屏还是全屏
-            if (self.playerView.frame.size.width == MainScreenWidth) {//说明是小屏的时候
-                _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, MainScreenWidth, CGRectGetHeight(self.playerView.frame))];
-                _imageView.image = [UIImage imageNamed:@"试看结束@2x"];
-                [self.playerView addSubview:_imageView];
+            if (weakSelf.playerView.frame.size.width == MainScreenWidth) {//说明是小屏的时候
+                weakSelf.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, MainScreenWidth, CGRectGetHeight(weakSelf.playerView.frame))];
+                weakSelf.imageView.image = [UIImage imageNamed:@"试看结束@2x"];
+                [weakSelf.playerView addSubview:weakSelf.imageView];
             } else {
-                _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.playerView.frame), MainScreenWidth)];
-                _imageView.image = [UIImage imageNamed:@"试看结束@2x"];
-                [self.playerView addSubview:_imageView];
+                weakSelf.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(weakSelf.playerView.frame), MainScreenWidth)];
+                weakSelf.imageView.image = [UIImage imageNamed:@"试看结束@2x"];
+                [weakSelf.playerView addSubview:weakSelf.imageView];
             }
-            self.playerView.userInteractionEnabled = NO;
+            weakSelf.playerView.userInteractionEnabled = NO;
         } else {
-            _imageView.hidden = NO;
-            if (self.playerView.frame.size.width == MainScreenWidth) {//说明是小屏的时候
-                _imageView.frame = CGRectMake(0, 0, MainScreenWidth, CGRectGetHeight(self.playerView.frame));
+            weakSelf.imageView.hidden = NO;
+            if (weakSelf.playerView.frame.size.width == MainScreenWidth) {//说明是小屏的时候
+                weakSelf.imageView.frame = CGRectMake(0, 0, MainScreenWidth, CGRectGetHeight(weakSelf.playerView.frame));
             } else {
-                _imageView.frame = CGRectMake(0, 0, CGRectGetWidth(self.playerView.frame), MainScreenWidth);
+                weakSelf.imageView.frame = CGRectMake(0, 0, CGRectGetWidth(weakSelf.playerView.frame), MainScreenWidth);
             }
-            [self.playerView addSubview:_imageView];
-            self.playerView.userInteractionEnabled = NO;
+            [weakSelf.playerView addSubview:weakSelf.imageView];
+            weakSelf.playerView.userInteractionEnabled = NO;
         }
     } else {//时间还没有到的
         wmPlayer.playOrPauseBtn.enabled = YES;
         wmPlayer.progressSlider.enabled = YES;
-        if (_imageView.subviews.count == 0) {
-            [_imageView removeFromSuperview];
+        if (weakSelf.imageView.subviews.count == 0) {
+            [weakSelf.imageView removeFromSuperview];
         }
     }
 }
@@ -2060,31 +2068,33 @@
 
 #pragma mark ---- 判断是够需要弹题
 - (void)judgeNeedTest {
-    if ([_seleCurrentDict stringValueForKey:@"qid"] == nil || [[_seleCurrentDict stringValueForKey:@"qid"] isEqualToString:@""]) {//没有弹题
+    classMain(self);
+    if ([weakSelf.seleCurrentDict stringValueForKey:@"qid"] == nil || [[weakSelf.seleCurrentDict stringValueForKey:@"qid"] isEqualToString:@""]) {//没有弹题
         
     } else {//有弹题
-        _popupTime = [[_seleCurrentDict stringValueForKey:@"popup_time"] integerValue];
-        _popupTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(videoTimeNeedTest) userInfo:nil repeats:YES];
+        weakSelf.popupTime = [[weakSelf.seleCurrentDict stringValueForKey:@"popup_time"] integerValue];
+        weakSelf.popupTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(videoTimeNeedTest) userInfo:nil repeats:YES];
     }
 }
 
 //弹题的处理
 - (void)videoTimeNeedTest {
     //监听播放时间
-    NSString *ailTimeStr = [NSString stringWithFormat:@"%f",self.playerView.currentTime];
+    classMain(self);
+    NSString *ailTimeStr = [NSString stringWithFormat:@"%f",weakSelf.playerView.currentTime];
     float videoDurationSeconds = [ailTimeStr floatValue];
     
-    if (videoDurationSeconds  > _popupTime) {//此时应该弹题
-        if (isExitTestView) {
+    if (videoDurationSeconds  > weakSelf.popupTime) {//此时应该弹题
+        if (weakSelf.isExitTestView) {
             return;
         } else {
-            [self.playerView pause];
+            [weakSelf.playerView pause];
             //弹题处理
-            ClassNeedTestViewController *vc = [[ClassNeedTestViewController alloc] initWithDict:_seleCurrentDict];
-            [self.view addSubview:vc.view];
-            vc.dict = _seleCurrentDict;
-            [self addChildViewController:vc];
-            isExitTestView = YES;
+            ClassNeedTestViewController *vc = [[ClassNeedTestViewController alloc] initWithDict:weakSelf.seleCurrentDict];
+            [weakSelf.view addSubview:vc.view];
+            vc.dict = weakSelf.seleCurrentDict;
+            [weakSelf addChildViewController:vc];
+            weakSelf.isExitTestView = YES;
         }
         
     }
@@ -2962,7 +2972,8 @@
             _activityCommentList.view.frame = CGRectMake(MainScreenWidth,0, MainScreenWidth, sectionHeight - 46.5 * HigtEachUnit);
             [self.mainScroll addSubview:_activityCommentList.view];
             [self addChildViewController:_activityCommentList];
-            [self addBlockCategory:_activityCommentList];
+            __weak Good_ClassMainViewController *wekself = self;
+            [self addBlockCategory:wekself.activityCommentList];
         } else {
             _activityCommentList.cellTabelCanScroll = !_canScrollAfterVideoPlay;
             _activityCommentList.view.frame = CGRectMake(MainScreenWidth,0, MainScreenWidth, sectionHeight - 46.5 * HigtEachUnit);
@@ -3140,24 +3151,24 @@
 - (void)addBlockCategory:(Good_ClassCatalogViewController *)vc {
     __weak Good_ClassMainViewController *wekself = self;
     vc.videoDataSource = ^(NSDictionary *videoDataSource) {
-        [_timer invalidate];
+        [wekself.timer invalidate];
         wekself.timer = nil;
-        _seleCurrentDict = videoDataSource;
-        _ailDownDict = videoDataSource;
-        _notifitonDic = videoDataSource;
-        _videoUrl = [_notifitonDic stringValueForKey:@"video_address"];
-        if ([[videoDataSource stringValueForKey:@"type"] integerValue] == 0 || [[videoDataSource stringValueForKey:@"type"] integerValue] == 1 || [[videoDataSource stringValueForKey:@"type"] integerValue] == 2 || [[videoDataSource stringValueForKey:@"type"] integerValue] == 5) {
-            if ([[videoDataSource stringValueForKey:@"type"] integerValue] != 2) {
+        wekself.seleCurrentDict = videoDataSource;
+        wekself.ailDownDict = videoDataSource;
+        wekself.notifitonDic = videoDataSource;
+        wekself.videoUrl = [wekself.notifitonDic stringValueForKey:@"video_address"];
+        if ([[wekself.seleCurrentDict stringValueForKey:@"type"] integerValue] == 0 || [[wekself.seleCurrentDict stringValueForKey:@"type"] integerValue] == 1 || [[wekself.seleCurrentDict stringValueForKey:@"type"] integerValue] == 2 || [[wekself.seleCurrentDict stringValueForKey:@"type"] integerValue] == 5) {
+            if ([[wekself.seleCurrentDict stringValueForKey:@"type"] integerValue] != 2) {
                 //判断是否需要弹题出来
-                isExitTestView = NO;
+                wekself.isExitTestView = NO;
                 [wekself judgeNeedTest];
                 wekself.timer = nil;
                 wekself.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:wekself selector:@selector(videoTimeMonitorAndAliPlayer) userInfo:nil repeats:YES];
             }
             [wekself removePassView];
             [wekself addAliYunPlayer];
-            _canScroll = YES;
-            [_tableView setContentOffset:CGPointMake(0, 0) animated:YES];
+            wekself.canScroll = YES;
+            [wekself.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
             [wekself tableViewCanNotScroll];
         } else if ([[videoDataSource stringValueForKey:@"type"] integerValue] == 6) {
             [wekself removePassView];
@@ -3166,7 +3177,7 @@
                 [wekself netWorkExamsGetPaperInfo];
             }];
             [alertController addAction:sureAction];
-            
+
             UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
             }];
             [alertController addAction:cancelAction];
@@ -3175,8 +3186,8 @@
         } else if ([[videoDataSource stringValueForKey:@"type"] integerValue] == 3) {
             [wekself removePassView];
             [wekself addTextView];
-            _canScroll = YES;
-            [_tableView setContentOffset:CGPointMake(0, 0) animated:YES];
+            wekself.canScroll = YES;
+            [wekself.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
             [wekself tableViewCanNotScroll];
         } else if ([[videoDataSource stringValueForKey:@"type"] integerValue] == 4) {
             if ([[videoDataSource stringValueForKey:@"is_baidudoc"] integerValue] == 1) {
@@ -3184,9 +3195,9 @@
                 return;
             } else {
                 [wekself removePassView];
-                _videoUrl = [_ailDownDict stringValueForKey:@"video_address"];
+                wekself.videoUrl = [wekself.ailDownDict stringValueForKey:@"video_address"];
                 [wekself addWebView];
-                [_tableView setContentOffset:CGPointZero animated:YES];
+                [wekself.tableView setContentOffset:CGPointZero animated:YES];
                 [wekself tableViewCanNotScroll];
             }
         }
@@ -3259,10 +3270,11 @@
 }
 
 - (void)canNotScroll {
-    _canScroll = NO;
-    _canScrollAfterVideoPlay = NO;
-    sectionHeight = MainScreenHeight - MACRO_UI_SAFEAREA - 50 * HigtEachUnit - self.headerView.height;
-    [_tableView reloadData];
+    classMain(self);
+    weakSelf.canScroll = NO;
+    weakSelf.canScrollAfterVideoPlay = NO;
+    sectionHeight = MainScreenHeight - MACRO_UI_SAFEAREA - 50 * HigtEachUnit - weakSelf.headerView.height;
+    [weakSelf.tableView reloadData];
 }
 
 - (void)serviceViewClick:(UIButton *)ges {

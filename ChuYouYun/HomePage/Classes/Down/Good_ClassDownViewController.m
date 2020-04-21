@@ -827,12 +827,12 @@ typedef enum : NSUInteger {
             else{
                 if (![[GLNetWorking isConnectionAvailable] isEqualToString:@"wifi"]) {
                     UIAlertView *_downAlertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"如果您正在使用2G/3G/4G,如果继续运营商可能会收取流量费用" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"继续", nil];
-                    _downAlertView.otherInfo = downDict;
+                    _downAlertView.otherInfo = passCourseInfo;
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [_downAlertView show];
                     });
                 } else {
-                    [[BRDownHelpManager manager] br_startDownUrl:url dictInfo:downDict];
+                    [[BRDownHelpManager manager] br_startDownUrl:url dictInfo:passCourseInfo];
                 }
             }
         }

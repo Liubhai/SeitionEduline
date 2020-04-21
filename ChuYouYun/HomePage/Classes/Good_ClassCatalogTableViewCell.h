@@ -17,7 +17,7 @@
 
 @interface Good_ClassCatalogTableViewCell : UITableViewCell<UITableViewDelegate, UITableViewDataSource>
 
-@property (assign, nonatomic) id<Good_ClassCatalogTableViewCellDelegate> delegate;
+@property (weak, nonatomic) id<Good_ClassCatalogTableViewCellDelegate> delegate;
 @property (strong ,nonatomic)UIImageView      *lockImageView;
 @property (strong ,nonatomic)UIImageView      *palyImage;
 @property (strong ,nonatomic)UILabel          *title;

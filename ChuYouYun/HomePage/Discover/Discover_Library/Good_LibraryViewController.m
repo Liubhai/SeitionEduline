@@ -28,7 +28,7 @@
 #import "Good_LibraryScreenViewController.h"
 
 
-@interface Good_LibraryViewController ()<UITableViewDataSource,UITableViewDelegate> {
+@interface Good_LibraryViewController ()<UITableViewDataSource,UITableViewDelegate,ZFDownloadDelegate> {
     BOOL isRank;
     BOOL isClass;
     BOOL isScreen;
@@ -222,9 +222,9 @@
 - (void)addTableView {
     
 //    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + 45 * WideEachUnit, MainScreenWidth, MainScreenHeight - 64 - 45 * WideEachUnit + 36) style:UITableViewStyleGrouped];
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + 45 * WideEachUnit, MainScreenWidth, MainScreenHeight - 64 + 36) style:UITableViewStyleGrouped];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + 45 * WideEachUnit, MainScreenWidth, MainScreenHeight - 64 - 45) style:UITableViewStyleGrouped];
     if (iPhoneX) {
-        _tableView.frame = CGRectMake(0, 88 + 45 * WideEachUnit, MainScreenWidth, MainScreenHeight - 88 + 36);
+        _tableView.frame = CGRectMake(0, 88 + 45 * WideEachUnit, MainScreenWidth, MainScreenHeight - 88 - 45);
     }
     _tableView.dataSource = self;
     _tableView.delegate = self;
@@ -492,7 +492,7 @@
     _indexRow = button.tag;
     _needScore = _dataArray[button.tag][@"price"];
     NSString *title = button.titleLabel.text;
-    if ([title isEqualToString:@"下载"]) {
+    if ([title isEqualToString:@"下载"] || [title isEqualToString:@"下载中"]) {
         [self downButtonClick];
     } else if ([title isEqualToString:@"兑换"]) {
         [self isSurePay];
@@ -672,6 +672,7 @@
     
     [[ZFDownloadManager sharedDownloadManager] downFileUrl:_downUrl filename:libriyName fileimage:image];
     //设置最多同时下载个数（默认是3）
+    [ZFDownloadManager sharedDownloadManager].downloadDelegate = self;
     [ZFDownloadManager sharedDownloadManager].maxCount = 1;
     
 }
@@ -683,6 +684,44 @@
         return;
 }
 
+// 开始下载
+- (void)startDownload:(ZFHttpRequest *)request
+{
+    NSLog(@"开始下载!");
+}
+
+// 下载中
+- (void)updateCellProgress:(ZFHttpRequest *)request
+{
+    ZFFileModel *fileInfo = [request.userInfo objectForKey:@"File"];
+    [self performSelectorOnMainThread:@selector(updateCellOnMainThread:) withObject:fileInfo waitUntilDone:YES];
+}
+
+// 下载完成
+- (void)finishedDownload:(ZFHttpRequest *)request
+{
+    
+}
+
+// 更新下载进度
+- (void)updateCellOnMainThread:(ZFFileModel *)fileInfo
+{
+    NSArray *cellArr = [self.tableView visibleCells];
+    for (id obj in cellArr) {
+        if([obj isKindOfClass:[LibraryCell class]]) {
+            LibraryCell *cell = (LibraryCell *)obj;
+            if([[cell.info objectForKey:@"attach"] isEqualToString:fileInfo.fileURL]) {
+                NSString *currentSize = [ZFCommonHelper getFileSizeString:fileInfo.fileReceivedSize];
+                NSString *totalSize = [ZFCommonHelper getFileSizeString:fileInfo.fileSize];
+                if (fileInfo.fileReceivedSize >= fileInfo.fileSize) {
+                    [cell.downButton setTitle:@"已下载" forState:0];
+                } else {
+                    [cell.downButton setTitle:@"下载中" forState:0];
+                }
+            }
+        }
+    }
+}
 
 
 @end

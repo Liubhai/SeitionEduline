@@ -165,39 +165,55 @@ static ZFDownloadManager *sharedDownloadManager = nil;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"该文件已下载" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:nil, nil];
         dispatch_async(dispatch_get_main_queue(), ^{
             [alert show];
+        });
+        return;
+    } else {
+        // 若不存在文件和临时文件，则是新的下载
+        [self.filelist addObject:_fileInfo];
+        [self startLoad];
+        if(self.VCdelegate != nil && [self.VCdelegate respondsToSelector:@selector(allowNextRequest)]) {
             
-        });
-        return;
-    }
-    // 存在于临时文件夹里
-    NSString *tempfilePath = [TEMP_PATH(name) stringByAppendingString:@".plist"];
-    if ([ZFCommonHelper isExistFile:tempfilePath]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"该文件已经在下载列表中了" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:nil, nil];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [alert show];
-        });
-        return;
+            [self.VCdelegate allowNextRequest];
+            
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"该文件成功添加到下载队列" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [alert show];
+            });
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)( 0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [alert dismissWithClickedButtonIndex:0 animated:YES];
+            });
+        }
+//        // 存在于临时文件夹里
+//        NSString *tempfilePath = [TEMP_PATH(name) stringByAppendingString:@".plist"];
+//        if ([ZFCommonHelper isExistFile:tempfilePath]) {
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"该文件已经在下载列表中了" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:nil, nil];
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [alert show];
+//            });
+//            return;
+//        } else {
+//            // 若不存在文件和临时文件，则是新的下载
+//            [self.filelist addObject:_fileInfo];
+//            [self startLoad];
+//            if(self.VCdelegate != nil && [self.VCdelegate respondsToSelector:@selector(allowNextRequest)]) {
+//
+//                [self.VCdelegate allowNextRequest];
+//
+//            } else {
+//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"该文件成功添加到下载队列" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    [alert show];
+//                });
+//
+//                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)( 0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                    [alert dismissWithClickedButtonIndex:0 animated:YES];
+//                });
+//            }
+//        }
     }
     
-    // 若不存在文件和临时文件，则是新的下载
-    [self.filelist addObject:_fileInfo];
-    [self startLoad];
-    if(self.VCdelegate != nil && [self.VCdelegate respondsToSelector:@selector(allowNextRequest)]) {
-        
-        [self.VCdelegate allowNextRequest];
-        
-    } else {
-        
-        [self startLoad];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"该文件成功添加到下载队列" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [alert show];
-        });
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)( 0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [alert dismissWithClickedButtonIndex:0 animated:YES];
-        });
-    }
     return;
 }
 
@@ -748,7 +764,6 @@ static ZFDownloadManager *sharedDownloadManager = nil;
         NSLog(@"clickedButtonAtIndex:%ld",buttonIndex);
     }else if (alertView.tag==121){
         if (buttonIndex==0) {
-            
             _maxCount = 0;
             return;
         }else{

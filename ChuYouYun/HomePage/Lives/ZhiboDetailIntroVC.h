@@ -14,12 +14,12 @@
 
 @property (strong, nonatomic) UIScrollView *mainScroll;
 @property (assign, nonatomic) CGFloat tabelHeight;
-@property (strong, nonatomic) ZhiBoMainViewController *vc;
-@property (strong, nonatomic) Good_ClassMainViewController *mainVC;
+@property (weak, nonatomic) ZhiBoMainViewController *vc;
+@property (weak, nonatomic) Good_ClassMainViewController *mainVC;
 @property (assign, nonatomic) BOOL cellTabelCanScroll;
 @property (assign, nonatomic) BOOL isZhibo;
 
-@property (strong ,nonatomic)void (^detailScroll)(CGFloat hight);
+@property (weak ,nonatomic)void (^detailScroll)(CGFloat hight);
 -(instancetype)initWithNumID:(NSString *)ID;
 -(instancetype)initWithNumID:(NSString *)ID WithOrderSwitch:(NSString *)orderSwitch;
 - (void)changeMainScrollViewHeight:(CGFloat)changeHeight;
