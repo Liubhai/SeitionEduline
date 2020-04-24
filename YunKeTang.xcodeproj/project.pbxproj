@@ -28196,7 +28196,7 @@
 					"\"$(SRCROOT)/ChuYouYun/Library/umeng_ios_social_sdk_5.2-2.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/SinaSSO/libWeiboSDK.a\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jintuoo.wangxiao;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jintuo.wangxiao;
 				PRODUCT_NAME = "锦拓网校";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = appTongYongDis;

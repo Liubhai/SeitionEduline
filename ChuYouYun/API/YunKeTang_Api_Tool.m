@@ -51,7 +51,7 @@ static YunKeTang_Api_Tool *_sharedInstance;
     
     NSLog(@"%@",Only_Login_Key);
     //处理唯一登录
-//    [dict setValue:Only_Login_Key forKey:@"only_login_key"];
+    [dict setValue:Only_Login_Key forKey:@"only_login_key"];
     
     NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[[NSDate  date] timeIntervalSince1970]];
     NSString *newStr = nil;
