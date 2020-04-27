@@ -12,6 +12,7 @@
 @property (nonatomic, strong) UILabel *iMessageLabel;
 @property (nonatomic, strong) NSString *iMessageText;
 @property (nonatomic, strong) UIImageView *backgroudImageView;
+@property (nonatomic, strong) UIView *bubbleView;
 - (void)resetView;
 - (void)setupView;
 + (CGFloat)heightFromText:(NSString *)text withLimitWidth:(CGFloat)width;

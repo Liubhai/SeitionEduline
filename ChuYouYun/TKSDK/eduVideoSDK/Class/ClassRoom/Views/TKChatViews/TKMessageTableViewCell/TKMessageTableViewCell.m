@@ -39,6 +39,13 @@
     _iMessageLabel.numberOfLines = 0;
     [_iMessageLabel setFont:TKFont(15)];
     [self.contentView addSubview:_iMessageLabel];
+    
+    self.bubbleView = [[UIView alloc] init];
+    self.bubbleView.layer.cornerRadius = (self.iMessageLabel.height - 8) / 2;
+    self.bubbleView.layer.masksToBounds = YES;
+    self.bubbleView.sakura.backgroundColor(@"ClassRoom.TKChatViews.chat_bubble_system_color");
+    self.bubbleView.sakura.alpha(@"ClassRoom.TKChatViews.chat_bubble_system_alpha");
+    
     self.contentView.backgroundColor = [UIColor clearColor];
     self.backgroundColor             = [UIColor clearColor];
    

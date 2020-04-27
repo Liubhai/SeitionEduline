@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TKNewMessageCell : TKMessageTableViewCell
-@property (nonatomic, strong) UIView *bubbleView;
+//@property (nonatomic, strong) UIView *bubbleView;
 - (void)setTextColor:(UIColor *)color;
 @end
 

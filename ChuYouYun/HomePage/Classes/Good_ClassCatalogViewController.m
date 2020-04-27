@@ -1664,10 +1664,14 @@
             for (int j = 0; j < courseArray.count; j++) {
                 NSDictionary *dict = courseArray[j];
                 if ([_sid isEqualToString:[NSString stringWithFormat:@"%@",[dict objectForKey:@"id"]]]) {
-                    __weak Good_ClassCatalogViewController *weakSelf = self;
-                    _cellDict = dict;
-                    weakSelf.videoDataSource(dict);
-                    _sid = @"";
+                    if ([dict objectForKey:@"video_address"]) {
+                        __weak Good_ClassCatalogViewController *weakSelf = self;
+                        _cellDict = dict;
+                        weakSelf.videoDataSource(dict);
+                        _sid = @"";
+                    } else {
+                        [TKProgressHUD showError:@"获取课时信息失败,请重新点击该课时播放" toView:[UIApplication sharedApplication].keyWindow];
+                    }
                     return;
                 }
             }

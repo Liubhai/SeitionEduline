@@ -472,6 +472,13 @@
     NSString *allUrlStr = [YunKeTang_Api_Tool YunKeTang_GetFullUrl:endUrlStr];
     
     NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
+    
+    if (SWNOTEmptyDictionary(_allDict)) {
+        if (SWNOTEmptyStr([_allDict objectForKey:@"uid"])) {
+            [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@",[_allDict objectForKey:@"uid"]] forKey:@"User_id"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+    }
     [mutabDict setObject:UserID forKey:@"user_id"];
     
     NSString *oath_token_Str = nil;

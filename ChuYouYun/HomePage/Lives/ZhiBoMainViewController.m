@@ -166,7 +166,8 @@
 
 -(id)initWithMemberId:(NSString *)MemberId andImage:(NSString *)imgUrl andTitle:(NSString *)title andNum:(int)num andprice:(NSString *)price
 {
-    if (self=[super init]) {
+    self=[super init];
+    if (self) {
         _ID = MemberId;
         _zhiBoTitle = title;
         _imageUrl = imgUrl;

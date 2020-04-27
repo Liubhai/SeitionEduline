@@ -730,8 +730,11 @@
         
         [[NSUserDefaults standardUserDefaults]setObject:[_loginSyncDataSource stringValueForKey:@"oauth_token"] forKey:@"oauthToken"];
         [[NSUserDefaults standardUserDefaults]setObject:[_loginSyncDataSource stringValueForKey:@"oauth_token_secret"] forKey:@"oauthTokenSecret"];
-//        [[NSUserDefaults standardUserDefaults]setObject:[_loginSyncDataSource stringValueForKey:@"uid"] forKey:@"User_id"];
+        if (SWNOTEmptyStr([_loginSyncDataSource objectForKey:@"uid"])) {
+            [[NSUserDefaults standardUserDefaults]setObject:[_loginSyncDataSource stringValueForKey:@"uid"] forKey:@"User_id"];
+        }
         [[NSUserDefaults standardUserDefaults]setObject:[_loginSyncDataSource stringValueForKey:@"userface"] forKey:@"userface"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"getPayMethodConfig" object:nil];
         rootViewController *blum = [[rootViewController alloc]init];
         self.view.window.rootViewController = blum;

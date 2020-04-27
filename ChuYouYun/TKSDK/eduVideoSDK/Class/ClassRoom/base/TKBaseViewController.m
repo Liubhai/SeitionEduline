@@ -33,6 +33,7 @@
     });
     
     // 隐藏状态栏
+    
     NSNumber *isVCBasedStatusBarAppearanceNum = [[NSBundle mainBundle]objectForInfoDictionaryKey:@"UIViewControllerBasedStatusBarAppearance"];
 
     if (isVCBasedStatusBarAppearanceNum) {
@@ -95,6 +96,12 @@
         [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
     }
     
+    [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
     [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
 }
 
