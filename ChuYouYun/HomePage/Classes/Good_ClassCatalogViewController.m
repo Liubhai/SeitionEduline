@@ -1659,15 +1659,34 @@
 - (void)judgePlayWhichVideo {
     if (SWNOTEmptyStr(_sid) && SWNOTEmptyArr(_newsDataArray) && _canPlayRecordVideo) {
         _canPlayRecordVideo = NO;
+        int currentSection = 0;// 当前播放课时在数组中的section
+        int currentRow = 0;// 当前播放课时在数组中的row
         for (int i = 0; i < _newsDataArray.count; i++) {
             NSArray *courseArray = _newsDataArray[i];
             for (int j = 0; j < courseArray.count; j++) {
                 NSDictionary *dict = courseArray[j];
                 if ([_sid isEqualToString:[NSString stringWithFormat:@"%@",[dict objectForKey:@"id"]]]) {
-                    __weak Good_ClassCatalogViewController *weakSelf = self;
-                    _cellDict = dict;
-                    weakSelf.videoDataSource(dict);
-                    _sid = @"";
+                    if (j < (courseArray.count - 1)) {
+                        currentRow = j + 1;
+                        currentSection = i;
+                        NSIndexPath *currentIndex = [NSIndexPath indexPathForRow:currentRow inSection:currentSection];
+                        [self autoDidselectedNextIndexPath:currentIndex];
+                    } else {
+                        if (i < (_newsDataArray.count - 1)) {
+                            currentSection = i + 1;
+                            currentRow = 0;
+                            NSIndexPath *currentIndex = [NSIndexPath indexPathForRow:currentRow inSection:currentSection];
+                            [self autoDidselectedNextIndexPath:currentIndex];
+                        }
+                    }
+//                    if ([dict objectForKey:@"video_address"]) {
+//                        __weak Good_ClassCatalogViewController *weakSelf = self;
+//                        _cellDict = dict;
+//                        weakSelf.videoDataSource(dict);
+//                        _sid = @"";
+//                    } else {
+//                        [TKProgressHUD showError:@"获取课时信息失败,请重新点击该课时播放" toView:[UIApplication sharedApplication].keyWindow];
+//                    }
                     return;
                 }
             }
@@ -1754,66 +1773,321 @@
     // 首先判断 课程是否解锁 课时是否免费 课时是否解锁
     // 课程价格为0 课时价格为0 然后判断是不是顺序课 is_order 没有登录而且没有解锁是试看
     
-    if ([[_videoInfoDict stringValueForKey:@"is_buy"] integerValue] == 1 || [[_cellDict stringValueForKey:@"is_free"] integerValue] == 1 || [[_cellDict stringValueForKey:@"is_buy"] integerValue] == 1) {//全部解锁过了
-        if ([[_videoInfoDict stringValueForKey:@"is_order"] integerValue] == 1) {
-            if ([[_cellDict stringValueForKey:@"lock"] integerValue] == 1) {
-                __weak Good_ClassCatalogViewController *weakSelf = self;
-                weakSelf.videoDataSource(_cellDict);
-                if ([[cellDict stringValueForKey:@"type"] integerValue] == 3 || [[cellDict stringValueForKey:@"type"] integerValue] == 4 || [[cellDict stringValueForKey:@"type"] integerValue] == 5) {
-                    [self addRecode];
-                } else {
-                    self.timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(addRecode) userInfo:nil repeats:YES];
-                    [self.timer fire];
+    if ([[cellDict stringValueForKey:@"type"] integerValue] == 6 || [[cellDict stringValueForKey:@"is_baidudoc"] integerValue] == 1) {
+        //点击了
+        //    self.didSele(@"didSele");
+        
+        for (int i = 0 ; i < _selectedArray.count ; i ++) {
+            if (i == indexPath.section) {
+                NSMutableArray *sectionArray = [NSMutableArray arrayWithArray:[_selectedArray objectAtIndex:indexPath.section]];
+                for (int k = 0 ; k < sectionArray.count ; k ++) {
+                    if (k == indexPath.row) {
+                        [sectionArray replaceObjectAtIndex:k  withObject:[NSNumber numberWithBool:YES]];
+                    }else {
+                        [sectionArray replaceObjectAtIndex:k withObject:[NSNumber numberWithBool:NO]];
+                    }
                 }
+                [_selectedArray replaceObjectAtIndex:indexPath.section withObject:sectionArray];
             } else {
-                [TKProgressHUD showError:@"暂时不能观看" toView:[UIApplication sharedApplication].keyWindow];
-                return;
-            }
-        } else {
-            __weak Good_ClassCatalogViewController *weakSelf = self;
-            weakSelf.videoDataSource(_cellDict);
-            if ([[cellDict stringValueForKey:@"type"] integerValue] == 3 || [[cellDict stringValueForKey:@"type"] integerValue] == 4 || [[cellDict stringValueForKey:@"type"] integerValue] == 5) {
-                [self addRecode];
-            } else {
-                self.timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(addRecode) userInfo:nil repeats:YES];
-                [self.timer fire];
+                NSMutableArray *sectionArray = [NSMutableArray arrayWithArray:[_selectedArray objectAtIndex:i]];
+                for (int i = 0 ; i < sectionArray.count ; i ++) {
+                    [sectionArray replaceObjectAtIndex:i  withObject:[NSNumber numberWithBool:NO]];
+                }
+                [_selectedArray replaceObjectAtIndex:i withObject:sectionArray];
             }
         }
-    } else {
-        if ([[cellDict stringValueForKey:@"type"] integerValue] == 3 || [[cellDict stringValueForKey:@"type"] integerValue] == 4 || [[cellDict stringValueForKey:@"type"] integerValue] == 5 || [[cellDict stringValueForKey:@"type"] integerValue] == 2) {
-            [self isPromptBuy];
-        } else {
-            if ([[_videoInfoDict stringValueForKey:@"price"] floatValue] != 0 && [[_cellDict stringValueForKey:@"course_hour_price"] floatValue] != 0) {
-                [self isPromptBuy];
-            } else {
-                if ([[_videoInfoDict stringValueForKey:@"is_order"] integerValue] == 1) {
-                    if ([[_cellDict stringValueForKey:@"lock"] integerValue] == 1) {
-                        __weak Good_ClassCatalogViewController *weakSelf = self;
-                        weakSelf.videoDataSource(_cellDict);
-                        if ([[cellDict stringValueForKey:@"type"] integerValue] == 3 || [[cellDict stringValueForKey:@"type"] integerValue] == 4 || [[cellDict stringValueForKey:@"type"] integerValue] == 5) {
-                            [self addRecode];
-                        } else {
-                            self.timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(addRecode) userInfo:nil repeats:YES];
-                            [self.timer fire];
-                        }
-                    } else {
-                        [TKProgressHUD showError:@"暂时不能观看" toView:[UIApplication sharedApplication].keyWindow];
-                        return;
-                    }
-                } else {
+        
+        // 判断流程
+        // 首先判断 课程是否解锁 课时是否免费 课时是否解锁
+        // 课程价格为0 课时价格为0 然后判断是不是顺序课 is_order 没有登录而且没有解锁是试看
+        
+        if ([[_videoInfoDict stringValueForKey:@"is_buy"] integerValue] == 1 || [[_cellDict stringValueForKey:@"is_free"] integerValue] == 1 || [[_cellDict stringValueForKey:@"is_buy"] integerValue] == 1) {//全部解锁过了
+            if ([[_videoInfoDict stringValueForKey:@"is_order"] integerValue] == 1) {
+                if ([[_cellDict stringValueForKey:@"lock"] integerValue] == 1) {
                     __weak Good_ClassCatalogViewController *weakSelf = self;
                     weakSelf.videoDataSource(_cellDict);
-                    if ([[cellDict stringValueForKey:@"type"] integerValue] == 3 || [[cellDict stringValueForKey:@"type"] integerValue] == 4 || [[cellDict stringValueForKey:@"type"] integerValue] == 5) {
+                    if ([[cellDict stringValueForKey:@"type"] integerValue] == 3 || [[cellDict stringValueForKey:@"type"] integerValue] == 4 || [[cellDict stringValueForKey:@"type"] integerValue] == 6) {
                         [self addRecode];
                     } else {
                         self.timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(addRecode) userInfo:nil repeats:YES];
                         [self.timer fire];
                     }
+                } else {
+                    if (indexPathSection == 0 && indexPathRow == 0) {
+                        [TKProgressHUD showError:@"请先解锁整个课程" toView:[UIApplication sharedApplication].keyWindow];
+                        return;
+                    } else {
+                        [TKProgressHUD showError:@"暂时不能观看,请先解锁上一个课时" toView:[UIApplication sharedApplication].keyWindow];
+                        return;
+                    }
+                }
+            } else {
+                __weak Good_ClassCatalogViewController *weakSelf = self;
+                weakSelf.videoDataSource(_cellDict);
+                if ([[cellDict stringValueForKey:@"type"] integerValue] == 3 || [[cellDict stringValueForKey:@"type"] integerValue] == 4 || [[cellDict stringValueForKey:@"type"] integerValue] == 6) {
+                    [self addRecode];
+                } else {
+                    self.timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(addRecode) userInfo:nil repeats:YES];
+                    [self.timer fire];
                 }
             }
+        } else {
+            if ([[cellDict stringValueForKey:@"type"] integerValue] == 3 || [[cellDict stringValueForKey:@"type"] integerValue] == 4 || [[cellDict stringValueForKey:@"type"] integerValue] == 6 || [[cellDict stringValueForKey:@"type"] integerValue] == 2) {
+                if ([[_cellDict stringValueForKey:@"course_hour_price"] floatValue] != 0) {
+                    [self isPromptBuy];
+                } else {
+                    [TKProgressHUD showError:@"请先解锁整个课程" toView:[UIApplication sharedApplication].keyWindow];
+                    return;
+                }
+            } else {
+                if ([[_videoInfoDict stringValueForKey:@"price"] floatValue] != 0 && [[_cellDict stringValueForKey:@"course_hour_price"] floatValue] != 0) {
+                    [self isPromptBuy];
+                } else {
+                    if ([[_videoInfoDict stringValueForKey:@"is_order"] integerValue] == 1) {
+                        if ([[_cellDict stringValueForKey:@"lock"] integerValue] == 1) {
+                            __weak Good_ClassCatalogViewController *weakSelf = self;
+                            weakSelf.videoDataSource(_cellDict);
+                            if ([[cellDict stringValueForKey:@"type"] integerValue] == 3 || [[cellDict stringValueForKey:@"type"] integerValue] == 4 || [[cellDict stringValueForKey:@"type"] integerValue] == 5) {
+                                [self addRecode];
+                            } else {
+                                self.timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(addRecode) userInfo:nil repeats:YES];
+                                [self.timer fire];
+                            }
+                        } else {
+                            [TKProgressHUD showError:@"暂时不能观看" toView:[UIApplication sharedApplication].keyWindow];
+                            return;
+                        }
+                    } else {
+                        __weak Good_ClassCatalogViewController *weakSelf = self;
+                        weakSelf.videoDataSource(_cellDict);
+                        if ([[cellDict stringValueForKey:@"type"] integerValue] == 3 || [[cellDict stringValueForKey:@"type"] integerValue] == 4 || [[cellDict stringValueForKey:@"type"] integerValue] == 6) {
+                            [self addRecode];
+                        } else {
+                            self.timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(addRecode) userInfo:nil repeats:YES];
+                            [self.timer fire];
+                        }
+                    }
+                }
+                
+            }
+        }
+        
+        //人脸识别的判断
+        if (isScene) {
+            NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
+            NSString *faceStr = [defaults objectForKey:@"Video_Face"];
+            if ([faceStr isEqualToString:@"face"]) {//说明已经扫过脸了
+                //            [self postNotificationAndStudyRecord];
+            } else {
+                //            [self NetWorkGetFaceStatus];
+            }
+            
+        } else {
             
         }
+    } else {
+        NSString *endUrlStr = course_getSectionHour;
+        NSString *allUrlStr = [YunKeTang_Api_Tool YunKeTang_GetFullUrl:endUrlStr];
+        
+        NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
+        [mutabDict setObject:[NSString stringWithFormat:@"%@",[cellDict objectForKey:@"id"]] forKey:@"id"];
+        
+        NSString *oath_token_Str = nil;
+        if (UserOathToken) {
+            oath_token_Str = [NSString stringWithFormat:@"%@:%@",UserOathToken,UserOathTokenSecret];
+        }
+        
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:allUrlStr]];
+        [request setHTTPMethod:NetWay];
+        NSString *encryptStr = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetEncryptStr:mutabDict];
+        [request setValue:encryptStr forHTTPHeaderField:HeaderKey];
+        [request setValue:oath_token_Str forHTTPHeaderField:OAUTH_TOKEN];
+        
+        AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+        [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+            NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
+            if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
+                NSDictionary *pass = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
+                NSMutableDictionary *pass1 = [NSMutableDictionary dictionaryWithDictionary:_cellDict];
+                [pass1 setObject:[pass objectForKey:@"video_address"] forKey:@"video_address"];
+                _cellDict = [NSDictionary dictionaryWithDictionary:pass1];
+                //点击了
+                //    self.didSele(@"didSele");
+                
+                for (int i = 0 ; i < _selectedArray.count ; i ++) {
+                    if (i == indexPath.section) {
+                        NSMutableArray *sectionArray = [NSMutableArray arrayWithArray:[_selectedArray objectAtIndex:indexPath.section]];
+                        for (int k = 0 ; k < sectionArray.count ; k ++) {
+                            if (k == indexPath.row) {
+                                [sectionArray replaceObjectAtIndex:k  withObject:[NSNumber numberWithBool:YES]];
+                            }else {
+                                [sectionArray replaceObjectAtIndex:k withObject:[NSNumber numberWithBool:NO]];
+                            }
+                        }
+                        [_selectedArray replaceObjectAtIndex:indexPath.section withObject:sectionArray];
+                    } else {
+                        NSMutableArray *sectionArray = [NSMutableArray arrayWithArray:[_selectedArray objectAtIndex:i]];
+                        for (int i = 0 ; i < sectionArray.count ; i ++) {
+                            [sectionArray replaceObjectAtIndex:i  withObject:[NSNumber numberWithBool:NO]];
+                        }
+                        [_selectedArray replaceObjectAtIndex:i withObject:sectionArray];
+                    }
+                }
+                
+                // 判断流程
+                // 首先判断 课程是否解锁 课时是否免费 课时是否解锁
+                // 课程价格为0 课时价格为0 然后判断是不是顺序课 is_order 没有登录而且没有解锁是试看
+                
+                if ([[_videoInfoDict stringValueForKey:@"is_buy"] integerValue] == 1 || [[_cellDict stringValueForKey:@"is_free"] integerValue] == 1 || [[_cellDict stringValueForKey:@"is_buy"] integerValue] == 1) {//全部解锁过了
+                    if ([[_videoInfoDict stringValueForKey:@"is_order"] integerValue] == 1) {
+                        if ([[_cellDict stringValueForKey:@"lock"] integerValue] == 1) {
+                            __weak Good_ClassCatalogViewController *weakSelf = self;
+                            weakSelf.videoDataSource(_cellDict);
+                            if ([[cellDict stringValueForKey:@"type"] integerValue] == 3 || [[cellDict stringValueForKey:@"type"] integerValue] == 4 || [[cellDict stringValueForKey:@"type"] integerValue] == 6) {
+                                [self addRecode];
+                            } else {
+                                self.timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(addRecode) userInfo:nil repeats:YES];
+                                [self.timer fire];
+                            }
+                        } else {
+                            if (indexPathSection == 0 && indexPathRow == 0) {
+                                [TKProgressHUD showError:@"请先解锁整个课程" toView:[UIApplication sharedApplication].keyWindow];
+                                return;
+                            } else {
+                                [TKProgressHUD showError:@"暂时不能观看,请先解锁上一个课时" toView:[UIApplication sharedApplication].keyWindow];
+                                return;
+                            }
+                        }
+                    } else {
+                        __weak Good_ClassCatalogViewController *weakSelf = self;
+                        weakSelf.videoDataSource(_cellDict);
+                        if ([[cellDict stringValueForKey:@"type"] integerValue] == 3 || [[cellDict stringValueForKey:@"type"] integerValue] == 4 || [[cellDict stringValueForKey:@"type"] integerValue] == 6) {
+                            [self addRecode];
+                        } else {
+                            self.timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(addRecode) userInfo:nil repeats:YES];
+                            [self.timer fire];
+                        }
+                    }
+                } else {
+                    if ([[cellDict stringValueForKey:@"type"] integerValue] == 3 || [[cellDict stringValueForKey:@"type"] integerValue] == 4 || [[cellDict stringValueForKey:@"type"] integerValue] == 6 || [[cellDict stringValueForKey:@"type"] integerValue] == 2) {
+                        if ([[_cellDict stringValueForKey:@"course_hour_price"] floatValue] != 0) {
+                            [self isPromptBuy];
+                        } else {
+                            [TKProgressHUD showError:@"请先解锁整个课程" toView:[UIApplication sharedApplication].keyWindow];
+                            return;
+                        }
+                    } else {
+                        if ([[_videoInfoDict stringValueForKey:@"price"] floatValue] != 0 && [[_cellDict stringValueForKey:@"course_hour_price"] floatValue] != 0) {
+                            [self isPromptBuy];
+                        } else {
+                            if ([[_videoInfoDict stringValueForKey:@"is_order"] integerValue] == 1) {
+                                if ([[_cellDict stringValueForKey:@"lock"] integerValue] == 1) {
+                                    __weak Good_ClassCatalogViewController *weakSelf = self;
+                                    weakSelf.videoDataSource(_cellDict);
+                                    if ([[cellDict stringValueForKey:@"type"] integerValue] == 3 || [[cellDict stringValueForKey:@"type"] integerValue] == 4 || [[cellDict stringValueForKey:@"type"] integerValue] == 5) {
+                                        [self addRecode];
+                                    } else {
+                                        self.timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(addRecode) userInfo:nil repeats:YES];
+                                        [self.timer fire];
+                                    }
+                                } else {
+                                    [TKProgressHUD showError:@"暂时不能观看" toView:[UIApplication sharedApplication].keyWindow];
+                                    return;
+                                }
+                            } else {
+                                __weak Good_ClassCatalogViewController *weakSelf = self;
+                                weakSelf.videoDataSource(_cellDict);
+                                if ([[cellDict stringValueForKey:@"type"] integerValue] == 3 || [[cellDict stringValueForKey:@"type"] integerValue] == 4 || [[cellDict stringValueForKey:@"type"] integerValue] == 6) {
+                                    [self addRecode];
+                                } else {
+                                    self.timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(addRecode) userInfo:nil repeats:YES];
+                                    [self.timer fire];
+                                }
+                            }
+                        }
+                        
+                    }
+                }
+                
+                //人脸识别的判断
+                if (isScene) {
+                    NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
+                    NSString *faceStr = [defaults objectForKey:@"Video_Face"];
+                    if ([faceStr isEqualToString:@"face"]) {//说明已经扫过脸了
+                        //            [self postNotificationAndStudyRecord];
+                    } else {
+                        //            [self NetWorkGetFaceStatus];
+                    }
+                    
+                } else {
+                    
+                }
+            }
+        } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        }];
+        [op start];
     }
+    
+//    if ([[_videoInfoDict stringValueForKey:@"is_buy"] integerValue] == 1 || [[_cellDict stringValueForKey:@"is_free"] integerValue] == 1 || [[_cellDict stringValueForKey:@"is_buy"] integerValue] == 1) {//全部解锁过了
+//        if ([[_videoInfoDict stringValueForKey:@"is_order"] integerValue] == 1) {
+//            if ([[_cellDict stringValueForKey:@"lock"] integerValue] == 1) {
+//                __weak Good_ClassCatalogViewController *weakSelf = self;
+//                weakSelf.videoDataSource(_cellDict);
+//                if ([[cellDict stringValueForKey:@"type"] integerValue] == 3 || [[cellDict stringValueForKey:@"type"] integerValue] == 4 || [[cellDict stringValueForKey:@"type"] integerValue] == 5) {
+//                    [self addRecode];
+//                } else {
+//                    self.timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(addRecode) userInfo:nil repeats:YES];
+//                    [self.timer fire];
+//                }
+//            } else {
+//                [TKProgressHUD showError:@"暂时不能观看" toView:[UIApplication sharedApplication].keyWindow];
+//                return;
+//            }
+//        } else {
+//            __weak Good_ClassCatalogViewController *weakSelf = self;
+//            weakSelf.videoDataSource(_cellDict);
+//            if ([[cellDict stringValueForKey:@"type"] integerValue] == 3 || [[cellDict stringValueForKey:@"type"] integerValue] == 4 || [[cellDict stringValueForKey:@"type"] integerValue] == 5) {
+//                [self addRecode];
+//            } else {
+//                self.timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(addRecode) userInfo:nil repeats:YES];
+//                [self.timer fire];
+//            }
+//        }
+//    } else {
+//        if ([[cellDict stringValueForKey:@"type"] integerValue] == 3 || [[cellDict stringValueForKey:@"type"] integerValue] == 4 || [[cellDict stringValueForKey:@"type"] integerValue] == 5 || [[cellDict stringValueForKey:@"type"] integerValue] == 2) {
+//            [self isPromptBuy];
+//        } else {
+//            if ([[_videoInfoDict stringValueForKey:@"price"] floatValue] != 0 && [[_cellDict stringValueForKey:@"course_hour_price"] floatValue] != 0) {
+//                [self isPromptBuy];
+//            } else {
+//                if ([[_videoInfoDict stringValueForKey:@"is_order"] integerValue] == 1) {
+//                    if ([[_cellDict stringValueForKey:@"lock"] integerValue] == 1) {
+//                        __weak Good_ClassCatalogViewController *weakSelf = self;
+//                        weakSelf.videoDataSource(_cellDict);
+//                        if ([[cellDict stringValueForKey:@"type"] integerValue] == 3 || [[cellDict stringValueForKey:@"type"] integerValue] == 4 || [[cellDict stringValueForKey:@"type"] integerValue] == 5) {
+//                            [self addRecode];
+//                        } else {
+//                            self.timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(addRecode) userInfo:nil repeats:YES];
+//                            [self.timer fire];
+//                        }
+//                    } else {
+//                        [TKProgressHUD showError:@"暂时不能观看" toView:[UIApplication sharedApplication].keyWindow];
+//                        return;
+//                    }
+//                } else {
+//                    __weak Good_ClassCatalogViewController *weakSelf = self;
+//                    weakSelf.videoDataSource(_cellDict);
+//                    if ([[cellDict stringValueForKey:@"type"] integerValue] == 3 || [[cellDict stringValueForKey:@"type"] integerValue] == 4 || [[cellDict stringValueForKey:@"type"] integerValue] == 5) {
+//                        [self addRecode];
+//                    } else {
+//                        self.timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(addRecode) userInfo:nil repeats:YES];
+//                        [self.timer fire];
+//                    }
+//                }
+//            }
+//
+//        }
+//    }
 }
 
 // 播放的时候如果有记录 就传递记录时间给 recodeNum
