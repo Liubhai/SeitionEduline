@@ -28,8 +28,9 @@
 @implementation VideoMarqueeViewController
 
 -(instancetype)initWithDict:(NSDictionary *)dict {
-    if (!self) {
-        self = [super init];
+    self = [super init];
+    if (self) {
+        _dict = dict;
         if (!_marqueeLabel) {
             _marqueeLabel = [[UILabel alloc] init];
             _marqueeLabel.backgroundColor = [UIColor clearColor];
@@ -39,7 +40,6 @@
             [self.view addSubview:_marqueeLabel];
         }
     }
-    _dict = dict;
     return self;
 }
 

@@ -131,6 +131,11 @@
     [_organizationButton addTarget:self action:@selector(coverButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [_organizationBg addSubview:_organizationButton];
     
+    if ([MoreOrSingle isEqualToString:@"1"]) {
+        [_organizationBg setHeight:0];
+        _organizationBg.hidden = YES;
+    }
+    
     _line2 = [[UIView alloc] initWithFrame:CGRectMake(0, _organizationBg.bottom, MainScreenWidth, 2)];
     _line2.backgroundColor = RGBHex(0xF8F8F8);
     [_mainScrollView addSubview:_line2];
@@ -263,10 +268,10 @@
     _agreeBackButton.center = _agreeButton.center;
     [_agreementBackView addSubview:_agreeBackButton];
     _agreeTitle = [[UILabel alloc] initWithFrame:CGRectMake(_agreeButton.right + 3, _agreeButton.top, MainScreenWidth - _agreeButton.right - 3, 16)];
-    _agreeTitle.text = @"我已阅读并同意《Eduline认证条款》";
+    _agreeTitle.text = [NSString stringWithFormat:@"我已阅读并同意《%@认证条款》",AppName];
     _agreeTitle.textColor = RGBHex(0x8B8888);
     _agreeTitle.font = SYSTEMFONT(14);
-    NSMutableAttributedString *mutal = [[NSMutableAttributedString alloc] initWithString:@"我已阅读并同意《Eduline认证条款》"];
+    NSMutableAttributedString *mutal = [[NSMutableAttributedString alloc] initWithString:_agreeTitle.text];
     [mutal addAttributes:@{NSForegroundColorAttributeName: BasidColor} range:NSMakeRange(7, _agreeTitle.text.length - 7)];
     _agreeTitle.attributedText = [[NSAttributedString alloc] initWithAttributedString:mutal];
     _agreeTitle.centerY = _agreeButton.centerY;
@@ -362,7 +367,7 @@
 
 - (void)submitButtonClick:(NSString *)imageId_string {
     
-    if (!SWNOTEmptyStr(schoolID)) {
+    if (!SWNOTEmptyStr(schoolID) && [MoreOrSingle isEqualToString:@"2"]) {
         [TKProgressHUD showError:@"请选择认证机构" toView:self.view];
         return;
     }
@@ -383,7 +388,9 @@
     NSString *allUrlStr = [YunKeTang_Api_Tool YunKeTang_GetFullUrl:endUrlStr];
     
     NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
-    [mutabDict setObject:schoolID forKey:@"school"];
+    if (SWNOTEmptyStr(schoolID)) {
+        [mutabDict setObject:schoolID forKey:@"school"];
+    }
     [mutabDict setObject:classID forKey:@"cate"];
     [mutabDict setObject:_nameTextField.text forKey:@"name"];
     [mutabDict setObject:_reasonTextView.text forKey:@"reason"];
@@ -839,7 +846,9 @@
             _teacherApplyInfo = [NSDictionary dictionaryWithDictionary:[YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStrFromData:responseObject]];
             if (SWNOTEmptyDictionary(_teacherApplyInfo)) {
                 [_schoolArray removeAllObjects];
-                [_schoolArray addObjectsFromArray:[_teacherApplyInfo objectForKey:@"school"]];
+                if (SWNOTEmptyArr([_teacherApplyInfo objectForKey:@"school"])) {
+                    [_schoolArray addObjectsFromArray:[_teacherApplyInfo objectForKey:@"school"]];
+                }
                 if (SWNOTEmptyDictionary([_teacherApplyInfo objectForKey:@"verifyInfo"])) {
                     verified_status = [NSString stringWithFormat:@"%@",[[_teacherApplyInfo objectForKey:@"verifyInfo"] objectForKey:@"verified_status"]];
                     [self setValueForTeacherInfo:[_teacherApplyInfo objectForKey:@"verifyInfo"]];
@@ -874,7 +883,7 @@
 }
 
 - (void)getClassTypeInfo {
-    if (!SWNOTEmptyStr(schoolID)) {
+    if (!SWNOTEmptyStr(schoolID) && [MoreOrSingle isEqualToString:@"2"]) {
         [TKProgressHUD showError:@"请先选择一个机构" toView:self.view];
         return;
     }
@@ -882,7 +891,10 @@
     NSString *allUrlStr = [YunKeTang_Api_Tool YunKeTang_GetFullUrl:endUrlStr];
     
     NSMutableDictionary *mutabDict = [NSMutableDictionary dictionaryWithCapacity:0];
-    [mutabDict setObject:schoolID forKey:@"mhm_id"];
+    
+    if (SWNOTEmptyStr(schoolID)) {
+        [mutabDict setObject:schoolID forKey:@"mhm_id"];
+    }
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:allUrlStr]];
     [request setHTTPMethod:NetWay];

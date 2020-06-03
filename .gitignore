@@ -1,2 +1,4 @@
 build/
 Pods/
+*.xcuserstate
+xcuserdata
