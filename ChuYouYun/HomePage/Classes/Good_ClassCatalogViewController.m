@@ -1715,7 +1715,9 @@
     self.timer = nil;
     recodeNum = 0;
     
-    [_tableView deselectRowAtIndexPath:indexPath animated:YES];
+//    [_tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self tableView:_tableView didSelectRowAtIndexPath:indexPath];
+    return;
     if ([_free_course_opt integerValue] == 1) {
         if (!UserOathToken) {
             DLViewController *vc = [[DLViewController alloc] init];
