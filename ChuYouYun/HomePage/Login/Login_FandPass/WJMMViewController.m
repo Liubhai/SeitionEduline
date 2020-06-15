@@ -269,17 +269,14 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr_Before:responseObject];
         if ([[dict stringValueForKey:@"code"] integerValue] == 1) {
-            dict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
-            if (dict.allKeys.count > 0) {
-                [TKProgressHUD showError:@"重置成功" toView:self.view];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    if ([_typeStr integerValue] == 123) {//说明是从设置界面退出登陆的
-                        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
-                    } else {
-                        [self.navigationController popToRootViewControllerAnimated:YES];
-                    }
-                });
-            }
+            [TKProgressHUD showError:@"重置成功" toView:self.view];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                if ([_typeStr integerValue] == 123) {//说明是从设置界面退出登陆的
+                    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
+                } else {
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                }
+            });
         } else {
             [TKProgressHUD showError:[dict stringValueForKey:@"msg"] toView:self.view];
         }
