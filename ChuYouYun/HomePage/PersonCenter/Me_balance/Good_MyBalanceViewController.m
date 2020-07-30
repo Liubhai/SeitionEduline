@@ -229,7 +229,7 @@
     
     //添加余额
     UILabel *balanceLabel = [[UILabel  alloc] initWithFrame:CGRectMake(MainScreenWidth / 2 - 100 * WideEachUnit, 25 * WideEachUnit , 200 * WideEachUnit, 30 * WideEachUnit)];
-    balanceLabel.text = @"育币0";
+    balanceLabel.text = @"金豆0";
     [balanceLabel setTextColor:[UIColor whiteColor]];
     balanceLabel.font = [UIFont systemFontOfSize:24 * WideEachUnit];
     balanceLabel.textAlignment = NSTextAlignmentCenter;
@@ -310,7 +310,7 @@
     NSArray *additionArray = nil;
     NSInteger allNumber = 0;
     if (_netWorkBalanceArray.count == 0) {
-        titleArray = @[@"育币20",@"",@"",@"育币   "];
+        titleArray = @[@"金豆20",@"",@"",@"金豆   "];
         additionArray = @[@"",@"充50送10",@"充100送30",@""];
         allNumber = 4;
     } else {
@@ -338,7 +338,7 @@
             
             //钱的数字
             UILabel *number1 = [[UILabel  alloc] initWithFrame:CGRectMake(0, 10 * WideEachUnit , buttonW, 20 * WideEachUnit)];
-            number1.text = [NSString stringWithFormat:@"%@育币",[[_netWorkBalanceArray objectAtIndex:i] stringValueForKey:@"rechange"]];
+            number1.text = [NSString stringWithFormat:@"%@金豆",[[_netWorkBalanceArray objectAtIndex:i] stringValueForKey:@"rechange"]];
             number1.textColor = [UIColor colorWithHexString:@"#888"];
             number1.font = Font(20 * WideEachUnit);
             number1.textAlignment = NSTextAlignmentCenter;
@@ -382,7 +382,7 @@
                 //添加自定义
                 UIButton *moneyButton = [[UIButton alloc] initWithFrame:CGRectMake(0 * WideEachUnit, 0, 25 * WideEachUnit, buttonH)];
                 moneyButton.backgroundColor = [UIColor groupTableViewBackgroundColor];
-                [moneyButton setTitle:@"育币" forState:UIControlStateNormal];
+                [moneyButton setTitle:@"金豆" forState:UIControlStateNormal];
                 moneyButton.titleLabel.numberOfLines = 0;
                 moneyButton.titleLabel.font = Font(13 * WideEachUnit);
                 [moneyButton setTitleColor:[UIColor colorWithHexString:@"#888"] forState:UIControlStateNormal];
@@ -820,7 +820,7 @@
     
     //实际钱
     UILabel *realMoney = [[UILabel alloc] initWithFrame:CGRectMake(115 * WideEachUnit, 0, 90 * WideEachUnit, 49 * WideEachUnit)];
-//    realMoney.text = [NSString stringWithFormat:@"育币%@",[_dict stringValueForKey:@"t_price"]];
+//    realMoney.text = [NSString stringWithFormat:@"金豆%@",[_dict stringValueForKey:@"t_price"]];
     realMoney.text = @"¥0";
     realMoney.font = Font(16 * WideEachUnit);
     realMoney.textColor = [UIColor colorWithHexString:@"#fc0203"];
@@ -1217,7 +1217,7 @@
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         _balanceDict = [YunKeTang_Api_Tool YunKeTang_Api_Tool_GetDecodeStr:responseObject];
-        _balanceLabel.text = [NSString stringWithFormat:@"育币%@",[_balanceDict stringValueForKey:@"balance" defaultValue:@"0"]];
+        _balanceLabel.text = [NSString stringWithFormat:@"金豆%@",[_balanceDict stringValueForKey:@"balance" defaultValue:@"0"]];
         _balanceLabel.text = [NSString stringWithFormat:@"%@",[[_balanceDict dictionaryValueForKey:@"learncoin_info"] stringValueForKey:@"balance" defaultValue:@"0"]];
         
         
@@ -1264,7 +1264,7 @@
         }
         
     } else {
-        [TKProgressHUD showError:@"充值育币不能为空" toView:self.view];
+        [TKProgressHUD showError:@"充值金豆不能为空" toView:self.view];
         return;
     }
     

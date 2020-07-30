@@ -503,11 +503,11 @@
             //            [payTypeButton setTitle:@"余额" forState:UIControlStateNormal];
             payTypeButton.hidden = YES;
             UILabel *payType = [[UILabel alloc] initWithFrame:CGRectMake(10 * WideEachUnit, 0, 250 * WideEachUnit, 50 * WideEachUnit)];
-            payType.text = @"育币";
+            payType.text = @"金豆";
             payType.textColor = [UIColor colorWithHexString:@"#888"];
             [payView addSubview:payType];
             payType.font = Font(14);
-            payType.text = [NSString stringWithFormat:@"育币 (当前账号育币为%@)",[_userAccountDict stringValueForKey:@"learn" defaultValue:@"0"]];
+            payType.text = [NSString stringWithFormat:@"金豆 (当前账号金豆为%@)",[_userAccountDict stringValueForKey:@"learn" defaultValue:@"0"]];
                             
         }
         
@@ -552,7 +552,7 @@
     price.textAlignment = NSTextAlignmentCenter;
     price.textColor = [UIColor colorWithHexString:@"#888"];
     price.textColor = [UIColor orangeColor];
-    price.text = [NSString stringWithFormat:@"实付：育币%@",[_orderDict stringValueForKey:@"price"]];
+    price.text = [NSString stringWithFormat:@"实付：金豆%@",[_orderDict stringValueForKey:@"price"]];
     
     //添加按钮
     UIButton *nowPayButton = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth / 2, 200 * WideEachUnit, MainScreenWidth / 2, 50 * WideEachUnit)];

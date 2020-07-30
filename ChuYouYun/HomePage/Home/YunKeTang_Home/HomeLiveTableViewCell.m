@@ -108,11 +108,11 @@
                 _priceLabel.text = @"免费";
                 _priceLabel.textColor = [UIColor colorWithHexString:@"#47b37d"];
             } else {
-                _priceLabel.text = [NSString stringWithFormat:@"%@育币",[[dict objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
+                _priceLabel.text = [NSString stringWithFormat:@"%@金豆",[[dict objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
                 _priceLabel.textColor = PriceColor;
             }
         } else {
-            _priceLabel.text = [NSString stringWithFormat:@"%@育币",[dict stringValueForKey:@"t_price"]];
+            _priceLabel.text = [NSString stringWithFormat:@"%@金豆",[dict stringValueForKey:@"t_price"]];
             _priceLabel.font = Font(12);
             _priceLabel.textAlignment = NSTextAlignmentLeft;
             _priceLabel.textColor = [UIColor colorWithHexString:@"#f01414"];
@@ -122,7 +122,7 @@
             }
         }
     } else {
-        _priceLabel.text = [NSString stringWithFormat:@"%@育币",[dict stringValueForKey:@"t_price"]];
+        _priceLabel.text = [NSString stringWithFormat:@"%@金豆",[dict stringValueForKey:@"t_price"]];
         _priceLabel.font = Font(12);
         _priceLabel.textAlignment = NSTextAlignmentLeft;
         _priceLabel.textColor = [UIColor colorWithHexString:@"#f01414"];

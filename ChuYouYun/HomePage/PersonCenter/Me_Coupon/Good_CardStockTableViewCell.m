@@ -120,7 +120,7 @@
         _titleLabel.textColor = [UIColor colorWithHexString:@"#5aa4e0"];
         _type.text = @"打折券";
         _segmentationImageView.image = Image(@"diacount@3x");
-        _useLabel.text = [NSString stringWithFormat:@"满%@育币可用",[dict stringValueForKey:@"maxprice"]];
+        _useLabel.text = [NSString stringWithFormat:@"满%@金豆可用",[dict stringValueForKey:@"maxprice"]];
         _insetLabel.text = [dict stringValueForKey:@"school_title"];
         
         _titleLabel.text = [NSString stringWithFormat:@"%@ 折",[dict stringValueForKey:@"discount"]];
@@ -163,9 +163,9 @@
         _type.text = @"优惠券";
         _segmentationImageView.image = Image(@"coupon@3x");
         _insetLabel.text = [dict stringValueForKey:@"school_title"];
-        _useLabel.text = [NSString stringWithFormat:@"满%@育币可用",[dict stringValueForKey:@"maxprice"]];
+        _useLabel.text = [NSString stringWithFormat:@"满%@金豆可用",[dict stringValueForKey:@"maxprice"]];
         
-        _titleLabel.text = [NSString stringWithFormat:@"育币%@",[dict stringValueForKey:@"price"]];
+        _titleLabel.text = [NSString stringWithFormat:@"金豆%@",[dict stringValueForKey:@"price"]];
         [self setIntroductionText:_titleLabel.text];
         NSMutableAttributedString *noteStr1 = [[NSMutableAttributedString alloc] initWithString:_titleLabel.text];
         [noteStr1 addAttribute:NSFontAttributeName value:Font(16 * WideEachUnit) range:NSMakeRange(0,1)];

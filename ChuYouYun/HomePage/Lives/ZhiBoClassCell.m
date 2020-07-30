@@ -99,7 +99,7 @@
                 _priceLabel.textColor = [UIColor colorWithHexString:@"#888"];
                 _priceLabel.layer.borderColor = [UIColor colorWithHexString:@"#888"].CGColor;
             } else {
-                _priceLabel.text = [NSString stringWithFormat:@"%d育币",[[dict stringValueForKey:@"course_hour_price"] integerValue]];
+                _priceLabel.text = [NSString stringWithFormat:@"%d金豆",[[dict stringValueForKey:@"course_hour_price"] integerValue]];
                 _priceLabel.textColor = [UIColor redColor];
                 _priceLabel.layer.borderColor = [UIColor redColor].CGColor;
                 if ([[dict stringValueForKey:@"course_hour_price"] floatValue] == 0) {

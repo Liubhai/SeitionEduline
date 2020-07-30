@@ -46,7 +46,7 @@
     [self addSubview:_person];
     
     _price = [[UILabel alloc] initWithFrame:CGRectMake(CellWidth / 2, CGRectGetMaxY(_title.frame), CellWidth / 2 - 10 * WideEachUnit, 20 * WideEachUnit)];
-    _price.text = @"122育币";
+    _price.text = @"122金豆";
     _price.textColor = BasidColor;
     _price.font = Font(14);
     _price.textAlignment = NSTextAlignmentRight;
@@ -67,7 +67,7 @@
     
     _title.text = [dict stringValueForKey:@"video_title"];
     _person.text = [NSString stringWithFormat:@"%@人报名",[dict stringValueForKey:@"video_order_count"]];
-    _price.text = [NSString stringWithFormat:@"育币:%@",[dict stringValueForKey:@"price"]];
+    _price.text = [NSString stringWithFormat:@"金豆:%@",[dict stringValueForKey:@"price"]];
     if ([[dict stringValueForKey:@"price"] floatValue] == 0) {
         _price.text = @"免费";
         _price.textColor = [UIColor colorWithHexString:@"#46c37b"];

@@ -32,6 +32,7 @@
 #include "MyDownLoadViewController.h"
 #import "LookRecodeViewController.h"
 #import "StudyRecodeViewController.h"
+#import "Good_MyLibraryViewController.h"
 
 #import "MyInstationViewController.h"
 #import "MyLibraryViewController.h"
@@ -514,10 +515,10 @@
         [_headerView addSubview:SZLabel];
         if (i == 0) {
             _bancleLabel = SZLabel;
-            _bancleLabel.text = @"育币0";
+            _bancleLabel.text = @"金豆0";
         } else if (i == 1) {
             _gainLabel = SZLabel;
-            _gainLabel.text = @"育币0";
+            _gainLabel.text = @"金豆0";
         } else if (i == 2) {
             _scoreLabel = SZLabel;
             _scoreLabel.text = @"0";
@@ -1003,7 +1004,8 @@
         MyLibraryViewController *myLibVc = [[MyLibraryViewController alloc] init];
         [self.navigationController pushViewController:myLibVc animated:YES];
     } else if ([button.titleLabel.text isEqualToString:@"我的下载"]) {
-        Good_MyDownLoadMainViewController *vc = [[Good_MyDownLoadMainViewController alloc] init];
+//        Good_MyDownLoadMainViewController *vc = [[Good_MyDownLoadMainViewController alloc] init];
+        Good_MyLibraryViewController *vc = [[Good_MyLibraryViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     } else if ([button.titleLabel.text isEqualToString:@"我的卡券"]) {
         Good_MyCardStockMainViewController *vc = [[Good_MyCardStockMainViewController alloc] init];
@@ -1546,8 +1548,8 @@
         }
 
         NSLog(@"Vip---%@",_vipDict);
-        _bancleLabel.text = [NSString stringWithFormat:@"育币%@",[_userAccountDict stringValueForKey:@"learn" defaultValue:@"0"]];
-        _gainLabel.text = [NSString stringWithFormat:@"育币%@",[_userAccountDict stringValueForKey:@"split" defaultValue:@"0"]];
+        _bancleLabel.text = [NSString stringWithFormat:@"金豆%@",[_userAccountDict stringValueForKey:@"learn" defaultValue:@"0"]];
+        _gainLabel.text = [NSString stringWithFormat:@"金豆%@",[_userAccountDict stringValueForKey:@"split" defaultValue:@"0"]];
         _scoreLabel.text = [NSString stringWithFormat:@"%ld", [[_userAccountDict stringValueForKey:@"score" defaultValue:@"0"] integerValue]];
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {

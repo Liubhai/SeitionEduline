@@ -48,7 +48,7 @@
     _pricelabel.textAlignment = NSTextAlignmentRight;
     _pricelabel.font = [UIFont systemFontOfSize:13];
     _pricelabel.centerY = _themeLabel.centerY;
-    _pricelabel.text = @"20育币";
+    _pricelabel.text = @"20金豆";
     [self addSubview:_pricelabel];
     
     _scanIcon = [[UIImageView alloc] initWithFrame:CGRectMake(_themeLabel.left, 0, 15, 15)];
@@ -79,7 +79,7 @@
 - (void)setClassMainInfo:(NSDictionary *)dict cellIndex:(NSIndexPath *)index {
     [_faceImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[dict objectForKey:@"imageurl"]]] placeholderImage:Image(@"站位图")];
     _themeLabel.text = [NSString stringWithFormat:@"%@",[dict objectForKey:@"album_title"]];
-    _pricelabel.text = [NSString stringWithFormat:@"%@育币",[dict objectForKey:@"price"]];
+    _pricelabel.text = [NSString stringWithFormat:@"%@金豆",[dict objectForKey:@"price"]];
     CGFloat priceWidth = [_pricelabel.text sizeWithFont:_pricelabel.font].width + 4;
     _scanCountlabel.text = [NSString stringWithFormat:@"(%@人浏览)",[dict objectForKey:@"view_nums_mark"]];
     _studyCountlabel.text = [NSString stringWithFormat:@"(%@人在学习)",[dict objectForKey:@"order_count_mark"]];

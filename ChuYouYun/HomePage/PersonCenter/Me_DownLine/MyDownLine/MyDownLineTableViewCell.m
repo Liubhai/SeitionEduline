@@ -56,7 +56,7 @@
     if (index != 0) {
         _nameLabel.text = [dict stringValueForKey:@"uname"];
         _timeLabel.text = [Passport formatterDate:[dict stringValueForKey:@"ctime"]];
-        _attachedLabel.text = [NSString stringWithFormat:@"%@育币", [dict stringValueForKey:@"num"]];
+        _attachedLabel.text = [NSString stringWithFormat:@"%@金豆", [dict stringValueForKey:@"num"]];
         if ([[dict stringValueForKey:@"level"] integerValue] == 1) {
              _recommendedLabel.text = @"一级推荐";
         } else if ([[dict stringValueForKey:@"level"] integerValue] == 2) {

@@ -263,7 +263,7 @@
     [oneView addSubview:className];
     
     UILabel *price = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imageView.frame) + 18 * WideEachUnit, 45 * WideEachUnit,MainScreenWidth - CGRectGetMaxX(imageView.frame) - 18 * WideEachUnit - 10 * WideEachUnit , 20 * WideEachUnit)];
-    price.text = [NSString stringWithFormat:@"育币:%@",_orderDict[@"price"]];
+    price.text = [NSString stringWithFormat:@"金豆:%@",_orderDict[@"price"]];
     if ([_orderDict[@"price"] integerValue] == 0) {
         
     }

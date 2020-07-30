@@ -48,7 +48,7 @@
 #pragma mark --- 懒加载
 -(UIImageView *)imageView {
     if (!_imageView) {
-        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, MainScreenWidth, MainScreenHeight - MACRO_UI_UPHEIGHT - 34)];
+        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, MACRO_UI_UPHEIGHT, MainScreenWidth, MainScreenHeight - MACRO_UI_UPHEIGHT)];
         _imageView.image = Image(@"云课堂_空数据");
         [self.view addSubview:_imageView];
     }
@@ -87,7 +87,7 @@
     [super viewDidLoad];
     [self interFace];
     _titleImage.backgroundColor = BasidColor;
-    _titleLabel.text = @"我的文库";
+    _titleLabel.text = @"我的下载";
     [self getDownDataSource];//得到下载的数据源
 //    [self addNav];
     [self addTableView];
@@ -171,7 +171,7 @@
 #pragma mark --- 添加表格
 - (void)addTableView {
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, MainScreenWidth, MainScreenHeight - MACRO_UI_UPHEIGHT - 34) style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, MACRO_UI_UPHEIGHT, MainScreenWidth, MainScreenHeight - MACRO_UI_UPHEIGHT) style:UITableViewStyleGrouped];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.rowHeight = 90 * WideEachUnit;

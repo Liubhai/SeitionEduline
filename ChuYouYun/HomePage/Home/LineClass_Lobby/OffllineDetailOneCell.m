@@ -94,7 +94,7 @@
     _time.text = [NSString stringWithFormat:@"开课时间：%@ ~ %@",beginStr,endStr];
     
     _adress.text = [NSString stringWithFormat:@"上课地点：%@",[dict stringValueForKey:@"teach_areas"]];
-    _price.text = [NSString stringWithFormat:@"育币 %@",[dict stringValueForKey:@"course_price"]];
+    _price.text = [NSString stringWithFormat:@"金豆 %@",[dict stringValueForKey:@"course_price"]];
     
 }
 

@@ -764,7 +764,7 @@
                 payType.textColor = [UIColor colorWithHexString:@"#888"];
                 [payView addSubview:payType];
                 payType.font = Font(14);
-                payType.text = [NSString stringWithFormat:@"积分 (当前账号积分为育币%@)",[_userAccountDict stringValueForKey:@"score" defaultValue:@"0"]];
+                payType.text = [NSString stringWithFormat:@"积分 (当前账号积分为金豆%@)",[_userAccountDict stringValueForKey:@"score" defaultValue:@"0"]];
                 
             }
         }
@@ -838,7 +838,7 @@
             Money = [[_dict stringValueForKey:@"price"] integerValue] * _numValue + [[_dict stringValueForKey:@"fare"] integerValue];
         }
     }
-    price.text = [NSString stringWithFormat:@"实付：育币%.2f",Money];
+    price.text = [NSString stringWithFormat:@"实付：金豆%.2f",Money];
     
     _pricePay = price;
     

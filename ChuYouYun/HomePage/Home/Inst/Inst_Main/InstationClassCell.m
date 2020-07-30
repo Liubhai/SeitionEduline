@@ -57,7 +57,7 @@
     
     //时间
     UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imageView.frame) + SpaceBaside, SpaceBaside + 60, 120, 20)];
-    timeLabel.text = @"228育币/小时";
+    timeLabel.text = @"228金豆/小时";
     timeLabel.font = Font(15);
     timeLabel.textColor = [UIColor orangeColor];
     [self addSubview:timeLabel];

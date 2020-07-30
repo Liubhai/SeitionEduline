@@ -40,7 +40,7 @@
     
     _priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(_groupTitle.right + 10, 0, 100, GroupListCellHeight)];
     _priceLabel.textColor = RGBHex(0xFF0000);
-    _priceLabel.text = @"100.0育币";
+    _priceLabel.text = @"100.0金豆";
     _priceLabel.font = SYSTEMFONT(13);
     [self addSubview:_priceLabel];
     

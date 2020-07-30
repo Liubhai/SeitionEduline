@@ -206,11 +206,11 @@
                     if ([dict[@"course_hour_price"] floatValue] == 0) {
                         _freeLabel.hidden = YES;
                     } else {
-                        _freeLabel.text = [NSString stringWithFormat:@"%.2f育币",[dict[@"course_hour_price"] floatValue]];
+                        _freeLabel.text = [NSString stringWithFormat:@"%.2f金豆",[dict[@"course_hour_price"] floatValue]];
 //                        if (([dict[@"course_hour_price"] floatValue] * 100 / 100) >= 1) {//有小数
 //
 //                        } else {//整数
-//                            _freeLabel.text = [NSString stringWithFormat:@"%ld育币",[dict[@"course_hour_price"] integerValue]];
+//                            _freeLabel.text = [NSString stringWithFormat:@"%ld金豆",[dict[@"course_hour_price"] integerValue]];
 //                        }
                         
                         _freeLabel.layer.borderColor = [UIColor redColor].CGColor;
@@ -322,11 +322,11 @@
                     _freeLabel.hidden = YES;
                 } else {
                     if (([_cellDict[@"course_hour_price"] floatValue] * 100 / 100) >= 1) {//有小数
-                        _freeLabel.text = [NSString stringWithFormat:@"%.02lf育币",[_cellDict[@"course_hour_price"] floatValue]];
+                        _freeLabel.text = [NSString stringWithFormat:@"%.02lf金豆",[_cellDict[@"course_hour_price"] floatValue]];
                     } else {//整数
-                        _freeLabel.text = [NSString stringWithFormat:@"%ld育币",[_cellDict[@"course_hour_price"] integerValue]];
+                        _freeLabel.text = [NSString stringWithFormat:@"%ld金豆",[_cellDict[@"course_hour_price"] integerValue]];
                     }
-                    _freeLabel.text = [NSString stringWithFormat:@"%.2f育币",[_cellDict[@"course_hour_price"] floatValue]];
+                    _freeLabel.text = [NSString stringWithFormat:@"%.2f金豆",[_cellDict[@"course_hour_price"] floatValue]];
                     _freeLabel.layer.borderColor = [UIColor redColor].CGColor;
                     _freeLabel.textColor = [UIColor redColor];
                     _freeLabel.frame = CGRectMake(CGRectGetMaxX(_title.frame) + 10 * WideEachUnit, 15 * WideEachUnit, 40 * WideEachUnit, 20 * WideEachUnit);

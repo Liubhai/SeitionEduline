@@ -224,7 +224,7 @@
     UILabel *last = [[UILabel alloc]initWithFrame:CGRectMake(MainScreenWidth - 130, 35, 120, 20)];
     last.text = [NSString stringWithFormat:@"-%@积分",_dataArray[indexPath.row][@"price"]];;
     if ([[[_dataArray objectAtIndex:indexPath.row] stringValueForKey:@"pay_price"] floatValue] != 0) {
-        last.text = [NSString stringWithFormat:@"%@育币",[[_dataArray objectAtIndex:indexPath.row] stringValueForKey:@"pay_price"]];
+        last.text = [NSString stringWithFormat:@"%@金豆",[[_dataArray objectAtIndex:indexPath.row] stringValueForKey:@"pay_price"]];
     }
     last.textColor = BasidColor;
     last.textAlignment = NSTextAlignmentRight;

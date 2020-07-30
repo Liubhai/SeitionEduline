@@ -162,7 +162,7 @@
             _kinsOf.text = [NSString stringWithFormat:@"免费"];
             _kinsOf.textColor = [UIColor colorWithHexString:@"#47b37d"];
         } else {
-            _kinsOf.text = [NSString stringWithFormat:@"育币%@",priceStr];
+            _kinsOf.text = [NSString stringWithFormat:@"金豆%@",priceStr];
             _kinsOf.textColor = PriceColor;
         }
         
@@ -172,7 +172,7 @@
             _kinsOf.text = [NSString stringWithFormat:@"免费"];
             _kinsOf.textColor = [UIColor colorWithHexString:@"#47b37d"];
         } else {
-            _kinsOf.text = [NSString stringWithFormat:@"育币%@",priceStr];
+            _kinsOf.text = [NSString stringWithFormat:@"金豆%@",priceStr];
             _kinsOf.textColor = PriceColor;
         }
     } else if ([type integerValue] == 3) {//下载
@@ -246,7 +246,7 @@
             _kinsOf.text = [NSString stringWithFormat:@"免费"];
             _kinsOf.textColor = [UIColor colorWithHexString:@"#47b37d"];
         } else {
-            _kinsOf.text = [NSString stringWithFormat:@"育币%@",priceStr];
+            _kinsOf.text = [NSString stringWithFormat:@"金豆%@",priceStr];
             _kinsOf.textColor = PriceColor;
         }
         
@@ -262,7 +262,7 @@
             _kinsOf.text = [NSString stringWithFormat:@"免费"];
             _kinsOf.textColor = [UIColor colorWithHexString:@"#47b37d"];
         } else {
-            _kinsOf.text = [NSString stringWithFormat:@"育币%@",priceStr];
+            _kinsOf.text = [NSString stringWithFormat:@"金豆%@",priceStr];
             _kinsOf.textColor = PriceColor;
         }
     }
@@ -325,7 +325,7 @@
         _kinsOf.text = [NSString stringWithFormat:@"免费"];
         _kinsOf.textColor = [UIColor colorWithHexString:@"#47b37d"];
     } else {
-        _kinsOf.text = [NSString stringWithFormat:@"育币%@",priceStr];
+        _kinsOf.text = [NSString stringWithFormat:@"金豆%@",priceStr];
         _kinsOf.textColor = PriceColor;
     }
 }

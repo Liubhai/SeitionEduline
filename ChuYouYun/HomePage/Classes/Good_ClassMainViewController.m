@@ -668,7 +668,7 @@
         title = @[@"已关注",@"私信"];
     }
     
-    title = @[[NSString stringWithFormat:@"育币 %@",_price],@"立即解锁"];
+    title = @[[NSString stringWithFormat:@"金豆 %@",_price],@"立即解锁"];
     if ([_price floatValue] == 0) {
         title = @[@"免费",@"立即解锁"];
     }
@@ -739,7 +739,7 @@
 #pragma mark --- 原价处理
 - (void)ordPriceDeal {
     
-    _ordPrice.text = [NSString stringWithFormat:@"育币%@",[_videoDataSource stringValueForKey:@"v_price"]];
+    _ordPrice.text = [NSString stringWithFormat:@"金豆%@",[_videoDataSource stringValueForKey:@"v_price"]];
     _ordPrice.textAlignment = NSTextAlignmentCenter;
     NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
     NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:_ordPrice.text attributes:attribtDic];
@@ -908,20 +908,20 @@
     _appWindow = app.keyWindow;
     
     UIView *moreView = [[UIView alloc] initWithFrame:CGRectMake(MainScreenWidth - 120 * WideEachUnit,55 * WideEachUnit,100 * WideEachUnit,100 * WideEachUnit)];
-    moreView.frame = CGRectMake(MainScreenWidth - 120 * WideEachUnit,55 * WideEachUnit,100 * WideEachUnit,100 * WideEachUnit);
+    moreView.frame = CGRectMake(MainScreenWidth - 120 * WideEachUnit,55 * WideEachUnit,100 * WideEachUnit,67 * WideEachUnit);
     moreView.backgroundColor = [UIColor whiteColor];
     moreView.layer.masksToBounds = YES;
     [allWindowView addSubview:moreView];
     
-    NSArray *imageArray = @[@"ico_collect@3x",@"class_share",@"class_down"];
-    NSArray *titleArray = @[@"+收藏",@"分享",@"下载"];
+    NSArray *imageArray = @[@"ico_collect@3x",@"class_share"];
+    NSArray *titleArray = @[@"+收藏",@"分享"];
     if ([_collectStr integerValue] == 1) {
-        imageArray = @[@"ic_collect_press@3x",@"class_share",@"class_down"];
-        titleArray = @[@"-收藏",@"分享",@"下载"];
+        imageArray = @[@"ic_collect_press@3x",@"class_share"];
+        titleArray = @[@"-收藏",@"分享"];
     }
     CGFloat ButtonW = 100 * WideEachUnit;
     CGFloat ButtonH = 33 * WideEachUnit;
-    for (int i = 0 ; i < 3 ; i ++) {
+    for (int i = 0 ; i < titleArray.count ; i ++) {
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0 * WideEachUnit, ButtonH * i, ButtonW, ButtonH)];
         button.tag = i;
         [button setTitle:titleArray[i] forState:UIControlStateNormal];
@@ -2261,16 +2261,16 @@
         [_headerView setHeight:_teachersHeaderBackView.bottom];
         
         _ordPrice.text = [NSString stringWithFormat:@"在学%@人",[_videoDataSource stringValueForKey:@"video_order_count"]];
-        _priceLabel.text = [NSString stringWithFormat:@"育币%@",[_videoDataSource stringValueForKey:@"price"]];
-//        [_attentionButton setTitle:[NSString stringWithFormat:@"育币 %@",[_videoDataSource stringValueForKey:@"price"]] forState:0];
-        NSString *nowPrice = [NSString stringWithFormat:@"育币 %@",[_videoDataSource stringValueForKey:@"price"]];
+        _priceLabel.text = [NSString stringWithFormat:@"金豆%@",[_videoDataSource stringValueForKey:@"price"]];
+//        [_attentionButton setTitle:[NSString stringWithFormat:@"金豆 %@",[_videoDataSource stringValueForKey:@"price"]] forState:0];
+        NSString *nowPrice = [NSString stringWithFormat:@"金豆 %@",[_videoDataSource stringValueForKey:@"price"]];
         if (SWNOTEmptyDictionary(_activityInfo)) {
             NSString *eventType = [NSString stringWithFormat:@"%@",[[_activityInfo objectForKey:@"event_type_info"] objectForKey:@"type_code"]];
             if ([eventType integerValue] == 6) {
-                nowPrice = [NSString stringWithFormat:@"育币 %@",[[_videoDataSource objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
+                nowPrice = [NSString stringWithFormat:@"金豆 %@",[[_videoDataSource objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
             }
         }
-        NSString *oldPrice = [NSString stringWithFormat:@"育币%@",[_videoDataSource stringValueForKey:@"v_price"]];
+        NSString *oldPrice = [NSString stringWithFormat:@"金豆%@",[_videoDataSource stringValueForKey:@"v_price"]];
         if ([[_videoDataSource stringValueForKey:@"price"] floatValue] == 0) {
             nowPrice = @"免费";
             _priceLabel.text = @"免费";
@@ -3381,8 +3381,8 @@
     _leftPriceLabel.font = SYSTEMFONT(13);
     _leftPriceLabel.textColor = [UIColor whiteColor];
     NSString *activityType = @"限时打折";
-    NSString *priceCount = @"育币963";
-    NSString *discount = @"育币1000";
+    NSString *priceCount = @"金豆963";
+    NSString *discount = @"金豆1000";
     NSString *leftPrice = [NSString stringWithFormat:@"%@%@%@",activityType,priceCount,discount];
     NSRange activityTypeRange = [leftPrice rangeOfString:activityType];
     NSRange priceRange = [leftPrice rangeOfString:priceCount];
@@ -3414,8 +3414,8 @@
         if (SWNOTEmptyDictionary(_videoDataSource)) {
             priceCount = [NSString stringWithFormat:@"%@",[[_videoDataSource objectForKey:@"mz_price"] objectForKey:@"eprice"]];
             discount = [NSString stringWithFormat:@"%@",[[_videoDataSource objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
-            NSString *nowPrice = [NSString stringWithFormat:@"育币 %@",[_videoDataSource stringValueForKey:@"price"]];
-            NSString *oldPrice = [NSString stringWithFormat:@"育币%@",[_videoDataSource stringValueForKey:@"v_price"]];
+            NSString *nowPrice = [NSString stringWithFormat:@"金豆 %@",[_videoDataSource stringValueForKey:@"price"]];
+            NSString *oldPrice = [NSString stringWithFormat:@"金豆%@",[_videoDataSource stringValueForKey:@"v_price"]];
             if ([[_activityInfo objectForKey:@"is_start"] integerValue] == 1) {
                 oldPrice = discount;
             }
@@ -3539,10 +3539,10 @@
                 activityType = @"即将开售";
             }
             if (SWNOTEmptyDictionary(_videoDataSource)) {
-                priceCount = [NSString stringWithFormat:@"%@育币",[[_videoDataSource objectForKey:@"mz_price"] objectForKey:@"eprice"]];
-                discount = [NSString stringWithFormat:@"%@育币",[[_videoDataSource objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
-                NSString *nowPrice = [NSString stringWithFormat:@"育币 %@",[_videoDataSource stringValueForKey:@"price"]];
-                NSString *oldPrice = [NSString stringWithFormat:@"育币%@",[_videoDataSource stringValueForKey:@"v_price"]];
+                priceCount = [NSString stringWithFormat:@"%@金豆",[[_videoDataSource objectForKey:@"mz_price"] objectForKey:@"eprice"]];
+                discount = [NSString stringWithFormat:@"%@金豆",[[_videoDataSource objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
+                NSString *nowPrice = [NSString stringWithFormat:@"金豆 %@",[_videoDataSource stringValueForKey:@"price"]];
+                NSString *oldPrice = [NSString stringWithFormat:@"金豆%@",[_videoDataSource stringValueForKey:@"v_price"]];
                 if ([[_activityInfo objectForKey:@"is_start"] integerValue] == 1) {
                     oldPrice = discount;
                 }
@@ -3748,10 +3748,10 @@
             activityType = @"即将开售";
         }
         if (SWNOTEmptyDictionary(_videoDataSource)) {
-            priceCount = [NSString stringWithFormat:@"%@育币",[[_videoDataSource objectForKey:@"mz_price"] objectForKey:@"eprice"]];
-            discount = [NSString stringWithFormat:@"%@育币",[[_videoDataSource objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
-            NSString *nowPrice = [NSString stringWithFormat:@"育币 %@",[_videoDataSource stringValueForKey:@"price"]];
-            NSString *oldPrice = [NSString stringWithFormat:@"育币%@",[_videoDataSource stringValueForKey:@"v_price"]];
+            priceCount = [NSString stringWithFormat:@"%@金豆",[[_videoDataSource objectForKey:@"mz_price"] objectForKey:@"eprice"]];
+            discount = [NSString stringWithFormat:@"%@金豆",[[_videoDataSource objectForKey:@"mz_price"] objectForKey:@"selPrice"]];
+            NSString *nowPrice = [NSString stringWithFormat:@"金豆 %@",[_videoDataSource stringValueForKey:@"price"]];
+            NSString *oldPrice = [NSString stringWithFormat:@"金豆%@",[_videoDataSource stringValueForKey:@"v_price"]];
             if ([[_activityInfo objectForKey:@"is_start"] integerValue] == 1) {
                 oldPrice = discount;
             }

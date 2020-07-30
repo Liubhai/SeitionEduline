@@ -607,7 +607,7 @@
             payType.textColor = [UIColor colorWithHexString:@"#888"];
             [payView addSubview:payType];
             payType.font = Font(14);
-            payType.text = [NSString stringWithFormat:@"余额 (当前育币%@)",[_userAccountDict stringValueForKey:@"learn" defaultValue:@"0"]];
+            payType.text = [NSString stringWithFormat:@"余额 (当前金豆%@)",[_userAccountDict stringValueForKey:@"learn" defaultValue:@"0"]];
         }
         
         UIButton *seleButton = [[UIButton alloc] initWithFrame:CGRectMake(viewW - 30 * WideEachUnit,(50-20)/2.0, 20 * WideEachUnit, 20 * WideEachUnit)];
@@ -660,7 +660,7 @@
     price.textAlignment = NSTextAlignmentCenter;
     price.textColor = [UIColor colorWithHexString:@"#888"];
     price.textColor = [UIColor orangeColor];
-    price.text = [NSString stringWithFormat:@"实付：育币%@",[_orderDict stringValueForKey:@"price"]];
+    price.text = [NSString stringWithFormat:@"实付：金豆%@",[_orderDict stringValueForKey:@"price"]];
     
     //添加按钮
     UIButton *nowPayButton = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth / 2, ButtonTop, MainScreenWidth / 2, 50 * WideEachUnit)];

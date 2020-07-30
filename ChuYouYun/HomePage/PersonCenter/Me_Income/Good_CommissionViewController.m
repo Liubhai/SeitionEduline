@@ -185,7 +185,7 @@
     
     //添加余额
     UILabel *balanceLabel = [[UILabel  alloc] initWithFrame:CGRectMake(MainScreenWidth / 2 - 100 * WideEachUnit, 25 * WideEachUnit , 200 * WideEachUnit, 30 * WideEachUnit)];
-    balanceLabel.text = @"育币0";
+    balanceLabel.text = @"金豆0";
     [balanceLabel setTextColor:[UIColor whiteColor]];
     balanceLabel.font = [UIFont systemFontOfSize:24 * WideEachUnit];
     balanceLabel.textAlignment = NSTextAlignmentCenter;
@@ -234,9 +234,9 @@
 //    [_textField becomeFirstResponder];
 //     _textField.inputView=[[UIView alloc]initWithFrame:CGRectZero];
     
-    //添加育币字端
+    //添加金豆字端
     UILabel *moneyTitle = [[UILabel  alloc] initWithFrame:CGRectMake(textField.left - 50, 40 * WideEachUnit , 50 * WideEachUnit, 30 * WideEachUnit)];
-    moneyTitle.text = @"育币";
+    moneyTitle.text = @"金豆";
     moneyTitle.textAlignment = NSTextAlignmentRight;
     moneyTitle.textColor = [UIColor colorWithHexString:@"#888"];
     moneyTitle.font = Font(20 * WideEachUnit);
@@ -249,7 +249,7 @@
     
     //添加备注
     _allCommissionLabel = [[UILabel  alloc] initWithFrame:CGRectMake(20 * WideEachUnit, 90 * WideEachUnit ,MainScreenWidth - 40 * WideEachUnit, 15 * WideEachUnit)];
-    _allCommissionLabel.text = @"当前已得收入为 0 育币，全部提现";
+    _allCommissionLabel.text = @"当前已得收入为 0 金豆，全部提现";
     _allCommissionLabel.textColor = [UIColor colorWithHexString:@"#888"];
     _allCommissionLabel.font = Font(12 * WideEachUnit);
     _allCommissionLabel.textAlignment = NSTextAlignmentCenter;
@@ -257,9 +257,9 @@
     _allCommissionLabel.userInteractionEnabled = YES;
     [_allCommissionLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(allCommissionLabelClick:)]];
     if (SWNOTEmptyDictionary(_commissionDict)) {
-        NSString *allCommissonStr = [NSString stringWithFormat:@"当前已得育币为%@，全部提现",[[_commissionDict dictionaryValueForKey:@"spilt_info"] stringValueForKey:@"balance" defaultValue:@"0"]];
+        NSString *allCommissonStr = [NSString stringWithFormat:@"当前已得金豆为%@，全部提现",[[_commissionDict dictionaryValueForKey:@"spilt_info"] stringValueForKey:@"balance" defaultValue:@"0"]];
         if ([_commissionDict dictionaryValueForKey:@"spilt_info"] == nil) {
-            allCommissonStr = @"当前已得育币为0，全部提现";
+            allCommissonStr = @"当前已得金豆为0，全部提现";
         }
         
         NSMutableAttributedString *noteStr1 = [[NSMutableAttributedString alloc] initWithString:allCommissonStr];
@@ -315,7 +315,7 @@
     
     NSArray *titleArray = @[@"余额",@"银行卡"];
     NSArray *iconArray = @[@"money",@"card"];
-    NSArray *informationArray = @[@"(当前育币40)",@"(中国银行1204)"];
+    NSArray *informationArray = @[@"(当前金豆40)",@"(中国银行1204)"];
     
     for (int i = 0 ; i < 2 ; i ++) {
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0 * WideEachUnit + viewH * i, viewW, viewH)];
@@ -551,7 +551,7 @@
         if (_balanNumber == 100) {
             
         } else {
-            remainTitle.text = [NSString stringWithFormat:@"(当前育币%@)",[[[_commissionDict arrayValueForKey:@"pay_type"] objectAtIndex:_balanNumber] stringValueForKey:@"learn_balance"]];
+            remainTitle.text = [NSString stringWithFormat:@"(当前金豆%@)",[[[_commissionDict arrayValueForKey:@"pay_type"] objectAtIndex:_balanNumber] stringValueForKey:@"learn_balance"]];
             
         }
         
@@ -750,8 +750,8 @@
     
     //实际钱
     UILabel *realMoney = [[UILabel alloc] initWithFrame:CGRectMake(115 * WideEachUnit, 0, 90 * WideEachUnit, 49 * WideEachUnit)];
-    //    realMoney.text = [NSString stringWithFormat:@"育币%@",[_dict stringValueForKey:@"t_price"]];
-    realMoney.text = @"育币 0";
+    //    realMoney.text = [NSString stringWithFormat:@"金豆%@",[_dict stringValueForKey:@"t_price"]];
+    realMoney.text = @"金豆 0";
     realMoney.font = Font(16 * WideEachUnit);
     realMoney.textColor = [UIColor colorWithHexString:@"#fc0203"];
     [_downView addSubview:realMoney];
@@ -820,7 +820,7 @@
         return;
     }
     
-    _realMoney.text = [NSString stringWithFormat:@"育币 %@",_textField.text];
+    _realMoney.text = [NSString stringWithFormat:@"金豆 %@",_textField.text];
     
 }
 
@@ -839,7 +839,7 @@
 - (void)allCommissionButtonCilck {
     NSInteger allCommiss = [[[_commissionDict dictionaryValueForKey:@"spilt_info"] stringValueForKey:@"balance"] integerValue];
     _textField.text = [NSString stringWithFormat:@"%ld",allCommiss];
-    _realMoney.text = [NSString stringWithFormat:@"育币 %ld",allCommiss];
+    _realMoney.text = [NSString stringWithFormat:@"金豆 %ld",allCommiss];
 }
 
 - (void)seleButtonCilck:(UIButton *)button {
@@ -946,7 +946,7 @@
     
     NSInteger allCommiss = [[[_commissionDict dictionaryValueForKey:@"spilt_info"] stringValueForKey:@"balance"] integerValue];
     _textField.text = [NSString stringWithFormat:@"%ld",allCommiss];
-    _realMoney.text = [NSString stringWithFormat:@"育币 %ld",allCommiss];
+    _realMoney.text = [NSString stringWithFormat:@"金豆 %ld",allCommiss];
 }
 
 - (void)viewClick:(UIButton *)tap {
@@ -1087,7 +1087,7 @@
 //是否 真要支付
 - (void)isSurePay {
     
-    NSString *messageStr = [NSString stringWithFormat:@"确定要兑换%@育币到余额？",_textField.text];
+    NSString *messageStr = [NSString stringWithFormat:@"确定要兑换%@金豆到余额？",_textField.text];
     if ([_payTypeStr integerValue] == 1) {//余额
         if ([[[[_commissionDict arrayValueForKey:@"pay_type"] objectAtIndex:_aliNumber] stringValueForKey:@"pay_type_note"] isEqualToString:@""]) {
             Good_AliBoundViewController *vc = [[Good_AliBoundViewController alloc] init];
@@ -1104,7 +1104,7 @@
         }
         messageStr = [NSString stringWithFormat:@"确定要兑换%@元到银行卡？",_textField.text];
     } else if ([_payTypeStr integerValue] == 0) {
-        messageStr = [NSString stringWithFormat:@"确定要兑换%@育币到余额？",_textField.text];
+        messageStr = [NSString stringWithFormat:@"确定要兑换%@金豆到余额？",_textField.text];
     } else if ([_payTypeStr integerValue] == 3) {
         messageStr = [NSString stringWithFormat:@"确定要兑换%@元到微信？",_textField.text];
     }
@@ -1159,19 +1159,19 @@
         
         
         _remainLabel.text = [_commissionDict stringValueForKey:@"pay_note"];
-        _commissionLabel.text = [NSString stringWithFormat:@"育币%@",[[_commissionDict dictionaryValueForKey:@"spilt_info"] stringValueForKey:@"balance" defaultValue:@"0"]];
+        _commissionLabel.text = [NSString stringWithFormat:@"金豆%@",[[_commissionDict dictionaryValueForKey:@"spilt_info"] stringValueForKey:@"balance" defaultValue:@"0"]];
         if ([_commissionDict dictionaryValueForKey:@"spilt_info"] == nil ) {
             _commissionLabel.text = @"0";
         }
-        _balanceseInformationLabel.text = [NSString stringWithFormat:@"(当前育币%@)",[_commissionDict stringValueForKey:@"learn" defaultValue:@"0"]];
+        _balanceseInformationLabel.text = [NSString stringWithFormat:@"(当前金豆%@)",[_commissionDict stringValueForKey:@"learn" defaultValue:@"0"]];
         _bankInformationLabel.text = [NSString stringWithFormat:@"(%@)",[_commissionDict stringValueForKey:@"card_info" defaultValue:@"未绑定"]];
         if ([[_commissionDict stringValueForKey:@"card_info"] isEqualToString:@""]) {//未绑定
             _bankInformationLabel.text = @"(未绑定)";
         }
         
-        NSString *allCommissonStr = [NSString stringWithFormat:@"当前已得育币为%@，全部提现",[[_commissionDict dictionaryValueForKey:@"spilt_info"] stringValueForKey:@"balance" defaultValue:@"0"]];
+        NSString *allCommissonStr = [NSString stringWithFormat:@"当前已得金豆为%@，全部提现",[[_commissionDict dictionaryValueForKey:@"spilt_info"] stringValueForKey:@"balance" defaultValue:@"0"]];
         if ([_commissionDict dictionaryValueForKey:@"spilt_info"] == nil) {
-            allCommissonStr = @"当前已得育币为0，全部提现";
+            allCommissonStr = @"当前已得金豆为0，全部提现";
         }
         
         NSMutableAttributedString *noteStr1 = [[NSMutableAttributedString alloc] initWithString:allCommissonStr];
@@ -1225,7 +1225,7 @@
     } else if ([_payTypeStr integerValue] == 2) {//收入兑换成积分
     }
     if (_textField.text.length == 0) {
-        [TKProgressHUD showError:@"请输入要提现的育币数量" toView:self.view];
+        [TKProgressHUD showError:@"请输入要提现的金豆数量" toView:self.view];
         return;
     } else {
         [mutabDict setObject:_textField.text forKey:@"exchange_balance"];

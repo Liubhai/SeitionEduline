@@ -105,7 +105,7 @@
     _price.font = Font(12);
 //    _price.textAlignment = NSTextAlignmentRight;
     _price.textColor = [UIColor grayColor];
-    _price.text = @"888育币";
+    _price.text = @"888金豆";
     
     //添加横线
     UIButton *lineButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 130, MainScreenWidth, 1)];
@@ -258,8 +258,8 @@
         [_actionButton setTitle:@"驳回原因" forState:UIControlStateNormal];
         _actionButton.hidden = YES;
     }
-    _realPrice.text = [NSString stringWithFormat:@"育币 %@",[dict stringValueForKey:@"price"]];
-//    _price.text = [NSString stringWithFormat:@"育币 %@",[[[dict dictionaryValueForKey:@"source_info"] dictionaryValueForKey:@"mzprice"] stringValueForKey:@"oriPrice"]];
+    _realPrice.text = [NSString stringWithFormat:@"金豆 %@",[dict stringValueForKey:@"price"]];
+//    _price.text = [NSString stringWithFormat:@"金豆 %@",[[[dict dictionaryValueForKey:@"source_info"] dictionaryValueForKey:@"mzprice"] stringValueForKey:@"oriPrice"]];
     if (SWNOTEmptyStr([dict stringValueForKey:@"video_binfo"])) {
         _price.text = [NSString stringWithFormat:@"%@",[dict stringValueForKey:@"video_binfo"]];
     } else {
@@ -283,12 +283,12 @@
             NSString *urlStr = [dict stringValueForKey:@"cover"];
             [_headerImage sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:Image(@"站位图")];
             _name.text = [dict stringValueForKey:@"video_name"];
-//            _price.text = [NSString stringWithFormat:@"育币 %@",[dict stringValueForKey:@"price"]];
+//            _price.text = [NSString stringWithFormat:@"金豆 %@",[dict stringValueForKey:@"price"]];
         } else if ([type isEqualToString:@"inst"]) {
             NSString *urlStr = [dict stringValueForKey:@"cover"];
             [_headerImage sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:Image(@"站位图")];
             _name.text = [dict stringValueForKey:@"video_name"];
-//            _price.text = [NSString stringWithFormat:@"育币 %@",[dict stringValueForKey:@"price"]];
+//            _price.text = [NSString stringWithFormat:@"金豆 %@",[dict stringValueForKey:@"price"]];
             
             _schoolName.text = [dict  stringValueForKey:@"title"];
             imageUrl = [dict stringValueForKey:@"cover"];
