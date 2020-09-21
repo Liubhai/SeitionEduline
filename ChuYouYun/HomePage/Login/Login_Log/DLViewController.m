@@ -404,8 +404,9 @@
         [self.view addSubview:SFLabel];
         
         //添加三方登录按钮
-        NSArray *SFArray = @[@"微博.png",@"QQ.png",@"微信.png"];
-        for (int i = 0 ; i < 3; i ++) {
+//        NSArray *SFArray = @[@"微博.png",@"QQ.png",@"微信.png"];
+        NSArray *SFArray = @[@"微信.png"];
+        for (int i = 0 ; i < SFArray.count; i ++) {
             UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth / 7 + MainScreenWidth / 7  * 2 * i, MainScreenHeight / 5 * 3 + 100, MainScreenWidth / 7, MainScreenWidth / 7)];
             [button setBackgroundImage:[UIImage imageNamed:SFArray[i]] forState:UIControlStateNormal];
             button.tag = i;
@@ -434,8 +435,9 @@
         [self.view addSubview:SFLabel];
 
         //添加三方登录按钮
-        NSArray *SFArray = @[@"微博.png",@"QQ.png",@"微信.png"];
-        for (int i = 0 ; i < 3; i ++) {
+//        NSArray *SFArray = @[@"微博.png",@"QQ.png",@"微信.png"];
+        NSArray *SFArray = @[@"微信.png"];
+        for (int i = 0 ; i < SFArray.count; i ++) {
             UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(MainScreenWidth / 7 + MainScreenWidth / 7  * 2 * i, MainScreenHeight / 5 * 3 + 100, MainScreenWidth / 7, MainScreenWidth / 7)];
             [button setBackgroundImage:[UIImage imageNamed:SFArray[i]] forState:UIControlStateNormal];
             button.tag = i;
@@ -499,7 +501,8 @@
         [self faceLogin];
     }
     if (button.tag == 0) {//新浪
-        [self Sina];
+//        [self Sina];
+        [self WeChat];
     }
     if (button.tag == 1) {//扣扣
         [self Tencent];
